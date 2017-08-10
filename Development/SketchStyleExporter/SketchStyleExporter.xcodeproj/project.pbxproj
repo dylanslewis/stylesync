@@ -25,6 +25,8 @@
 /* Begin PBXFileReference section */
 		65492B631F3BB62000321C7F /* SketchStyleExporter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SketchStyleExporter; sourceTree = BUILT_PRODUCTS_DIR; };
 		65492B661F3BB62000321C7F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		658382E51F3D0F2C005B4753 /* 03006D69-4182-42B5-9AA1-9171CA517A63.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "03006D69-4182-42B5-9AA1-9171CA517A63.json"; path = "SketchStyleExporter/SampleSketchSource/03006D69-4182-42B5-9AA1-9171CA517A63.json"; sourceTree = SOURCE_ROOT; };
+		658382E61F3D0F2C005B4753 /* document.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = document.json; path = SketchStyleExporter/SampleSketchSource/document.json; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +60,19 @@
 			isa = PBXGroup;
 			children = (
 				65492B661F3BB62000321C7F /* main.swift */,
+				658382E41F3D0F07005B4753 /* SampleSketchSource */,
 			);
 			path = SketchStyleExporter;
+			sourceTree = "<group>";
+		};
+		658382E41F3D0F07005B4753 /* SampleSketchSource */ = {
+			isa = PBXGroup;
+			children = (
+				658382E51F3D0F2C005B4753 /* 03006D69-4182-42B5-9AA1-9171CA517A63.json */,
+				658382E61F3D0F2C005B4753 /* document.json */,
+			);
+			name = SampleSketchSource;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +278,7 @@
 				65492B6C1F3BB62000321C7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
