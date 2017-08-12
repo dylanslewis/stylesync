@@ -22,4 +22,11 @@ extension String {
 		let otherCharacters = String(capitalizedStringWithoutSpaces.characters.dropFirst())
 		return firstCharacter + otherCharacters
 	}
+	
+	func unarchivedObject<TargetObjectType>() -> TargetObjectType? {
+		guard let data = Data(base64Encoded: self) else {
+			return nil
+		}
+		return NSKeyedUnarchiver.unarchiveObject(with: data) as? TargetObjectType
+	}
 }
