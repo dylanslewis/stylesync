@@ -7,6 +7,6 @@
 extension UIColor {
 	<ColorDeclaration>
 
-	static let <#=colorName#>: UIColor = .init(red: <#=red#>, green: <#=green#>, blue: <#=blue#>, alpha: <#=alpha#>)
+	public let <#=colorName#> = UIColor(red: <#=red#>, green: <#=green#>, blue: <#=blue#>, alpha: <#=alpha#>)
 	</ColorDeclaration>
 }
