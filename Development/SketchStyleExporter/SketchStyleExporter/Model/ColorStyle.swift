@@ -26,3 +26,19 @@ struct ColorStyle {
 		self.color = NSColor(red: red, green: green, blue: blue, alpha: alpha)
 	}
 }
+
+// MARK: - CodeTemplateReplacable
+
+extension ColorStyle: CodeTemplateReplacable {
+	static let declarationName: String = "ColorDeclaration"
+	
+	var replacementDictionary: [String: String] {
+		return [
+			"colorName": name,
+			"red": String(describing: color.redComponent),
+			"green": String(describing: color.greenComponent),
+			"blue": String(describing: color.blueComponent),
+			"alpha": String(describing: color.alphaComponent),
+		]
+	}
+}

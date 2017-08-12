@@ -10,6 +10,8 @@
 		651DFF031F3F27D500B067D5 /* String+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651DFF021F3F27D500B067D5 /* String+Extra.swift */; };
 		651DFF051F3F281400B067D5 /* SketchDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651DFF041F3F281400B067D5 /* SketchDocument.swift */; };
 		65492B671F3BB62000321C7F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65492B661F3BB62000321C7F /* main.swift */; };
+		6562B3EB1F3F34D10017037D /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6562B3EA1F3F34D10017037D /* CodeGenerator.swift */; };
+		6562B3EE1F3F54F50017037D /* CodeTemplateReplaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6562B3ED1F3F54F50017037D /* CodeTemplateReplaceable.swift */; };
 		658382E91F3D1094005B4753 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658382E81F3D1094005B4753 /* TextStyle.swift */; };
 		658382EB1F3D10C6005B4753 /* ColorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658382EA1F3D10C6005B4753 /* ColorStyle.swift */; };
 /* End PBXBuildFile section */
@@ -31,6 +33,8 @@
 		651DFF041F3F281400B067D5 /* SketchDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SketchDocument.swift; path = Model/SketchDocument.swift; sourceTree = "<group>"; };
 		65492B631F3BB62000321C7F /* SketchStyleExporter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SketchStyleExporter; sourceTree = BUILT_PRODUCTS_DIR; };
 		65492B661F3BB62000321C7F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6562B3EA1F3F34D10017037D /* CodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CodeGenerator.swift; path = SketchStyleExporter/Templates/CodeGenerator.swift; sourceTree = SOURCE_ROOT; };
+		6562B3ED1F3F54F50017037D /* CodeTemplateReplaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CodeTemplateReplaceable.swift; path = SketchStyleExporter/Templates/CodeTemplateReplaceable.swift; sourceTree = SOURCE_ROOT; };
 		6570EE411F3F1A9500DC9F3B /* 03006D69-4182-42B5-9AA1-9171CA517A63.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "03006D69-4182-42B5-9AA1-9171CA517A63.json"; sourceTree = "<group>"; };
 		6570EE421F3F1A9500DC9F3B /* document.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = document.json; sourceTree = "<group>"; };
 		658382E81F3D1094005B4753 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextStyle.swift; path = Model/TextStyle.swift; sourceTree = "<group>"; };
@@ -76,11 +80,22 @@
 			isa = PBXGroup;
 			children = (
 				65492B661F3BB62000321C7F /* main.swift */,
+				6562B3E91F3F32C80017037D /* Templates */,
 				651DFF011F3F27C800B067D5 /* Utilities */,
 				658382E71F3D107B005B4753 /* Model */,
 				6570EE401F3F1A9500DC9F3B /* SampleSketchSource */,
 			);
 			path = SketchStyleExporter;
+			sourceTree = "<group>";
+		};
+		6562B3E91F3F32C80017037D /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				6562B3EA1F3F34D10017037D /* CodeGenerator.swift */,
+				6562B3ED1F3F54F50017037D /* CodeTemplateReplaceable.swift */,
+			);
+			name = Templates;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		6570EE401F3F1A9500DC9F3B /* SampleSketchSource */ = {
@@ -160,10 +175,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				658382EB1F3D10C6005B4753 /* ColorStyle.swift in Sources */,
+				6562B3EB1F3F34D10017037D /* CodeGenerator.swift in Sources */,
 				651DFF051F3F281400B067D5 /* SketchDocument.swift in Sources */,
 				658382E91F3D1094005B4753 /* TextStyle.swift in Sources */,
 				65492B671F3BB62000321C7F /* main.swift in Sources */,
 				651DFF031F3F27D500B067D5 /* String+Extra.swift in Sources */,
+				6562B3EE1F3F54F50017037D /* CodeTemplateReplaceable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
