@@ -4,9 +4,11 @@
 </GeneratedFileHeader>
 //
 
+import UIKit
+
 extension UIColor {
 	<ColorDeclaration>
 
-	public let <#=colorName#> = UIColor(red: <#=red#>, green: <#=green#>, blue: <#=blue#>, alpha: <#=alpha#>)
+	public static let <#=colorName#> = UIColor(red: <#=red#>, green: <#=green#>, blue: <#=blue#>, alpha: <#=alpha#>)
 	</ColorDeclaration>
 }

@@ -4,21 +4,23 @@
 </GeneratedFileHeader>
 //
 
+import UIKit
+
 public struct TextStyle {
 	let font: UIFont
 	let color: UIColor
 	let kerning: CGFloat
 	let lineHeight: CGFloat
 
-	init?(
+	init(
 		fontName: String,
 		pointSize: CGFloat,
 		color: UIColor,
 		kerning: CGFloat,
 		lineHeight: CGFloat
 	) {
-		guard let font = UIFont(name: fontName, size: pointSize) else { return nil }
-		self.font = font
+		let fontDescriptor = UIFontDescriptor(name: fontName, size: pointSize)
+		self.font = UIFont(descriptor: fontDescriptor, size: pointSize)
 		self.color = color
 		self.kerning = kerning
 		self.lineHeight = lineHeight
