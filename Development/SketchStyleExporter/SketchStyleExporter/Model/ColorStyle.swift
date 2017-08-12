@@ -26,5 +26,3 @@ struct ColorStyle {
 		self.color = NSColor(red: red, green: green, blue: blue, alpha: alpha)
 	}
 }
-
-}
