@@ -1,0 +1,57 @@
+//
+<GeneratedFileHeader>
+//  <#=headerLine#>
+</GeneratedFileHeader>
+//
+
+public struct TextStyle {
+	let font: UIFont
+	let color: UIColor
+	let kerning: CGFloat
+	let lineHeight: CGFloat
+
+	init?(
+		fontName: String,
+		pointSize: CGFloat,
+		color: UIColor,
+		kerning: CGFloat,
+		lineHeight: CGFloat
+	) {
+		guard let font = UIFont(name: fontName, size: pointSize) else { return nil }
+		self.font = font
+		self.color = color
+		self.kerning = kerning
+		self.lineHeight = lineHeight
+	}
+}
+
+extension TextStyle {
+	<TextStyleDeclaration>
+
+	static let <#=name#> = TextStyle(
+		fontName: <#=fontName#>,
+		pointSize: <#=pointSize#>,
+		color: <#=color#>,
+		kerning: <#=kerning#>,
+		lineHeight: <#=lineHeight#>
+	)
+	</TextStyleDeclaration>
+}
+
+extension NSAttributedString {
+	private static func attributes(for textStyle: TextStyle) -> [NSAttributedStringKey: Any] {
+		let paragraphStyle = NSMutableParagraphStyle()
+		paragraphStyle.maximumLineHeight = textStyle.lineHeight
+		return [
+			.font: textStyle.font,
+			.foregroundColor: textStyle.color,
+			.kern: textStyle.kerning,
+			.paragraphStyle: paragraphStyle
+		]
+	}
+
+	public convenience init(string: String, textStyle: TextStyle) {
+		let attributes = NSAttributedString.attributes(for: textStyle)
+		self.init(string: string, attributes: attributes)
+	}
+}

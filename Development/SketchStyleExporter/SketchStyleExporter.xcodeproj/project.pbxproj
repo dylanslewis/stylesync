@@ -12,6 +12,7 @@
 		65492B671F3BB62000321C7F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65492B661F3BB62000321C7F /* main.swift */; };
 		6562B3EB1F3F34D10017037D /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6562B3EA1F3F34D10017037D /* CodeGenerator.swift */; };
 		6562B3EE1F3F54F50017037D /* CodeTemplateReplaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6562B3ED1F3F54F50017037D /* CodeTemplateReplaceable.swift */; };
+		6562B3F41F3F656F0017037D /* iOSSwift in Sources */ = {isa = PBXBuildFile; fileRef = 6562B3F31F3F656F0017037D /* iOSSwift */; };
 		658382E91F3D1094005B4753 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658382E81F3D1094005B4753 /* TextStyle.swift */; };
 		658382EB1F3D10C6005B4753 /* ColorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658382EA1F3D10C6005B4753 /* ColorStyle.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		6562B3EA1F3F34D10017037D /* CodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CodeGenerator.swift; path = SketchStyleExporter/Templates/CodeGenerator.swift; sourceTree = SOURCE_ROOT; };
 		6562B3ED1F3F54F50017037D /* CodeTemplateReplaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CodeTemplateReplaceable.swift; path = SketchStyleExporter/Templates/CodeTemplateReplaceable.swift; sourceTree = SOURCE_ROOT; };
 		6562B3F21F3F652E0017037D /* iOSSwift */ = {isa = PBXFileReference; lastKnownFileType = text; path = iOSSwift; sourceTree = "<group>"; };
+		6562B3F31F3F656F0017037D /* iOSSwift */ = {isa = PBXFileReference; lastKnownFileType = text; path = iOSSwift; sourceTree = "<group>"; };
 		6570EE411F3F1A9500DC9F3B /* 03006D69-4182-42B5-9AA1-9171CA517A63.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "03006D69-4182-42B5-9AA1-9171CA517A63.json"; sourceTree = "<group>"; };
 		6570EE421F3F1A9500DC9F3B /* document.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = document.json; sourceTree = "<group>"; };
 		658382E81F3D1094005B4753 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextStyle.swift; path = Model/TextStyle.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		6562B3F01F3F652E0017037D /* TextStyles */ = {
 			isa = PBXGroup;
 			children = (
+				6562B3F31F3F656F0017037D /* iOSSwift */,
 			);
 			name = TextStyles;
 			path = SketchStyleExporter/Templates/TextStyles;
@@ -195,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				658382EB1F3D10C6005B4753 /* ColorStyle.swift in Sources */,
+				6562B3F41F3F656F0017037D /* iOSSwift in Sources */,
 				6562B3EB1F3F34D10017037D /* CodeGenerator.swift in Sources */,
 				651DFF051F3F281400B067D5 /* SketchDocument.swift in Sources */,
 				658382E91F3D1094005B4753 /* TextStyle.swift in Sources */,
