@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		651DFF031F3F27D500B067D5 /* String+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651DFF021F3F27D500B067D5 /* String+Extra.swift */; };
 		651DFF051F3F281400B067D5 /* SketchDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651DFF041F3F281400B067D5 /* SketchDocument.swift */; };
 		65492B671F3BB62000321C7F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65492B661F3BB62000321C7F /* main.swift */; };
 		658382E91F3D1094005B4753 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658382E81F3D1094005B4753 /* TextStyle.swift */; };
@@ -26,11 +27,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		651DFF021F3F27D500B067D5 /* String+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Extra.swift"; path = "Utilities/String+Extra.swift"; sourceTree = "<group>"; };
 		651DFF041F3F281400B067D5 /* SketchDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SketchDocument.swift; path = Model/SketchDocument.swift; sourceTree = "<group>"; };
 		65492B631F3BB62000321C7F /* SketchStyleExporter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SketchStyleExporter; sourceTree = BUILT_PRODUCTS_DIR; };
 		65492B661F3BB62000321C7F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		658382E51F3D0F2C005B4753 /* 03006D69-4182-42B5-9AA1-9171CA517A63.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "03006D69-4182-42B5-9AA1-9171CA517A63.json"; path = "SketchStyleExporter/SampleSketchSource/03006D69-4182-42B5-9AA1-9171CA517A63.json"; sourceTree = SOURCE_ROOT; };
-		658382E61F3D0F2C005B4753 /* document.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = document.json; path = SketchStyleExporter/SampleSketchSource/document.json; sourceTree = SOURCE_ROOT; };
+		6570EE411F3F1A9500DC9F3B /* 03006D69-4182-42B5-9AA1-9171CA517A63.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "03006D69-4182-42B5-9AA1-9171CA517A63.json"; sourceTree = "<group>"; };
+		6570EE421F3F1A9500DC9F3B /* document.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = document.json; sourceTree = "<group>"; };
 		658382E81F3D1094005B4753 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextStyle.swift; path = Model/TextStyle.swift; sourceTree = "<group>"; };
 		658382EA1F3D10C6005B4753 /* ColorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColorStyle.swift; path = Model/ColorStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -46,6 +48,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		651DFF011F3F27C800B067D5 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				651DFF021F3F27D500B067D5 /* String+Extra.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		65492B5A1F3BB62000321C7F = {
 			isa = PBXGroup;
 			children = (
@@ -66,20 +76,20 @@
 			isa = PBXGroup;
 			children = (
 				65492B661F3BB62000321C7F /* main.swift */,
+				651DFF011F3F27C800B067D5 /* Utilities */,
 				658382E71F3D107B005B4753 /* Model */,
-				658382E41F3D0F07005B4753 /* SampleSketchSource */,
+				6570EE401F3F1A9500DC9F3B /* SampleSketchSource */,
 			);
 			path = SketchStyleExporter;
 			sourceTree = "<group>";
 		};
-		658382E41F3D0F07005B4753 /* SampleSketchSource */ = {
+		6570EE401F3F1A9500DC9F3B /* SampleSketchSource */ = {
 			isa = PBXGroup;
 			children = (
-				658382E51F3D0F2C005B4753 /* 03006D69-4182-42B5-9AA1-9171CA517A63.json */,
-				658382E61F3D0F2C005B4753 /* document.json */,
+				6570EE411F3F1A9500DC9F3B /* 03006D69-4182-42B5-9AA1-9171CA517A63.json */,
+				6570EE421F3F1A9500DC9F3B /* document.json */,
 			);
-			name = SampleSketchSource;
-			path = "New Group";
+			path = SampleSketchSource;
 			sourceTree = "<group>";
 		};
 		658382E71F3D107B005B4753 /* Model */ = {
@@ -153,6 +163,7 @@
 				651DFF051F3F281400B067D5 /* SketchDocument.swift in Sources */,
 				658382E91F3D1094005B4753 /* TextStyle.swift in Sources */,
 				65492B671F3BB62000321C7F /* main.swift in Sources */,
+				651DFF031F3F27D500B067D5 /* String+Extra.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
