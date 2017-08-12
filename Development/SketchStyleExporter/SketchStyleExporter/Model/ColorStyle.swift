@@ -42,3 +42,17 @@ extension ColorStyle: CodeTemplateReplacable {
 		]
 	}
 }
+
+// MARK: - Helpers
+
+private extension NSColor {
+	var components: (CGFloat, CGFloat, CGFloat, CGFloat) {
+		return ((redComponent * 255).rounded(), (greenComponent * 255).rounded(), (blueComponent * 255).rounded(), alphaComponent)
+	}
+}
+
+extension ColorStyle {
+	static func colorStyle(for color: NSColor, in colorStyles: [ColorStyle]) -> ColorStyle? {
+		return colorStyles.first(where: { $0.color.components == color.components })
+	}
+}
