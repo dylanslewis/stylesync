@@ -46,7 +46,7 @@ extension TextStyle: CodeTemplateReplacable {
 	var replacementDictionary: [String: String] {
 		return [
 			"name": name,
-			"fontName": "\"\(fontName)\"",
+			"fontName": "\".\(fontName)\"", // TODO: Only do this for SF
 			"pointSize": String(describing: pointSize),
 			"kerning": String(describing: kerning),
 			"lineHeight": String(describing: lineHeight),
