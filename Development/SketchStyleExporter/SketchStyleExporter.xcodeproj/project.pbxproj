@@ -15,6 +15,7 @@
 		6562B3F41F3F656F0017037D /* iOSSwift in Sources */ = {isa = PBXBuildFile; fileRef = 6562B3F31F3F656F0017037D /* iOSSwift */; };
 		658382E91F3D1094005B4753 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658382E81F3D1094005B4753 /* TextStyle.swift */; };
 		658382EB1F3D10C6005B4753 /* ColorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658382EA1F3D10C6005B4753 /* ColorStyle.swift */; };
+		65F890BC1F4227EE0027B697 /* CodeNameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F890BB1F4227EE0027B697 /* CodeNameable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,7 @@
 		6562B3F31F3F656F0017037D /* iOSSwift */ = {isa = PBXFileReference; lastKnownFileType = text; path = iOSSwift; sourceTree = "<group>"; };
 		658382E81F3D1094005B4753 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextStyle.swift; path = Model/TextStyle.swift; sourceTree = "<group>"; };
 		658382EA1F3D10C6005B4753 /* ColorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColorStyle.swift; path = Model/ColorStyle.swift; sourceTree = "<group>"; };
+		65F890BB1F4227EE0027B697 /* CodeNameable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CodeNameable.swift; path = Utilities/CodeNameable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		651DFF011F3F27C800B067D5 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				65F890BB1F4227EE0027B697 /* CodeNameable.swift */,
 				651DFF021F3F27D500B067D5 /* String+Extra.swift */,
 			);
 			name = Utilities;
@@ -189,6 +192,7 @@
 				6562B3F41F3F656F0017037D /* iOSSwift in Sources */,
 				6562B3EB1F3F34D10017037D /* CodeGenerator.swift in Sources */,
 				651DFF051F3F281400B067D5 /* SketchDocument.swift in Sources */,
+				65F890BC1F4227EE0027B697 /* CodeNameable.swift in Sources */,
 				658382E91F3D1094005B4753 /* TextStyle.swift in Sources */,
 				65492B671F3BB62000321C7F /* main.swift in Sources */,
 				651DFF031F3F27D500B067D5 /* String+Extra.swift in Sources */,

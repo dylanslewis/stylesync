@@ -30,7 +30,7 @@ public struct TextStyle {
 extension TextStyle {
 	<TextStyleDeclaration>
 
-	static let <#=name#> = TextStyle(
+	static let <#=textStyleName#> = TextStyle(
 		fontName: <#=fontName#>,
 		pointSize: <#=pointSize#>,
 		color: <#=color#>,
@@ -38,6 +38,12 @@ extension TextStyle {
 		lineHeight: <#=lineHeight#>
 	)
 	</TextStyleDeclaration>
+
+	public static let allGeneratedStylesAndCodeNameAndName: [(TextStyle, String, String)] = [
+		<TextStyleDeclaration>
+			(.<#=textStyleName#>, "<#=textStyleName#>", "<#=name#>"),
+		</TextStyleDeclaration>
+	]
 }
 
 extension NSAttributedString {

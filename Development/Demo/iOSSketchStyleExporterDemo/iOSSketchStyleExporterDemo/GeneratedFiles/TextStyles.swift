@@ -67,6 +67,14 @@ extension TextStyle {
 		kerning: 0.56,
 		lineHeight: 30.0
 	)
+
+	public static let allGeneratedStylesAndCodeNameAndName: [(TextStyle, String, String)] = [
+			(.sampleHeading, "sampleHeading", "Sample Heading"),
+			(.sampleTitle, "sampleTitle", "Sample Title"),
+			(.sampleBody, "sampleBody", "Sample Body"),
+			(.sampleCaption, "sampleCaption", "Sample Caption"),
+			(.sampleSectionHeader, "sampleSectionHeader", "Sample Section Header"),
+	]
 }
 
 extension NSAttributedString {

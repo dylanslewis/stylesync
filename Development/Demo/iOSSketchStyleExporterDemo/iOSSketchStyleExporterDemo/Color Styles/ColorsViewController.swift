@@ -16,14 +16,6 @@ class ColorsViewController: UIViewController {
 		}
 	}
 	
-	fileprivate let nameAndCodeNameAndColorStyle: [(String, String, UIColor)] = [
-		("Sample Black", "sampleBlack", .sampleBlack),
-		("Sample Green", "sampleGreen", .sampleGreen),
-		("Sample Yellow", "sampleYellow", .sampleYellow),
-		("Sample Orange", "sampleOrange", .sampleOrange),
-		("Sample Red", "sampleRed", .sampleRed)
-	]
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		title = "Colours"
@@ -31,17 +23,16 @@ class ColorsViewController: UIViewController {
 	}
 }
 
-
 extension ColorsViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return nameAndCodeNameAndColorStyle.count
+		return UIColor.allGeneratedStylesAndCodeNameAndName.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "ColorStyleCell") as? ColorTableViewCell else {
 			fatalError()
 		}
-		let (name, codeName, color) = nameAndCodeNameAndColorStyle[indexPath.row]
+		let (color, codeName, name) = UIColor.allGeneratedStylesAndCodeNameAndName[indexPath.row]
 		guard let viewData = ColorTableViewCell.ViewData(name: name, codeName: codeName, color: color) else {
 			fatalError()
 		}

@@ -11,4 +11,10 @@ extension UIColor {
 
 	public static let <#=colorName#> = UIColor(red: <#=red#>, green: <#=green#>, blue: <#=blue#>, alpha: <#=alpha#>)
 	</ColorDeclaration>
+
+	public static let allGeneratedStylesAndCodeNameAndName: [(UIColor, String, String)] = [
+	<ColorDeclaration>
+		(.<#=colorName#>, "<#=colorName#>", "<#=name#>"),
+	</ColorDeclaration>
+	]
 }

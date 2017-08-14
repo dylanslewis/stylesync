@@ -16,14 +16,6 @@ class TextStylesViewController: UIViewController {
 		}
 	}
 	
-	fileprivate let nameAndTextStyle: [(String, TextStyle)] = [
-		("Sample Heading", .sampleHeading),
-		("Sample Title", .sampleTitle),
-		("Sample Section Header", .sampleSectionHeader),
-		("Sample Body", .sampleBody),
-		("Sample Caption", .sampleCaption)
-	]
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		title = "Text Styles"
@@ -33,14 +25,14 @@ class TextStylesViewController: UIViewController {
 
 extension TextStylesViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return nameAndTextStyle.count
+		return TextStyle.allGeneratedStylesAndCodeNameAndName.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "TextStyleCell") else {
 			fatalError()
 		}
-		let (name, textStyle) = nameAndTextStyle[indexPath.row]
+		let (textStyle, codeName, name) = TextStyle.allGeneratedStylesAndCodeNameAndName[indexPath.row]
 		cell.textLabel?.attributedText = NSAttributedString(string: name, textStyle: textStyle)
 		return cell
 	}
