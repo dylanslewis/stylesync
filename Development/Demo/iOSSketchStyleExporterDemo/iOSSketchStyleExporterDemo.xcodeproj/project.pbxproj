@@ -64,8 +64,8 @@
 		6562B4001F3F7D1F0017037D /* iOSSketchStyleExporterDemo */ = {
 			isa = PBXGroup;
 			children = (
-				65F890B81F4225DC0027B697 /* Extensions */,
 				6562B41A1F3F7EC30017037D /* GeneratedFiles */,
+				65F890B81F4225DC0027B697 /* Extensions */,
 				65F890B61F40EA290027B697 /* Text Styles */,
 				65F890B71F40EA320027B697 /* Color Styles */,
 				65F890B51F40EA200027B697 /* Supporting Files */,
@@ -105,8 +105,8 @@
 		65F890B71F40EA320027B697 /* Color Styles */ = {
 			isa = PBXGroup;
 			children = (
-				651668BB1F3FB6CB0034635D /* ColorTableViewCell.swift */,
 				658618631F40CABE0069711F /* ColorsViewController.swift */,
+				651668BB1F3FB6CB0034635D /* ColorTableViewCell.swift */,
 			);
 			path = "Color Styles";
 			sourceTree = "<group>";
