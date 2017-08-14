@@ -16,6 +16,7 @@
 		6562B4091F3F7D1F0017037D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6562B4081F3F7D1F0017037D /* Assets.xcassets */; };
 		6562B40C1F3F7D1F0017037D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6562B40A1F3F7D1F0017037D /* LaunchScreen.storyboard */; };
 		658618641F40CABE0069711F /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658618631F40CABE0069711F /* ColorsViewController.swift */; };
+		65F890BA1F4225EC0027B697 /* UIColor+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F890B91F4225EC0027B697 /* UIColor+Extra.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		6562B41B1F3F7EC30017037D /* ColorStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStyles.swift; sourceTree = "<group>"; };
 		6562B41C1F3F7EC30017037D /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
 		658618631F40CABE0069711F /* ColorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
+		65F890B91F4225EC0027B697 /* UIColor+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extra.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,10 +64,11 @@
 		6562B4001F3F7D1F0017037D /* iOSSketchStyleExporterDemo */ = {
 			isa = PBXGroup;
 			children = (
+				65F890B81F4225DC0027B697 /* Extensions */,
 				6562B41A1F3F7EC30017037D /* GeneratedFiles */,
-				65F890B51F40EA200027B697 /* Supporting Files */,
 				65F890B61F40EA290027B697 /* Text Styles */,
 				65F890B71F40EA320027B697 /* Color Styles */,
+				65F890B51F40EA200027B697 /* Supporting Files */,
 				6562B4051F3F7D1F0017037D /* Main.storyboard */,
 				6562B4081F3F7D1F0017037D /* Assets.xcassets */,
 				6562B40A1F3F7D1F0017037D /* LaunchScreen.storyboard */,
@@ -106,6 +109,14 @@
 				658618631F40CABE0069711F /* ColorsViewController.swift */,
 			);
 			path = "Color Styles";
+			sourceTree = "<group>";
+		};
+		65F890B81F4225DC0027B697 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				65F890B91F4225EC0027B697 /* UIColor+Extra.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,6 +196,7 @@
 				6562B4021F3F7D1F0017037D /* AppDelegate.swift in Sources */,
 				658618641F40CABE0069711F /* ColorsViewController.swift in Sources */,
 				6509A3111F3F81E7002A68F8 /* ColorStyles.swift in Sources */,
+				65F890BA1F4225EC0027B697 /* UIColor+Extra.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
