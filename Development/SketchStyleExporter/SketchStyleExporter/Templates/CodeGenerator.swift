@@ -111,22 +111,26 @@ private extension Array where Iterator.Element == String {
 		
 		let replacementElementType = type(of: firstReplacementItem)
 		let declarationName = replacementElementType.declarationName
-		guard
-			let declarationStartIndex = index(where: { $0.contains(declarationName.declarationStartReference) }),
-			let declarationEndIndex = index(where: { $0.contains(declarationName.declarationEndReference) })
-		else {
-			print("⚠️ Unable to find declaration indicies for \(String(describing: replacementElementType))")
-			return self
-		}
-		
-		// Extract the template for the given replacement item type.
-		let replacementItemTemplate = Array(self[declarationStartIndex.advanced(by: 1)..<declarationEndIndex])
 		
 		var codeLinesWithReplacement = self
-		let codeLinesWithReplacedPlaceholders = replacementItems
-			.map({ return replacementItemTemplate.replacingCodePlaceholders(usingReplacementDictionary: $0.replacementDictionary) })
-			.flatMap({ $0 })
-		codeLinesWithReplacement.replaceSubrange(declarationStartIndex...declarationEndIndex, with: codeLinesWithReplacedPlaceholders)
+		var containsDeclarationForType = true
+		repeat {
+			guard
+				let declarationStartIndex = codeLinesWithReplacement.index(where: { $0.contains(declarationName.declarationStartReference) }),
+				let declarationEndIndex = codeLinesWithReplacement.index(where: { $0.contains(declarationName.declarationEndReference) })
+			else {
+				containsDeclarationForType = false
+				continue
+			}
+			
+			// Extract the template for the given replacement item type.
+			let replacementItemTemplate = Array(codeLinesWithReplacement[declarationStartIndex.advanced(by: 1)..<declarationEndIndex])
+			let codeLinesWithReplacedPlaceholders = replacementItems
+				.map({ return replacementItemTemplate.replacingCodePlaceholders(usingReplacementDictionary: $0.replacementDictionary) })
+				.flatMap({ $0 })
+			codeLinesWithReplacement.replaceSubrange(declarationStartIndex...declarationEndIndex, with: codeLinesWithReplacedPlaceholders)
+		} while containsDeclarationForType == true
+		
 		return codeLinesWithReplacement
 	}
 	
