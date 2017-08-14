@@ -8,7 +8,7 @@
 
 import Cocoa
 
-struct ColorStyle {
+struct ColorStyle: CodeNameable {
 	let name: String
 	let color: NSColor
 	
@@ -22,7 +22,7 @@ struct ColorStyle {
 		let blue = colorFill.color.blue
 		let alpha = colorFill.color.alpha
 		
-		self.name = colorStyleObject.name.camelcased
+		self.name = colorStyleObject.name
 		self.color = NSColor(red: red, green: green, blue: blue, alpha: alpha)
 	}
 }
@@ -34,7 +34,8 @@ extension ColorStyle: CodeTemplateReplacable {
 	
 	var replacementDictionary: [String: String] {
 		return [
-			"colorName": name,
+			"name": name,
+			"colorName": codeName,
 			"red": String(describing: color.redComponent),
 			"green": String(describing: color.greenComponent),
 			"blue": String(describing: color.blueComponent),

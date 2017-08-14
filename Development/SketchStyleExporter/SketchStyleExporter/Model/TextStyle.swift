@@ -8,7 +8,7 @@
 
 import Cocoa
 
-struct TextStyle {
+struct TextStyle: CodeNameable {
 	let name: String
 	let fontName: String
 	let pointSize: CGFloat
@@ -28,7 +28,7 @@ struct TextStyle {
 			return nil
 		}
 		
-		self.name = textStyleObject.name.camelcased
+		self.name = textStyleObject.name
 		self.fontName = fontName
 		self.pointSize = pointSize
 		self.kerning = textAttributes.kerning
@@ -46,11 +46,12 @@ extension TextStyle: CodeTemplateReplacable {
 	var replacementDictionary: [String: String] {
 		return [
 			"name": name,
+			"textStyleName": codeName,
 			"fontName": "\".\(fontName)\"", // TODO: Only do this for SF
 			"pointSize": String(describing: pointSize),
 			"kerning": String(describing: kerning),
 			"lineHeight": String(describing: lineHeight),
-			"color": ".\(colorStyle.name)"
+			"color": ".\(colorStyle.codeName)"
 		]
 	}
 }
