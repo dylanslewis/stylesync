@@ -42,10 +42,20 @@
 		658382E81F3D1094005B4753 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextStyle.swift; path = Model/TextStyle.swift; sourceTree = "<group>"; };
 		658382EA1F3D10C6005B4753 /* ColorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColorStyle.swift; path = Model/ColorStyle.swift; sourceTree = "<group>"; };
 		65F890BB1F4227EE0027B697 /* CodeNameable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CodeNameable.swift; path = Utilities/CodeNameable.swift; sourceTree = "<group>"; };
+		65F890C41F44DC600027B697 /* SketchStyleExporterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SketchStyleExporterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65F890C81F44DC600027B697 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65F890CC1F44DCC40027B697 /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		65492B601F3BB62000321C7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65F890C11F44DC600027B697 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -68,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				65492B651F3BB62000321C7F /* SketchStyleExporter */,
+				65F890C51F44DC600027B697 /* SketchStyleExporterTests */,
 				65492B641F3BB62000321C7F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -76,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				65492B631F3BB62000321C7F /* SketchStyleExporter */,
+				65F890C41F44DC600027B697 /* SketchStyleExporterTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,6 +143,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		65F890C51F44DC600027B697 /* SketchStyleExporterTests */ = {
+			isa = PBXGroup;
+			children = (
+				65F890C81F44DC600027B697 /* Info.plist */,
+			);
+			path = SketchStyleExporterTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,6 +171,23 @@
 			productReference = 65492B631F3BB62000321C7F /* SketchStyleExporter */;
 			productType = "com.apple.product-type.tool";
 		};
+		65F890C31F44DC600027B697 /* SketchStyleExporterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65F890C91F44DC600027B697 /* Build configuration list for PBXNativeTarget "SketchStyleExporterTests" */;
+			buildPhases = (
+				65F890C01F44DC600027B697 /* Sources */,
+				65F890C11F44DC600027B697 /* Frameworks */,
+				65F890C21F44DC600027B697 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SketchStyleExporterTests;
+			productName = SketchStyleExporterTests;
+			productReference = 65F890C41F44DC600027B697 /* SketchStyleExporterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -162,6 +199,9 @@
 				ORGANIZATIONNAME = "Dylan Lewis";
 				TargetAttributes = {
 					65492B621F3BB62000321C7F = {
+						CreatedOnToolsVersion = 9.0;
+					};
+					65F890C31F44DC600027B697 = {
 						CreatedOnToolsVersion = 9.0;
 					};
 				};
@@ -179,9 +219,20 @@
 			projectRoot = "";
 			targets = (
 				65492B621F3BB62000321C7F /* SketchStyleExporter */,
+				65F890C31F44DC600027B697 /* SketchStyleExporterTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		65F890C21F44DC600027B697 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		65492B5F1F3BB62000321C7F /* Sources */ = {
@@ -323,6 +374,32 @@
 			};
 			name = Release;
 		};
+		65F890CA1F44DC600027B697 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5D6MUHPE98;
+				INFOPLIST_FILE = SketchStyleExporterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dylanslewis.SketchStyleExporterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		65F890CB1F44DC600027B697 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5D6MUHPE98;
+				INFOPLIST_FILE = SketchStyleExporterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dylanslewis.SketchStyleExporterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -343,6 +420,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		65F890C91F44DC600027B697 /* Build configuration list for PBXNativeTarget "SketchStyleExporterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65F890CA1F44DC600027B697 /* Debug */,
+				65F890CB1F44DC600027B697 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
