@@ -72,7 +72,7 @@ extension ColorStyle: Equatable {
 // MARK: - CodeTemplateReplacable
 
 extension ColorStyle: CodeTemplateReplacable {
-	static let declarationName: String = "ColorDeclaration"
+	static let declarationName: String = "colorDeclaration"
 	
 	var replacementDictionary: [String: String] {
 		return [

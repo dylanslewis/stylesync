@@ -9,7 +9,7 @@
 import Foundation
 
 /// A `String` of a code template, where replacable ranges are denoted as
-/// `<ReplacableDeclaration>` and `</ReplacableDeclaration>`, and replaceable
+/// `<replacableDeclaration>` and `</replacableDeclaration>`, and replaceable
 /// elements are denoted as `<#=replaceableElement#>`
 typealias Template = String
 
@@ -61,7 +61,7 @@ struct CodeGenerator {
 private extension CodeGenerator {
 	/// A line of text to be shown in the header of the generated file.
 	struct HeaderLine: CodeTemplateReplacable {
-		static let declarationName: String = "GeneratedFileHeader"
+		static let declarationName: String = "generatedFileHeader"
 		let headerLine: String
 		
 		var replacementDictionary: [String: String] {

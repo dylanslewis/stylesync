@@ -1,7 +1,7 @@
 //
-<GeneratedFileHeader>
+<generatedFileHeader>
 //  <#=headerLine#>
-</GeneratedFileHeader>
+</generatedFileHeader>
 //
 
 import UIKit
@@ -28,7 +28,7 @@ public struct TextStyle {
 }
 
 extension TextStyle {
-	<TextStyleDeclaration>
+	<textStyleDeclaration>
 
 	static let <#=textStyleName#> = TextStyle(
 		fontName: <#=fontName#>,
@@ -37,12 +37,12 @@ extension TextStyle {
 		kerning: <#=kerning#>,
 		lineHeight: <#=lineHeight#>
 	)
-	</TextStyleDeclaration>
+	</textStyleDeclaration>
 
 	public static let allGeneratedStylesAndCodeNameAndName: [(TextStyle, String, String)] = [
-		<TextStyleDeclaration>
+		<textStyleDeclaration>
 			(.<#=textStyleName#>, "<#=textStyleName#>", "<#=name#>"),
-		</TextStyleDeclaration>
+		</textStyleDeclaration>
 	]
 }
 

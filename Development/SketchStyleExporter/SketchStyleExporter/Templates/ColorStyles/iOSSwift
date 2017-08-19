@@ -1,20 +1,20 @@
 //
-<GeneratedFileHeader>
+<generatedFileHeader>
 //  <#=headerLine#>
-</GeneratedFileHeader>
+</generatedFileHeader>
 //
 
 import UIKit
 
 extension UIColor {
-	<ColorDeclaration>
+	<colorDeclaration>
 
 	public static let <#=colorName#> = UIColor(red: <#=red#>, green: <#=green#>, blue: <#=blue#>, alpha: <#=alpha#>)
-	</ColorDeclaration>
+	</colorDeclaration>
 
 	public static let allGeneratedStylesAndCodeNameAndName: [(UIColor, String, String)] = [
-	<ColorDeclaration>
+	<colorDeclaration>
 		(.<#=colorName#>, "<#=colorName#>", "<#=name#>"),
-	</ColorDeclaration>
+	</colorDeclaration>
 	]
 }

@@ -55,7 +55,7 @@ extension TextStyle: Equatable {
 // MARK: - CodeTemplateReplacable
 
 extension TextStyle: CodeTemplateReplacable {
-	static let declarationName: String = "TextStyleDeclaration"
+	static let declarationName: String = "textStyleDeclaration"
 	
 	var replacementDictionary: [String: String] {
 		return [
