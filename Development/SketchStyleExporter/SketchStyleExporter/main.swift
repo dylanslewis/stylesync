@@ -57,8 +57,15 @@ let generatedTextStylesCode = textStyleCodeGenerator.generatedCode
 
 let exportDirectoryPath = URL(fileURLWithPath: exportDirectoryPathString)
 
-let generatedColorStylesFilePath = exportDirectoryPath.appendingPathComponent("ColorStyles.swift")
-let generatedTextStylesFilePath = exportDirectoryPath.appendingPathComponent("TextStyles.swift")
+var generatedColorStylesFilePath = exportDirectoryPath.appendingPathComponent("ColorStyles")
+if let fileExtension = colorStyleCodeGenerator.fileExtension {
+	generatedColorStylesFilePath = generatedColorStylesFilePath.appendingPathExtension(fileExtension)
+}
+
+var generatedTextStylesFilePath = exportDirectoryPath.appendingPathComponent("TextStyles")
+if let fileExtension = textStyleCodeGenerator.fileExtension {
+	generatedTextStylesFilePath = generatedTextStylesFilePath.appendingPathExtension(fileExtension)
+}
 
 let rawStylesFilePath = exportDirectoryPath.appendingPathComponent("ExportedStyles.json")
 let version: Version
