@@ -8,14 +8,10 @@
 
 import Cocoa
 
-struct ColorStyle: Codable, CodeNameable {
+struct ColorStyle: CodeNameable {
 	let name: String
 	let identifier: String
 	let color: NSColor
-	
-	enum CodingKeys: String, CodingKey {
-		case name, identifier, red, green, blue, alpha
-	}
 	
 	init?(colorStyleObject: SketchDocument.ColorStyles.Object) {
 		// FIXME: Check what happens with gradient styles
@@ -31,6 +27,14 @@ struct ColorStyle: Codable, CodeNameable {
 		self.identifier = colorStyleObject.identifier
 		self.color = NSColor(red: red, green: green, blue: blue, alpha: alpha)
 	}
+}
+
+// MARK: - Codable
+
+extension ColorStyle: Codable {
+	enum CodingKeys: String, CodingKey {
+		case name, identifier, red, green, blue, alpha
+	}
 	
 	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -38,7 +42,7 @@ struct ColorStyle: Codable, CodeNameable {
 		let green = try container.decode(CGFloat.self, forKey: .green)
 		let blue = try container.decode(CGFloat.self, forKey: .blue)
 		let alpha = try container.decode(CGFloat.self, forKey: .alpha)
-
+		
 		self.name = try container.decode(String.self, forKey: .name)
 		self.identifier = try container.decode(String.self, forKey: .identifier)
 		self.color = NSColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
