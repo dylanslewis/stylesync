@@ -14,7 +14,6 @@ struct ColorStyle: CodeNameable {
 	let color: NSColor
 	
 	init?(colorStyleObject: SketchDocument.ColorStyles.Object) {
-		// FIXME: Check what happens with gradient styles
 		guard let colorFill = colorStyleObject.value.fills.first else {
 			return nil
 		}
