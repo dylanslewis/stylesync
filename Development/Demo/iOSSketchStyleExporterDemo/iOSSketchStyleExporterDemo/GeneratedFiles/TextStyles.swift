@@ -38,17 +38,17 @@ extension TextStyle {
 
 	static let sampleTitle = TextStyle(
 		fontName: ".SFUIDisplay-Semibold",
-		pointSize: 18.0,
+		pointSize: 17.0,
 		color: .sampleGreen,
-		kerning: -0.7058823,
+		kerning: 0.0,
 		lineHeight: 30.0
 	)
 
 	static let sampleBody = TextStyle(
 		fontName: ".SFUIDisplay-Light",
-		pointSize: 12.0,
+		pointSize: 14.0,
 		color: .sampleBlack,
-		kerning: 0.6,
+		kerning: 0.6999999,
 		lineHeight: 30.0
 	)
 
