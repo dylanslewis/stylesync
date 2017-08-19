@@ -10,28 +10,22 @@
 import Cocoa
 
 let commandLineArguments = CommandLine.arguments.dropFirst()
-guard commandLineArguments.count == 2 else {
-	print("First argument should be document.json and second should be export location")
-	fatalError()
-}
-
 guard
+	commandLineArguments.count == 2,
 	let sketchDocumentPathString = commandLineArguments.first,
 	let exportDirectoryPathString = commandLineArguments.last
 else {
-	print("Pass the sketch file as the first argument")
-	fatalError()
-}
-
-let sketchDocumentPath = URL(fileURLWithPath: sketchDocumentPathString)
-guard let sketchDocumentData = try? Data(contentsOf: sketchDocumentPath) else {
-	print("Failed to extract JSON data")
+	print("First parameter should be Sketch file's document.json and second should be export path.")
 	fatalError()
 }
 
 let decoder = JSONDecoder()
-guard let sketchDocument = try? decoder.decode(SketchDocument.self, from: sketchDocumentData) else {
-	print("Failed to decode JSON data")
+let sketchDocumentPath = URL(fileURLWithPath: sketchDocumentPathString)
+guard
+	let sketchDocumentData = try? Data(contentsOf: sketchDocumentPath),
+	let sketchDocument = try? decoder.decode(SketchDocument.self, from: sketchDocumentData)
+else {
+	print("Failed to extract JSON data from Sketch file's document.json")
 	fatalError()
 }
 
