@@ -59,6 +59,17 @@ extension ColorStyle: Codable {
 	}
 }
 
+// MARK: - Equatable
+
+extension ColorStyle: Equatable {
+	static func == (lhs: ColorStyle, rhs: ColorStyle) -> Bool {
+		return
+			lhs.name == rhs.name &&
+			lhs.identifier == rhs.identifier &&
+			lhs.color == rhs.color
+	}
+}
+
 // MARK: - CodeTemplateReplacable
 
 extension ColorStyle: CodeTemplateReplacable {

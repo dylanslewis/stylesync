@@ -37,6 +37,21 @@ struct TextStyle: Codable, CodeNameable {
 	}
 }
 
+// MARK: - Equatable
+
+extension TextStyle: Equatable {
+	static func == (lhs: TextStyle, rhs: TextStyle) -> Bool {
+		return
+			lhs.name == rhs.name &&
+			lhs.identifier == rhs.identifier &&
+			lhs.fontName == rhs.fontName &&
+			lhs.pointSize == rhs.pointSize &&
+			lhs.kerning == rhs.kerning &&
+			lhs.lineHeight == rhs.lineHeight &&
+			lhs.colorStyle == rhs.colorStyle
+	}
+}
+
 // MARK: - CodeTemplateReplacable
 
 extension TextStyle: CodeTemplateReplacable {
