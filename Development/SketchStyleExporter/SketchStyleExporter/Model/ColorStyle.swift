@@ -10,6 +10,7 @@ import Cocoa
 
 struct ColorStyle: CodeNameable {
 	let name: String
+	let identifier: String
 	let color: NSColor
 	
 	init?(colorStyleObject: SketchDocument.ColorStyles.Object) {
@@ -23,6 +24,7 @@ struct ColorStyle: CodeNameable {
 		let alpha = colorFill.color.alpha
 		
 		self.name = colorStyleObject.name
+		self.identifier = colorStyleObject.identifier
 		self.color = NSColor(red: red, green: green, blue: blue, alpha: alpha)
 	}
 }

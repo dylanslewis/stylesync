@@ -10,6 +10,7 @@ import Cocoa
 
 struct TextStyle: CodeNameable {
 	let name: String
+	let identifier: String
 	let fontName: String
 	let pointSize: CGFloat
 	let kerning: CGFloat
@@ -29,6 +30,7 @@ struct TextStyle: CodeNameable {
 		}
 		
 		self.name = textStyleObject.name
+		self.identifier = textStyleObject.identifier
 		self.fontName = fontName
 		self.pointSize = pointSize
 		self.kerning = textAttributes.kerning

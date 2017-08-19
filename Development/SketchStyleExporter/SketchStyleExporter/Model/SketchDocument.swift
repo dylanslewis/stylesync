@@ -24,6 +24,13 @@ extension SketchDocument {
 		struct Object: Codable {
 			let name: String
 			let value: Value
+			let identifier: String
+			
+			enum CodingKeys: String, CodingKey {
+				case name
+				case value
+				case identifier = "do_objectID"
+			}
 			
 			struct Value: Codable {
 				let fills: [Fill]
@@ -52,6 +59,13 @@ extension SketchDocument {
 		struct Object: Codable {
 			let name: String
 			let value: Value
+			let identifier: String
+			
+			enum CodingKeys: String, CodingKey {
+				case name
+				case value
+				case identifier = "do_objectID"
+			}
 			
 			struct Value: Codable {
 				let textStyle: TextStyle
