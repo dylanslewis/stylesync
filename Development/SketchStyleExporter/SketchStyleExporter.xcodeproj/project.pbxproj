@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		651DFF031F3F27D500B067D5 /* String+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651DFF021F3F27D500B067D5 /* String+Extra.swift */; };
 		651DFF051F3F281400B067D5 /* SketchDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651DFF041F3F281400B067D5 /* SketchDocument.swift */; };
+		651E77711F48D48D00BD766C /* Deprecatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651E77701F48D48D00BD766C /* Deprecatable.swift */; };
 		65492B671F3BB62000321C7F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65492B661F3BB62000321C7F /* main.swift */; };
 		6562B3EB1F3F34D10017037D /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6562B3EA1F3F34D10017037D /* CodeGenerator.swift */; };
 		6562B3EE1F3F54F50017037D /* CodeTemplateReplaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6562B3ED1F3F54F50017037D /* CodeTemplateReplaceable.swift */; };
@@ -37,6 +38,7 @@
 		651668BA1F3F94EE0034635D /* iOSSwift */ = {isa = PBXFileReference; lastKnownFileType = text; path = iOSSwift; sourceTree = "<group>"; };
 		651DFF021F3F27D500B067D5 /* String+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Extra.swift"; path = "Utilities/String+Extra.swift"; sourceTree = "<group>"; };
 		651DFF041F3F281400B067D5 /* SketchDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SketchDocument.swift; path = Model/SketchDocument.swift; sourceTree = "<group>"; };
+		651E77701F48D48D00BD766C /* Deprecatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Deprecatable.swift; path = Utilities/Deprecatable.swift; sourceTree = "<group>"; };
 		65492B631F3BB62000321C7F /* SketchStyleExporter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SketchStyleExporter; sourceTree = BUILT_PRODUCTS_DIR; };
 		65492B661F3BB62000321C7F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6562B3EA1F3F34D10017037D /* CodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CodeGenerator.swift; path = SketchStyleExporter/Templates/CodeGenerator.swift; sourceTree = SOURCE_ROOT; };
@@ -74,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				65F890BB1F4227EE0027B697 /* CodeNameable.swift */,
+				651E77701F48D48D00BD766C /* Deprecatable.swift */,
 				651DFF021F3F27D500B067D5 /* String+Extra.swift */,
 			);
 			name = Utilities;
@@ -248,6 +251,7 @@
 			files = (
 				658382EB1F3D10C6005B4753 /* ColorStyle.swift in Sources */,
 				6562B3F41F3F656F0017037D /* iOSSwift in Sources */,
+				651E77711F48D48D00BD766C /* Deprecatable.swift in Sources */,
 				6562B3EB1F3F34D10017037D /* CodeGenerator.swift in Sources */,
 				65F134771F4873C600DA91E3 /* CodableError.swift in Sources */,
 				651DFF051F3F281400B067D5 /* SketchDocument.swift in Sources */,

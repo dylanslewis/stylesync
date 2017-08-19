@@ -29,17 +29,53 @@ else {
 	fatalError()
 }
 
-let colorStyles = sketchDocument.layerStyles.objects.flatMap(ColorStyle.init)
-let textStyles = sketchDocument.layerTextStyles.objects.flatMap { textStyleObject -> TextStyle? in
+let exportDirectoryPath = URL(fileURLWithPath: exportDirectoryPathString)
+let rawStylesFilePath = exportDirectoryPath.appendingPathComponent("ExportedStyles.json")
+
+let previousExportedStyles: VersionedStyles?
+let previousExportedColorStyles: [ColorStyle]
+let previousExportedTextStyles: [TextStyle]
+if
+	let previousExportedStylesData = try? Data(contentsOf: rawStylesFilePath),
+	let versionedStyles = try? decoder.decode(VersionedStyles.self, from: previousExportedStylesData)
+{
+	previousExportedStyles = versionedStyles
+	previousExportedColorStyles = versionedStyles.colorStyles
+	previousExportedTextStyles = versionedStyles.textStyles
+} else {
+	previousExportedStyles = nil
+	previousExportedColorStyles = []
+	previousExportedTextStyles = []
+}
+
+let newColorStyles = sketchDocument.layerStyles.objects.flatMap({ ColorStyle(colorStyleObject: $0, isDeprecated: false) })
+var deprecatedColorStyles = previousExportedColorStyles
+	.filter { colorStyle -> Bool in
+		return newColorStyles.contains(where: { $0.identifier == colorStyle.identifier }) == false
+	}
+	.map { colorStyle -> ColorStyle in
+		return colorStyle.deprecated
+	}
+let allColorStyles = newColorStyles + deprecatedColorStyles
+
+let newTextStyles = sketchDocument.layerTextStyles.objects.flatMap { textStyleObject -> TextStyle? in
 	guard
 		let color = textStyleObject.value.textStyle.encodedAttributes.color.color,
-		let colorStyle = ColorStyle.colorStyle(for: color, in: colorStyles)
-	else {
-		print("⚠️ \(textStyleObject.name) does not use a color from the shared colour scheme")
-		return nil
+		let colorStyle = ColorStyle.colorStyle(for: color, in: newColorStyles)
+		else {
+			print("⚠️ \(textStyleObject.name) does not use a color from the shared colour scheme")
+			return nil
 	}
-	return TextStyle(textStyleObject: textStyleObject, colorStyle: colorStyle)
+	return TextStyle(textStyleObject: textStyleObject, colorStyle: colorStyle, isDeprecated: false)
 }
+var deprecatedTextStyles = previousExportedTextStyles
+	.filter { textStyle -> Bool in
+		return newTextStyles.contains(where: { $0.identifier == textStyle.identifier }) == false
+	}
+	.map { textStyle -> TextStyle in
+		return textStyle.deprecated
+	}
+let allTextStyles = newTextStyles + deprecatedTextStyles
 
 let iOSSwiftColorStyleTemplateURL = URL(fileURLWithPath: "/Users/dylanslewis/Developer/SketchStyleExporter/Development/SketchStyleExporter/SketchStyleExporter/Templates/ColorStyles/iOSSwift")
 let iOSSwiftColorStyleTemplateData = try! Data(contentsOf: iOSSwiftColorStyleTemplateURL)
@@ -49,13 +85,12 @@ let iOSSwiftTextStyleTemplateURL = URL(fileURLWithPath: "/Users/dylanslewis/Deve
 let iOSSwiftTextStyleTemplateData = try! Data(contentsOf: iOSSwiftTextStyleTemplateURL)
 let iOSSwiftTextStyleTemplate: Template = String.init(data: iOSSwiftTextStyleTemplateData, encoding: .utf8)!
 
-let colorStyleCodeGenerator = CodeGenerator(template: iOSSwiftColorStyleTemplate, codeTemplateReplacables: [colorStyles])
+let colorStyleCodeGenerator = CodeGenerator(template: iOSSwiftColorStyleTemplate, codeTemplateReplacables: [allColorStyles])
 let generatedColorStylesCode = colorStyleCodeGenerator.generatedCode
 
-let textStyleCodeGenerator = CodeGenerator(template: iOSSwiftTextStyleTemplate, codeTemplateReplacables: [textStyles])
+let textStyleCodeGenerator = CodeGenerator(template: iOSSwiftTextStyleTemplate, codeTemplateReplacables: [allTextStyles])
 let generatedTextStylesCode = textStyleCodeGenerator.generatedCode
 
-let exportDirectoryPath = URL(fileURLWithPath: exportDirectoryPathString)
 
 var generatedColorStylesFilePath = exportDirectoryPath.appendingPathComponent("ColorStyles")
 if let fileExtension = colorStyleCodeGenerator.fileExtension {
@@ -67,21 +102,17 @@ if let fileExtension = textStyleCodeGenerator.fileExtension {
 	generatedTextStylesFilePath = generatedTextStylesFilePath.appendingPathExtension(fileExtension)
 }
 
-let rawStylesFilePath = exportDirectoryPath.appendingPathComponent("ExportedStyles.json")
 let version: Version
-if
-	let previousExportedStylesData = try? Data(contentsOf: rawStylesFilePath),
-	let previousExportedStyles = try? decoder.decode(VersionedStyles.self, from: previousExportedStylesData)
-{
-	let didTextStylesChange = previousExportedStyles.textStyles != textStyles
-	let didColorStylesChange = previousExportedStyles.colorStyles != colorStyles
+if let previousExportedStyles = previousExportedStyles {
+	let didTextStylesChange = previousExportedStyles.textStyles != newTextStyles
+	let didColorStylesChange = previousExportedStyles.colorStyles != newColorStyles
 	switch (didTextStylesChange, didColorStylesChange) {
-		case (true, _):
-			version = previousExportedStyles.version.incrementingMajor()
-		case (false, true):
-			version = previousExportedStyles.version.incrementingMinor()
-		case (false, false):
-			version = previousExportedStyles.version
+	case (true, _):
+		version = previousExportedStyles.version.incrementingMajor()
+	case (false, true):
+		version = previousExportedStyles.version.incrementingMinor()
+	case (false, false):
+		version = previousExportedStyles.version
 	}
 } else {
 	version = .firstVersion
@@ -89,8 +120,8 @@ if
 
 let versionedStyles = VersionedStyles(
 	version: version,
-	colorStyles: colorStyles,
-	textStyles: textStyles
+	colorStyles: allColorStyles,
+	textStyles: allTextStyles
 )
 let encoder = JSONEncoder()
 let rawStylesData = try! encoder.encode(versionedStyles)

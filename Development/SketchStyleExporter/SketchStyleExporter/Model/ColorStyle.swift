@@ -8,12 +8,20 @@
 
 import Cocoa
 
-struct ColorStyle: CodeNameable {
+struct ColorStyle: CodeNameable, Deprecatable {
 	let name: String
 	let identifier: String
 	let color: NSColor
+	var isDeprecated: Bool
 	
-	init?(colorStyleObject: SketchDocument.ColorStyles.Object) {
+	init(name: String, identifier: String, color: NSColor, isDeprecated: Bool) {
+		self.name = name
+		self.identifier = identifier
+		self.color = color
+		self.isDeprecated = isDeprecated
+	}
+	
+	init?(colorStyleObject: SketchDocument.ColorStyles.Object, isDeprecated: Bool) {
 		guard let colorFill = colorStyleObject.value.fills.first else {
 			return nil
 		}
@@ -25,6 +33,7 @@ struct ColorStyle: CodeNameable {
 		self.name = colorStyleObject.name
 		self.identifier = colorStyleObject.identifier
 		self.color = NSColor(red: red, green: green, blue: blue, alpha: alpha)
+		self.isDeprecated = isDeprecated
 	}
 }
 
@@ -32,7 +41,7 @@ struct ColorStyle: CodeNameable {
 
 extension ColorStyle: Codable {
 	enum CodingKeys: String, CodingKey {
-		case name, identifier, red, green, blue, alpha
+		case name, identifier, red, green, blue, alpha, isDeprecated
 	}
 	
 	init(from decoder: Decoder) throws {
@@ -45,6 +54,7 @@ extension ColorStyle: Codable {
 		self.name = try container.decode(String.self, forKey: .name)
 		self.identifier = try container.decode(String.self, forKey: .identifier)
 		self.color = NSColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
+		self.isDeprecated = try container.decode(Bool.self, forKey: .isDeprecated)
 	}
 	
 	func encode(to encoder: Encoder) throws {
@@ -55,6 +65,7 @@ extension ColorStyle: Codable {
 		try container.encode(color.greenComponent*255, forKey: .green)
 		try container.encode(color.blueComponent*255, forKey: .blue)
 		try container.encode(color.alphaComponent, forKey: .alpha)
+		try container.encode(isDeprecated, forKey: .isDeprecated)
 	}
 }
 
@@ -65,7 +76,8 @@ extension ColorStyle: Equatable {
 		return
 			lhs.name == rhs.name &&
 			lhs.identifier == rhs.identifier &&
-			lhs.color == rhs.color
+			lhs.color == rhs.color &&
+			lhs.isDeprecated == rhs.isDeprecated
 	}
 }
 
@@ -83,6 +95,19 @@ extension ColorStyle: CodeTemplateReplacable {
 			"blue": String(describing: color.blueComponent),
 			"alpha": String(describing: color.alphaComponent),
 		]
+	}
+}
+
+// MARK: - Deprecatable
+
+extension ColorStyle {
+	var deprecated: ColorStyle {
+		return ColorStyle(
+			name: name,
+			identifier: identifier,
+			color: color,
+			isDeprecated: true
+		)
 	}
 }
 

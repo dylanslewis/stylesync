@@ -97,7 +97,11 @@ private extension Array where Iterator.Element == String {
 	///									   the value is the replacement for that
 	///									   placeholder.
 	/// - Returns: The original array with replaced placeholders.
-	func replacingCodePlaceholders(usingReplacementDictionary replacementDictionary: [String: String]) -> [String] {
+	
+	// FIXME: Update docs
+	func replacingCodePlaceholders(usingReplacementDictionary replacementDictionary: [String: String], isDeprecated: Bool) -> [String] {
+		let deprecatedReference = "deprecated".conditionalCodePlaceholderReference
+		
 		return map({ line -> String in
 			var codeLineWithReplacedPlaceholders = line
 			replacementDictionary.forEach({ (arg) in
@@ -106,6 +110,18 @@ private extension Array where Iterator.Element == String {
 					.replacingOccurrences(of: replacementKey.codePlaceholderReference, with: replacementValue)
 			})
 			return codeLineWithReplacedPlaceholders
+		}).flatMap({ line -> String? in
+			switch (isDeprecated, line.contains(deprecatedReference)) {
+			case (_, false):
+				return line
+			case (false, true):
+				// This line contains the deprecation reference, but the object
+				// is not deprecated, so remove the line.
+				return nil
+			case (true, true):
+				// Remove the deprecation reference from the line.
+				return line.replacingOccurrences(of: deprecatedReference, with: "")
+			}
 		})
 	}
 	
@@ -142,7 +158,8 @@ private extension Array where Iterator.Element == String {
 			// Extract the template for the given replacement item type.
 			let replacementItemTemplate = Array(codeLinesWithReplacement[declarationStartIndex.advanced(by: 1)..<declarationEndIndex])
 			let codeLinesWithReplacedPlaceholders = replacementItems
-				.map({ return replacementItemTemplate.replacingCodePlaceholders(usingReplacementDictionary: $0.replacementDictionary) })
+				.map({ return replacementItemTemplate
+					.replacingCodePlaceholders(usingReplacementDictionary: $0.replacementDictionary, isDeprecated: $0.isDeprecated) })
 				.flatMap({ $0 })
 			codeLinesWithReplacement.replaceSubrange(declarationStartIndex...declarationEndIndex, with: codeLinesWithReplacedPlaceholders)
 		} while containsDeclarationForType == true
@@ -163,13 +180,26 @@ private extension Array where Iterator.Element == String {
 }
 
 private extension String {
+	private enum ReplaceableReference {
+		static let start: String = "<#"
+		static let end: String = "#>"
+	}
+	
+	private func replaceableReference(withSymbol symbol: String) -> String {
+		return ReplaceableReference.start + symbol + self + ReplaceableReference.end
+	}
+	
 	/// Wraps the current string in a code placeholder reference.
 	var codePlaceholderReference: String {
-		return "<#=" + self + "#" + ">"
+		return replaceableReference(withSymbol: "=")
+	}
+	
+	var conditionalCodePlaceholderReference: String {
+		return replaceableReference(withSymbol: "?")
 	}
 	
 	var metadataPlaceholderReference: String {
-		return "<#@" + self + "#" + ">"
+		return replaceableReference(withSymbol: "@")
 	}
 	
 	/// Wraps the current string in a declaration start reference.

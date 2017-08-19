@@ -8,7 +8,7 @@
 
 import Cocoa
 
-struct TextStyle: Codable, CodeNameable {
+struct TextStyle: Codable, CodeNameable, Deprecatable {
 	let name: String
 	let identifier: String
 	let fontName: String
@@ -16,8 +16,29 @@ struct TextStyle: Codable, CodeNameable {
 	let kerning: CGFloat
 	let lineHeight: CGFloat
 	let colorStyle: ColorStyle
+	let isDeprecated: Bool
 	
-	init?(textStyleObject: SketchDocument.TextStyles.Object, colorStyle: ColorStyle) {
+	init(
+		name: String,
+		identifier: String,
+		fontName: String,
+		pointSize: CGFloat,
+		kerning: CGFloat,
+		lineHeight: CGFloat,
+		colorStyle: ColorStyle,
+		isDeprecated: Bool
+	) {
+		self.name = name
+		self.identifier = identifier
+		self.fontName = fontName
+		self.pointSize = pointSize
+		self.kerning = kerning
+		self.lineHeight = lineHeight
+		self.colorStyle = colorStyle
+		self.isDeprecated = isDeprecated
+	}
+	
+	init?(textStyleObject: SketchDocument.TextStyles.Object, colorStyle: ColorStyle, isDeprecated: Bool) {
 		let textAttributes = textStyleObject.value.textStyle.encodedAttributes
 		guard
 			let fontName = textAttributes.font.fontName,
@@ -34,6 +55,7 @@ struct TextStyle: Codable, CodeNameable {
 		self.kerning = textAttributes.kerning
 		self.lineHeight = lineHeight
 		self.colorStyle = colorStyle
+		self.isDeprecated = isDeprecated
 	}
 }
 
@@ -48,7 +70,8 @@ extension TextStyle: Equatable {
 			lhs.pointSize == rhs.pointSize &&
 			lhs.kerning == rhs.kerning &&
 			lhs.lineHeight == rhs.lineHeight &&
-			lhs.colorStyle == rhs.colorStyle
+			lhs.colorStyle == rhs.colorStyle &&
+			lhs.isDeprecated == rhs.isDeprecated
 	}
 }
 
@@ -67,5 +90,23 @@ extension TextStyle: CodeTemplateReplacable {
 			"lineHeight": String(describing: lineHeight),
 			"color": ".\(colorStyle.codeName)"
 		]
+	}
+}
+
+
+// MARK: - Deprecatable
+
+extension TextStyle {
+	var deprecated: TextStyle {
+		return TextStyle(
+			name: name,
+			identifier: identifier,
+			fontName: fontName,
+			pointSize: pointSize,
+			kerning: kerning,
+			lineHeight: lineHeight,
+			colorStyle: colorStyle,
+			isDeprecated: true
+		)
 	}
 }

@@ -8,7 +8,14 @@
 
 import Foundation
 
-protocol CodeTemplateReplacable {
+protocol CodeTemplateReplacable: Deprecatable {
 	static var declarationName: String { get }
 	var replacementDictionary: [String: String] { get }
+	var isDeprecated: Bool { get }
+}
+
+extension CodeTemplateReplacable {
+	var isDeprecated: Bool {
+		return false
+	}
 }
