@@ -67,9 +67,11 @@ let generatedColorStylesFilePath = exportDirectoryPath.appendingPathComponent("C
 let generatedTextStylesFilePath = exportDirectoryPath.appendingPathComponent("TextStyles.swift")
 
 let rawColorStylesFilePath = exportDirectoryPath.appendingPathComponent("ColorStyles.json")
+let rawTextStylesFilePath = exportDirectoryPath.appendingPathComponent("TextStyles.json")
 
 let encoder = JSONEncoder()
 let rawColorStylesData = try! encoder.encode(colorStyles)
+let rawTextStylesData = try! encoder.encode(textStyles)
 
 guard
 	let generatedColorStylesData = generatedColorStylesCode.data(using: .utf8),
@@ -82,6 +84,7 @@ do {
 	try generatedColorStylesData.write(to: generatedColorStylesFilePath, options: .atomic)
 	try generatedTextStylesData.write(to: generatedTextStylesFilePath, options: .atomic)
 	try rawColorStylesData.write(to: rawColorStylesFilePath, options: .atomic)
+	try rawTextStylesData.write(to: rawTextStylesFilePath, options: .atomic)
 } catch {
 	print(error)
 }

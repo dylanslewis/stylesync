@@ -8,14 +8,13 @@
 
 import Cocoa
 
-struct TextStyle: CodeNameable {
+struct TextStyle: Codable, CodeNameable {
 	let name: String
 	let identifier: String
 	let fontName: String
 	let pointSize: CGFloat
 	let kerning: CGFloat
 	let lineHeight: CGFloat
-	let color: NSColor
 	let colorStyle: ColorStyle
 	
 	init?(textStyleObject: SketchDocument.TextStyles.Object, colorStyle: ColorStyle) {
@@ -23,8 +22,7 @@ struct TextStyle: CodeNameable {
 		guard
 			let fontName = textAttributes.font.fontName,
 			let pointSize = textAttributes.font.pointSize,
-			let lineHeight = textAttributes.paragraphStyle.paragraphStyle?.maximumLineHeight,
-			let color = textAttributes.color.color
+			let lineHeight = textAttributes.paragraphStyle.paragraphStyle?.maximumLineHeight
 		else {
 			return nil
 		}
@@ -35,7 +33,6 @@ struct TextStyle: CodeNameable {
 		self.pointSize = pointSize
 		self.kerning = textAttributes.kerning
 		self.lineHeight = lineHeight
-		self.color = color
 		self.colorStyle = colorStyle
 	}
 }
