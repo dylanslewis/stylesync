@@ -87,14 +87,6 @@ extension ColorStyle: CodeTemplateReplacable {
 	}
 }
 
-// MARK: - Error
-
-extension ColorStyle {
-	enum Error: Swift.Error {
-		case cannotDecode
-	}
-}
-
 // MARK: - Helpers
 
 private extension NSColor {

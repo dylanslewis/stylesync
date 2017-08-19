@@ -66,12 +66,33 @@ let exportDirectoryPath = URL(fileURLWithPath: exportDirectoryPathString)
 let generatedColorStylesFilePath = exportDirectoryPath.appendingPathComponent("ColorStyles.swift")
 let generatedTextStylesFilePath = exportDirectoryPath.appendingPathComponent("TextStyles.swift")
 
-let rawColorStylesFilePath = exportDirectoryPath.appendingPathComponent("ColorStyles.json")
-let rawTextStylesFilePath = exportDirectoryPath.appendingPathComponent("TextStyles.json")
+let rawStylesFilePath = exportDirectoryPath.appendingPathComponent("ExportedStyles.json")
+let version: Version
+if
+	let previousExportedStylesData = try? Data(contentsOf: rawStylesFilePath),
+	let previousExportedStyles = try? decoder.decode(VersionedStyles.self, from: previousExportedStylesData)
+{
+	let didTextStylesChange = previousExportedStyles.textStyles != textStyles
+	let didColorStylesChange = previousExportedStyles.colorStyles != colorStyles
+	switch (didTextStylesChange, didColorStylesChange) {
+		case (true, _):
+			version = previousExportedStyles.version.incrementingMajor()
+		case (false, true):
+			version = previousExportedStyles.version.incrementingMinor()
+		case (false, false):
+			version = previousExportedStyles.version
+	}
+} else {
+	version = .firstVersion
+}
 
+let versionedStyles = VersionedStyles(
+	version: version,
+	colorStyles: colorStyles,
+	textStyles: textStyles
+)
 let encoder = JSONEncoder()
-let rawColorStylesData = try! encoder.encode(colorStyles)
-let rawTextStylesData = try! encoder.encode(textStyles)
+let rawStylesData = try! encoder.encode(versionedStyles)
 
 guard
 	let generatedColorStylesData = generatedColorStylesCode.data(using: .utf8),
@@ -83,8 +104,7 @@ else {
 do {
 	try generatedColorStylesData.write(to: generatedColorStylesFilePath, options: .atomic)
 	try generatedTextStylesData.write(to: generatedTextStylesFilePath, options: .atomic)
-	try rawColorStylesData.write(to: rawColorStylesFilePath, options: .atomic)
-	try rawTextStylesData.write(to: rawTextStylesFilePath, options: .atomic)
+	try rawStylesData.write(to: rawStylesFilePath, options: .atomic)
 } catch {
 	print(error)
 }
