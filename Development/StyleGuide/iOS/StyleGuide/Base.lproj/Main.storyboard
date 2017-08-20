@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="67Z-WJ-UHz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="67Z-WJ-UHz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Text Styles-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Text Styles" id="BYZ-38-t0r" customClass="TextStylesViewController" customModule="iOSSketchStyleExporterDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Text Styles" id="BYZ-38-t0r" customClass="TextStylesViewController" customModule="StyleGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -67,7 +67,7 @@
         <!--Colours-->
         <scene sceneID="Wko-Cp-eUX">
             <objects>
-                <viewController title="Colours" id="KEA-CQ-CMw" customClass="ColorsViewController" customModule="iOSSketchStyleExporterDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Colours" id="KEA-CQ-CMw" customClass="ColorsViewController" customModule="StyleGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xzc-am-uRW"/>
                         <viewControllerLayoutGuide type="bottom" id="JAd-Vg-BEF"/>
@@ -80,7 +80,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ColorStyleCell" rowHeight="129" id="jqi-iV-duo" customClass="ColorTableViewCell" customModule="iOSSketchStyleExporterDemo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ColorStyleCell" rowHeight="129" id="jqi-iV-duo" customClass="ColorTableViewCell" customModule="StyleGuide" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="129"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jqi-iV-duo" id="oIW-M3-uaj">
@@ -169,10 +169,10 @@
         <scene sceneID="ymo-Y3-17x">
             <objects>
                 <navigationController title="Colours" automaticallyAdjustsScrollViewInsets="NO" id="z6X-lX-E1V" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="0zg-I5-EWW"/>
+                    <tabBarItem key="tabBarItem" title="Color Styles" image="Color Styles" id="0zg-I5-EWW"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vaz-na-tak">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -188,10 +188,10 @@
         <scene sceneID="dpP-pF-XaB">
             <objects>
                 <navigationController title="Text Styles" automaticallyAdjustsScrollViewInsets="NO" id="vv3-i8-3zT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="HCF-FP-01m"/>
+                    <tabBarItem key="tabBarItem" title="Text Styles" image="Text Styles" id="HCF-FP-01m"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hBG-oX-4fF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -223,4 +223,8 @@
             <point key="canvasLocation" x="1266" y="-673"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Color Styles" width="40" height="40"/>
+        <image name="Text Styles" width="40" height="40"/>
+    </resources>
 </document>

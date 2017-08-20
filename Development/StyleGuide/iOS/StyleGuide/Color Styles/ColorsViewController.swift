@@ -18,7 +18,7 @@ class ColorsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		title = "Colours"
+		title = "Color Styles"
 		navigationController?.navigationBar.prefersLargeTitles = true
 	}
 }
