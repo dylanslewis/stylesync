@@ -8,7 +8,7 @@
 
 import Cocoa
 
-struct TextStyle: Codable, CodeNameable, Deprecatable {
+struct TextStyle: Style, Codable {
 	let name: String
 	let identifier: String
 	let fontName: String

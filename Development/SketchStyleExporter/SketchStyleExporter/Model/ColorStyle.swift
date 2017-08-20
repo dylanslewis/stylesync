@@ -8,7 +8,7 @@
 
 import Cocoa
 
-struct ColorStyle: CodeNameable, Deprecatable {
+struct ColorStyle: Style {
 	let name: String
 	let identifier: String
 	let color: NSColor
