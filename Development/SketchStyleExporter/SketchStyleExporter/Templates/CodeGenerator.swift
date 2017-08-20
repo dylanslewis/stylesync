@@ -100,8 +100,9 @@ private extension Array where Iterator.Element == String {
 	
 	// FIXME: Update docs
 	func replacingCodePlaceholders(usingReplacementDictionary replacementDictionary: [String: String], isDeprecated: Bool) -> [String] {
-		let deprecatedReference = "deprecated".conditionalCodePlaceholderReference
-		
+		let deprecatedKey = "deprecated"
+		let deprecatedReference = "\(deprecatedKey)=\(isDeprecated)".conditionalCodePlaceholderReference
+				
 		return map({ line -> String in
 			var codeLineWithReplacedPlaceholders = line
 			replacementDictionary.forEach({ (arg) in
@@ -111,16 +112,16 @@ private extension Array where Iterator.Element == String {
 			})
 			return codeLineWithReplacedPlaceholders
 		}).flatMap({ line -> String? in
-			switch (isDeprecated, line.contains(deprecatedReference)) {
-			case (_, false):
-				return line
-			case (false, true):
-				// This line contains the deprecation reference, but the object
-				// is not deprecated, so remove the line.
-				return nil
-			case (true, true):
-				// Remove the deprecation reference from the line.
+			switch line.contains(deprecatedReference) {
+			case true:
+				// Condition is matched, remove the reference from the line.
 				return line.replacingOccurrences(of: deprecatedReference, with: "")
+			case false where line.contains(deprecatedKey):
+				// It contains the key, but the condition is not matched. Remove
+				// the line.
+				return nil
+			case false:
+				return line
 			}
 		})
 	}

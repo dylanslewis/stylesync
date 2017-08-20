@@ -10,7 +10,7 @@ import UIKit
 extension UIColor {
 	<colorDeclaration>
 
-	<#?deprecated#>@available(*, deprecated)
+	<#?deprecated=true#>@available(*, deprecated)
 	public static let <#=colorName#> = UIColor(red: <#=red#>, green: <#=green#>, blue: <#=blue#>, alpha: <#=alpha#>)
 	</colorDeclaration>
 

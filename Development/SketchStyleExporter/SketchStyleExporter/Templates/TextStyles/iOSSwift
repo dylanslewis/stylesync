@@ -31,7 +31,7 @@ public struct TextStyle {
 extension TextStyle {
 	<textStyleDeclaration>
 
-	<#?deprecated#>@available(*, deprecated)
+	<#?deprecated=true#>@available(*, deprecated)
 	static let <#=textStyleName#> = TextStyle(
 		fontName: <#=fontName#>,
 		pointSize: <#=pointSize#>,
