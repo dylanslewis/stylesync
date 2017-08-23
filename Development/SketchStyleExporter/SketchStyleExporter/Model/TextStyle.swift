@@ -75,6 +75,22 @@ extension TextStyle: Equatable {
 	}
 }
 
+// MARK: - Hashable
+
+extension TextStyle: Hashable {
+	var hashValue: Int {
+		return
+			name.hashValue ^
+			identifier.hashValue ^
+			fontName.hashValue ^
+			pointSize.hashValue ^
+			kerning.hashValue ^
+			lineHeight.hashValue ^
+			colorStyle.hashValue ^
+			isDeprecated.hashValue
+	}
+}
+
 // MARK: - CodeTemplateReplacable
 
 extension TextStyle: CodeTemplateReplacable {
@@ -92,7 +108,6 @@ extension TextStyle: CodeTemplateReplacable {
 		]
 	}
 }
-
 
 // MARK: - Deprecatable
 

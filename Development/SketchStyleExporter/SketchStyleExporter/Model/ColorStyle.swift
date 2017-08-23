@@ -81,6 +81,18 @@ extension ColorStyle: Equatable {
 	}
 }
 
+// MARK: - Hashable
+
+extension ColorStyle: Hashable {
+	var hashValue: Int {
+		return
+			name.hashValue ^
+			identifier.hashValue ^
+			color.hashValue ^
+			isDeprecated.hashValue
+	}
+}
+
 // MARK: - CodeTemplateReplacable
 
 extension ColorStyle: CodeTemplateReplacable {
