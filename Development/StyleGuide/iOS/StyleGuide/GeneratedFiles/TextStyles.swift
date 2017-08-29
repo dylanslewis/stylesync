@@ -47,7 +47,7 @@ extension TextStyle {
 	static let sampleCaption = TextStyle(
 		fontName: ".SFUIDisplay-Light",
 		pointSize: 8.0,
-		color: .sampleFire,
+		color: .sampleGreen,
 		kerning: 0.4,
 		lineHeight: 30.0
 	)
