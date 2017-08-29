@@ -12,6 +12,10 @@ let package = Package(
 			name: "StyleSync",
 			dependencies: ["StyleSyncCore"]
 		),
-		.target(name: "StyleSyncCore")
+		.target(name: "StyleSyncCore"),
+		.testTarget(
+			name: "StyleSyncTests",
+			dependencies: ["StyleSyncCore"]
+		)
 	]
 )

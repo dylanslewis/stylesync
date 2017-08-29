@@ -6,38 +6,66 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		"StyleSync::StyleSyncPackageTests::ProductTarget" /* StyleSyncPackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_78 /* Build configuration list for PBXAggregateTarget "StyleSyncPackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_81 /* PBXTargetDependency */,
+			);
+			name = StyleSyncPackageTests;
+			productName = StyleSyncPackageTests;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		OBJ_36 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
-		OBJ_42 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* main.swift */; };
-		OBJ_44 /* StyleSyncCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "StyleSync::StyleSyncCore::Product" /* StyleSyncCore.framework */; };
-		OBJ_51 /* CodableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodableError.swift */; };
-		OBJ_52 /* ColorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ColorStyle.swift */; };
-		OBJ_53 /* SketchDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* SketchDocument.swift */; };
-		OBJ_54 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Style.swift */; };
-		OBJ_55 /* StyleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* StyleParser.swift */; };
-		OBJ_56 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* TextStyle.swift */; };
-		OBJ_57 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Version.swift */; };
-		OBJ_58 /* VersionedStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* VersionedStyles.swift */; };
-		OBJ_59 /* StyleSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* StyleSync.swift */; };
-		OBJ_60 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* CodeGenerator.swift */; };
-		OBJ_61 /* CodeTemplateReplaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* CodeTemplateReplaceable.swift */; };
-		OBJ_62 /* CodeNameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* CodeNameable.swift */; };
-		OBJ_63 /* String+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* String+Extra.swift */; };
+		OBJ_39 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_45 /* StyleSyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* StyleSyncTests.swift */; };
+		OBJ_47 /* StyleSyncCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "StyleSync::StyleSyncCore::Product" /* StyleSyncCore.framework */; };
+		OBJ_55 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* main.swift */; };
+		OBJ_57 /* StyleSyncCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "StyleSync::StyleSyncCore::Product" /* StyleSyncCore.framework */; };
+		OBJ_63 /* CodableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodableError.swift */; };
+		OBJ_64 /* ColorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ColorStyle.swift */; };
+		OBJ_65 /* SketchDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* SketchDocument.swift */; };
+		OBJ_66 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Style.swift */; };
+		OBJ_67 /* StyleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* StyleParser.swift */; };
+		OBJ_68 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* TextStyle.swift */; };
+		OBJ_69 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Version.swift */; };
+		OBJ_70 /* VersionedStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* VersionedStyles.swift */; };
+		OBJ_71 /* StyleSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* StyleSync.swift */; };
+		OBJ_72 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* CodeGenerator.swift */; };
+		OBJ_73 /* CodeTemplateReplaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* CodeTemplateReplaceable.swift */; };
+		OBJ_74 /* CodeNameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* CodeNameable.swift */; };
+		OBJ_75 /* String+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* String+Extra.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6580307B1F55F96B00D13B50 /* PBXContainerItemProxy */ = {
+		65009A491F56012200B31BD2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "StyleSync::StyleSyncCore";
 			remoteInfo = StyleSyncCore;
 		};
+		65009A4A1F56012200B31BD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "StyleSync::StyleSyncCore";
+			remoteInfo = StyleSyncCore;
+		};
+		65009A4B1F56012600B31BD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "StyleSync::StyleSyncTests";
+			remoteInfo = StyleSyncTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6580307F1F55FDC700D13B50 /* iOSSwift */ = {isa = PBXFileReference; lastKnownFileType = text; path = iOSSwift; sourceTree = "<group>"; };
-		658030811F55FDC700D13B50 /* iOSSwift */ = {isa = PBXFileReference; lastKnownFileType = text; path = iOSSwift; sourceTree = "<group>"; };
 		OBJ_10 /* CodableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableError.swift; sourceTree = "<group>"; };
 		OBJ_11 /* ColorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStyle.swift; sourceTree = "<group>"; };
 		OBJ_12 /* SketchDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchDocument.swift; sourceTree = "<group>"; };
@@ -52,21 +80,31 @@
 		OBJ_23 /* CodeNameable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeNameable.swift; sourceTree = "<group>"; };
 		OBJ_24 /* String+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extra.swift"; sourceTree = "<group>"; };
 		OBJ_26 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		OBJ_29 /* StyleSyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSyncTests.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		"StyleSync::StyleSync::Product" /* StyleSync */ = {isa = PBXFileReference; lastKnownFileType = text; path = StyleSync; sourceTree = BUILT_PRODUCTS_DIR; };
 		"StyleSync::StyleSyncCore::Product" /* StyleSyncCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = StyleSyncCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"StyleSync::StyleSyncTests::Product" /* StyleSyncTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = StyleSyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_43 /* Frameworks */ = {
+		OBJ_46 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_44 /* StyleSyncCore.framework in Frameworks */,
+				OBJ_47 /* StyleSyncCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_64 /* Frameworks */ = {
+		OBJ_56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_57 /* StyleSyncCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_76 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
@@ -76,29 +114,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6580307E1F55FDC700D13B50 /* TextStyles */ = {
-			isa = PBXGroup;
-			children = (
-				6580307F1F55FDC700D13B50 /* iOSSwift */,
-			);
-			path = TextStyles;
-			sourceTree = "<group>";
-		};
-		658030801F55FDC700D13B50 /* ColorStyles */ = {
-			isa = PBXGroup;
-			children = (
-				658030811F55FDC700D13B50 /* iOSSwift */,
-			);
-			path = ColorStyles;
-			sourceTree = "<group>";
-		};
 		OBJ_19 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_20 /* CodeGenerator.swift */,
 				OBJ_21 /* CodeTemplateReplaceable.swift */,
-				658030801F55FDC700D13B50 /* ColorStyles */,
-				6580307E1F55FDC700D13B50 /* TextStyles */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -124,13 +144,24 @@
 		OBJ_27 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_28 /* StyleSyncTests */,
 			);
 			name = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_28 /* Products */ = {
+		OBJ_28 /* StyleSyncTests */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_29 /* StyleSyncTests.swift */,
+			);
+			name = StyleSyncTests;
+			path = Tests/StyleSyncTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_30 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"StyleSync::StyleSyncTests::Product" /* StyleSyncTests.xctest */,
 				"StyleSync::StyleSync::Product" /* StyleSync */,
 				"StyleSync::StyleSyncCore::Product" /* StyleSyncCore.framework */,
 			);
@@ -143,7 +174,7 @@
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_27 /* Tests */,
-				OBJ_28 /* Products */,
+				OBJ_30 /* Products */,
 			);
 			name = "";
 			sourceTree = "<group>";
@@ -189,15 +220,15 @@
 /* Begin PBXNativeTarget section */
 		"StyleSync::StyleSync" /* StyleSync */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_38 /* Build configuration list for PBXNativeTarget "StyleSync" */;
+			buildConfigurationList = OBJ_51 /* Build configuration list for PBXNativeTarget "StyleSync" */;
 			buildPhases = (
-				OBJ_41 /* Sources */,
-				OBJ_43 /* Frameworks */,
+				OBJ_54 /* Sources */,
+				OBJ_56 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_45 /* PBXTargetDependency */,
+				OBJ_58 /* PBXTargetDependency */,
 			);
 			name = StyleSync;
 			productName = StyleSync;
@@ -206,10 +237,10 @@
 		};
 		"StyleSync::StyleSyncCore" /* StyleSyncCore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_47 /* Build configuration list for PBXNativeTarget "StyleSyncCore" */;
+			buildConfigurationList = OBJ_59 /* Build configuration list for PBXNativeTarget "StyleSyncCore" */;
 			buildPhases = (
-				OBJ_50 /* Sources */,
-				OBJ_64 /* Frameworks */,
+				OBJ_62 /* Sources */,
+				OBJ_76 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -220,11 +251,28 @@
 			productReference = "StyleSync::StyleSyncCore::Product" /* StyleSyncCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		"StyleSync::StyleSyncTests" /* StyleSyncTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_41 /* Build configuration list for PBXNativeTarget "StyleSyncTests" */;
+			buildPhases = (
+				OBJ_44 /* Sources */,
+				OBJ_46 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_48 /* PBXTargetDependency */,
+			);
+			name = StyleSyncTests;
+			productName = StyleSyncTests;
+			productReference = "StyleSync::StyleSyncTests::Product" /* StyleSyncTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		"StyleSync::SwiftPMPackageDescription" /* StyleSyncPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_32 /* Build configuration list for PBXNativeTarget "StyleSyncPackageDescription" */;
+			buildConfigurationList = OBJ_35 /* Build configuration list for PBXNativeTarget "StyleSyncPackageDescription" */;
 			buildPhases = (
-				OBJ_35 /* Sources */,
+				OBJ_38 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -250,61 +298,81 @@
 				en,
 			);
 			mainGroup = OBJ_5 /*  */;
-			productRefGroup = OBJ_28 /* Products */;
+			productRefGroup = OBJ_30 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				"StyleSync::SwiftPMPackageDescription" /* StyleSyncPackageDescription */,
+				"StyleSync::StyleSyncTests" /* StyleSyncTests */,
 				"StyleSync::StyleSync" /* StyleSync */,
 				"StyleSync::StyleSyncCore" /* StyleSyncCore */,
+				"StyleSync::StyleSyncPackageTests::ProductTarget" /* StyleSyncPackageTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_35 /* Sources */ = {
+		OBJ_38 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_36 /* Package.swift in Sources */,
+				OBJ_39 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_41 /* Sources */ = {
+		OBJ_44 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_42 /* main.swift in Sources */,
+				OBJ_45 /* StyleSyncTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_50 /* Sources */ = {
+		OBJ_54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_51 /* CodableError.swift in Sources */,
-				OBJ_52 /* ColorStyle.swift in Sources */,
-				OBJ_53 /* SketchDocument.swift in Sources */,
-				OBJ_54 /* Style.swift in Sources */,
-				OBJ_55 /* StyleParser.swift in Sources */,
-				OBJ_56 /* TextStyle.swift in Sources */,
-				OBJ_57 /* Version.swift in Sources */,
-				OBJ_58 /* VersionedStyles.swift in Sources */,
-				OBJ_59 /* StyleSync.swift in Sources */,
-				OBJ_60 /* CodeGenerator.swift in Sources */,
-				OBJ_61 /* CodeTemplateReplaceable.swift in Sources */,
-				OBJ_62 /* CodeNameable.swift in Sources */,
-				OBJ_63 /* String+Extra.swift in Sources */,
+				OBJ_55 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_63 /* CodableError.swift in Sources */,
+				OBJ_64 /* ColorStyle.swift in Sources */,
+				OBJ_65 /* SketchDocument.swift in Sources */,
+				OBJ_66 /* Style.swift in Sources */,
+				OBJ_67 /* StyleParser.swift in Sources */,
+				OBJ_68 /* TextStyle.swift in Sources */,
+				OBJ_69 /* Version.swift in Sources */,
+				OBJ_70 /* VersionedStyles.swift in Sources */,
+				OBJ_71 /* StyleSync.swift in Sources */,
+				OBJ_72 /* CodeGenerator.swift in Sources */,
+				OBJ_73 /* CodeTemplateReplaceable.swift in Sources */,
+				OBJ_74 /* CodeNameable.swift in Sources */,
+				OBJ_75 /* String+Extra.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_45 /* PBXTargetDependency */ = {
+		OBJ_48 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "StyleSync::StyleSyncCore" /* StyleSyncCore */;
-			targetProxy = 6580307B1F55F96B00D13B50 /* PBXContainerItemProxy */;
+			targetProxy = 65009A4A1F56012200B31BD2 /* PBXContainerItemProxy */;
+		};
+		OBJ_58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "StyleSync::StyleSyncCore" /* StyleSyncCore */;
+			targetProxy = 65009A491F56012200B31BD2 /* PBXContainerItemProxy */;
+		};
+		OBJ_81 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "StyleSync::StyleSyncTests" /* StyleSyncTests */;
+			targetProxy = 65009A4B1F56012600B31BD2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -331,7 +399,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_33 /* Debug */ = {
+		OBJ_36 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -340,7 +408,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_34 /* Release */ = {
+		OBJ_37 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -348,25 +416,6 @@
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
-		};
-		OBJ_39 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = StyleSync.xcodeproj/StyleSync_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx @executable_path";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = YES;
-				SWIFT_FORCE_STATIC_LINK_STDLIB = NO;
-				SWIFT_VERSION = 4.0;
-				TARGET_NAME = StyleSync;
-			};
-			name = Debug;
 		};
 		OBJ_4 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -388,7 +437,62 @@
 			};
 			name = Release;
 		};
-		OBJ_40 /* Release */ = {
+		OBJ_42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = StyleSync.xcodeproj/StyleSyncTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = StyleSyncTests;
+			};
+			name = Debug;
+		};
+		OBJ_43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = StyleSync.xcodeproj/StyleSyncTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = StyleSyncTests;
+			};
+			name = Release;
+		};
+		OBJ_52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = StyleSync.xcodeproj/StyleSync_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx @executable_path";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = YES;
+				SWIFT_FORCE_STATIC_LINK_STDLIB = NO;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = StyleSync;
+			};
+			name = Debug;
+		};
+		OBJ_53 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -407,7 +511,7 @@
 			};
 			name = Release;
 		};
-		OBJ_48 /* Debug */ = {
+		OBJ_60 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -429,7 +533,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_49 /* Release */ = {
+		OBJ_61 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -451,6 +555,18 @@
 			};
 			name = Release;
 		};
+		OBJ_79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -463,29 +579,47 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_32 /* Build configuration list for PBXNativeTarget "StyleSyncPackageDescription" */ = {
+		OBJ_35 /* Build configuration list for PBXNativeTarget "StyleSyncPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_33 /* Debug */,
-				OBJ_34 /* Release */,
+				OBJ_36 /* Debug */,
+				OBJ_37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_38 /* Build configuration list for PBXNativeTarget "StyleSync" */ = {
+		OBJ_41 /* Build configuration list for PBXNativeTarget "StyleSyncTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_39 /* Debug */,
-				OBJ_40 /* Release */,
+				OBJ_42 /* Debug */,
+				OBJ_43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_47 /* Build configuration list for PBXNativeTarget "StyleSyncCore" */ = {
+		OBJ_51 /* Build configuration list for PBXNativeTarget "StyleSync" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_48 /* Debug */,
-				OBJ_49 /* Release */,
+				OBJ_52 /* Debug */,
+				OBJ_53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_59 /* Build configuration list for PBXNativeTarget "StyleSyncCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_60 /* Debug */,
+				OBJ_61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_78 /* Build configuration list for PBXAggregateTarget "StyleSyncPackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_79 /* Debug */,
+				OBJ_80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

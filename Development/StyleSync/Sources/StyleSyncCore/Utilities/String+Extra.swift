@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension String {
-	var camelcased: String {
+public extension String {
+	public var camelcased: String {
 		let capitalizedStringWithoutSpaces: String
 		if contains(" ") {
 			let words = components(separatedBy: " ")
