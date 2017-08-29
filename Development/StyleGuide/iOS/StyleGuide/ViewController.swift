@@ -26,7 +26,7 @@ class TextStylesViewController: UIViewController {
 		("Sample Black", .sampleBlack),
 		("Sample Green", .sampleGreen),
 		("Sample Yellow", .sampleYellow),
-		("Sample Orange", .sampleOrange),
+		("Sample Orange", .sampleFire),
 		("Sample Red", .sampleRed)
 	]
 }
