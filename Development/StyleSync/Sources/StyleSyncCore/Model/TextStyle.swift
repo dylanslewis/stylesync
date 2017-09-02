@@ -38,7 +38,7 @@ struct TextStyle: Style, Codable {
 		self.isDeprecated = isDeprecated
 	}
 	
-	init?(textStyleObject: SketchDocument.TextStyles.Object, colorStyle: ColorStyle, isDeprecated: Bool) {
+	init?(textStyleObject: SketchDocument.TextStyles.Object, colorStyle: ColorStyle, isDeprecated: Bool = false) {
 		let textAttributes = textStyleObject.value.textStyle.encodedAttributes
 		guard
 			let fontName = textAttributes.font.fontName,
@@ -112,7 +112,7 @@ extension TextStyle: CodeTemplateReplacable {
 // MARK: - Deprecatable
 
 extension TextStyle {
-	var deprecated: TextStyle {
+	var deprecated: Style {
 		return TextStyle(
 			name: name,
 			identifier: identifier,

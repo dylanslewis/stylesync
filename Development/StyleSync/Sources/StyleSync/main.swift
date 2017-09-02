@@ -3,10 +3,10 @@
 import Foundation
 import StyleSyncCore
 
-let styleSync = StyleSync()
 do {
-	try styleSync.run()
+	try StyleSync().run()
 } catch {
+	// FIXME: Parse StyleSync.Errors properly
 	print(error)
 	exit(1)
 }

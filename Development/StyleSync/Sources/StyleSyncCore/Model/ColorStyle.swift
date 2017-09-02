@@ -21,7 +21,7 @@ struct ColorStyle: Style {
 		self.isDeprecated = isDeprecated
 	}
 	
-	init?(colorStyleObject: SketchDocument.ColorStyles.Object, isDeprecated: Bool) {
+	init?(colorStyleObject: SketchDocument.ColorStyles.Object, isDeprecated: Bool = false) {
 		guard let colorFill = colorStyleObject.value.fills.first else {
 			return nil
 		}
@@ -113,7 +113,7 @@ extension ColorStyle: CodeTemplateReplacable {
 // MARK: - Deprecatable
 
 extension ColorStyle {
-	var deprecated: ColorStyle {
+	var deprecated: Style {
 		return ColorStyle(
 			name: name,
 			identifier: identifier,

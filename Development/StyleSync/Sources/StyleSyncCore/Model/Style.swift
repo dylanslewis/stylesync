@@ -11,6 +11,7 @@ import Foundation
 protocol Style {
 	var name: String { get }
 	var identifier: String { get }
+	var deprecated: Style { get }
 }
 
 extension Style {
