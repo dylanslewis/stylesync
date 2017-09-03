@@ -6,7 +6,6 @@
 //  Copyright © 2017 Dylan Lewis. All rights reserved.
 //
 
-import Foundation
 import XCTest
 import StyleSyncCore
 

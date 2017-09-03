@@ -1,5 +1,5 @@
 //
-//  main.swift
+//  StyleSync.swift
 //  StyleSync
 //
 //  Created by Dylan Lewis on 09/08/2017.
@@ -72,7 +72,13 @@ public final class StyleSync {
 		try updateFilesInProjectDirectoryAndFindUsedDeprecatedStyles()
 		
 		let (colorStyles, textStyles) = getAllStyles()
-		let version = getStylesVersion(usingPreviousExportedStyles: previousExportedStyles)
+		let version = Version(
+			oldColorStyles: previousExportedStyles?.colorStyles,
+			oldTextStyles: previousExportedStyles?.textStyles,
+			newColorStyles: colorStyles,
+			newTextStyles: textStyles,
+			currentVersion: previousExportedStyles?.version
+		)
 		try generateAndSaveStyleCode(version: version, colorStyles: colorStyles, textStyles: textStyles)
 		try generateAndSaveVersionedStyles(version: version, colorStyles: colorStyles, textStyles: textStyles)
 	}
@@ -121,23 +127,6 @@ public final class StyleSync {
 		)
 	}
 	
-	private func getStylesVersion(usingPreviousExportedStyles previousExportedStyles: VersionedStyles?) -> Version {
-		guard let previousExportedStyles = previousExportedStyles else {
-			return .firstVersion
-		}
-		
-		let didTextStylesChange = previousExportedStyles.textStyles != textStyleParser.newStyles
-		let didColorStylesChange = previousExportedStyles.colorStyles != colorStyleParser.newStyles
-		switch (didTextStylesChange, didColorStylesChange) {
-		case (true, _):
-			return previousExportedStyles.version.incrementingMajor()
-		case (false, true):
-			return previousExportedStyles.version.incrementingMinor()
-		case (false, false):
-			return previousExportedStyles.version
-		}
-	}
-	
 	private func updateFilesInProjectDirectoryAndFindUsedDeprecatedStyles() throws {
 		// Get all supported file types.
 		let supportedFileTypes: Set<FileName.FileType> = [
@@ -180,25 +169,6 @@ public final class StyleSync {
 		)
 	}
 	
-	private func generateAndSaveStyleCode(version: Version, colorStyles: [ColorStyle], textStyles: [TextStyle]) throws {
-		let generatedColorStylesCode = colorStyleCodeGenerator.generatedCode(for: [colorStyles], version: version)
-		let generatedTextStylesCode = textStyleCodeGenerator.generatedCode(for: [textStyles], version: version)
-		
-		try generatedColorStylesCode.write(to: generatedColorStylesFilePath, atomically: true, encoding: .utf8)
-		try generatedTextStylesCode.write(to: generatedTextStylesFilePath, atomically: true, encoding: .utf8)
-	}
-	
-	private func generateAndSaveVersionedStyles(version: Version, colorStyles: [ColorStyle], textStyles: [TextStyle]) throws {
-		let versionedStyles = VersionedStyles(
-			version: version,
-			colorStyles: colorStyles,
-			textStyles: textStyles
-		)
-		let encoder = JSONEncoder()
-		let rawStylesData = try encoder.encode(versionedStyles)
-		try rawStylesData.write(to: rawStylesURL, options: .atomic)
-	}
-	
 	private func getAllStyles() -> (colorStyles: [ColorStyle], textStyles: [TextStyle]) {
 		var deprecatedColorStyles = colorStyleParser.deprecatedStyles
 		var deprecatedTextStyles = textStyleParser.deprecatedStyles
@@ -218,6 +188,25 @@ public final class StyleSync {
 		let allTextStyles = textStyleParser.newStyles + deprecatedTextStyles
 		
 		return (allColorStyles, allTextStyles)
+	}
+	
+	private func generateAndSaveStyleCode(version: Version, colorStyles: [ColorStyle], textStyles: [TextStyle]) throws {
+		let generatedColorStylesCode = colorStyleCodeGenerator.generatedCode(for: [colorStyles], version: version)
+		let generatedTextStylesCode = textStyleCodeGenerator.generatedCode(for: [textStyles], version: version)
+		
+		try generatedColorStylesCode.write(to: generatedColorStylesFilePath, atomically: true, encoding: .utf8)
+		try generatedTextStylesCode.write(to: generatedTextStylesFilePath, atomically: true, encoding: .utf8)
+	}
+	
+	private func generateAndSaveVersionedStyles(version: Version, colorStyles: [ColorStyle], textStyles: [TextStyle]) throws {
+		let versionedStyles = VersionedStyles(
+			version: version,
+			colorStyles: colorStyles,
+			textStyles: textStyles
+		)
+		let encoder = JSONEncoder()
+		let rawStylesData = try encoder.encode(versionedStyles)
+		try rawStylesData.write(to: rawStylesURL, options: .atomic)
 	}
 	
 	// MARK: - Helpers
