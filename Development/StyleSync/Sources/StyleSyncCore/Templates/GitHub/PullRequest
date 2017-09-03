@@ -1,27 +1,4 @@
-<#@fileExtension#>swift
-//
-<generatedFileHeader>
-//  <#=headerLine#>
-</generatedFileHeader>
-//
-
-import UIKit
-
-extension UIColor {
-	<colorDeclaration>
-
-	<#?deprecated=true#>@available(*, deprecated)
-	public static let <#=colorName#> = UIColor(red: <#=red#>, green: <#=green#>, blue: <#=blue#>, alpha: <#=alpha#>)
-	</colorDeclaration>
-
-	public static let allGeneratedStylesAndCodeNameAndName: [(UIColor, String, String)] = [
-	<colorDeclaration>
-		(.<#=colorName#>, "<#=colorName#>", "<#=name#>"),
-	</colorDeclaration>
-	]
-}
-
-
+<#?didUpdateStyles=true#>
 # Updated styles
 
 ### `colorName`
@@ -37,6 +14,8 @@ extension UIColor {
 | Kerning | `0.1` | `0.2` |
 | Font | SF-Bold | SF-Ultralight |
 
+<#/didUpdateStyles#>
+<#?didAddStyles=true#>
 # Added styles
 
 ### `colorName`
@@ -45,13 +24,18 @@ extension UIColor {
 | Name | `newName` |
 | Color | `#123456` |
 
+<#/didAddStyles#>
+<#?didUpdateStyles=true#>
 # Removed styles
 ### `colorName`
-### `colorName`
 
+<#?/didRemoveStyles#>
+<#?didDeprecateStyles=true#>
 # Deprecated styles
 *These styles have been removed from the style guide, but are still referenced in your project.*
 
 | Style name | Referenced in file |
 | --- | :---:   |
-| `textStyle` | `MainViewController.swift` `MainViewController.swift` `MainViewController.swift` `MainViewController.swift` `MainViewController.swift` `MainViewController.swift` `MainViewController.swift` `MainViewController.swift` |
+| `textStyle` | `MainViewController.swift` |
+
+<#?/didDeprecateStyles#>

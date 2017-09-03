@@ -106,7 +106,12 @@ extension ColorStyle: CodeTemplateReplacable {
 			"green": String(describing: color.greenComponent),
 			"blue": String(describing: color.blueComponent),
 			"alpha": String(describing: color.alphaComponent),
+			"hex": "#" + color.hex
 		]
+	}
+	
+	var ignoredUpdateAttributes: [String] {
+		return ["red", "green", "blue", "alpha"]
 	}
 }
 
@@ -124,12 +129,6 @@ extension ColorStyle {
 }
 
 // MARK: - Helpers
-
-private extension NSColor {
-	var components: (CGFloat, CGFloat, CGFloat, CGFloat) {
-		return ((redComponent * 255).rounded(), (greenComponent * 255).rounded(), (blueComponent * 255).rounded(), alphaComponent)
-	}
-}
 
 extension ColorStyle {
 	static func colorStyle(for color: NSColor, in colorStyles: [ColorStyle]) -> ColorStyle? {

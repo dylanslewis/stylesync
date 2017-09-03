@@ -12,7 +12,7 @@ public final class StyleSync {
 	// MARK: - Constants
 	
 	private enum Constant {
-		static let expectedNumberOfArguments = 9
+		static let expectedNumberOfArguments = 10
 		static let exportedStylesFileName = FileName(name: "ExportedStyles", type: .json)
 		static let colorStylesName = "ColorStyles"
 		static let textStylesName = "TextStyles"
@@ -56,6 +56,9 @@ public final class StyleSync {
 	}
 	private var gitHubPersonalAccessToken: String {
 		return arguments[8]
+	}
+	private var pullRequestTemplateURL: URL {
+		return URL(fileURLWithPath: arguments[9])
 	}
 	private var rawStylesURL: URL {
 		return exportDirectoryURL.appending(fileName: Constant.exportedStylesFileName)
@@ -106,15 +109,28 @@ public final class StyleSync {
 			repositoryName: gitHubRepositoryName,
 			personalAccessToken: gitHubPersonalAccessToken
 		)
+		
+		let updatedStylesTableTemplateData = try Data(contentsOf: pullRequestTemplateURL)
+		guard let updatedStylesTableTemplate: Template = String(data: updatedStylesTableTemplateData, encoding: .utf8) else {
+			fatalError()
+		}
+		
+		let pullRequestBody = try PullRequestBody(
+			oldColorStyles: previousExportedStyles?.colorStyles ?? [],
+			newColorStyles: colorStyleParser.newStyles,
+			oldTextStyles: previousExportedStyles?.textStyles ?? [],
+			newTextStyles: textStyleParser.newStyles,
+			updatedStylesTableTemplate: updatedStylesTableTemplate
+		)
 		let pullRequest = GitHub.PullRequest(
 			title: "[StyleSync] Update style guide to version \(version.stringRepresentation)",
-			body: "Body",
+			body: pullRequestBody.body,
 			head: gitManager.styleSyncBranchName,
 			base: gitManager.originalBranchName
 		)
+	
 		try pullRequestManager.submit(pullRequest: pullRequest)
 	}
-	
 	
 	// MARK: - Actions
 	
