@@ -12,7 +12,7 @@ public final class StyleSync {
 	// MARK: - Constants
 	
 	private enum Constant {
-		static let expectedNumberOfArguments = 6
+		static let expectedNumberOfArguments = 9
 		static let exportedStylesFileName = FileName(name: "ExportedStyles", type: .json)
 		static let colorStylesName = "ColorStyles"
 		static let textStylesName = "TextStyles"
@@ -48,6 +48,15 @@ public final class StyleSync {
 	private var textStyleTemplateURL: URL {
 		return URL(fileURLWithPath: arguments[5])
 	}
+	private var gitHubUsername: String {
+		return arguments[6]
+	}
+	private var gitHubRepositoryName: String {
+		return arguments[7]
+	}
+	private var gitHubPersonalAccessToken: String {
+		return arguments[8]
+	}
 	private var rawStylesURL: URL {
 		return exportDirectoryURL.appending(fileName: Constant.exportedStylesFileName)
 	}
@@ -79,9 +88,33 @@ public final class StyleSync {
 			newTextStyles: textStyles,
 			currentVersion: previousExportedStyles?.version
 		)
+		
+		guard previousExportedStyles?.version == nil || version != previousExportedStyles?.version else {
+			return
+		}
+
 		try generateAndSaveStyleCode(version: version, colorStyles: colorStyles, textStyles: textStyles)
 		try generateAndSaveVersionedStyles(version: version, colorStyles: colorStyles, textStyles: textStyles)
+		
+		let gitManager = GitManager(projectDirectoryURL: projectDirectoryURL, version: version)
+		gitManager.createStyleSyncBranch()
+		gitManager.commitAllStyleUpdates()
+		gitManager.checkoutOriginalBranch()
+	
+		let pullRequestManager = GitHubPullRequestManager(
+			username: gitHubUsername,
+			repositoryName: gitHubRepositoryName,
+			personalAccessToken: gitHubPersonalAccessToken
+		)
+		let pullRequest = GitHub.PullRequest(
+			title: "[StyleSync] Update style guide to version \(version.stringRepresentation)",
+			body: "Body",
+			head: gitManager.styleSyncBranchName,
+			base: gitManager.originalBranchName
+		)
+		try pullRequestManager.submit(pullRequest: pullRequest)
 	}
+	
 	
 	// MARK: - Actions
 	
