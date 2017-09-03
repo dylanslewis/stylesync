@@ -11,10 +11,14 @@ import Foundation
 protocol CodeTemplateReplacable {
 	static var declarationName: String { get }
 	var replacementDictionary: [String: String] { get }
+	var ignoredUpdateAttributes: [String] { get }
 	var isDeprecated: Bool { get }
 }
 
 extension CodeTemplateReplacable {
+	var ignoredUpdateAttributes: [String] {
+		return []
+	}
 	var isDeprecated: Bool {
 		return false
 	}
