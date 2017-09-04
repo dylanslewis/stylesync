@@ -1,0 +1,4 @@
+<#@fileExtension#>md
+<styleDeclaration>
+### `<#=styleName#>`
+</styleDeclaration>

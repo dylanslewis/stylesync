@@ -1,0 +1,4 @@
+<#@fileExtension#>md
+<headingDeclaration>
+# <#=headingName#>
+</headingDeclaration>
