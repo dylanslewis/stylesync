@@ -11,7 +11,7 @@ struct UpdatedStyle {
 	let styleName: String
 	let updatedAttributes: [UpdatedAttribute]
 	
-	init?(oldStyle: Style & CodeTemplateReplacable, newStyle: Style & CodeTemplateReplacable) {
+	init?(oldStyle: Style, newStyle: Style) {
 		var updatedKeys: [String] = []
 		let oldStyleReplacementDictionary = oldStyle.replacementDictionary
 		let newStyleReplacementDictionary = newStyle.replacementDictionary
@@ -37,5 +37,13 @@ struct UpdatedStyle {
 			}
 			return .init(attributeName: key, oldValue: oldValue, newValue: newValue)
 		}
+	}
+}
+
+extension UpdatedStyle: CodeTemplateReplacable {
+	static var declarationName: String = "styleDeclaration"
+	
+	var replacementDictionary: [String : String] {
+		return ["styleName": styleName]
 	}
 }

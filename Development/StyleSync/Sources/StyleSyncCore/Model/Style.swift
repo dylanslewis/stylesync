@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Style {
+protocol Style: CodeTemplateReplacable {
 	var name: String { get }
 	var identifier: String { get }
 	var deprecated: Style { get }

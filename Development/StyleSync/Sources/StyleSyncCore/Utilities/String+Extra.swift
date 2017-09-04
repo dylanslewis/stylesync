@@ -29,4 +29,16 @@ public extension String {
 		}
 		return NSKeyedUnarchiver.unarchiveObject(with: data) as? TargetObjectType
 	}
+	
+	init(contentsOfURL url: URL, encoding: String.Encoding = .utf8) throws {
+		let data = try Data(contentsOf: url)
+		guard let string = String(data: data, encoding: encoding) else {
+			throw Error.failedToCreateStringFromData
+		}
+		self = string
+	}
+	
+	enum Error: Swift.Error {
+		case failedToCreateStringFromData
+	}
 }

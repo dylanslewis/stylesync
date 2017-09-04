@@ -71,6 +71,10 @@ struct CodeGenerator {
 		codeLines.validateCodeLines()
 		return codeLines.joined(separator: "\n")
 	}
+	
+	func generatedCode(for codeTemplateReplaceable: CodeTemplateReplacable) -> String {
+		return generatedCode(for: [[codeTemplateReplaceable]])
+	}
 }
 
 // MARK: - HeaderLine

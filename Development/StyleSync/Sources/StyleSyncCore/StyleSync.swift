@@ -12,7 +12,7 @@ public final class StyleSync {
 	// MARK: - Constants
 	
 	private enum Constant {
-		static let expectedNumberOfArguments = 10
+		static let expectedNumberOfArguments = 9
 		static let exportedStylesFileName = FileName(name: "ExportedStyles", type: .json)
 		static let colorStylesName = "ColorStyles"
 		static let textStylesName = "TextStyles"
@@ -21,6 +21,7 @@ public final class StyleSync {
 	// MARK: - Stored properties
 	
 	private let arguments: [String]
+	private let fileManager: FileManager
 	
 	private var colorStyleParser: StyleParser<ColorStyle>!
 	private var textStyleParser: StyleParser<TextStyle>!
@@ -57,8 +58,23 @@ public final class StyleSync {
 	private var gitHubPersonalAccessToken: String {
 		return arguments[8]
 	}
-	private var pullRequestTemplateURL: URL {
-		return URL(fileURLWithPath: arguments[9])
+	private var gitHubTemplatesBaseURL: URL {
+		return URL(fileURLWithPath: "\(fileManager.currentDirectoryPath)/Sources/StyleSyncCore/Templates/GitHub/")
+	}
+	private var pullRequestHeadingTemplateURL: URL {
+		return gitHubTemplatesBaseURL.appendingPathComponent("Heading")
+	}
+	private var pullRequestStyleNameTemplateURL: URL {
+		return gitHubTemplatesBaseURL.appendingPathComponent("StyleName")
+	}
+	private var pullRequestNewStyleTableTemplateURL: URL {
+		return gitHubTemplatesBaseURL.appendingPathComponent("NewStyleTable")
+	}
+	private var pullRequestUpdatedStyleTableTemplateURL: URL {
+		return gitHubTemplatesBaseURL.appendingPathComponent("UpdatedStyleTable")
+	}
+	private var pullRequestDeprecatedStylesTemplateURL: URL {
+		return gitHubTemplatesBaseURL.appendingPathComponent("DeprecatedStylesTable")
 	}
 	private var rawStylesURL: URL {
 		return exportDirectoryURL.appending(fileName: Constant.exportedStylesFileName)
@@ -66,11 +82,15 @@ public final class StyleSync {
 	
 	// MARK: - Initializer
 	
-	public init(arguments: [String] = CommandLine.arguments) throws {
+	public init(
+		arguments: [String] = CommandLine.arguments,
+		fileManager: FileManager = .default
+	) throws {
 		if arguments.count != Constant.expectedNumberOfArguments {
 			throw Error.invalidArguments
 		}
 		self.arguments = arguments
+		self.fileManager = fileManager
 	}
 
 	// MARK: - Run
@@ -99,37 +119,16 @@ public final class StyleSync {
 		try generateAndSaveStyleCode(version: version, colorStyles: colorStyles, textStyles: textStyles)
 		try generateAndSaveVersionedStyles(version: version, colorStyles: colorStyles, textStyles: textStyles)
 		
-		let gitManager = GitManager(projectDirectoryURL: projectDirectoryURL, version: version)
-		gitManager.createStyleSyncBranch()
-		gitManager.commitAllStyleUpdates()
-		gitManager.checkoutOriginalBranch()
-	
-		let pullRequestManager = GitHubPullRequestManager(
-			username: gitHubUsername,
-			repositoryName: gitHubRepositoryName,
-			personalAccessToken: gitHubPersonalAccessToken
-		)
-		
-		let updatedStylesTableTemplateData = try Data(contentsOf: pullRequestTemplateURL)
-		guard let updatedStylesTableTemplate: Template = String(data: updatedStylesTableTemplateData, encoding: .utf8) else {
-			fatalError()
-		}
-		
-		let pullRequestBody = try PullRequestBody(
+		let (headBranchName, baseBranchName) = createBranchAndCommitChanges(version: version)
+		try submitPullRequest(
+			headBranchName: headBranchName,
+			baseBranchName: baseBranchName,
 			oldColorStyles: previousExportedStyles?.colorStyles ?? [],
 			newColorStyles: colorStyleParser.newStyles,
 			oldTextStyles: previousExportedStyles?.textStyles ?? [],
 			newTextStyles: textStyleParser.newStyles,
-			updatedStylesTableTemplate: updatedStylesTableTemplate
+			version: version
 		)
-		let pullRequest = GitHub.PullRequest(
-			title: "[StyleSync] Update style guide to version \(version.stringRepresentation)",
-			body: pullRequestBody.body,
-			head: gitManager.styleSyncBranchName,
-			base: gitManager.originalBranchName
-		)
-	
-		try pullRequestManager.submit(pullRequest: pullRequest)
 	}
 	
 	// MARK: - Actions
@@ -256,6 +255,59 @@ public final class StyleSync {
 		let encoder = JSONEncoder()
 		let rawStylesData = try encoder.encode(versionedStyles)
 		try rawStylesData.write(to: rawStylesURL, options: .atomic)
+	}
+	
+	private func createBranchAndCommitChanges(version: Version) -> (headBranchName: String, baseBranchName: String) {
+		let gitManager = GitManager(projectDirectoryURL: projectDirectoryURL, version: version)
+		gitManager.createStyleSyncBranch()
+		gitManager.commitAllStyleUpdates()
+		gitManager.checkoutOriginalBranch()
+		return (gitManager.styleSyncBranchName, gitManager.originalBranchName)
+	}
+	
+	private func submitPullRequest(
+		headBranchName: String,
+		baseBranchName: String,
+		oldColorStyles: [ColorStyle],
+		newColorStyles: [ColorStyle],
+		oldTextStyles: [TextStyle],
+		newTextStyles: [TextStyle],
+		version: Version
+	) throws {
+		let pullRequestManager = GitHubPullRequestManager(
+			username: gitHubUsername,
+			repositoryName: gitHubRepositoryName,
+			personalAccessToken: gitHubPersonalAccessToken
+		)
+		
+		let headingTemplate: Template = try String(contentsOfURL: pullRequestHeadingTemplateURL)
+		let styleNameTemplate: Template = try String(contentsOfURL: pullRequestStyleNameTemplateURL)
+		let newStyleTableTemplate: Template = try String(contentsOfURL: pullRequestNewStyleTableTemplateURL)
+		let updatedStyleTableTemplate: Template = try String(contentsOfURL: pullRequestUpdatedStyleTableTemplateURL)
+		let deprecatedStylesTableTemplate: Template = try String(contentsOfURL: pullRequestDeprecatedStylesTemplateURL)
+		
+		let pullRequestBodyGenerator = try PullRequestBodyGenerator(
+			headingTemplate: headingTemplate,
+			styleNameTemplate: styleNameTemplate,
+			newStyleTableTemplate: newStyleTableTemplate,
+			updatedStyleTableTemplate: updatedStyleTableTemplate,
+			deprecatedStylesTableTemplate: deprecatedStylesTableTemplate
+		)
+		let body = try pullRequestBodyGenerator.body(
+			fromOldColorStyles: oldColorStyles,
+			newColorStyles: newColorStyles,
+			oldTextStyles: oldTextStyles,
+			newTextStyles: newTextStyles
+		)
+		
+		let pullRequest = GitHub.PullRequest(
+			title: "[StyleSync] Update style guide to version \(version.stringRepresentation)",
+			body: body,
+			head: headBranchName,
+			base: baseBranchName
+		)
+
+		try pullRequestManager.submit(pullRequest: pullRequest)
 	}
 	
 	// MARK: - Helpers
