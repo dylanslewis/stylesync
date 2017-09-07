@@ -46,22 +46,20 @@ struct PullRequestBodyGenerator {
 		let oldAndNewTextStyles: OldAndNewStyles = (oldTextStyles, newTextStyles)
 		let allStyleGroups: [OldAndNewStyles] = [oldAndNewColorStyles, oldAndNewTextStyles]
 		
+		let allAddedStyles = allStyleGroups
+			.map { addedStyles(oldStyles: $0.old, newStyles: $0.new) }
+			.flatMap { $0 }
+		let allUpdatedStyles = allStyleGroups
+			.map { updatedStyles(oldStyles: $0.old, newStyles: $0.new) }
+			.flatMap { $0 }
+		let allRemovedStyles = allStyleGroups
+			.map { removedStyles(oldStyles: $0.old, newStyles: $0.new) }
+			.flatMap { $0 }
+		
 		var sections: [String?] = []
-		sections.append(
-			contentsOf: allStyleGroups
-				.map { addedStyles(oldStyles: $0.old, newStyles: $0.new) }
-				.map { addedStylesSection(for: $0) }
-		)
-		sections.append(
-			contentsOf: allStyleGroups
-				.map { updatedStyles(oldStyles: $0.old, newStyles: $0.new) }
-				.map { updatedStylesSection(for: $0) }
-		)
-		sections.append(
-			contentsOf: allStyleGroups
-				.map { removedStyles(oldStyles: $0.old, newStyles: $0.new) }
-				.map { removedStylesSection(for: $0) }
-		)
+		sections.append(addedStylesSection(for: allAddedStyles))
+		sections.append(updatedStylesSection(for: allUpdatedStyles))
+		sections.append(removedStylesSection(for: allRemovedStyles))
 		
 		return sections
 			.flatMap({ $0 })
