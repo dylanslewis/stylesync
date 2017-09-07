@@ -22,8 +22,9 @@
 
 /* Begin PBXBuildFile section */
 		6556E9941F5DE7D1004C6084 /* UpdatedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* UpdatedStyle.swift */; };
-		6556E99D1F5DEEC2004C6084 /* NewStyleAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6556E99B1F5DEEBB004C6084 /* NewStyleAttribute.swift */; };
-		6556E99E1F5DEEC2004C6084 /* NewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6556E9991F5DEE92004C6084 /* NewStyle.swift */; };
+		6556E99D1F5DEEC2004C6084 /* AddedStyleAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6556E99B1F5DEEBB004C6084 /* AddedStyleAttribute.swift */; };
+		6556E99E1F5DEEC2004C6084 /* AddedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6556E9991F5DEE92004C6084 /* AddedStyle.swift */; };
+		6577773D1F61C1F1006FF33F /* RemovedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6577773C1F61C1F1006FF33F /* RemovedStyle.swift */; };
 		OBJ_52 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_58 /* CamelcasedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* CamelcasedTests.swift */; };
 		OBJ_59 /* VersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* VersionTests.swift */; };
@@ -79,8 +80,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6556E9991F5DEE92004C6084 /* NewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStyle.swift; sourceTree = "<group>"; };
-		6556E99B1F5DEEBB004C6084 /* NewStyleAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStyleAttribute.swift; sourceTree = "<group>"; };
+		6556E9991F5DEE92004C6084 /* AddedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedStyle.swift; sourceTree = "<group>"; };
+		6556E99B1F5DEEBB004C6084 /* AddedStyleAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedStyleAttribute.swift; sourceTree = "<group>"; };
+		6577773C1F61C1F1006FF33F /* RemovedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovedStyle.swift; sourceTree = "<group>"; };
 		OBJ_10 /* FileManager+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extra.swift"; sourceTree = "<group>"; };
 		OBJ_11 /* NSColor+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extra.swift"; sourceTree = "<group>"; };
 		OBJ_12 /* URLRequest+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extra.swift"; sourceTree = "<group>"; };
@@ -163,8 +165,9 @@
 				OBJ_25 /* TextStyle.swift */,
 				OBJ_26 /* UpdatedAttribute.swift */,
 				OBJ_27 /* UpdatedStyle.swift */,
-				6556E99B1F5DEEBB004C6084 /* NewStyleAttribute.swift */,
-				6556E9991F5DEE92004C6084 /* NewStyle.swift */,
+				6556E99B1F5DEEBB004C6084 /* AddedStyleAttribute.swift */,
+				6556E9991F5DEE92004C6084 /* AddedStyle.swift */,
+				6577773C1F61C1F1006FF33F /* RemovedStyle.swift */,
 				OBJ_28 /* Version.swift */,
 				OBJ_29 /* VersionedStyles.swift */,
 			);
@@ -404,7 +407,7 @@
 				OBJ_83 /* ColorStyle.swift in Sources */,
 				OBJ_84 /* FileName.swift in Sources */,
 				OBJ_85 /* GitHub.swift in Sources */,
-				6556E99D1F5DEEC2004C6084 /* NewStyleAttribute.swift in Sources */,
+				6556E99D1F5DEEC2004C6084 /* AddedStyleAttribute.swift in Sources */,
 				OBJ_86 /* PullRequestBody.swift in Sources */,
 				OBJ_87 /* SketchDocument.swift in Sources */,
 				OBJ_88 /* Style.swift in Sources */,
@@ -412,11 +415,12 @@
 				OBJ_90 /* TextStyle.swift in Sources */,
 				OBJ_91 /* UpdatedAttribute.swift in Sources */,
 				OBJ_93 /* Version.swift in Sources */,
-				6556E99E1F5DEEC2004C6084 /* NewStyle.swift in Sources */,
+				6556E99E1F5DEEC2004C6084 /* AddedStyle.swift in Sources */,
 				OBJ_94 /* VersionedStyles.swift in Sources */,
 				OBJ_95 /* StyleSync.swift in Sources */,
 				OBJ_96 /* CodeGenerator.swift in Sources */,
 				OBJ_97 /* CodeTemplateReplaceable.swift in Sources */,
+				6577773D1F61C1F1006FF33F /* RemovedStyle.swift in Sources */,
 				OBJ_98 /* CodeNameable.swift in Sources */,
 				OBJ_99 /* String+Extra.swift in Sources */,
 				6556E9941F5DE7D1004C6084 /* UpdatedStyle.swift in Sources */,

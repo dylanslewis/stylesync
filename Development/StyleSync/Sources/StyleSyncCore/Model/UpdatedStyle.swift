@@ -30,7 +30,7 @@ struct UpdatedStyle {
 		let updatedNewStyleAttributes = newStyleReplacementDictionary
 			.filter({ updatedKeys.contains($0.key) })
 		
-		self.styleName = newStyle.codeName
+		self.styleName = newStyle.name
 		self.updatedAttributes = updatedOldStyleAttributes.flatMap { (key, oldValue) in
 			guard let newValue = updatedNewStyleAttributes[key] else {
 				return nil

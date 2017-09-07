@@ -67,7 +67,7 @@ public final class StyleSync {
 	private var pullRequestStyleNameTemplateURL: URL {
 		return gitHubTemplatesBaseURL.appendingPathComponent("StyleName")
 	}
-	private var pullRequestNewStyleTableTemplateURL: URL {
+	private var pullRequestAddedStyleTableTemplateURL: URL {
 		return gitHubTemplatesBaseURL.appendingPathComponent("NewStyleTable")
 	}
 	private var pullRequestUpdatedStyleTableTemplateURL: URL {
@@ -282,18 +282,18 @@ public final class StyleSync {
 		
 		let headingTemplate: Template = try String(contentsOfURL: pullRequestHeadingTemplateURL)
 		let styleNameTemplate: Template = try String(contentsOfURL: pullRequestStyleNameTemplateURL)
-		let newStyleTableTemplate: Template = try String(contentsOfURL: pullRequestNewStyleTableTemplateURL)
+		let addedStyleTableTemplate: Template = try String(contentsOfURL: pullRequestAddedStyleTableTemplateURL)
 		let updatedStyleTableTemplate: Template = try String(contentsOfURL: pullRequestUpdatedStyleTableTemplateURL)
 		let deprecatedStylesTableTemplate: Template = try String(contentsOfURL: pullRequestDeprecatedStylesTemplateURL)
 		
 		let pullRequestBodyGenerator = try PullRequestBodyGenerator(
 			headingTemplate: headingTemplate,
 			styleNameTemplate: styleNameTemplate,
-			newStyleTableTemplate: newStyleTableTemplate,
+			addedStyleTableTemplate: addedStyleTableTemplate,
 			updatedStyleTableTemplate: updatedStyleTableTemplate,
 			deprecatedStylesTableTemplate: deprecatedStylesTableTemplate
 		)
-		let body = try pullRequestBodyGenerator.body(
+		let body = pullRequestBodyGenerator.body(
 			fromOldColorStyles: oldColorStyles,
 			newColorStyles: newColorStyles,
 			oldTextStyles: oldTextStyles,

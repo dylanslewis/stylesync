@@ -8,100 +8,145 @@
 import Foundation
 
 struct PullRequestBodyGenerator {
+	// MARK: - Stored properties
+	
 	private let headingGenerator: CodeGenerator
 	private let styleNameGenerator: CodeGenerator
-	private let newStyleTableGenerator: CodeGenerator
+	private let addedStyleTableGenerator: CodeGenerator
 	private let updatedStyleTableGenerator: CodeGenerator
 	private let deprecatedStylesTableGenerator: CodeGenerator
+	
+	// MARK: - Initializer
 	
 	init(
 		headingTemplate: Template,
 		styleNameTemplate: Template,
-		newStyleTableTemplate: Template,
+		addedStyleTableTemplate: Template,
 		updatedStyleTableTemplate: Template,
 		deprecatedStylesTableTemplate: Template
 	) throws {
 		self.headingGenerator = try CodeGenerator(template: headingTemplate)
 		self.styleNameGenerator = try CodeGenerator(template: styleNameTemplate)
-		self.newStyleTableGenerator = try CodeGenerator(template: newStyleTableTemplate)
+		self.addedStyleTableGenerator = try CodeGenerator(template: addedStyleTableTemplate)
 		self.updatedStyleTableGenerator = try CodeGenerator(template: updatedStyleTableTemplate)
 		self.deprecatedStylesTableGenerator = try CodeGenerator(template: deprecatedStylesTableTemplate)
 	}
+	
+	// MARK: - Body
+	
+	private typealias OldAndNewStyles = (old: [Style], new: [Style])
 	
 	func body(
 		fromOldColorStyles oldColorStyles: [ColorStyle],
 		newColorStyles: [ColorStyle],
 		oldTextStyles: [TextStyle],
 		newTextStyles: [TextStyle]
-	) throws -> String {
-		let updatedColorStyles = updatedStyles(oldStyles: oldColorStyles, newStyles: newColorStyles)
-		let updatedTextStyles = updatedStyles(oldStyles: oldTextStyles, newStyles: newTextStyles)
-		let allUpdatedStyles = updatedColorStyles + updatedTextStyles
-
-		let newColorStyles = newStyles(oldStyles: oldColorStyles, newStyles: newColorStyles)
-		let newTextStyles = newStyles(oldStyles: oldTextStyles, newStyles: newTextStyles)
-		let allNewStyles = newColorStyles + newTextStyles
+	) -> String {
+		let oldAndNewColorStyles: OldAndNewStyles = (oldColorStyles, newColorStyles)
+		let oldAndNewTextStyles: OldAndNewStyles = (oldTextStyles, newTextStyles)
+		let allStyleGroups: [OldAndNewStyles] = [oldAndNewColorStyles, oldAndNewTextStyles]
 		
-		var body: String = ""
-		if let newStylesSection = self.newStylesSection(forStyles: allNewStyles) {
-			body.append(contentsOf: newStylesSection)
-		}
+		var sections: [String?] = []
+		sections.append(
+			contentsOf: allStyleGroups
+				.map { addedStyles(oldStyles: $0.old, newStyles: $0.new) }
+				.map { addedStylesSection(for: $0) }
+		)
+		sections.append(
+			contentsOf: allStyleGroups
+				.map { updatedStyles(oldStyles: $0.old, newStyles: $0.new) }
+				.map { updatedStylesSection(for: $0) }
+		)
+		sections.append(
+			contentsOf: allStyleGroups
+				.map { removedStyles(oldStyles: $0.old, newStyles: $0.new) }
+				.map { removedStylesSection(for: $0) }
+		)
 		
-		if let updatedStylesSection = self.updatedStylesSection(forUpdatedStyles: allUpdatedStyles) {
-			body.append(contentsOf: updatedStylesSection)
-		}
-		return body
+		return sections
+			.flatMap({ $0 })
+			.joined(separator: "\n")
 	}
 	
-	private func newStylesSection(forStyles styles: [NewStyle]) -> String? {
+	// MARK: - Sections
+	
+	private func addedStylesSection(for styles: [AddedStyle]) -> String? {
 		guard !styles.isEmpty else {
 			return nil
 		}
 		
-		let heading = Heading(name: "New Styles")
-		let generatedHeading = headingGenerator.generatedCode(for: heading)
-		
-		let newStyles: [String] = styles.map { newStyle in
-			let heading = styleNameGenerator.generatedCode(for: newStyle)
-			let table = newStyleTableGenerator.generatedCode(for: [newStyle.attributes])
+		let generatedHeading = self.generatedHeading(withName: "Added Styles")
+
+		let generatedAddedStyles: [String] = styles.map { style in
+			let heading = styleNameGenerator.generatedCode(for: style)
+			let table = addedStyleTableGenerator.generatedCode(for: [style.attributes])
 			return heading + "\n" + table
 		}
-		return generatedHeading + "\n" + newStyles.joined(separator: "\n") + "\n"
+		return generatedHeading + "\n" + generatedAddedStyles.joined(separator: "\n") + "\n"
 	}
 
-	private func updatedStylesSection(forUpdatedStyles updatedStyles: [UpdatedStyle]) -> String? {
-		guard !updatedStyles.isEmpty else {
+	private func updatedStylesSection(for styles: [UpdatedStyle]) -> String? {
+		guard !styles.isEmpty else {
 			return nil
 		}
 		
-		let heading = Heading(name: "Updated Styles")
-		let generatedHeading = headingGenerator.generatedCode(for: heading)
-		
-		let generatedUpdatedStyles: [String] = updatedStyles.map { updatedStyle in
-			let heading = styleNameGenerator.generatedCode(for: updatedStyle)
-			let table = updatedStyleTableGenerator.generatedCode(for: [updatedStyle.updatedAttributes])
+		let generatedHeading = self.generatedHeading(withName: "Updated Styles")
+
+		let generatedUpdatedStyles: [String] = styles.map { style in
+			let heading = styleNameGenerator.generatedCode(for: style)
+			let table = updatedStyleTableGenerator.generatedCode(for: [style.updatedAttributes])
 			return heading + "\n" + table
 		}
 		return generatedHeading + "\n" + generatedUpdatedStyles.joined(separator: "\n") + "\n"
 	}
 	
-	private func newStyles<S: Style>(oldStyles: [S], newStyles: [S]) -> [NewStyle] {
+	private func removedStylesSection(for styles: [RemovedStyle]) -> String? {
+		guard !styles.isEmpty else {
+			return nil
+		}
+		
+		let generatedHeading = self.generatedHeading(withName: "Removed Styles")
+		
+		let generatedRemovedStyles: [String] = styles.map { style in
+			let heading = styleNameGenerator.generatedCode(for: style)
+			return heading + "\n"
+		}
+		return generatedHeading + "\n" + generatedRemovedStyles.joined(separator: "\n") + "\n"
+	}
+	
+	// MARK: - Utilities
+	
+	private func generatedHeading(withName name: String) -> String {
+		let heading = Heading(name: name)
+		return headingGenerator.generatedCode(for: heading)
+	}
+	
+	private func addedStyles(oldStyles: [Style], newStyles: [Style]) -> [AddedStyle] {
 		return newStyles.flatMap { newStyle in
 			guard oldStyles.first(where: { $0.identifier == newStyle.identifier }) == nil else {
 				return nil
 			}
-			return NewStyle(style: newStyle)
+			return AddedStyle(style: newStyle)
 		}
 	}
 	
 	// TODO: You can probably get this from the data found out already...
-	private func updatedStyles<S: Style>(oldStyles: [S], newStyles: [S]) -> [UpdatedStyle] {
+	private func updatedStyles(oldStyles: [Style], newStyles: [Style]) -> [UpdatedStyle] {
 		return newStyles.flatMap { newStyle in
 			guard let oldStyle = oldStyles
 				.first(where: { $0.identifier == newStyle.identifier }) else {
 					return nil
 			}
 			return UpdatedStyle(oldStyle: oldStyle, newStyle: newStyle)
+		}
+	}
+	
+	private func removedStyles(oldStyles: [Style], newStyles: [Style]) -> [RemovedStyle] {
+		return oldStyles.flatMap { newStyle in
+			guard newStyles.first(where: { $0.identifier == newStyle.identifier }) == nil else {
+				return nil
+			}
+			return RemovedStyle(style: newStyle)
 		}
 	}
 }
