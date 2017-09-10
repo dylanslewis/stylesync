@@ -26,13 +26,14 @@ struct GitManager {
 	init(projectFolderPath: String, version: Version) throws {
 		self.projectFolderPath = projectFolderPath
 		self.version = version
-		originalBranchName = try shellOut(to: .getGitBranch())
+		originalBranchName = try shellOut(to: .gitGetCurrentBranch())
 	}
 	
 	// MARK: - Actions
 	
 	func createStyleSyncBranch() throws {
 		try shellOut(to: .changeDirectory(directory: projectFolderPath))
+		try shellOut(to: .gitCreateBranch(branch: styleSyncBranchName))
 		try shellOut(to: .gitCheckout(branch: styleSyncBranchName))
 	}
 	
@@ -47,12 +48,19 @@ struct GitManager {
 }
 
 private extension ShellOutCommand {
-	static func getGitBranch() -> ShellOutCommand {
+	static func gitGetCurrentBranch() -> ShellOutCommand {
 		var command = "git"
 		command.append(argument: "describe")
 		command.append(argument: "--contains")
 		command.append(argument: "--all")
 		command.append(argument: "HEAD")
+		return ShellOutCommand(string: command)
+	}
+	
+	static func gitCreateBranch(branch: String) -> ShellOutCommand {
+		var command = "git"
+		command.append(argument: "branch")
+		command.append(argument: branch)
 		return ShellOutCommand(string: command)
 	}
 	
