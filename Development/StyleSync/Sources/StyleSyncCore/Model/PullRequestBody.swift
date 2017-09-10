@@ -172,12 +172,14 @@ struct PullRequestBodyGenerator {
 	}
 	
 	private func removedStyles(oldStyles: [Style], newStyles: [Style]) -> [RemovedStyle] {
-		return oldStyles.flatMap { newStyle in
-			guard newStyles.first(where: { $0.identifier == newStyle.identifier }) == nil else {
-				return nil
+		return oldStyles
+			.filter({ !$0.isDeprecated })
+			.flatMap { newStyle in
+				guard newStyles.first(where: { $0.identifier == newStyle.identifier }) == nil else {
+					return nil
+				}
+				return RemovedStyle(style: newStyle)
 			}
-			return RemovedStyle(style: newStyle)
-		}
 	}
 	
 	private func deprecatedStyles(forFileNamesForStyle fileNamesForStyleName: [String: [String]]) -> [DeprecatedStyle] {

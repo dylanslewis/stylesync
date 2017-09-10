@@ -133,9 +133,9 @@ public final class StyleSync {
 			headBranchName: headBranchName,
 			baseBranchName: baseBranchName,
 			oldColorStyles: previousExportedStyles?.colorStyles ?? [],
-			newColorStyles: colorStyleParser.newStyles,
+			newColorStyles: colorStyles,
 			oldTextStyles: previousExportedStyles?.textStyles ?? [],
-			newTextStyles: textStyleParser.newStyles,
+			newTextStyles: textStyles,
 			version: version
 		)
 	}
@@ -285,9 +285,9 @@ public final class StyleSync {
 	
 	private func createBranchAndCommitChanges(version: Version) -> (headBranchName: String, baseBranchName: String) {
 		let gitManager = GitManager(projectFolderPath: projectFolder.path, version: version)
-		gitManager.createStyleSyncBranch()
-		gitManager.commitAllStyleUpdates()
-		gitManager.checkoutOriginalBranch()
+//		gitManager.createStyleSyncBranch()
+//		gitManager.commitAllStyleUpdates()
+//		gitManager.checkoutOriginalBranch()
 		return (gitManager.styleSyncBranchName, gitManager.originalBranchName)
 	}
 	
@@ -324,7 +324,7 @@ public final class StyleSync {
 		Array(filesForDeprecatedColorStyle.keys)
 			.forEach { style in
 				let filesForStyle = filesForDeprecatedColorStyle[style]
-				let fileNames: [String] = filesForStyle?.map({ $0.path }) ?? []
+				let fileNames: [String] = filesForStyle?.map({ $0.name }) ?? []
 				fileNamesForDeprecatedStyleNames[style.codeName] = fileNames
 		}
 		Array(filesForDeprecatedTextStyle.keys)
@@ -341,6 +341,8 @@ public final class StyleSync {
 			newTextStyles: newTextStyles,
 			fileNamesForDeprecatedStyleNames: fileNamesForDeprecatedStyleNames
 		)
+		
+		print(body)
 		
 		let pullRequest = GitHub.PullRequest(
 			title: "[StyleSync] Update style guide to version \(version.stringRepresentation)",
