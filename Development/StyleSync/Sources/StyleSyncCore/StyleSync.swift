@@ -126,9 +126,9 @@ public final class StyleSync {
 		}
 
 		try generateAndSaveStyleCode(version: version, colorStyles: colorStyles, textStyles: textStyles)
-//		try generateAndSaveVersionedStyles(version: version, colorStyles: colorStyles, textStyles: textStyles)
+		try generateAndSaveVersionedStyles(version: version, colorStyles: colorStyles, textStyles: textStyles)
 		
-//		let (headBranchName, baseBranchName) = createBranchAndCommitChanges(version: version)
+		let (headBranchName, baseBranchName) = createBranchAndCommitChanges(version: version)
 		try submitPullRequest(
 			headBranchName: "headBranchName",
 			baseBranchName: "baseBranchName",
@@ -207,7 +207,7 @@ public final class StyleSync {
 		let updateOldColorStyleReferencesOperation = updateOldReferencesFileOperation(currentAndMigratedStyles: colorStyleParser.currentAndMigratedStyles)
 		let updateOldTextStyleReferencesOperation = updateOldReferencesFileOperation(currentAndMigratedStyles: textStyleParser.currentAndMigratedStyles)
 		
-//		let fileReferencesForDeprecatedStyle: [TextStyle: [String]] = [:]
+		let fileReferencesForDeprecatedStyle: [TextStyle: [String]] = [:]
 		
 		// Find used deprecated styles.
 		let findUsedDeprecatedColorStylesOperation = findUsedDeprecatedStylesFileOperation(
@@ -344,8 +344,6 @@ public final class StyleSync {
 			fileNamesForDeprecatedStyleNames: fileNamesForDeprecatedStyleNames
 		)
 		
-		print(body)
-		
 		let pullRequest = GitHub.PullRequest(
 			title: "[StyleSync] Update style guide to version \(version.stringRepresentation)",
 			body: body,
@@ -353,7 +351,7 @@ public final class StyleSync {
 			base: baseBranchName
 		)
 
-//		try pullRequestManager.submit(pullRequest: pullRequest)
+		try pullRequestManager.submit(pullRequest: pullRequest)
 	}
 	
 	// MARK: - Helpers
