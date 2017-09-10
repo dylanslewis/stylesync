@@ -130,8 +130,8 @@ public final class StyleSync {
 		
 		let (headBranchName, baseBranchName) = createBranchAndCommitChanges(version: version)
 		try submitPullRequest(
-			headBranchName: "headBranchName",
-			baseBranchName: "baseBranchName",
+			headBranchName: headBranchName,
+			baseBranchName: baseBranchName,
 			oldColorStyles: previousExportedStyles?.colorStyles ?? [],
 			newColorStyles: colorStyleParser.newStyles,
 			oldTextStyles: previousExportedStyles?.textStyles ?? [],
@@ -206,8 +206,6 @@ public final class StyleSync {
 		// Update style references.
 		let updateOldColorStyleReferencesOperation = updateOldReferencesFileOperation(currentAndMigratedStyles: colorStyleParser.currentAndMigratedStyles)
 		let updateOldTextStyleReferencesOperation = updateOldReferencesFileOperation(currentAndMigratedStyles: textStyleParser.currentAndMigratedStyles)
-		
-		let fileReferencesForDeprecatedStyle: [TextStyle: [String]] = [:]
 		
 		// Find used deprecated styles.
 		let findUsedDeprecatedColorStylesOperation = findUsedDeprecatedStylesFileOperation(

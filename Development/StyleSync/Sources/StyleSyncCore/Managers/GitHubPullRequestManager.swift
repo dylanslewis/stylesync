@@ -51,7 +51,6 @@ struct GitHubPullRequestManager {
 		let semaphore = DispatchSemaphore(value: 0)
 		
 		make(urlRequest: request, base64EncodedCredential: base64LoginString) {
-			print("Done here")
 			semaphore.signal()
 		}
 		semaphore.wait()
@@ -67,11 +66,6 @@ struct GitHubPullRequestManager {
 			if let error = error {
 				print(error)
 			}
-			
-			if let data = data, let dataString = String(data: data, encoding: String.Encoding.utf8) {
-				print(dataString)
-			}
-			
 			completion()
 		}
 		task.resume()
