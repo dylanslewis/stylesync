@@ -9,6 +9,10 @@ let package = Package(
 		.package(
 			url: "https://github.com/johnsundell/files.git",
 			from: "1.0.0"
+		),
+		.package(
+			url: "https://github.com/JohnSundell/ShellOut.git",
+			from: "1.0.0"
 		)
 	],
 	targets: [
@@ -18,7 +22,7 @@ let package = Package(
 		),
 		.target(
 			name: "StyleSyncCore",
-			dependencies: ["Files"]
+			dependencies: ["Files", "ShellOut"]
 		),
 		.testTarget(
 			name: "StyleSyncTests",

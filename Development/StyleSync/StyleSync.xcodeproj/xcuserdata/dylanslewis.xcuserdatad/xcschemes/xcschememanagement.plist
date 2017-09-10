@@ -7,6 +7,11 @@
 		<key>FilesPackageDescription.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>ShellOutPackageDescription.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
 		<key>StyleSync-Package.xcscheme_^#shared#^_</key>
@@ -17,7 +22,7 @@
 		<key>StyleSync.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>4</integer>
 		</dict>
 		<key>StyleSyncPackageDescription.xcscheme</key>
 		<dict>
@@ -27,7 +32,7 @@
 		<key>StyleSyncPackageTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>5</integer>
 		</dict>
 	</dict>
 </dict>

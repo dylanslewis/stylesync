@@ -121,7 +121,7 @@ public final class StyleSync {
 		try generateAndSaveStyleCode(version: version, colorStyles: colorStyles, textStyles: textStyles)
 		try generateAndSaveVersionedStyles(version: version, colorStyles: colorStyles, textStyles: textStyles)
 		
-		let (headBranchName, baseBranchName) = createBranchAndCommitChanges(version: version)
+		let (headBranchName, baseBranchName) = try createBranchAndCommitChanges(version: version)
 		try submitPullRequest(
 			headBranchName: headBranchName,
 			baseBranchName: baseBranchName,
@@ -269,11 +269,11 @@ public final class StyleSync {
 		try rawStylesFile.write(data: rawStylesData)
 	}
 	
-	private func createBranchAndCommitChanges(version: Version) -> (headBranchName: String, baseBranchName: String) {
-		let gitManager = GitManager(projectFolderPath: projectFolder.path, version: version)
-		gitManager.createStyleSyncBranch()
-		gitManager.commitAllStyleUpdates()
-		gitManager.checkoutOriginalBranch()
+	private func createBranchAndCommitChanges(version: Version) throws -> (headBranchName: String, baseBranchName: String) {
+		let gitManager = try GitManager(projectFolderPath: projectFolder.path, version: version)
+		try gitManager.createStyleSyncBranch()
+		try gitManager.commitAllStyleUpdates()
+		try gitManager.checkoutOriginalBranch()
 		return (gitManager.styleSyncBranchName, gitManager.originalBranchName)
 	}
 	

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ShellOut
 
 struct GitManager {
 	// MARK: - Stored properties
@@ -22,54 +23,61 @@ struct GitManager {
 	
 	// MARK: - Initializer
 	
-	init(projectFolderPath: String, version: Version) {
+	init(projectFolderPath: String, version: Version) throws {
 		self.projectFolderPath = projectFolderPath
 		self.version = version
-		originalBranchName = bash(command: "git", arguments: ["describe", "--contains", "--all", "HEAD"])
+		originalBranchName = try shellOut(to: .getGitBranch())
 	}
 	
 	// MARK: - Actions
 	
-	func createStyleSyncBranch() {
-		bash(command: "cd", arguments: [projectFolderPath])
-		bash(command: "git", arguments: ["branch", styleSyncBranchName])
-		bash(command: "git", arguments: ["checkout", styleSyncBranchName])
+	func createStyleSyncBranch() throws {
+		try shellOut(to: .changeDirectory(directory: projectFolderPath))
+		try shellOut(to: .gitCheckout(branch: styleSyncBranchName))
 	}
 	
-	func commitAllStyleUpdates() {
-		bash(command: "git", arguments: ["add", "\(projectFolderPath)/*"])
-		bash(command: "git", arguments: ["commit", "-m", "Update style guide to version \(version.stringRepresentation)"])
-		bash(command: "git", arguments: ["push", "--set-upstream", "origin", styleSyncBranchName])
+	func commitAllStyleUpdates() throws {
+		try shellOut(to: .gitCommit(message: "Update style guide to version \(version.stringRepresentation)"))
+		try shellOut(to: .gitPush(branch: styleSyncBranchName))
 	}
 	
-	func checkoutOriginalBranch() {
-		bash(command: "git", arguments: ["checkout", originalBranchName])
+	func checkoutOriginalBranch() throws {
+		try shellOut(to: .gitCheckout(branch: originalBranchName))
+	}
+}
+
+private extension ShellOutCommand {
+	static func getGitBranch() -> ShellOutCommand {
+		var command = "git"
+		command.append(argument: "describe")
+		command.append(argument: "--contains")
+		command.append(argument: "--all")
+		command.append(argument: "HEAD")
+		return ShellOutCommand(string: command)
 	}
 	
-	// MARK: - Helpers
-	
-	private func shell(launchPath: String, arguments: [String]) -> String {
-		let task = Process()
-		task.launchPath = launchPath
-		task.arguments = arguments
-		
-		let pipe = Pipe()
-		task.standardOutput = pipe
-		task.launch()
-		
-		let data = pipe.fileHandleForReading.readDataToEndOfFile()
-		let output = String(data: data, encoding: String.Encoding.utf8)!
-		if output.characters.count > 0 {
-			//remove newline character.
-			let lastIndex = output.index(before: output.endIndex)
-			return String(output[output.startIndex ..< lastIndex])
-		}
-		return output
+	static func changeDirectory(directory: String) -> ShellOutCommand {
+		var command = "cd"
+		command.append(argument: directory)
+		return ShellOutCommand(string: command)
+	}
+}
+
+/// Copied from ShellOut.swift
+private extension String {
+	func appending(argument: String) -> String {
+		return "\(self) \"\(argument)\""
 	}
 	
-	@discardableResult
-	private func bash(command: String, arguments: [String] = []) -> String {
-		let whichPathForCommand = shell(launchPath: "/bin/bash", arguments: [ "-l", "-c", "which \(command)" ])
-		return shell(launchPath: whichPathForCommand, arguments: arguments)
+	func appending(arguments: [String]) -> String {
+		return appending(argument: arguments.joined(separator: "\" \""))
+	}
+	
+	mutating func append(argument: String) {
+		self = appending(argument: argument)
+	}
+	
+	mutating func append(arguments: [String]) {
+		self = appending(arguments: arguments)
 	}
 }
