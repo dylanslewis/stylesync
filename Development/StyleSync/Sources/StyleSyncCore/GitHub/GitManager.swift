@@ -39,7 +39,7 @@ struct GitManager {
 	
 	func commitAllStyleUpdates() throws {
 		try shellOut(to: .gitCommit(message: "Update style guide to version \(version.stringRepresentation)"))
-		try shellOut(to: .gitPush(branch: styleSyncBranchName))
+		try shellOut(to: .gitInitialPush(branch: styleSyncBranchName))
 	}
 	
 	func checkoutOriginalBranch() throws {
@@ -60,6 +60,15 @@ private extension ShellOutCommand {
 	static func gitCreateBranch(branch: String) -> ShellOutCommand {
 		var command = "git"
 		command.append(argument: "branch")
+		command.append(argument: branch)
+		return ShellOutCommand(string: command)
+	}
+	
+	static func gitInitialPush(branch: String) -> ShellOutCommand {
+		var command = "git"
+		command.append(argument: "push")
+		command.append(argument: "--set-upstream")
+		command.append(argument: "origin")
 		command.append(argument: branch)
 		return ShellOutCommand(string: command)
 	}
