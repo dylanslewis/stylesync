@@ -15,14 +15,13 @@ public final class StyleSync {
 	private enum Constant {
 		static let expectedNumberOfArguments = 9
 		static let exportedStylesFileName = "ExportedStyles"
-		static let exportedStylesFileType: FileName.FileType = .json
+		static let exportedStylesFileType: FileType = .json
 		static let colorStylesName = "ColorStyles"
 		static let textStylesName = "TextStyles"
 	}
 	
 	// MARK: - Stored properties
 	
-	private let arguments: [String]
 	private let fileManager: FileManager
 	
 	private var colorStyleParser: StyleParser<ColorStyle>!
@@ -31,51 +30,30 @@ public final class StyleSync {
 	private var textStyleCodeGenerator: CodeGenerator!
 	private var filesForDeprecatedColorStyle: [ColorStyle: [File]] = [:]
 	private var filesForDeprecatedTextStyle: [TextStyle: [File]] = [:]
+
 	private var projectFolder: Folder!
 	private var exportFolder: Folder!
 
+	private var sketchDocument: File!
+	private var colorStyleTemplate: File!
+	private var textStyleTemplate: File!
+	
+	private var gitHubUsername: String!
+	private var gitHubRepositoryName: String!
+	private var gitHubPersonalAccessToken: String!
+	
+	private var pullRequestHeadingTemplate: File!
+	private var pullRequestStyleNameTemplate: File!
+	private var pullRequestAddedStyleTableTemplate: File!
+	private var pullRequestUpdatedStyleTableTemplate: File!
+	private var pullRequestDeprecatedStylesTemplate: File!
+	
 	private var generatedColorStylesFile: File!
 	private var generatedTextStylesFile: File!
 	private var generatedRawStylesFile: File!
 	
 	// MARK: - Computed properties
-	
-	private var sketchDocumentURL: URL {
-		return URL(fileURLWithPath: arguments[1])
-	}
-	private var colorStyleTemplateURL: URL {
-		return URL(fileURLWithPath: arguments[4])
-	}
-	private var textStyleTemplateURL: URL {
-		return URL(fileURLWithPath: arguments[5])
-	}
-	private var gitHubUsername: String {
-		return arguments[6]
-	}
-	private var gitHubRepositoryName: String {
-		return arguments[7]
-	}
-	private var gitHubPersonalAccessToken: String {
-		return arguments[8]
-	}
-	private var gitHubTemplatesBaseURL: URL {
-		return URL(fileURLWithPath: "\(fileManager.currentDirectoryPath)/Sources/StyleSyncCore/Templates/GitHub/")
-	}
-	private var pullRequestHeadingTemplateURL: URL {
-		return gitHubTemplatesBaseURL.appendingPathComponent("Heading")
-	}
-	private var pullRequestStyleNameTemplateURL: URL {
-		return gitHubTemplatesBaseURL.appendingPathComponent("StyleName")
-	}
-	private var pullRequestAddedStyleTableTemplateURL: URL {
-		return gitHubTemplatesBaseURL.appendingPathComponent("NewStyleTable")
-	}
-	private var pullRequestUpdatedStyleTableTemplateURL: URL {
-		return gitHubTemplatesBaseURL.appendingPathComponent("UpdatedStyleTable")
-	}
-	private var pullRequestDeprecatedStylesTemplateURL: URL {
-		return gitHubTemplatesBaseURL.appendingPathComponent("DeprecatedStylesTable")
-	}
+
 	private var usedDeprecatedColorStyles: Set<ColorStyle> {
 		return Set(filesForDeprecatedColorStyle.keys)
 	}
@@ -92,20 +70,35 @@ public final class StyleSync {
 		if arguments.count != Constant.expectedNumberOfArguments {
 			throw Error.invalidArguments
 		}
-		self.arguments = arguments
 		self.fileManager = fileManager
-		try createFolderReferences(using: arguments)
+		try parse(arguments: arguments)
+		try createGitHubTemplateReferences()
 	}
 	
-	private func createFolderReferences(using arguments: [String]) throws {
+	private func parse(arguments: [String]) throws {
+		self.sketchDocument = try File(path: arguments[1])
 		self.projectFolder = try Folder(path: arguments[2])
 		self.exportFolder = try Folder(path: arguments[3])
+		self.colorStyleTemplate = try File(path: arguments[4])
+		self.textStyleTemplate = try File(path: arguments[5])
+		self.gitHubUsername = arguments[6]
+		self.gitHubRepositoryName = arguments[7]
+		self.gitHubPersonalAccessToken = arguments[8]
+	}
+	
+	private func createGitHubTemplateReferences() throws {
+		let gitHubTemplatesBaseURL = try Folder.current.subfolder(atPath: "Sources/StyleSyncCore/Templates/GitHub")
+		self.pullRequestHeadingTemplate = try gitHubTemplatesBaseURL.file(named: "Heading")
+		self.pullRequestStyleNameTemplate = try gitHubTemplatesBaseURL.file(named: "StyleName")
+		self.pullRequestAddedStyleTableTemplate = try gitHubTemplatesBaseURL.file(named: "NewStyleTable")
+		self.pullRequestUpdatedStyleTableTemplate = try gitHubTemplatesBaseURL.file(named: "UpdatedStyleTable")
+		self.pullRequestDeprecatedStylesTemplate = try gitHubTemplatesBaseURL.file(named: "DeprecatedStylesTable")
 	}
 
 	// MARK: - Run
 
 	public func run() throws {
-		let sketchDocument: SketchDocument = try decodedObject(at: sketchDocumentURL)
+		let sketchDocument: SketchDocument = try self.sketchDocument.readAsDecodedJSON()
 		
 		let previousExportedStyles = getPreviousExportedStyles()
 		createStyleParsers(using: sketchDocument, previousExportedStyles: previousExportedStyles)
@@ -167,15 +160,8 @@ public final class StyleSync {
 	}
 	
 	private func createStyleCodeGenerators() throws {
-		let colorStyleTemplateData = try Data(contentsOf: colorStyleTemplateURL)
-		let textStyleTemplateData = try Data(contentsOf: textStyleTemplateURL)
-		
-		guard
-			let colorStyleTemplate: Template = String(data: colorStyleTemplateData, encoding: .utf8),
-			let textStyleTemplate: Template = String(data: textStyleTemplateData, encoding: .utf8)
-		else {
-			throw Error.failedToCreateStringFromData
-		}
+		let colorStyleTemplate: Template = try self.colorStyleTemplate.readAsString()
+		let textStyleTemplate: Template = try self.textStyleTemplate.readAsString()
 		
 		colorStyleCodeGenerator = try CodeGenerator(template: colorStyleTemplate)
 		textStyleCodeGenerator = try CodeGenerator(template: textStyleTemplate)
@@ -192,7 +178,7 @@ public final class StyleSync {
 	
 	private func updateFilesInProjectDirectoryAndFindUsedDeprecatedStyles() throws {
 		// Get all supported file types.
-		let supportedFileTypes: Set<FileName.FileType> = [
+		let supportedFileTypes: Set<FileType> = [
 			colorStyleCodeGenerator.fileExtension,
 			textStyleCodeGenerator.fileExtension
 		]
@@ -306,11 +292,11 @@ public final class StyleSync {
 			personalAccessToken: gitHubPersonalAccessToken
 		)
 		
-		let headingTemplate: Template = try String(contentsOfURL: pullRequestHeadingTemplateURL)
-		let styleNameTemplate: Template = try String(contentsOfURL: pullRequestStyleNameTemplateURL)
-		let addedStyleTableTemplate: Template = try String(contentsOfURL: pullRequestAddedStyleTableTemplateURL)
-		let updatedStyleTableTemplate: Template = try String(contentsOfURL: pullRequestUpdatedStyleTableTemplateURL)
-		let deprecatedStylesTableTemplate: Template = try String(contentsOfURL: pullRequestDeprecatedStylesTemplateURL)
+		let headingTemplate: Template = try pullRequestHeadingTemplate.readAsString()
+		let styleNameTemplate: Template = try pullRequestStyleNameTemplate.readAsString()
+		let addedStyleTableTemplate: Template = try pullRequestAddedStyleTableTemplate.readAsString()
+		let updatedStyleTableTemplate: Template = try pullRequestUpdatedStyleTableTemplate.readAsString()
+		let deprecatedStylesTableTemplate: Template = try pullRequestDeprecatedStylesTemplate.readAsString()
 		
 		let pullRequestBodyGenerator = try PullRequestBodyGenerator(
 			headingTemplate: headingTemplate,
@@ -429,6 +415,5 @@ public final class StyleSync {
 extension StyleSync {
 	enum Error: Swift.Error {
 		case invalidArguments
-		case failedToCreateStringFromData
 	}
 }

@@ -18,7 +18,7 @@ struct CodeGenerator {
 	
 	private let template: Template
 	private var templateCodeLines: [String]
-	var fileExtension: FileName.FileType
+	var fileExtension: FileType
 	
 	// MARK: - Initializer
 	
@@ -103,13 +103,13 @@ extension CodeGenerator {
 
 private extension Array where Iterator.Element == String {
 	// FIXME: Add docs
-	func extractingFileType() throws -> (FileName.FileType, [String]) {
+	func extractingFileType() throws -> (FileType, [String]) {
 		let fileExtensionReference = "fileExtension".metadataPlaceholderReference
 		var templateCodeLines = self
 		guard let (index, element) = enumerated().first(where: { $0.element.contains(fileExtensionReference) }) else {
 			throw CodeGenerator.Error.noFileExtensionFound
 		}
-		let fileType: FileName.FileType = element.replacingOccurrences(of: fileExtensionReference, with: "")
+		let fileType: FileType = element.replacingOccurrences(of: fileExtensionReference, with: "")
 		templateCodeLines.remove(at: index)
 		return (fileType, templateCodeLines)
 	}

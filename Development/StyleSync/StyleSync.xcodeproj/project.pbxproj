@@ -30,7 +30,7 @@
 		OBJ_104 /* CodableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* CodableError.swift */; };
 		OBJ_105 /* ColorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* ColorStyle.swift */; };
 		OBJ_106 /* DeprecatedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* DeprecatedStyle.swift */; };
-		OBJ_107 /* FileName.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* FileName.swift */; };
+		OBJ_107 /* FileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* FileType.swift */; };
 		OBJ_108 /* GitHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* GitHub.swift */; };
 		OBJ_109 /* PullRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* PullRequestBody.swift */; };
 		OBJ_110 /* RemovedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* RemovedStyle.swift */; };
@@ -120,7 +120,7 @@
 		OBJ_19 /* CodableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableError.swift; sourceTree = "<group>"; };
 		OBJ_20 /* ColorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStyle.swift; sourceTree = "<group>"; };
 		OBJ_21 /* DeprecatedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeprecatedStyle.swift; sourceTree = "<group>"; };
-		OBJ_22 /* FileName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileName.swift; sourceTree = "<group>"; };
+		OBJ_22 /* FileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileType.swift; sourceTree = "<group>"; };
 		OBJ_23 /* GitHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHub.swift; sourceTree = "<group>"; };
 		OBJ_24 /* PullRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestBody.swift; sourceTree = "<group>"; };
 		OBJ_25 /* RemovedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovedStyle.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 				OBJ_19 /* CodableError.swift */,
 				OBJ_20 /* ColorStyle.swift */,
 				OBJ_21 /* DeprecatedStyle.swift */,
-				OBJ_22 /* FileName.swift */,
+				OBJ_22 /* FileType.swift */,
 				OBJ_23 /* GitHub.swift */,
 				OBJ_24 /* PullRequestBody.swift */,
 				OBJ_25 /* RemovedStyle.swift */,
@@ -523,7 +523,7 @@
 				OBJ_104 /* CodableError.swift in Sources */,
 				OBJ_105 /* ColorStyle.swift in Sources */,
 				OBJ_106 /* DeprecatedStyle.swift in Sources */,
-				OBJ_107 /* FileName.swift in Sources */,
+				OBJ_107 /* FileType.swift in Sources */,
 				OBJ_108 /* GitHub.swift in Sources */,
 				OBJ_109 /* PullRequestBody.swift in Sources */,
 				OBJ_110 /* RemovedStyle.swift in Sources */,
