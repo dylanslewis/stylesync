@@ -22,8 +22,6 @@ public final class StyleSync {
 	
 	// MARK: - Stored properties
 	
-	private let fileManager: FileManager
-	
 	private var colorStyleParser: StyleParser<ColorStyle>!
 	private var textStyleParser: StyleParser<TextStyle>!
 	private var colorStyleCodeGenerator: CodeGenerator!
@@ -54,23 +52,19 @@ public final class StyleSync {
 	
 	// MARK: - Computed properties
 
-	private var usedDeprecatedColorStyles: Set<ColorStyle> {
-		return Set(filesForDeprecatedColorStyle.keys)
+	private var usedDeprecatedColorStyles: [ColorStyle] {
+		return Array(filesForDeprecatedColorStyle.keys)
 	}
-	private var usedDeprecatedTextStyles: Set<TextStyle> {
-		return Set(filesForDeprecatedTextStyle.keys)
+	private var usedDeprecatedTextStyles: [TextStyle] {
+		return Array(filesForDeprecatedTextStyle.keys)
 	}
 	
 	// MARK: - Initializer
 	
-	public init(
-		arguments: [String] = CommandLine.arguments,
-		fileManager: FileManager = .default
-	) throws {
-		if arguments.count != Constant.expectedNumberOfArguments {
+	public init(arguments: [String] = CommandLine.arguments) throws {
+		guard arguments.count == Constant.expectedNumberOfArguments else {
 			throw Error.invalidArguments
 		}
-		self.fileManager = fileManager
 		try parse(arguments: arguments)
 		try createGitHubTemplateReferences()
 	}
@@ -190,8 +184,12 @@ public final class StyleSync {
 		]
 		
 		// Update style references.
-		let updateOldColorStyleReferencesOperation = updateOldReferencesFileOperation(currentAndMigratedStyles: colorStyleParser.currentAndMigratedStyles)
-		let updateOldTextStyleReferencesOperation = updateOldReferencesFileOperation(currentAndMigratedStyles: textStyleParser.currentAndMigratedStyles)
+		let updateOldColorStyleReferencesOperation = updateOldReferencesFileOperation(
+			currentAndMigratedStyles: colorStyleParser.currentAndMigratedStyles
+		)
+		let updateOldTextStyleReferencesOperation = updateOldReferencesFileOperation(
+			currentAndMigratedStyles: textStyleParser.currentAndMigratedStyles
+		)
 		
 		// Find used deprecated styles.
 		let findUsedDeprecatedColorStylesOperation = findUsedDeprecatedStylesFileOperation(
@@ -229,12 +227,12 @@ public final class StyleSync {
 		
 		removeUnusedDeprecatedStyles(
 			deprecatedStyles: &deprecatedColorStyles,
-			usedDeprecatedStyles: Array(usedDeprecatedColorStyles),
+			usedDeprecatedStyles: usedDeprecatedColorStyles,
 			newStyles: colorStyleParser.newStyles
 		)
 		removeUnusedDeprecatedStyles(
 			deprecatedStyles: &deprecatedTextStyles,
-			usedDeprecatedStyles: Array(usedDeprecatedTextStyles),
+			usedDeprecatedStyles: usedDeprecatedTextStyles,
 			newStyles: textStyleParser.newStyles
 		)
 		
@@ -339,12 +337,6 @@ public final class StyleSync {
 	}
 	
 	// MARK: - Helpers
-	
-	private func decodedObject<Object: Decodable>(at url: URL) throws -> Object {
-		let decoder = JSONDecoder()
-		let decodedData = try Data(contentsOf: url)
-		return try decoder.decode(Object.self, from: decodedData)
-	}
 	
 	private func updateOldReferencesFileOperation<S: Style>(currentAndMigratedStyles: [(S, S)]) -> FileOperation {
 		return { file in
