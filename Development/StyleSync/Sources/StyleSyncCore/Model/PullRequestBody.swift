@@ -8,6 +8,15 @@
 import Foundation
 
 struct PullRequestBodyGenerator {
+	// MARK: - Constant
+	
+	private enum HeadingName {
+		static let added = "✅ Added Styles"
+		static let updated = "💅 Updated Styles"
+		static let removed = "⛔ Removed Styles"
+		static let deprecated = "⚠️ Deprecated Styles"
+	}
+	
 	// MARK: - Stored properties
 	
 	private let headingGenerator: CodeGenerator
@@ -77,7 +86,7 @@ struct PullRequestBodyGenerator {
 			return nil
 		}
 		
-		let generatedHeading = self.generatedHeading(withName: "Added Styles")
+		let generatedHeading = self.generatedHeading(withName: HeadingName.added)
 
 		let generatedAddedStyles: [String] = styles.map { style in
 			let heading = styleNameGenerator.generatedCode(for: style)
@@ -92,7 +101,7 @@ struct PullRequestBodyGenerator {
 			return nil
 		}
 		
-		let generatedHeading = self.generatedHeading(withName: "Updated Styles")
+		let generatedHeading = self.generatedHeading(withName: HeadingName.updated)
 
 		let generatedUpdatedStyles: [String] = styles.map { style in
 			let heading = styleNameGenerator.generatedCode(for: style)
@@ -107,7 +116,7 @@ struct PullRequestBodyGenerator {
 			return nil
 		}
 		
-		let generatedHeading = self.generatedHeading(withName: "Removed Styles")
+		let generatedHeading = self.generatedHeading(withName: HeadingName.removed)
 		
 		let generatedRemovedStyles: [String] = styles.map { style in
 			let heading = styleNameGenerator.generatedCode(for: style)
@@ -121,7 +130,7 @@ struct PullRequestBodyGenerator {
 			return nil
 		}
 		
-		let generatedHeading = self.generatedHeading(withName: "Deprecated Styles")
+		let generatedHeading = self.generatedHeading(withName: HeadingName.deprecated)
 		
 		let generatedDeprecatedStyles: [String] = styles.map { deprecatedStylesTableGenerator.generatedCode(for: $0) }
 		return generatedHeading + "\n" + generatedDeprecatedStyles.joined(separator: "\n") + "\n"
