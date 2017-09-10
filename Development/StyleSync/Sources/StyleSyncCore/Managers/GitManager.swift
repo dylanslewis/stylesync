@@ -10,7 +10,7 @@ import Foundation
 struct GitManager {
 	// MARK: - Stored properties
 	
-	private let projectDirectoryURL: URL
+	private let projectFolderPath: String
 	private let version: Version
 	var originalBranchName: String!
 	
@@ -22,8 +22,8 @@ struct GitManager {
 	
 	// MARK: - Initializer
 	
-	init(projectDirectoryURL: URL, version: Version) {
-		self.projectDirectoryURL = projectDirectoryURL
+	init(projectFolderPath: String, version: Version) {
+		self.projectFolderPath = projectFolderPath
 		self.version = version
 		originalBranchName = bash(command: "git", arguments: ["describe", "--contains", "--all", "HEAD"])
 	}
@@ -31,13 +31,13 @@ struct GitManager {
 	// MARK: - Actions
 	
 	func createStyleSyncBranch() {
-		bash(command: "cd", arguments: [projectDirectoryURL.path])
+		bash(command: "cd", arguments: [projectFolderPath])
 		bash(command: "git", arguments: ["branch", styleSyncBranchName])
 		bash(command: "git", arguments: ["checkout", styleSyncBranchName])
 	}
 	
 	func commitAllStyleUpdates() {
-		bash(command: "git", arguments: ["add", "\(projectDirectoryURL.path)/*"])
+		bash(command: "git", arguments: ["add", "\(projectFolderPath)/*"])
 		bash(command: "git", arguments: ["commit", "-m", "Update style guide to version \(version.stringRepresentation)"])
 		bash(command: "git", arguments: ["push", "--set-upstream", "origin", styleSyncBranchName])
 	}

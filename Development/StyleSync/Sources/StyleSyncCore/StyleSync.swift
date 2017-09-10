@@ -7,13 +7,15 @@
 //
 
 import Cocoa
+import Files
 
 public final class StyleSync {
 	// MARK: - Constants
 	
 	private enum Constant {
 		static let expectedNumberOfArguments = 9
-		static let exportedStylesFileName = FileName(name: "ExportedStyles", type: .json)
+		static let exportedStylesFileName = "ExportedStyles"
+		static let exportedStylesFileType: FileName.FileType = .json
 		static let colorStylesName = "ColorStyles"
 		static let textStylesName = "TextStyles"
 	}
@@ -27,21 +29,20 @@ public final class StyleSync {
 	private var textStyleParser: StyleParser<TextStyle>!
 	private var colorStyleCodeGenerator: CodeGenerator!
 	private var textStyleCodeGenerator: CodeGenerator!
-	private var generatedColorStylesFilePath: URL!
-	private var generatedTextStylesFilePath: URL!
 	private var usedDeprecatedColorStyles: Set<ColorStyle> = []
 	private var usedDeprecatedTextStyles: Set<TextStyle> = []
+	
+	private var projectFolder: Folder!
+	private var exportFolder: Folder!
+
+	private var generatedColorStylesFile: File!
+	private var generatedTextStylesFile: File!
+	private var generatedRawStylesFile: File!
 	
 	// MARK: - Computed properties
 	
 	private var sketchDocumentURL: URL {
 		return URL(fileURLWithPath: arguments[1])
-	}
-	private var projectDirectoryURL: URL {
-		return URL(fileURLWithPath: arguments[2])
-	}
-	private var exportDirectoryURL: URL {
-		return URL(fileURLWithPath: arguments[3])
 	}
 	private var colorStyleTemplateURL: URL {
 		return URL(fileURLWithPath: arguments[4])
@@ -76,9 +77,6 @@ public final class StyleSync {
 	private var pullRequestDeprecatedStylesTemplateURL: URL {
 		return gitHubTemplatesBaseURL.appendingPathComponent("DeprecatedStylesTable")
 	}
-	private var rawStylesURL: URL {
-		return exportDirectoryURL.appending(fileName: Constant.exportedStylesFileName)
-	}
 	
 	// MARK: - Initializer
 	
@@ -91,6 +89,12 @@ public final class StyleSync {
 		}
 		self.arguments = arguments
 		self.fileManager = fileManager
+		try createFolderReferences(using: arguments)
+	}
+	
+	private func createFolderReferences(using arguments: [String]) throws {
+		self.projectFolder = try Folder(path: arguments[2])
+		self.exportFolder = try Folder(path: arguments[3])
 	}
 
 	// MARK: - Run
@@ -117,12 +121,12 @@ public final class StyleSync {
 		}
 
 		try generateAndSaveStyleCode(version: version, colorStyles: colorStyles, textStyles: textStyles)
-		try generateAndSaveVersionedStyles(version: version, colorStyles: colorStyles, textStyles: textStyles)
+//		try generateAndSaveVersionedStyles(version: version, colorStyles: colorStyles, textStyles: textStyles)
 		
-		let (headBranchName, baseBranchName) = createBranchAndCommitChanges(version: version)
+//		let (headBranchName, baseBranchName) = createBranchAndCommitChanges(version: version)
 		try submitPullRequest(
-			headBranchName: headBranchName,
-			baseBranchName: baseBranchName,
+			headBranchName: "headBranchName",
+			baseBranchName: "baseBranchName",
 			oldColorStyles: previousExportedStyles?.colorStyles ?? [],
 			newColorStyles: colorStyleParser.newStyles,
 			oldTextStyles: previousExportedStyles?.textStyles ?? [],
@@ -135,7 +139,11 @@ public final class StyleSync {
 	
 	private func getPreviousExportedStyles() -> VersionedStyles? {
 		do {
-			return try decodedObject(at: rawStylesURL)
+			let rawStylesFile = try exportFolder.file(
+				named: Constant.exportedStylesFileName,
+				fileExtension: Constant.exportedStylesFileType
+			)
+			return try rawStylesFile.readAsDecodedJSON()
 		} catch {
 			return nil
 		}
@@ -167,11 +175,13 @@ public final class StyleSync {
 		colorStyleCodeGenerator = try CodeGenerator(template: colorStyleTemplate)
 		textStyleCodeGenerator = try CodeGenerator(template: textStyleTemplate)
 		
-		generatedColorStylesFilePath = exportDirectoryURL.appending(
-			fileName: .init(name: Constant.colorStylesName, type: colorStyleCodeGenerator.fileExtension)
+		generatedColorStylesFile = try exportFolder.createFileIfNeeded(
+			named: Constant.colorStylesName,
+			fileExtension: colorStyleCodeGenerator.fileExtension
 		)
-		generatedTextStylesFilePath = exportDirectoryURL.appending(
-			fileName: .init(name: Constant.textStylesName, type: textStyleCodeGenerator.fileExtension)
+		generatedTextStylesFile = try exportFolder.createFileIfNeeded(
+			named: Constant.textStylesName,
+			fileExtension: textStyleCodeGenerator.fileExtension
 		)
 	}
 	
@@ -183,14 +193,16 @@ public final class StyleSync {
 		]
 		
 		// Ignore file URLs that will be automatically generated.
-		let ignoredFileURLs: [URL] = [
-			generatedColorStylesFilePath,
-			generatedTextStylesFilePath
+		let ignoredFiles: [File] = [
+			generatedColorStylesFile,
+			generatedTextStylesFile
 		]
 		
 		// Update style references.
 		let updateOldColorStyleReferencesOperation = updateOldReferencesFileOperation(currentAndMigratedStyles: colorStyleParser.currentAndMigratedStyles)
 		let updateOldTextStyleReferencesOperation = updateOldReferencesFileOperation(currentAndMigratedStyles: textStyleParser.currentAndMigratedStyles)
+		
+//		let fileReferencesForDeprecatedStyle: [TextStyle: [String]] = [:]
 		
 		// Find used deprecated styles.
 		let findUsedDeprecatedColorStylesOperation = findUsedDeprecatedStylesFileOperation(
@@ -209,12 +221,17 @@ public final class StyleSync {
 			findUsedDeprecatedTextStylesOperation
 		]
 		
-		try FileManager.default.iterateOverFiles(
-			inDirectory: projectDirectoryURL,
-			fileTypes: supportedFileTypes,
-			ignoredFileURLs: ignoredFileURLs,
-			fileOperations: allOperations
-		)
+		projectFolder
+			.makeSubfolderSequence(recursive: true, includeHidden: false)
+			.forEach { folder in
+				folder
+					.makeFileSequence(recursive: true, includeHidden: false)
+					.filter({ supportedFileTypes.contains($0.extension ?? "") })
+					.filter({ !ignoredFiles.contains($0) })
+					.forEach({ file in
+						allOperations.forEach(({ $0(file) }))
+					})
+			}
 	}
 	
 	private func getAllStyles() -> (colorStyles: [ColorStyle], textStyles: [TextStyle]) {
@@ -242,8 +259,8 @@ public final class StyleSync {
 		let generatedColorStylesCode = colorStyleCodeGenerator.generatedCode(for: [colorStyles], version: version)
 		let generatedTextStylesCode = textStyleCodeGenerator.generatedCode(for: [textStyles], version: version)
 		
-		try generatedColorStylesCode.write(to: generatedColorStylesFilePath, atomically: true, encoding: .utf8)
-		try generatedTextStylesCode.write(to: generatedTextStylesFilePath, atomically: true, encoding: .utf8)
+		try generatedColorStylesFile.write(string: generatedColorStylesCode)
+		try generatedTextStylesFile.write(string: generatedTextStylesCode)
 	}
 	
 	private func generateAndSaveVersionedStyles(version: Version, colorStyles: [ColorStyle], textStyles: [TextStyle]) throws {
@@ -252,13 +269,19 @@ public final class StyleSync {
 			colorStyles: colorStyles,
 			textStyles: textStyles
 		)
+		
+		let rawStylesFile = try exportFolder.createFileIfNeeded(
+			named: Constant.exportedStylesFileName,
+			fileExtension: Constant.exportedStylesFileType
+ 		)
+		
 		let encoder = JSONEncoder()
 		let rawStylesData = try encoder.encode(versionedStyles)
-		try rawStylesData.write(to: rawStylesURL, options: .atomic)
+		try rawStylesFile.write(data: rawStylesData)
 	}
 	
 	private func createBranchAndCommitChanges(version: Version) -> (headBranchName: String, baseBranchName: String) {
-		let gitManager = GitManager(projectDirectoryURL: projectDirectoryURL, version: version)
+		let gitManager = GitManager(projectFolderPath: projectFolder.path, version: version)
 		gitManager.createStyleSyncBranch()
 		gitManager.commitAllStyleUpdates()
 		gitManager.checkoutOriginalBranch()
@@ -300,6 +323,8 @@ public final class StyleSync {
 			newTextStyles: newTextStyles
 		)
 		
+		print(body)
+		
 		let pullRequest = GitHub.PullRequest(
 			title: "[StyleSync] Update style guide to version \(version.stringRepresentation)",
 			body: body,
@@ -307,7 +332,7 @@ public final class StyleSync {
 			base: baseBranchName
 		)
 
-		try pullRequestManager.submit(pullRequest: pullRequest)
+//		try pullRequestManager.submit(pullRequest: pullRequest)
 	}
 	
 	// MARK: - Helpers
@@ -319,13 +344,20 @@ public final class StyleSync {
 	}
 	
 	private func updateOldReferencesFileOperation<S: Style>(currentAndMigratedStyles: [(S, S)]) -> FileOperation {
-		return { (filePath, fileContents) in
-			var updatedFileContents = fileContents
-			currentAndMigratedStyles.forEach({ updatedFileContents = updatedFileContents
-				.replacingOccurrences(of: $0.0.codeName, with: $0.1.codeName) })
+		return { file in
+			var fileString: String
+			do {
+				fileString = try file.readAsString()
+			} catch {
+				print(error)
+				return
+			}
+			currentAndMigratedStyles.forEach({
+				fileString = fileString.replacingOccurrences(of: $0.0.codeName, with: $0.1.codeName)
+			})
 			
 			do {
-				try updatedFileContents.write(to: filePath, atomically: true, encoding: .utf8)
+				try file.write(string: fileString)
 			} catch {
 				print(error)
 			}
@@ -333,12 +365,18 @@ public final class StyleSync {
 	}
 	
 	private func findUsedDeprecatedStylesFileOperation<S: Style>(deprecatedStyles: [S], usedDeprecatedStyles: inout Set<S>) -> FileOperation {
-		return { (_, fileContents) in
-			deprecatedStyles.forEach({ style in
-				if fileContents.contains(style.codeName) {
-					usedDeprecatedStyles.insert(style)
-				}
-			})
+		return { file in
+			var fileString: String
+			do {
+				fileString = try file.readAsString()
+			} catch {
+				print(error)
+				return
+			}
+
+			deprecatedStyles
+				.filter({ fileString.contains($0.codeName) })
+				.forEach({ usedDeprecatedStyles.insert($0) })
 		}
 	}
 	
