@@ -40,7 +40,8 @@ struct PullRequestBodyGenerator {
 		fromOldColorStyles oldColorStyles: [ColorStyle],
 		newColorStyles: [ColorStyle],
 		oldTextStyles: [TextStyle],
-		newTextStyles: [TextStyle]
+		newTextStyles: [TextStyle],
+		fileNamesForDeprecatedStyleNames: [String: [String]]
 	) -> String {
 		let oldAndNewColorStyles: OldAndNewStyles = (oldColorStyles, newColorStyles)
 		let oldAndNewTextStyles: OldAndNewStyles = (oldTextStyles, newTextStyles)
@@ -55,12 +56,15 @@ struct PullRequestBodyGenerator {
 		let allRemovedStyles = allStyleGroups
 			.map { removedStyles(oldStyles: $0.old, newStyles: $0.new) }
 			.flatMap { $0 }
-		
+		let allDeprecatedStyles = deprecatedStyles(
+			forFileNamesForStyle: fileNamesForDeprecatedStyleNames
+		)
 		var sections: [String?] = []
 		sections.append(addedStylesSection(for: allAddedStyles))
 		sections.append(updatedStylesSection(for: allUpdatedStyles))
 		sections.append(removedStylesSection(for: allRemovedStyles))
-		
+		sections.append(deprecatedStylesSection(for: allDeprecatedStyles))
+
 		return sections
 			.flatMap({ $0 })
 			.joined(separator: "\n")
@@ -112,6 +116,17 @@ struct PullRequestBodyGenerator {
 		return generatedHeading + "\n" + generatedRemovedStyles.joined(separator: "\n") + "\n"
 	}
 	
+	private func deprecatedStylesSection(for styles: [DeprecatedStyle]) -> String? {
+		guard !styles.isEmpty else {
+			return nil
+		}
+		
+		let generatedHeading = self.generatedHeading(withName: "Deprecated Styles")
+		
+		let generatedDeprecatedStyles: [String] = styles.map { deprecatedStylesTableGenerator.generatedCode(for: $0) }
+		return generatedHeading + "\n" + generatedDeprecatedStyles.joined(separator: "\n") + "\n"
+	}
+	
 	// MARK: - Utilities
 	
 	private func generatedHeading(withName name: String) -> String {
@@ -146,6 +161,10 @@ struct PullRequestBodyGenerator {
 			}
 			return RemovedStyle(style: newStyle)
 		}
+	}
+	
+	private func deprecatedStyles(forFileNamesForStyle fileNamesForStyleName: [String: [String]]) -> [DeprecatedStyle] {
+		return fileNamesForStyleName.flatMap({ DeprecatedStyle(styleName: $0.0, fileNames: $0.1) })
 	}
 }
 

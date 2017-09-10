@@ -4,5 +4,5 @@
 | Style name | Referenced in file |
 | --- | :---: |
 <styleDeclaration>
-| <#=styleName#> | `<#=viewControllerName#>` |
+| `<#=styleName#>` | <#=fileNames#> |
 </styleDeclaration>

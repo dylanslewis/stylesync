@@ -29,9 +29,8 @@ public final class StyleSync {
 	private var textStyleParser: StyleParser<TextStyle>!
 	private var colorStyleCodeGenerator: CodeGenerator!
 	private var textStyleCodeGenerator: CodeGenerator!
-	private var usedDeprecatedColorStyles: Set<ColorStyle> = []
-	private var usedDeprecatedTextStyles: Set<TextStyle> = []
-	
+	private var filesForDeprecatedColorStyle: [ColorStyle: [File]] = [:]
+	private var filesForDeprecatedTextStyle: [TextStyle: [File]] = [:]
 	private var projectFolder: Folder!
 	private var exportFolder: Folder!
 
@@ -76,6 +75,12 @@ public final class StyleSync {
 	}
 	private var pullRequestDeprecatedStylesTemplateURL: URL {
 		return gitHubTemplatesBaseURL.appendingPathComponent("DeprecatedStylesTable")
+	}
+	private var usedDeprecatedColorStyles: Set<ColorStyle> {
+		return Set(filesForDeprecatedColorStyle.keys)
+	}
+	private var usedDeprecatedTextStyles: Set<TextStyle> {
+		return Set(filesForDeprecatedTextStyle.keys)
 	}
 	
 	// MARK: - Initializer
@@ -207,11 +212,11 @@ public final class StyleSync {
 		// Find used deprecated styles.
 		let findUsedDeprecatedColorStylesOperation = findUsedDeprecatedStylesFileOperation(
 			deprecatedStyles: colorStyleParser.deprecatedStyles,
-			usedDeprecatedStyles: &usedDeprecatedColorStyles
+			filesForDeprecatedStyle: &filesForDeprecatedColorStyle
 		)
 		let findUsedDeprecatedTextStylesOperation = findUsedDeprecatedStylesFileOperation(
 			deprecatedStyles: textStyleParser.deprecatedStyles,
-			usedDeprecatedStyles: &usedDeprecatedTextStyles
+			filesForDeprecatedStyle: &filesForDeprecatedTextStyle
 		)
 		
 		let allOperations: [FileOperation] = [
@@ -316,11 +321,27 @@ public final class StyleSync {
 			updatedStyleTableTemplate: updatedStyleTableTemplate,
 			deprecatedStylesTableTemplate: deprecatedStylesTableTemplate
 		)
+		
+		var fileNamesForDeprecatedStyleNames: [String: [String]] = [:]
+		Array(filesForDeprecatedColorStyle.keys)
+			.forEach { style in
+				let filesForStyle = filesForDeprecatedColorStyle[style]
+				let fileNames: [String] = filesForStyle?.map({ $0.path }) ?? []
+				fileNamesForDeprecatedStyleNames[style.codeName] = fileNames
+		}
+		Array(filesForDeprecatedTextStyle.keys)
+			.forEach { style in
+				let filesForStyle = filesForDeprecatedTextStyle[style]
+				let fileNames: [String] = filesForStyle?.map({ $0.name }) ?? []
+				fileNamesForDeprecatedStyleNames[style.codeName] = fileNames
+		}
+		
 		let body = pullRequestBodyGenerator.body(
 			fromOldColorStyles: oldColorStyles,
 			newColorStyles: newColorStyles,
 			oldTextStyles: oldTextStyles,
-			newTextStyles: newTextStyles
+			newTextStyles: newTextStyles,
+			fileNamesForDeprecatedStyleNames: fileNamesForDeprecatedStyleNames
 		)
 		
 		print(body)
@@ -364,7 +385,10 @@ public final class StyleSync {
 		}
 	}
 	
-	private func findUsedDeprecatedStylesFileOperation<S: Style>(deprecatedStyles: [S], usedDeprecatedStyles: inout Set<S>) -> FileOperation {
+	private func findUsedDeprecatedStylesFileOperation<S: Style>(
+		deprecatedStyles: [S],
+		filesForDeprecatedStyle: inout [S: [File]]
+	) -> FileOperation {
 		return { file in
 			var fileString: String
 			do {
@@ -376,7 +400,14 @@ public final class StyleSync {
 
 			deprecatedStyles
 				.filter({ fileString.contains($0.codeName) })
-				.forEach({ usedDeprecatedStyles.insert($0) })
+				.forEach({ style in
+					var filesForStyle = filesForDeprecatedStyle[style] ?? []
+					guard !filesForStyle.contains(file) else {
+						return
+					}
+					filesForStyle.append(file)
+					filesForDeprecatedStyle[style] = filesForStyle
+				})
 		}
 	}
 	

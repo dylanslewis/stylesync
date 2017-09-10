@@ -6,3 +6,22 @@
 //
 
 import Foundation
+
+struct DeprecatedStyle {
+	let styleName: String
+	let fileNames: [String]
+}
+
+extension DeprecatedStyle: CodeTemplateReplacable {
+	static let declarationName: String = "styleDeclaration"
+	
+	var replacementDictionary: [String : String] {
+		let allFileNames = fileNames
+			.map({ "`" + $0 + "`" })
+			.joined(separator: " ")
+		return [
+			"styleName": styleName,
+			"fileNames": allFileNames
+		]
+	}
+}
