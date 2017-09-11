@@ -8,7 +8,7 @@
 
 import XCTest
 
-class StyleGuideUITests: XCTestCase {
+class StyleSyncTests: XCTestCase {
 	private var screen: XCUIScreen {
 		return .main
 	}

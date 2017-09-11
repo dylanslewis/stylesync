@@ -32,6 +32,7 @@ struct GitManager {
 	// MARK: - Actions
 	
 	func createStyleSyncBranch() throws {
+		// FIXME: Don't cd, use path parameter
 		try shellOut(to: .changeDirectory(directory: projectFolderPath))
 		try shellOut(to: .gitCreateBranch(branch: styleSyncBranchName))
 		try shellOut(to: .gitCheckout(branch: styleSyncBranchName))
@@ -71,30 +72,5 @@ private extension ShellOutCommand {
 		command.append(argument: "origin")
 		command.append(argument: branch)
 		return ShellOutCommand(string: command)
-	}
-	
-	static func changeDirectory(directory: String) -> ShellOutCommand {
-		var command = "cd"
-		command.append(argument: directory)
-		return ShellOutCommand(string: command)
-	}
-}
-
-/// Copied from ShellOut.swift
-private extension String {
-	func appending(argument: String) -> String {
-		return "\(self) \"\(argument)\""
-	}
-	
-	func appending(arguments: [String]) -> String {
-		return appending(argument: arguments.joined(separator: "\" \""))
-	}
-	
-	mutating func append(argument: String) {
-		self = appending(argument: argument)
-	}
-	
-	mutating func append(arguments: [String]) {
-		self = appending(arguments: arguments)
 	}
 }

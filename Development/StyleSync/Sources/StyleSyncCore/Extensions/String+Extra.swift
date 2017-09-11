@@ -30,3 +30,22 @@ public extension String {
 		return NSKeyedUnarchiver.unarchiveObject(with: data) as? TargetObjectType
 	}
 }
+
+/// Copied from ShellOut.swift
+extension String {
+	func appending(argument: String) -> String {
+		return "\(self) \"\(argument)\""
+	}
+	
+	mutating func append(argument: String) {
+		self = appending(argument: argument)
+	}
+
+	func appending(parameter: String) -> String {
+		return "\(self) \(parameter)"
+	}
+	
+	mutating func append(parameter: String) {
+		self = appending(parameter: parameter)
+	}
+}

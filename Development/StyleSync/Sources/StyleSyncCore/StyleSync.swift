@@ -99,32 +99,34 @@ public final class StyleSync {
 		try createStyleCodeGenerators()
 		try updateFilesInProjectDirectoryAndFindUsedDeprecatedStyles()
 		
-		let (colorStyles, textStyles) = getAllStyles()
-		let version = Version(
-			oldColorStyles: previousExportedStyles?.colorStyles,
-			oldTextStyles: previousExportedStyles?.textStyles,
-			newColorStyles: colorStyles,
-			newTextStyles: textStyles,
-			currentVersion: previousExportedStyles?.version
-		)
+//		let (colorStyles, textStyles) = getAllStyles()
+//		let version = Version(
+//			oldColorStyles: previousExportedStyles?.colorStyles,
+//			oldTextStyles: previousExportedStyles?.textStyles,
+//			newColorStyles: colorStyles,
+//			newTextStyles: textStyles,
+//			currentVersion: previousExportedStyles?.version
+//		)
 		
-		guard previousExportedStyles?.version == nil || version != previousExportedStyles?.version else {
-			return
-		}
-
-		try generateAndSaveStyleCode(version: version, colorStyles: colorStyles, textStyles: textStyles)
-		try generateAndSaveVersionedStyles(version: version, colorStyles: colorStyles, textStyles: textStyles)
+//		guard previousExportedStyles?.version == nil || version != previousExportedStyles?.version else {
+//			return
+//		}
+//
+//		try generateAndSaveStyleCode(version: version, colorStyles: colorStyles, textStyles: textStyles)
+//		try generateAndSaveVersionedStyles(version: version, colorStyles: colorStyles, textStyles: textStyles)
+//
+//		let (headBranchName, baseBranchName) = try createBranchAndCommitChanges(version: version)
+		try generateScreenshots()
 		
-		let (headBranchName, baseBranchName) = try createBranchAndCommitChanges(version: version)
-		try submitPullRequest(
-			headBranchName: headBranchName,
-			baseBranchName: baseBranchName,
-			oldColorStyles: previousExportedStyles?.colorStyles ?? [],
-			newColorStyles: colorStyles,
-			oldTextStyles: previousExportedStyles?.textStyles ?? [],
-			newTextStyles: textStyles,
-			version: version
-		)
+//		try submitPullRequest(
+//			headBranchName: headBranchName,
+//			baseBranchName: baseBranchName,
+//			oldColorStyles: previousExportedStyles?.colorStyles ?? [],
+//			newColorStyles: colorStyles,
+//			oldTextStyles: previousExportedStyles?.textStyles ?? [],
+//			newTextStyles: textStyles,
+//			version: version
+//		)
 	}
 	
 	// MARK: - Actions
@@ -273,6 +275,49 @@ public final class StyleSync {
 		try gitManager.commitAllStyleUpdates()
 		try gitManager.checkoutOriginalBranch()
 		return (gitManager.styleSyncBranchName, gitManager.originalBranchName)
+	}
+	
+	private func generateScreenshots() throws {
+		// TODO: Look for other xcode projects, find the best fit.
+		guard let xcodeProjectFolder = projectFolder.subfolders.first(where: { $0.extension == .xcodeProject }) else {
+			// TODO: Throw
+			return
+		}
+		// Check the project
+		// TODO: Perform a better check on the project file
+		let _ = try xcodeProjectFolder
+			.makeFileSequence(recursive: true, includeHidden: false)
+			.filter({ $0.extension == .xcodeScheme })
+			.first(where: { xcodeSchemeFile in
+				let xcodeSchemeXML = try xcodeSchemeFile.readAsString()
+				return xcodeSchemeXML.contains("systemAttachmentLifetime = \"keepNever\"")
+		})
+
+		// Run the test
+		// TODO: Get all these values as parameters
+		let xcodeProject = XcodeProject(projectDirectory: projectFolder)
+		let test = XcodeProject.Test(
+			testSuite: "StyleGuideUITests",
+			testCase: "StyleSyncTests",
+			testName: "testSpider"
+		)
+		try xcodeProject.run(test: test, scheme: "StyleGuide")
+		
+		// Get the screenshots
+		let derivedDataFolder = try Folder(path: "~/Library/Developer/Xcode/DerivedData")
+		let lastUpdatedDerivedDataGroup = derivedDataFolder.subfolders
+			.filter({ !$0.name.contains("ModuleCache") })
+			.sorted { (lhs, rhs) -> Bool in
+				return lhs.modificationDate < rhs.modificationDate
+			}
+			.first
+		
+		let attachmentsFolder = try lastUpdatedDerivedDataGroup?.subfolder(atPath: "Logs/Test/Attachments")
+		attachmentsFolder?.files.forEach({ print($0.name) })
+		// TODO: Show an error if these attachments aren't here
+		
+		// Create or checkout a StyleSyncScreenshots repository
+		
 	}
 	
 	private func submitPullRequest(
