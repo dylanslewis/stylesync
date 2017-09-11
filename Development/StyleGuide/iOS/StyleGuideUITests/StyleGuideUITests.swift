@@ -9,7 +9,9 @@
 import XCTest
 
 class StyleGuideUITests: XCTestCase {
-	private let screen: XCUIScreen = .main
+	private var screen: XCUIScreen {
+		return .main
+	}
 	private var app: XCUIApplication {
 		return .init()
 	}
@@ -23,9 +25,14 @@ class StyleGuideUITests: XCTestCase {
 	}
 	
     func testSpider() {
-		tabBar.buttons.allElementsBoundByIndex.forEach({ tabButton in
-			tabButton.tap()
-			screen.screenshot()
-		})
+		XCTContext.runActivity(named: "Take screenshots") { activity in
+			tabBar.buttons.allElementsBoundByIndex.forEach({ tabButton in
+				tabButton.tap()
+				let screenshot = self.screen.screenshot()
+				let attachment = XCTAttachment(screenshot: screenshot)
+				attachment.lifetime = .keepAlways
+				activity.add(attachment)
+			})
+		}
     }
 }
