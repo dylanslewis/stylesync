@@ -99,34 +99,34 @@ public final class StyleSync {
 		try createStyleCodeGenerators()
 		try updateFilesInProjectDirectoryAndFindUsedDeprecatedStyles()
 		
-//		let (colorStyles, textStyles) = getAllStyles()
-//		let version = Version(
-//			oldColorStyles: previousExportedStyles?.colorStyles,
-//			oldTextStyles: previousExportedStyles?.textStyles,
-//			newColorStyles: colorStyles,
-//			newTextStyles: textStyles,
-//			currentVersion: previousExportedStyles?.version
-//		)
+		let (colorStyles, textStyles) = getAllStyles()
+		let version = Version(
+			oldColorStyles: previousExportedStyles?.colorStyles,
+			oldTextStyles: previousExportedStyles?.textStyles,
+			newColorStyles: colorStyles,
+			newTextStyles: textStyles,
+			currentVersion: previousExportedStyles?.version
+		)
 		
-//		guard previousExportedStyles?.version == nil || version != previousExportedStyles?.version else {
-//			return
-//		}
-//
-//		try generateAndSaveStyleCode(version: version, colorStyles: colorStyles, textStyles: textStyles)
-//		try generateAndSaveVersionedStyles(version: version, colorStyles: colorStyles, textStyles: textStyles)
-//
-//		let (headBranchName, baseBranchName) = try createBranchAndCommitChanges(version: version)
-		try generateScreenshots()
+		guard previousExportedStyles?.version == nil || version != previousExportedStyles?.version else {
+			return
+		}
+
+		try generateAndSaveStyleCode(version: version, colorStyles: colorStyles, textStyles: textStyles)
+		try generateAndSaveVersionedStyles(version: version, colorStyles: colorStyles, textStyles: textStyles)
+
+		let (headBranchName, baseBranchName) = try createBranchAndCommitChanges(version: version)
+//		try generateScreenshots()
 		
-//		try submitPullRequest(
-//			headBranchName: headBranchName,
-//			baseBranchName: baseBranchName,
-//			oldColorStyles: previousExportedStyles?.colorStyles ?? [],
-//			newColorStyles: colorStyles,
-//			oldTextStyles: previousExportedStyles?.textStyles ?? [],
-//			newTextStyles: textStyles,
-//			version: version
-//		)
+		try submitPullRequest(
+			headBranchName: headBranchName,
+			baseBranchName: baseBranchName,
+			oldColorStyles: previousExportedStyles?.colorStyles ?? [],
+			newColorStyles: colorStyles,
+			oldTextStyles: previousExportedStyles?.textStyles ?? [],
+			newTextStyles: textStyles,
+			version: version
+		)
 	}
 	
 	// MARK: - Actions
@@ -278,6 +278,9 @@ public final class StyleSync {
 	}
 	
 	private func generateScreenshots() throws {
+		// TODO: Genericise the 'screenshots' part of this, so that it can easily
+		// extend to other platforms
+		
 		// TODO: Look for other xcode projects, find the best fit.
 		guard let xcodeProjectFolder = projectFolder.subfolders.first(where: { $0.extension == .xcodeProject }) else {
 			// TODO: Throw
