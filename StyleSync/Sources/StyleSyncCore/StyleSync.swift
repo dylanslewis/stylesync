@@ -125,6 +125,7 @@ public final class StyleSync {
 		)
 		
 		guard previousExportedStyles?.version == nil || version != previousExportedStyles?.version else {
+			print("🎉 Your styles are already up to date!")
 			return
 		}
 
