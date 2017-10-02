@@ -1,4 +1,4 @@
 <#@fileExtension#>
 <attributeDeclaration>
-<#=attributeName#>:	`<#=attributeValue#>`
+<#=attributeName#>:		<#=attributeValue#>
 </attributeDeclaration>

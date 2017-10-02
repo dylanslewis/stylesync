@@ -45,6 +45,12 @@ public final class StyleSync {
 	private var pullRequestAddedStyleTableTemplate: File!
 	private var pullRequestUpdatedStyleTableTemplate: File!
 	private var pullRequestDeprecatedStylesTemplate: File!
+
+	private var consoleHeadingTemplate: File!
+	private var consoleStyleNameTemplate: File!
+	private var consoleAddedStyleTableTemplate: File!
+	private var consoleUpdatedStyleTableTemplate: File!
+	private var consoleDeprecatedStylesTemplate: File!
 	
 	private var generatedColorStylesFile: File!
 	private var generatedTextStylesFile: File!
@@ -67,6 +73,7 @@ public final class StyleSync {
 		}
 		try parse(arguments: arguments)
 		try createGitHubTemplateReferences()
+		try createConsoleTemplateReferences()
 	}
 	
 	private func parse(arguments: [String]) throws {
@@ -87,6 +94,15 @@ public final class StyleSync {
 		self.pullRequestAddedStyleTableTemplate = try gitHubTemplatesBaseURL.file(named: "NewStyleTable")
 		self.pullRequestUpdatedStyleTableTemplate = try gitHubTemplatesBaseURL.file(named: "UpdatedStyleTable")
 		self.pullRequestDeprecatedStylesTemplate = try gitHubTemplatesBaseURL.file(named: "DeprecatedStylesTable")
+	}
+	
+	private func createConsoleTemplateReferences() throws {
+		let consoleTemplatesBaseURL = try Folder.current.subfolder(atPath: "StyleSync/Sources/StyleSyncCore/Templates/Console")
+		self.consoleHeadingTemplate = try consoleTemplatesBaseURL.file(named: "Heading")
+		self.consoleStyleNameTemplate = try consoleTemplatesBaseURL.file(named: "StyleName")
+		self.consoleAddedStyleTableTemplate = try consoleTemplatesBaseURL.file(named: "NewStyleTable")
+		self.consoleUpdatedStyleTableTemplate = try consoleTemplatesBaseURL.file(named: "UpdatedStyleTable")
+		self.consoleDeprecatedStylesTemplate = try consoleTemplatesBaseURL.file(named: "DeprecatedStylesTable")
 	}
 
 	// MARK: - Run
@@ -127,6 +143,12 @@ public final class StyleSync {
 //			newTextStyles: textStyles,
 //			version: version
 //		)
+		try printUpdatedStyles(
+			oldColorStyles: previousExportedStyles?.colorStyles ?? [],
+			newColorStyles: colorStyles,
+			oldTextStyles: previousExportedStyles?.textStyles ?? [],
+			newTextStyles: textStyles
+		)
 	}
 	
 	// MARK: - Actions
@@ -344,27 +366,13 @@ public final class StyleSync {
 		let updatedStyleTableTemplate: Template = try pullRequestUpdatedStyleTableTemplate.readAsString()
 		let deprecatedStylesTableTemplate: Template = try pullRequestDeprecatedStylesTemplate.readAsString()
 		
-		let pullRequestBodyGenerator = try PullRequestBodyGenerator(
+		let pullRequestBodyGenerator = try StyleUpdateSummaryGenerator(
 			headingTemplate: headingTemplate,
 			styleNameTemplate: styleNameTemplate,
 			addedStyleTableTemplate: addedStyleTableTemplate,
 			updatedStyleTableTemplate: updatedStyleTableTemplate,
 			deprecatedStylesTableTemplate: deprecatedStylesTableTemplate
 		)
-		
-		var fileNamesForDeprecatedStyleNames: [String: [String]] = [:]
-		Array(filesForDeprecatedColorStyle.keys)
-			.forEach { style in
-				let filesForStyle = filesForDeprecatedColorStyle[style]
-				let fileNames: [String] = filesForStyle?.map({ $0.name }) ?? []
-				fileNamesForDeprecatedStyleNames[style.codeName] = fileNames
-		}
-		Array(filesForDeprecatedTextStyle.keys)
-			.forEach { style in
-				let filesForStyle = filesForDeprecatedTextStyle[style]
-				let fileNames: [String] = filesForStyle?.map({ $0.name }) ?? []
-				fileNamesForDeprecatedStyleNames[style.codeName] = fileNames
-		}
 		
 		let body = pullRequestBodyGenerator.body(
 			fromOldColorStyles: oldColorStyles,
@@ -382,6 +390,37 @@ public final class StyleSync {
 		)
 
 		try pullRequestManager.submit(pullRequest: pullRequest)
+	}
+	
+	private func printUpdatedStyles(
+		oldColorStyles: [ColorStyle],
+		newColorStyles: [ColorStyle],
+		oldTextStyles: [TextStyle],
+		newTextStyles: [TextStyle]
+	) throws {
+		let headingTemplate: Template = try consoleHeadingTemplate.readAsString()
+		let styleNameTemplate: Template = try consoleStyleNameTemplate.readAsString()
+		let addedStyleTableTemplate: Template = try consoleAddedStyleTableTemplate.readAsString()
+		let updatedStyleTableTemplate: Template = try consoleUpdatedStyleTableTemplate.readAsString()
+		let deprecatedStylesTableTemplate: Template = try consoleDeprecatedStylesTemplate.readAsString()
+
+		let consoleLogGenerator = try StyleUpdateSummaryGenerator(
+			headingTemplate: headingTemplate,
+			styleNameTemplate: styleNameTemplate,
+			addedStyleTableTemplate: addedStyleTableTemplate,
+			updatedStyleTableTemplate: updatedStyleTableTemplate,
+			deprecatedStylesTableTemplate: deprecatedStylesTableTemplate,
+			shouldPrintStyleSyncLink: false
+		)
+		
+		let consoleLog = consoleLogGenerator.body(
+			fromOldColorStyles: oldColorStyles,
+			newColorStyles: newColorStyles,
+			oldTextStyles: oldTextStyles,
+			newTextStyles: newTextStyles,
+			fileNamesForDeprecatedStyleNames: fileNamesForDeprecatedStyleNames
+		)
+		print(consoleLog)
 	}
 	
 	// MARK: - Helpers
@@ -449,6 +488,23 @@ public final class StyleSync {
 					return true
 				}
 			})
+	}
+	
+	private var fileNamesForDeprecatedStyleNames: [String: [String]] {
+		var fileNamesForDeprecatedStyleNames: [String: [String]] = [:]
+		Array(filesForDeprecatedColorStyle.keys)
+			.forEach { style in
+				let filesForStyle = filesForDeprecatedColorStyle[style]
+				let fileNames: [String] = filesForStyle?.map({ $0.name }) ?? []
+				fileNamesForDeprecatedStyleNames[style.codeName] = fileNames
+		}
+		Array(filesForDeprecatedTextStyle.keys)
+			.forEach { style in
+				let filesForStyle = filesForDeprecatedTextStyle[style]
+				let fileNames: [String] = filesForStyle?.map({ $0.name }) ?? []
+				fileNamesForDeprecatedStyleNames[style.codeName] = fileNames
+		}
+		return fileNamesForDeprecatedStyleNames
 	}
 }
 

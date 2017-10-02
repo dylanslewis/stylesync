@@ -1,5 +1,5 @@
 //
-//  PullRequestBody.swift
+//  StyleUpdateSummaryGenerator.swift
 //  StyleSyncCore
 //
 //  Created by Dylan Lewis on 03/09/2017.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PullRequestBodyGenerator {
+struct StyleUpdateSummaryGenerator {
 	// MARK: - Constant
 	
 	private enum HeadingName {
@@ -24,6 +24,7 @@ struct PullRequestBodyGenerator {
 	private let addedStyleTableGenerator: CodeGenerator
 	private let updatedStyleTableGenerator: CodeGenerator
 	private let deprecatedStylesTableGenerator: CodeGenerator
+	private let shouldPrintStyleSyncLink: Bool
 	
 	// MARK: - Initializer
 	
@@ -32,13 +33,15 @@ struct PullRequestBodyGenerator {
 		styleNameTemplate: Template,
 		addedStyleTableTemplate: Template,
 		updatedStyleTableTemplate: Template,
-		deprecatedStylesTableTemplate: Template
+		deprecatedStylesTableTemplate: Template,
+		shouldPrintStyleSyncLink: Bool = true
 	) throws {
 		self.headingGenerator = try CodeGenerator(template: headingTemplate)
 		self.styleNameGenerator = try CodeGenerator(template: styleNameTemplate)
 		self.addedStyleTableGenerator = try CodeGenerator(template: addedStyleTableTemplate)
 		self.updatedStyleTableGenerator = try CodeGenerator(template: updatedStyleTableTemplate)
 		self.deprecatedStylesTableGenerator = try CodeGenerator(template: deprecatedStylesTableTemplate)
+		self.shouldPrintStyleSyncLink = shouldPrintStyleSyncLink
 	}
 	
 	// MARK: - Body
@@ -73,7 +76,9 @@ struct PullRequestBodyGenerator {
 		sections.append(updatedStylesSection(for: allUpdatedStyles))
 		sections.append(removedStylesSection(for: allRemovedStyles))
 		sections.append(deprecatedStylesSection(for: allDeprecatedStyles))
-		sections.append(gitHubLinkSection)
+		if shouldPrintStyleSyncLink {
+			sections.append(gitHubLinkSection)
+		}
 
 		return sections
 			.flatMap({ $0 })
@@ -189,13 +194,13 @@ struct PullRequestBodyGenerator {
 	}
 }
 
-extension PullRequestBodyGenerator {
+extension StyleUpdateSummaryGenerator {
 	struct Heading {
 		let name: String
 	}
 }
 
-extension PullRequestBodyGenerator.Heading: CodeTemplateReplacable {
+extension StyleUpdateSummaryGenerator.Heading: CodeTemplateReplacable {
 	static let declarationName: String = "headingDeclaration"
 	
 	var replacementDictionary: [String : String] {
