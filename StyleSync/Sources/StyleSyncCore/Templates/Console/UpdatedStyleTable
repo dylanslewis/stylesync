@@ -1,0 +1,4 @@
+<#@fileExtension#>
+<attributeDeclaration>
+<#=attributeName#> changed from `<#=oldValue#>` to `<#=newValue#>`
+</attributeDeclaration>

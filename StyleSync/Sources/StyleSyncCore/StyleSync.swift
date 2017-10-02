@@ -81,7 +81,7 @@ public final class StyleSync {
 	}
 	
 	private func createGitHubTemplateReferences() throws {
-		let gitHubTemplatesBaseURL = try Folder.current.subfolder(atPath: "Sources/StyleSyncCore/Templates/GitHub")
+		let gitHubTemplatesBaseURL = try Folder.current.subfolder(atPath: "StyleSync/Sources/StyleSyncCore/Templates/GitHub")
 		self.pullRequestHeadingTemplate = try gitHubTemplatesBaseURL.file(named: "Heading")
 		self.pullRequestStyleNameTemplate = try gitHubTemplatesBaseURL.file(named: "StyleName")
 		self.pullRequestAddedStyleTableTemplate = try gitHubTemplatesBaseURL.file(named: "NewStyleTable")
