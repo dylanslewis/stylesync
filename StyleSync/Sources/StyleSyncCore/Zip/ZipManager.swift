@@ -26,8 +26,7 @@ struct ZipManager {
 	
 	init(zippedFile: File) throws {
 		guard let parentFolder = zippedFile.parent else {
-			// TODO: Throw
-			fatalError()
+			throw Error.failedToFindParentFolder
 		}
 		self.zippedFile = zippedFile
 		self.parentFolder = parentFolder
@@ -46,6 +45,12 @@ struct ZipManager {
 	func cleanup() throws {
 		let exportFolder = try parentFolder.subfolder(named: Constant.exportFolderName)
 		try shellOut(to: .removeDirectory(directory: exportFolder.path))
+	}
+}
+
+extension ZipManager {
+	enum Error: Swift.Error {
+		case failedToFindParentFolder
 	}
 }
 
