@@ -127,8 +127,7 @@ private extension Array where Iterator.Element == String {
 	func replacingCodePlaceholders(usingReplacementDictionary replacementDictionary: [String: String], isDeprecated: Bool) -> [String] {
 		let deprecatedKey = "deprecated"
 		let deprecatedReference = "\(deprecatedKey)=\(isDeprecated)".conditionalCodePlaceholderReference
-		let deprecatedEndReference = deprecatedKey.codePlaceholderEndReference
-		
+
 		return map({ line -> String in
 			var codeLineWithReplacedPlaceholders = line
 			replacementDictionary.forEach({ (arg) in
