@@ -12,6 +12,8 @@ struct GitManager {
 	// MARK: - Stored properties
 	
 	private let projectFolderPath: String
+	private let exportFolderPath: String
+	private let exportedFileNames: [String]
 	private let version: Version
 	var originalBranchName: String!
 	
@@ -23,8 +25,15 @@ struct GitManager {
 	
 	// MARK: - Initializer
 	
-	init(projectFolderPath: String, version: Version) throws {
+	init(
+		projectFolderPath: String,
+		exportFolderPath: String,
+		exportedFileNames: [String],
+		version: Version
+	) throws {
 		self.projectFolderPath = projectFolderPath
+		self.exportFolderPath = exportFolderPath
+		self.exportedFileNames = exportedFileNames
 		self.version = version
 		originalBranchName = try shellOut(to: .gitGetCurrentBranch())
 	}
@@ -32,23 +41,38 @@ struct GitManager {
 	// MARK: - Actions
 	
 	func createStyleSyncBranch() throws {
-		// FIXME: Don't cd, use path parameter
-		try shellOut(to: .changeDirectory(directory: projectFolderPath))
-		try shellOut(to: .gitCreateBranch(branch: styleSyncBranchName))
-		try shellOut(to: .gitCheckout(branch: styleSyncBranchName))
+		try shellOut(to: .gitCreateBranch(branch: styleSyncBranchName), at: projectFolderPath)
+		try shellOut(to: .gitCheckout(branch: styleSyncBranchName), at: projectFolderPath)
 	}
 	
 	func commitAllStyleUpdates() throws {
-		try shellOut(to: .gitCommit(message: "Update style guide to version \(version.stringRepresentation)"))
-		try shellOut(to: .gitInitialPush(branch: styleSyncBranchName))
+		try exportedFileNames.forEach { try shellOut(to: .gitAdd(atPath: $0), at: exportFolderPath) }
+		try shellOut(
+			to: .gitCommitWithoutAdding(message: "Update style guide to version \(version.stringRepresentation)"),
+			at: exportFolderPath
+		)
+		try shellOut(to: .gitInitialPush(branch: styleSyncBranchName), at: projectFolderPath)
 	}
 	
 	func checkoutOriginalBranch() throws {
-		try shellOut(to: .gitCheckout(branch: originalBranchName))
+		try shellOut(to: .gitCheckout(branch: originalBranchName), at: projectFolderPath)
 	}
 }
 
 private extension ShellOutCommand {
+	static func gitAdd(atPath path: String) -> ShellOutCommand {
+		var command = "git add"
+		command.append(argument: path)
+		return ShellOutCommand(string: command)
+	}
+	
+	static func gitCommitWithoutAdding(message: String) -> ShellOutCommand {
+		var command = "git commit -a -m"
+		command.append(argument: message)
+		command.append(" --quiet")
+		return ShellOutCommand(string: command)
+	}
+	
 	static func gitGetCurrentBranch() -> ShellOutCommand {
 		var command = "git"
 		command.append(argument: "describe")

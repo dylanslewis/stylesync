@@ -110,7 +110,7 @@ public final class StyleSync {
 	public func run() throws {
 		let sketchDocument: SketchDocument = try self.sketchDocument.readAsDecodedJSON()
 		
-		let previousExportedStyles = getPreviousExportedStyles()
+		let previousExportedStyles = try getPreviousExportedStyles()
 		createStyleParsers(using: sketchDocument, previousExportedStyles: previousExportedStyles)
 		try createStyleCodeGenerators()
 		try updateFilesInProjectDirectoryAndFindUsedDeprecatedStyles()
@@ -154,13 +154,14 @@ public final class StyleSync {
 	
 	// MARK: - Actions
 	
-	private func getPreviousExportedStyles() -> VersionedStyles? {
+	private func getPreviousExportedStyles() throws -> VersionedStyles? {
+		generatedRawStylesFile = try exportFolder.createFileIfNeeded(
+			named: Constant.exportedStylesFileName,
+			fileExtension: Constant.exportedStylesFileType
+		)
+		
 		do {
-			let rawStylesFile = try exportFolder.file(
-				named: Constant.exportedStylesFileName,
-				fileExtension: Constant.exportedStylesFileType
-			)
-			return try rawStylesFile.readAsDecodedJSON()
+			return try generatedRawStylesFile.readAsDecodedJSON()
 		} catch {
 			return nil
 		}
@@ -282,18 +283,19 @@ public final class StyleSync {
 			textStyles: textStyles
 		)
 		
-		let rawStylesFile = try exportFolder.createFileIfNeeded(
-			named: Constant.exportedStylesFileName,
-			fileExtension: Constant.exportedStylesFileType
- 		)
-		
 		let encoder = JSONEncoder()
 		let rawStylesData = try encoder.encode(versionedStyles)
-		try rawStylesFile.write(data: rawStylesData)
+		try generatedRawStylesFile.write(data: rawStylesData)
 	}
 	
 	private func createBranchAndCommitChanges(version: Version) throws -> (headBranchName: String, baseBranchName: String) {
-		let gitManager = try GitManager(projectFolderPath: projectFolder.path, version: version)
+		print(generatedRawStylesFile)
+		let gitManager = try GitManager(
+			projectFolderPath: projectFolder.path,
+			exportFolderPath: exportFolder.path,
+			exportedFileNames: [generatedColorStylesFile.name, generatedTextStylesFile.name, generatedRawStylesFile.name],
+			version: version
+		)
 		try gitManager.createStyleSyncBranch()
 		try gitManager.commitAllStyleUpdates()
 		try gitManager.checkoutOriginalBranch()
