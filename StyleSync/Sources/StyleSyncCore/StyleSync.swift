@@ -32,13 +32,15 @@ public final class StyleSync {
 	private var projectFolder: Folder!
 	private var exportFolder: Folder!
 
-	private var sketchDocument: File!
+	private var sketchFile: File!
 	private var colorStyleTemplate: File!
 	private var textStyleTemplate: File!
 	
 	private var gitHubUsername: String!
 	private var gitHubRepositoryName: String!
 	private var gitHubPersonalAccessToken: String!
+	
+	private var zipManager: ZipManager!
 	
 	private var pullRequestHeadingTemplate: File!
 	private var pullRequestStyleNameTemplate: File!
@@ -72,12 +74,13 @@ public final class StyleSync {
 			throw Error.invalidArguments
 		}
 		try parse(arguments: arguments)
+		try createZipManager(forSketchFile: sketchFile)
 		try createGitHubTemplateReferences()
 		try createConsoleTemplateReferences()
 	}
 	
 	private func parse(arguments: [String]) throws {
-		self.sketchDocument = try File(path: arguments[1])
+		self.sketchFile = try File(path: arguments[1])
 		self.projectFolder = try Folder(path: arguments[2])
 		self.exportFolder = try Folder(path: arguments[3])
 		self.colorStyleTemplate = try File(path: arguments[4])
@@ -85,6 +88,10 @@ public final class StyleSync {
 		self.gitHubUsername = arguments[6]
 		self.gitHubRepositoryName = arguments[7]
 		self.gitHubPersonalAccessToken = arguments[8]
+	}
+	
+	private func createZipManager(forSketchFile file: File) throws {
+		self.zipManager = try ZipManager(zippedFile: file)
 	}
 	
 	private func createGitHubTemplateReferences() throws {
@@ -108,7 +115,16 @@ public final class StyleSync {
 	// MARK: - Run
 
 	public func run() throws {
-		let sketchDocument: SketchDocument = try self.sketchDocument.readAsDecodedJSON()
+		defer {
+			do {
+				try zipManager.cleanup()
+			} catch {
+				print(error)
+			}
+		}
+		
+		let sketchDocumentFile = try zipManager.getSketchDocument()
+		let sketchDocument: SketchDocument = try sketchDocumentFile.readAsDecodedJSON()
 		
 		let previousExportedStyles = try getPreviousExportedStyles()
 		createStyleParsers(using: sketchDocument, previousExportedStyles: previousExportedStyles)
