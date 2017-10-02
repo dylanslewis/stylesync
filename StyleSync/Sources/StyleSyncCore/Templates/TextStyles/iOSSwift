@@ -40,12 +40,6 @@ extension TextStyle {
 		lineHeight: <#=lineHeight#>
 	)
 	</textStyleDeclaration>
-
-	public static let allGeneratedStylesAndCodeNameAndName: [(TextStyle, String, String)] = [
-		<textStyleDeclaration>
-			(.<#=textStyleName#>, "<#=textStyleName#>", "<#=name#>"),
-		</textStyleDeclaration>
-	]
 }
 
 extension NSAttributedString {

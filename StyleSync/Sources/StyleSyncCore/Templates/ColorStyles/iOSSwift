@@ -13,10 +13,4 @@ extension UIColor {
 	<#?deprecated=true#>@available(*, deprecated)
 	public static let <#=colorName#> = UIColor(red: <#=red#>, green: <#=green#>, blue: <#=blue#>, alpha: <#=alpha#>)
 	</colorDeclaration>
-
-	public static let allGeneratedStylesAndCodeNameAndName: [(UIColor, String, String)] = [
-	<colorDeclaration>
-		(.<#=colorName#>, "<#=colorName#>", "<#=name#>"),
-	</colorDeclaration>
-	]
 }
