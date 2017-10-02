@@ -97,10 +97,16 @@ extension TextStyle: CodeTemplateReplacable {
 	static let declarationName: String = "textStyleDeclaration"
 	
 	var replacementDictionary: [String: String] {
+		let exportFontName: String
+		if fontName.contains("SFUIDisplay") || fontName.contains("SFUIText") {
+			exportFontName = ".\(fontName)"
+		} else {
+			exportFontName = fontName
+		}
 		return [
 			"name": name,
 			"textStyleName": codeName,
-			"fontName": "\".\(fontName)\"", // TODO: Only do this for SF
+			"fontName": "\"\(exportFontName)\"",
 			"pointSize": String(describing: pointSize),
 			"kerning": String(describing: kerning),
 			"lineHeight": String(describing: lineHeight),
