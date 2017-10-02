@@ -1,0 +1,4 @@
+<#@fileExtension#>
+<styleDeclaration>
+<#=styleName#>
+</styleDeclaration>

@@ -51,9 +51,9 @@ struct TextStyle: Style, Codable {
 		self.name = textStyleObject.name
 		self.identifier = textStyleObject.identifier
 		self.fontName = fontName
-		self.pointSize = pointSize
-		self.kerning = textAttributes.kerning
-		self.lineHeight = lineHeight
+		self.pointSize = pointSize.roundedToTwoDecimalPlaces
+		self.kerning = textAttributes.kerning.roundedToTwoDecimalPlaces
+		self.lineHeight = lineHeight.roundedToTwoDecimalPlaces
 		self.colorStyle = colorStyle
 		self.isDeprecated = isDeprecated
 	}

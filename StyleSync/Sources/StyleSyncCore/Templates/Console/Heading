@@ -1,0 +1,5 @@
+<#@fileExtension#>
+<headingDeclaration>
+<#=headingName#>
+--------------------------------------------------------------------------------
+</headingDeclaration>
