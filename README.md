@@ -1,2 +1,2 @@
 # StyleSync
-A set of tools to export Sketch document styles into native code for mobile or web platforms.
+A command line tool to export Sketch document styles into native code for any platform.
