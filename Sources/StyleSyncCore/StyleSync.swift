@@ -95,7 +95,7 @@ public final class StyleSync {
 	}
 	
 	private func createGitHubTemplateReferences() throws {
-		let gitHubTemplatesBaseURL = try Folder.current.subfolder(atPath: "StyleSync/Sources/StyleSyncCore/Templates/GitHub")
+		let gitHubTemplatesBaseURL = try Folder.current.subfolder(atPath: "Sources/StyleSyncCore/Templates/GitHub")
 		self.pullRequestHeadingTemplate = try gitHubTemplatesBaseURL.file(named: "Heading")
 		self.pullRequestStyleNameTemplate = try gitHubTemplatesBaseURL.file(named: "StyleName")
 		self.pullRequestAddedStyleTableTemplate = try gitHubTemplatesBaseURL.file(named: "NewStyleTable")
@@ -104,7 +104,7 @@ public final class StyleSync {
 	}
 	
 	private func createConsoleTemplateReferences() throws {
-		let consoleTemplatesBaseURL = try Folder.current.subfolder(atPath: "StyleSync/Sources/StyleSyncCore/Templates/Console")
+		let consoleTemplatesBaseURL = try Folder.current.subfolder(atPath: "Sources/StyleSyncCore/Templates/Console")
 		self.consoleHeadingTemplate = try consoleTemplatesBaseURL.file(named: "Heading")
 		self.consoleStyleNameTemplate = try consoleTemplatesBaseURL.file(named: "StyleName")
 		self.consoleAddedStyleTableTemplate = try consoleTemplatesBaseURL.file(named: "NewStyleTable")
