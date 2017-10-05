@@ -103,13 +103,17 @@ extension TextStyle: CodeTemplateReplacable {
 		} else {
 			exportFontName = fontName
 		}
+		let letterSpacingEm = kerning / pointSize
+		let lineSpacingMultiplier = lineHeight / pointSize
 		return [
 			"name": name,
 			"textStyleName": codeName,
 			"fontName": exportFontName,
 			"pointSize": String(describing: pointSize),
 			"kerning": String(describing: kerning),
+			"letterSpacingEm": String(describing: letterSpacingEm.roundedToTwoDecimalPlaces),
 			"lineHeight": String(describing: lineHeight),
+			"lineSpacingMultiplier": String(describing: lineSpacingMultiplier),
 			"color": ".\(colorStyle.codeName)"
 		]
 	}
