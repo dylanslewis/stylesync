@@ -33,7 +33,7 @@ extension TextStyle {
 
 	<#?deprecated=true#>@available(*, deprecated)
 	static let <#=textStyleName#> = TextStyle(
-		fontName: <#=fontName#>,
+		fontName: "<#=fontName#>",
 		pointSize: <#=pointSize#>,
 		color: <#=color#>,
 		kerning: <#=kerning#>,

@@ -106,7 +106,7 @@ extension TextStyle: CodeTemplateReplacable {
 		return [
 			"name": name,
 			"textStyleName": codeName,
-			"fontName": "\"\(exportFontName)\"",
+			"fontName": exportFontName,
 			"pointSize": String(describing: pointSize),
 			"kerning": String(describing: kerning),
 			"lineHeight": String(describing: lineHeight),
