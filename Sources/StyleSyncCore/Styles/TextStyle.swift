@@ -109,13 +109,19 @@ extension TextStyle: CodeTemplateReplacable {
 			"name": name,
 			"textStyleName": codeName,
 			"fontName": exportFontName,
-			"pointSize": String(describing: pointSize),
+			"pointSize": pointSize.cleaned,
 			"kerning": String(describing: kerning),
 			"letterSpacingEm": String(describing: letterSpacingEm.roundedToTwoDecimalPlaces),
-			"lineHeight": String(describing: lineHeight),
+			"lineHeight": lineHeight.cleaned,
 			"lineSpacingMultiplier": String(describing: lineSpacingMultiplier),
 			"color": ".\(colorStyle.codeName)"
 		]
+	}
+}
+
+private extension Float {
+	var cleaned: String {
+		return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(describing: self)
 	}
 }
 
