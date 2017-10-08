@@ -102,8 +102,8 @@ class VersionTests: XCTestCase {
 	}
 	
 	func testRemovingAColorStyleIncrementsMajorVersion() {
-		let oldColorStyles = [redColorStyle, greenColorStyle]
-		let newColorStyles = [redColorStyle]
+		let oldColorStyles = [redColorStyle, greenColorStyle].convertedToCodeTemplateReplacableStyle
+		let newColorStyles = [redColorStyle].convertedToCodeTemplateReplacableStyle
 		let currentVersion: Version = .firstVersion
 		let version = Version(
 			oldColorStyles: oldColorStyles,
@@ -117,8 +117,8 @@ class VersionTests: XCTestCase {
 	}
 	
 	func testAddingAColorStyleIncrementsMinorVersion() {
-		let oldColorStyles = [redColorStyle]
-		let newColorStyles = [redColorStyle, greenColorStyle]
+		let oldColorStyles = [redColorStyle].convertedToCodeTemplateReplacableStyle
+		let newColorStyles = [redColorStyle, greenColorStyle].convertedToCodeTemplateReplacableStyle
 		let currentVersion: Version = .firstVersion
 		let version = Version(
 			oldColorStyles: oldColorStyles,
@@ -132,8 +132,8 @@ class VersionTests: XCTestCase {
 	}
 	
 	func testKeepingColorStylesUnchangedDoesNotChangeVersion() {
-		let oldColorStyles = [redColorStyle]
-		let newColorStyles = [redColorStyle]
+		let oldColorStyles = [redColorStyle].convertedToCodeTemplateReplacableStyle
+		let newColorStyles = [redColorStyle].convertedToCodeTemplateReplacableStyle
 		let currentVersion: Version = .firstVersion
 		let version = Version(
 			oldColorStyles: oldColorStyles,
@@ -147,8 +147,8 @@ class VersionTests: XCTestCase {
 	}
 	
 	func testUpdatingAnExistingColorStyleIncrementsMinorVersion() {
-		let oldColorStyles = [redColorStyle]
-		let newColorStyles = [newRedColorStyle]
+		let oldColorStyles = [redColorStyle].convertedToCodeTemplateReplacableStyle
+		let newColorStyles = [newRedColorStyle].convertedToCodeTemplateReplacableStyle
 		let currentVersion: Version = .firstVersion
 		let version = Version(
 			oldColorStyles: oldColorStyles,
@@ -162,8 +162,8 @@ class VersionTests: XCTestCase {
 	}
 	
 	func testRemovingATextStyleIncrementsMajorVersion() {
-		let oldTextStyles = [headingTextStyle, bodyTextStyle]
-		let newTextStyles = [headingTextStyle]
+		let oldTextStyles = [headingTextStyle, bodyTextStyle].convertedToCodeTemplateReplacableStyle
+		let newTextStyles = [headingTextStyle].convertedToCodeTemplateReplacableStyle
 		let currentVersion: Version = .firstVersion
 		let version = Version(
 			oldColorStyles: [],
@@ -177,8 +177,8 @@ class VersionTests: XCTestCase {
 	}
 	
 	func testAddingATextStyleIncrementsMinorVersion() {
-		let oldTextStyles = [headingTextStyle]
-		let newTextStyles = [headingTextStyle, bodyTextStyle]
+		let oldTextStyles = [headingTextStyle].convertedToCodeTemplateReplacableStyle
+		let newTextStyles = [headingTextStyle, bodyTextStyle].convertedToCodeTemplateReplacableStyle
 		let currentVersion: Version = .firstVersion
 		let version = Version(
 			oldColorStyles: [],
@@ -192,8 +192,8 @@ class VersionTests: XCTestCase {
 	}
 	
 	func testKeepingTextStylesUnchangedDoesNotChangeVersion() {
-		let oldTextStyles = [headingTextStyle]
-		let newTextStyles = [headingTextStyle]
+		let oldTextStyles = [headingTextStyle].convertedToCodeTemplateReplacableStyle
+		let newTextStyles = [headingTextStyle].convertedToCodeTemplateReplacableStyle
 		let currentVersion: Version = .firstVersion
 		let version = Version(
 			oldColorStyles: [],
@@ -207,8 +207,8 @@ class VersionTests: XCTestCase {
 	}
 	
 	func testUpdatingAnExistingTextStyleIncrementsMinorVersion() {
-		let oldTextStyles = [headingTextStyle]
-		let newTextStyles = [newHeadingTextStyle]
+		let oldTextStyles = [headingTextStyle].convertedToCodeTemplateReplacableStyle
+		let newTextStyles = [newHeadingTextStyle].convertedToCodeTemplateReplacableStyle
 		let currentVersion: Version = .firstVersion
 		let version = Version(
 			oldColorStyles: [],
@@ -222,10 +222,10 @@ class VersionTests: XCTestCase {
 	}
 	
 	func testUpdatingAColorStyleAndAddingATextStyleIncrementsMinorVersion() {
-		let oldColorStyles = [redColorStyle, greenColorStyle]
-		let oldTextStyles = [headingTextStyle]
-		let newColorStyles = [newRedColorStyle, greenColorStyle]
-		let newTextStyles = [headingTextStyle, bodyTextStyle]
+		let oldColorStyles = [redColorStyle, greenColorStyle].convertedToCodeTemplateReplacableStyle
+		let oldTextStyles = [headingTextStyle].convertedToCodeTemplateReplacableStyle
+		let newColorStyles = [newRedColorStyle, greenColorStyle].convertedToCodeTemplateReplacableStyle
+		let newTextStyles = [headingTextStyle, bodyTextStyle].convertedToCodeTemplateReplacableStyle
 		let currentVersion: Version = .firstVersion
 		let version = Version(
 			oldColorStyles: oldColorStyles,
@@ -239,10 +239,10 @@ class VersionTests: XCTestCase {
 	}
 	
 	func testRemovingAColorStyleAndAddingATextStyleIncrementsMajorVersion() {
-		let oldColorStyles = [redColorStyle, greenColorStyle]
-		let oldTextStyles = [headingTextStyle]
-		let newColorStyles = [redColorStyle]
-		let newTextStyles = [headingTextStyle, bodyTextStyle]
+		let oldColorStyles = [redColorStyle, greenColorStyle].convertedToCodeTemplateReplacableStyle
+		let oldTextStyles = [headingTextStyle].convertedToCodeTemplateReplacableStyle
+		let newColorStyles = [redColorStyle].convertedToCodeTemplateReplacableStyle
+		let newTextStyles = [headingTextStyle, bodyTextStyle].convertedToCodeTemplateReplacableStyle
 		let currentVersion: Version = .firstVersion
 		let version = Version(
 			oldColorStyles: oldColorStyles,
@@ -256,10 +256,10 @@ class VersionTests: XCTestCase {
 	}
 	
 	func testRemovingAColorStyleAndUpdatingATextStyleIncrementsMajorVersion() {
-		let oldColorStyles = [redColorStyle, greenColorStyle]
-		let oldTextStyles = [headingTextStyle, bodyTextStyle]
-		let newColorStyles = [redColorStyle]
-		let newTextStyles = [newHeadingTextStyle, bodyTextStyle]
+		let oldColorStyles = [redColorStyle, greenColorStyle].convertedToCodeTemplateReplacableStyle
+		let oldTextStyles = [headingTextStyle, bodyTextStyle].convertedToCodeTemplateReplacableStyle
+		let newColorStyles = [redColorStyle].convertedToCodeTemplateReplacableStyle
+		let newTextStyles = [newHeadingTextStyle, bodyTextStyle].convertedToCodeTemplateReplacableStyle
 		let currentVersion: Version = .firstVersion
 		let version = Version(
 			oldColorStyles: oldColorStyles,
@@ -270,5 +270,17 @@ class VersionTests: XCTestCase {
 		)
 		let expectedVersion = Version(major: 2, minor: 0)
 		XCTAssertEqual(version, expectedVersion)
+	}
+}
+
+private extension Array where Element == ColorStyle {
+	var convertedToCodeTemplateReplacableStyle: [CodeTemplateReplacableStyle] {
+		return self.map({ CodeTemplateReplacableStyle(colorStyle: $0, fileType: "") })
+	}
+}
+
+private extension Array where Element == TextStyle {
+	var convertedToCodeTemplateReplacableStyle: [CodeTemplateReplacableStyle] {
+		return self.map({ CodeTemplateReplacableStyle(textStyle: $0, fileType: "") })
 	}
 }
