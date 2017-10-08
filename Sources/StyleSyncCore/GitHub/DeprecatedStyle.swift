@@ -13,7 +13,9 @@ struct DeprecatedStyle {
 }
 
 extension DeprecatedStyle: CodeTemplateReplacable {
-	static let declarationName: String = "styleDeclaration"
+	var declarationName: String {
+		return "styleDeclaration"
+	}
 	
 	var replacementDictionary: [String : String] {
 		let allFileNames = fileNames

@@ -91,40 +91,6 @@ extension TextStyle: Hashable {
 	}
 }
 
-// MARK: - CodeTemplateReplacable
-
-extension TextStyle: CodeTemplateReplacable {
-	static let declarationName: String = "textStyleDeclaration"
-	
-	var replacementDictionary: [String: String] {
-		let exportFontName: String
-		if fontName.contains("SFUIDisplay") || fontName.contains("SFUIText") {
-			exportFontName = ".\(fontName)"
-		} else {
-			exportFontName = fontName
-		}
-		let letterSpacingEm = kerning / pointSize
-		let lineSpacingMultiplier = lineHeight / pointSize
-		return [
-			"name": name,
-			"textStyleName": codeName,
-			"fontName": exportFontName,
-			"pointSize": pointSize.cleaned,
-			"kerning": String(describing: kerning),
-			"letterSpacingEm": String(describing: letterSpacingEm.roundedToTwoDecimalPlaces),
-			"lineHeight": lineHeight.cleaned,
-			"lineSpacingMultiplier": String(describing: lineSpacingMultiplier),
-			"color": ".\(colorStyle.codeName)"
-		]
-	}
-}
-
-private extension Float {
-	var cleaned: String {
-		return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(describing: self)
-	}
-}
-
 // MARK: - Deprecatable
 
 extension TextStyle {

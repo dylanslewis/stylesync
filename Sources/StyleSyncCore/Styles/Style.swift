@@ -8,14 +8,9 @@
 
 import Foundation
 
-protocol Style: CodeTemplateReplacable {
+protocol Style {
 	var name: String { get }
 	var identifier: String { get }
+	var isDeprecated: Bool { get }
 	var deprecated: Style { get }
-}
-
-extension Style {
-	var codeName: String {
-		return name.camelcased
-	}
 }

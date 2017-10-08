@@ -82,7 +82,7 @@ struct CodeGenerator {
 private extension CodeGenerator {
 	/// A line of text to be shown in the header of the generated file.
 	struct HeaderLine: CodeTemplateReplacable {
-		static let declarationName: String = "generatedFileHeader"
+		let declarationName: String = "generatedFileHeader"
 		let headerLine: String
 		
 		var replacementDictionary: [String: String] {
@@ -167,8 +167,7 @@ private extension Array where Iterator.Element == String {
 			return self
 		}
 		
-		let replacementElementType = type(of: firstReplacementItem)
-		let declarationName = replacementElementType.declarationName
+		let declarationName = firstReplacementItem.declarationName
 		
 		var codeLinesWithReplacement = self
 		var containsDeclarationForType = true

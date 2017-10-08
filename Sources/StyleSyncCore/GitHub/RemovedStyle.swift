@@ -10,13 +10,15 @@ import Foundation
 struct RemovedStyle {
 	let styleName: String
 	
-	init(style: Style) {
+	init(style: CodeTemplateReplacableStyle) {
 		self.styleName = style.name
 	}
 }
 
 extension RemovedStyle: CodeTemplateReplacable {
-	static let declarationName: String = "styleDeclaration"
+	var declarationName: String {
+		return "styleDeclaration"
+	}
 	
 	var replacementDictionary: [String : String] {
 		return ["styleName": styleName]

@@ -46,13 +46,13 @@ struct StyleUpdateSummaryGenerator {
 	
 	// MARK: - Body
 	
-	private typealias OldAndNewStyles = (old: [Style], new: [Style])
+	private typealias OldAndNewStyles = (old: [CodeTemplateReplacableStyle], new: [CodeTemplateReplacableStyle])
 	
 	func body(
-		fromOldColorStyles oldColorStyles: [ColorStyle],
-		newColorStyles: [ColorStyle],
-		oldTextStyles: [TextStyle],
-		newTextStyles: [TextStyle],
+		fromOldColorStyles oldColorStyles: [CodeTemplateReplacableStyle],
+		newColorStyles: [CodeTemplateReplacableStyle],
+		oldTextStyles: [CodeTemplateReplacableStyle],
+		newTextStyles: [CodeTemplateReplacableStyle],
 		fileNamesForDeprecatedStyleNames: [String: [String]]
 	) -> String {
 		let oldAndNewColorStyles: OldAndNewStyles = (oldColorStyles, newColorStyles)
@@ -158,7 +158,7 @@ struct StyleUpdateSummaryGenerator {
 		return headingGenerator.generatedCode(for: heading)
 	}
 	
-	private func addedStyles(oldStyles: [Style], newStyles: [Style]) -> [AddedStyle] {
+	private func addedStyles(oldStyles: [CodeTemplateReplacableStyle], newStyles: [CodeTemplateReplacableStyle]) -> [AddedStyle] {
 		return newStyles.flatMap { newStyle in
 			guard oldStyles.first(where: { $0.identifier == newStyle.identifier }) == nil else {
 				return nil
@@ -168,7 +168,7 @@ struct StyleUpdateSummaryGenerator {
 	}
 	
 	// TODO: You can probably get this from the data found out already...
-	private func updatedStyles(oldStyles: [Style], newStyles: [Style]) -> [UpdatedStyle] {
+	private func updatedStyles(oldStyles: [CodeTemplateReplacableStyle], newStyles: [CodeTemplateReplacableStyle]) -> [UpdatedStyle] {
 		return newStyles.flatMap { newStyle in
 			guard let oldStyle = oldStyles
 				.first(where: { $0.identifier == newStyle.identifier }) else {
@@ -178,7 +178,7 @@ struct StyleUpdateSummaryGenerator {
 		}
 	}
 	
-	private func removedStyles(oldStyles: [Style], newStyles: [Style]) -> [RemovedStyle] {
+	private func removedStyles(oldStyles: [CodeTemplateReplacableStyle], newStyles: [CodeTemplateReplacableStyle]) -> [RemovedStyle] {
 		return oldStyles
 			.filter({ !$0.isDeprecated })
 			.flatMap { newStyle in
@@ -201,7 +201,9 @@ extension StyleUpdateSummaryGenerator {
 }
 
 extension StyleUpdateSummaryGenerator.Heading: CodeTemplateReplacable {
-	static let declarationName: String = "headingDeclaration"
+	var declarationName: String {
+		return "headingDeclaration"
+	}
 	
 	var replacementDictionary: [String : String] {
 		return ["headingName": name]

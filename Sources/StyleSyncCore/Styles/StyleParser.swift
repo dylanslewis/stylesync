@@ -23,7 +23,7 @@ struct StyleParser<S: Style> {
 		return currentStyles
 			.flatMap { style -> (S, S)? in
 				guard
-					let migratedStyle = newStyles.first(where: { $0.identifier == style.identifier && $0.codeName != style.codeName })
+					let migratedStyle = newStyles.first(where: { $0.identifier == style.identifier && $0.name != style.name })
 				else {
 					return nil
 				}

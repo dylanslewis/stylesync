@@ -11,20 +11,22 @@ struct AddedStyle {
 	let styleName: String
 	let attributes: [AddedStyleAttribute]
 	
-	init(style: Style) {
+	init(style: CodeTemplateReplacableStyle) {
 		let attributes = style.replacementDictionary.keys.flatMap({ key -> AddedStyleAttribute? in
 			guard let value = style.replacementDictionary[key] else {
 				return nil
 			}
 			return .init(attributeName: key, attributeValue: value)
 		})
-		self.styleName = style.codeName
+		self.styleName = style.name
 		self.attributes = attributes
 	}
 }
 
 extension AddedStyle: CodeTemplateReplacable {
-	static let declarationName: String = "styleDeclaration"
+	var declarationName: String {
+		return "styleDeclaration"
+	}
 	
 	var replacementDictionary: [String : String] {
 		return ["styleName": styleName]

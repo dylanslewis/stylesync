@@ -42,10 +42,10 @@ struct Version {
 
 extension Version {
 	init(
-		oldColorStyles: [ColorStyle]?,
-		oldTextStyles: [TextStyle]?,
-		newColorStyles: [ColorStyle],
-		newTextStyles: [TextStyle],
+		oldColorStyles: [CodeTemplateReplacableStyle]?,
+		oldTextStyles: [CodeTemplateReplacableStyle]?,
+		newColorStyles: [CodeTemplateReplacableStyle],
+		newTextStyles: [CodeTemplateReplacableStyle],
 		currentVersion: Version?
 	) {
 		guard

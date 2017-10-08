@@ -93,28 +93,6 @@ extension ColorStyle: Hashable {
 	}
 }
 
-// MARK: - CodeTemplateReplacable
-
-extension ColorStyle: CodeTemplateReplacable {
-	static let declarationName: String = "colorDeclaration"
-	
-	var replacementDictionary: [String: String] {
-		return [
-			"name": name,
-			"colorName": codeName,
-			"red": String(describing: color.redComponent),
-			"green": String(describing: color.greenComponent),
-			"blue": String(describing: color.blueComponent),
-			"alpha": String(describing: color.alphaComponent),
-			"hex": "#" + color.hex
-		]
-	}
-	
-	var ignoredUpdateAttributes: [String] {
-		return ["red", "green", "blue", "alpha"]
-	}
-}
-
 // MARK: - Deprecatable
 
 extension ColorStyle {

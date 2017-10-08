@@ -13,7 +13,9 @@ struct AddedStyleAttribute {
 }
 
 extension AddedStyleAttribute: CodeTemplateReplacable {
-	static let declarationName: String = "attributeDeclaration"
+	var declarationName: String {
+		return "attributeDeclaration"
+	}
 	
 	var replacementDictionary: [String : String] {
 		return [

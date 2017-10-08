@@ -14,7 +14,9 @@ struct UpdatedAttribute {
 }
 
 extension UpdatedAttribute: CodeTemplateReplacable {
-	static var declarationName: String = "attributeDeclaration"
+	var declarationName: String {
+		return "attributeDeclaration"
+	}
 	
 	var replacementDictionary: [String : String] {
 		return [
