@@ -1,4 +1,4 @@
-<#@fileExtension#>
+<#@fileExtension#>log
 <styleDeclaration>
 <#=styleName#>
 </styleDeclaration>
