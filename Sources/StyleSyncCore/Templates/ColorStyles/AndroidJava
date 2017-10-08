@@ -1,4 +1,4 @@
-<#@fileExtension#>java
+<#@fileExtension#>xml
 /*
 <generatedFileHeader>
  * <#=headerLine#>
@@ -6,8 +6,8 @@
  */
 
 <resources>
-	<colorDeclaration>
-	<#?deprecated=true#>@Deprecated
-	<color name="<#=colorName#>"><#=hex#></color>
-	</colorDeclaration>
+  <colorDeclaration>
+  <#?deprecated=true#>/* Deprecated */
+  <color name="<#=colorName#>"><#=hex#></color>
+  </colorDeclaration>
 </resources>
