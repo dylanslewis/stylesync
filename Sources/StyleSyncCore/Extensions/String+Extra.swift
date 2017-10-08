@@ -23,6 +23,21 @@ public extension String {
 		return firstCharacter + otherCharacters
 	}
 	
+	public var lowercasedWithUnderscoreSeparators: String {
+		return self
+			.lowercased()
+			.replacingOccurrences(of: " ", with: "_")
+			.replacingOccurrences(of: "-", with: "_")
+	}
+	
+	public var capitalizedWithoutSpaceSeparators: String {
+		return self
+			.capitalized
+			.replacingOccurrences(of: " ", with: "")
+			.replacingOccurrences(of: "-", with: "")
+			.replacingOccurrences(of: "_", with: "")
+	}
+	
 	func unarchivedObject<TargetObjectType>() -> TargetObjectType? {
 		guard let data = Data(base64Encoded: self) else {
 			return nil
