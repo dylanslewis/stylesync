@@ -115,6 +115,14 @@ public final class StyleSync {
 	// MARK: - Run
 
 	public func run() throws {
+		let config = Config()
+		let didFinishQuestionaire: (Creatable) -> Void = { completedConfig in
+			print(completedConfig)
+		}
+		let questionaire = Questionaire(creatable: config, didFinishQuestionaire: didFinishQuestionaire)
+		questionaire.startQuestionaire()
+		return
+		
 		defer {
 			do {
 				try zipManager.cleanup()
