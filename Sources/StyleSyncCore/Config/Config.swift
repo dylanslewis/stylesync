@@ -10,9 +10,8 @@ import Files
 
 struct Config: Codable {
 	var sketchDocument: File!
-	var colorStyle: Style!
-	var textStyle: Style!
-	var projectDirectory: Folder?
+	var colorStyle: Style = Style()
+	var textStyle: Style = Style()
 	var gitHubPersonalAccessToken: String?
 	
 	struct Style: Codable {
@@ -28,16 +27,98 @@ extension Config: Creatable {
 		return sketchDocumentLocation
 	}
 	
-	var sketchDocumentLocation: Question {
-		return Question(
-			question: "What is the location of your Sketch document?"
-		) { answer -> (Config, Question?) in
-			guard let file = try? File(path: answer) else {
-				return (self, self.sketchDocumentLocation)
+	private var sketchDocumentLocation: Question {
+		return Question(question: "🔶 What is the location of your Sketch document?") { (updatedSelf, answer) -> (Config, Question?)? in
+			guard let answer = answer, var updatedConfig = updatedSelf as? Config else {
+				return nil
 			}
-			var mutableSelf = self
-			mutableSelf.sketchDocument = file
-			return (mutableSelf, nil)
+			let file: File
+			do {
+				file = try File(path: answer)
+			} catch {
+				print(error)
+				return nil
+			}
+			updatedConfig.sketchDocument = file
+			return (updatedConfig, self.colorStyleTemplateLocation)
+		}
+	}
+	
+	private var colorStyleTemplateLocation: Question {
+		return Question(question: "🎨 What is the location of your color template file?") { (updatedSelf, answer) -> (Config, Question?)? in
+			guard let answer = answer, var updatedConfig = updatedSelf as? Config else {
+				return nil
+			}
+			let file: File
+			do {
+				file = try File(path: answer)
+			} catch {
+				print(error)
+				return nil
+			}
+			updatedConfig.colorStyle.template = file
+			return (updatedConfig, self.colorStyleExportDirectoryLocation)
+		}
+	}
+	
+	private var colorStyleExportDirectoryLocation: Question {
+		return Question(question: "💅 Where would you like to export the generated color file to?") { (updatedSelf, answer) -> (Config, Question?)? in
+			guard let answer = answer, var updatedConfig = updatedSelf as? Config else {
+				return nil
+			}
+			let folder: Folder
+			do {
+				folder = try Folder(path: answer)
+			} catch {
+				print(error)
+				return nil
+			}
+			updatedConfig.colorStyle.exportDirectory = folder
+			return (updatedConfig, self.textStyleTemplateLocation)
+		}
+	}
+	
+	private var textStyleTemplateLocation: Question {
+		return Question(question: "✍️ What is the location of your text styles template file?") { (updatedSelf, answer) -> (Config, Question?)? in
+			guard let answer = answer, var updatedConfig = updatedSelf as? Config else {
+				return nil
+			}
+			let file: File
+			do {
+				file = try File(path: answer)
+			} catch {
+				print(error)
+				return nil
+			}
+			updatedConfig.textStyle.template = file
+			return (updatedConfig, self.textStyleExportDirectoryLocation)
+		}
+	}
+	
+	private var textStyleExportDirectoryLocation: Question {
+		return Question(question: "💅 Where would you like to export the generated text styles file to?") { (updatedSelf, answer) -> (Config, Question?)? in
+			guard let answer = answer, var updatedConfig = updatedSelf as? Config else {
+				return nil
+			}
+			let folder: Folder
+			do {
+				folder = try Folder(path: answer)
+			} catch {
+				print(error)
+				return nil
+			}
+			updatedConfig.textStyle.exportDirectory = folder
+			return (updatedConfig, self.gitHubPersonalAccessTokenQuestion)
+		}
+	}
+	
+	private var gitHubPersonalAccessTokenQuestion: Question {
+		return Question(question: "If you would like Style Sync to make a branch, commit, push and raise a pull request for styling changes, please enter your GitHub personal access token. (optional)") { (updatedSelf, answer) -> (Config, Question?)? in
+			guard let answer = answer, var updatedConfig = updatedSelf as? Config, !answer.isEmpty else {
+				return (self, nil)
+			}
+			updatedConfig.gitHubPersonalAccessToken = answer
+			return (updatedConfig, nil)
 		}
 	}
 }

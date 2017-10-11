@@ -28,15 +28,19 @@ struct Questionaire {
 			guard let question = nextQuestion else {
 				return
 			}
-			print(question.question)
-			let answer = "./Package.swift" // TODO: get user input
-			(creatable, nextQuestion) = question.didAnswerQuestion(answer)
+			print("\n" + question.question)
+			let answer = readLine()
+			if let (newCreatable, newNextQuestion) = question.didAnswerQuestion(creatable, answer) {
+				creatable = newCreatable
+				nextQuestion = newNextQuestion
+			}
+			print(creatable)
 		} while nextQuestion != nil
 	}
 }
 
 struct Question {
-	typealias DidAnswerQuestion = (String) -> (Creatable, Question?)
+	typealias DidAnswerQuestion = (Creatable, String?) -> (Creatable, Question?)?
 	
 	var question: String
 	var didAnswerQuestion: DidAnswerQuestion
