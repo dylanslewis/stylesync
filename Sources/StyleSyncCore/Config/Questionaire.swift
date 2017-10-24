@@ -19,10 +19,6 @@ struct Questionaire {
 	
 	func startQuestionaire() {
 		var creatable: Creatable = self.creatable
-		defer {
-			didFinishQuestionaire(creatable)
-		}
-
 		var nextQuestion: Question? = creatable.firstQuestion
 		repeat {
 			guard let question = nextQuestion else {
@@ -31,16 +27,18 @@ struct Questionaire {
 			print("\n" + question.question)
 			let answer = readLine()
 			if let (newCreatable, newNextQuestion) = question.didAnswerQuestion(creatable, answer) {
-				creatable = newCreatable
+				if let newCreatable = newCreatable {
+					creatable = newCreatable
+				}
 				nextQuestion = newNextQuestion
 			}
-			print(creatable)
 		} while nextQuestion != nil
+		didFinishQuestionaire(creatable)
 	}
 }
 
 struct Question {
-	typealias DidAnswerQuestion = (Creatable, String?) -> (Creatable, Question?)?
+	typealias DidAnswerQuestion = (Creatable, String?) -> (Creatable?, Question?)?
 	
 	var question: String
 	var didAnswerQuestion: DidAnswerQuestion
