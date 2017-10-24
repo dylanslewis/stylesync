@@ -235,7 +235,6 @@ public final class StyleSync {
 		do {
 			let (gitHubUsername, gitHubRepositoryName) = try getGitHubUsernameAndRepositoryName()
 			let (headBranchName, baseBranchName) = try createBranchAndCommitChanges(version: version)
-			try generateScreenshots()
 			
 			try submitPullRequest(
 				username: gitHubUsername,
