@@ -13,14 +13,24 @@ public final class StyleSync {
 	// MARK: - Constants
 	
 	private enum Constant {
-		static let expectedNumberOfArguments = 9
-		static let exportedStylesFileName = "ExportedStyles"
+		static let exportedTextStylesFileName = "exportedTextStyles"
+		static let exportedColorStylesFileName = "exportedColorStyles"
 		static let exportedStylesFileType: FileType = .json
 		static let colorStylesName = "ColorStyles"
 		static let textStylesName = "TextStyles"
+		
+		enum Config {
+			static let fileName = "styleSyncConfig"
+			static let fileType: FileType = .json
+		}
 	}
 	
 	// MARK: - Stored properties
+
+	private var sketchFile: File!
+	private var colorStyleTemplate: File!
+	private var textStyleTemplate: File!
+	private var gitHubPersonalAccessToken: String?
 	
 	private var colorStyleParser: StyleParser<ColorStyle>!
 	private var textStyleParser: StyleParser<TextStyle>!
@@ -29,17 +39,10 @@ public final class StyleSync {
 	private var filesForDeprecatedColorStyle: [CodeTemplateReplacableStyle: [File]] = [:]
 	private var filesForDeprecatedTextStyle: [CodeTemplateReplacableStyle: [File]] = [:]
 
-	private var projectFolder: Folder!
-	private var exportFolder: Folder!
+	private let projectFolder: Folder = .current
+	private var exportTextFolder: Folder!
+	private var exportColorsFolder: Folder!
 
-	private var sketchFile: File!
-	private var colorStyleTemplate: File!
-	private var textStyleTemplate: File!
-	
-	private var gitHubUsername: String!
-	private var gitHubRepositoryName: String!
-	private var gitHubPersonalAccessToken: String!
-	
 	private var zipManager: ZipManager!
 	
 	private var pullRequestHeadingTemplate: File!
@@ -56,7 +59,8 @@ public final class StyleSync {
 	
 	private var generatedColorStylesFile: File!
 	private var generatedTextStylesFile: File!
-	private var generatedRawStylesFile: File!
+	private var generatedRawTextStylesFile: File!
+	private var generatedRawColorStylesFile: File!
 	
 	// MARK: - Computed properties
 
@@ -70,24 +74,81 @@ public final class StyleSync {
 	// MARK: - Initializer
 	
 	public init(arguments: [String] = CommandLine.arguments) throws {
-		guard arguments.count == Constant.expectedNumberOfArguments else {
+		guard arguments.count == 1 else {
 			throw Error.invalidArguments
 		}
-		try parse(arguments: arguments)
+		try getConfig()
 		try createZipManager(forSketchFile: sketchFile)
 		try createGitHubTemplateReferences()
 		try createConsoleTemplateReferences()
 	}
 	
-	private func parse(arguments: [String]) throws {
-		self.sketchFile = try File(path: arguments[1])
-		self.projectFolder = try Folder(path: arguments[2])
-		self.exportFolder = try Folder(path: arguments[3])
-		self.colorStyleTemplate = try File(path: arguments[4])
-		self.textStyleTemplate = try File(path: arguments[5])
-		self.gitHubUsername = arguments[6]
-		self.gitHubRepositoryName = arguments[7]
-		self.gitHubPersonalAccessToken = arguments[8]
+	// MARK: - Config
+	
+	private func getConfig() throws {
+		do {
+			try readConfig()
+		} catch Error.failedToFindFile {
+			try createConfig()
+		} catch {
+			throw Error.failedToReadFile
+		}
+	}
+	
+	private func readConfig() throws {
+		guard let configFile = try? projectFolder.file(
+			named: Constant.Config.fileName,
+			fileExtension: Constant.Config.fileType
+		) else {
+			throw Error.failedToFindFile
+		}
+		let config: Config = try configFile.readAsDecodedJSON()
+		try parse(config: config)
+	}
+	
+	private func parse(config: Config) throws {
+		self.sketchFile = try File(path: config.sketchDocument)
+		self.exportTextFolder = try Folder(path: config.textStyle.exportDirectory)
+		self.exportColorsFolder = try Folder(path: config.colorStyle.exportDirectory)
+		self.colorStyleTemplate = try File(path: config.colorStyle.template)
+		self.textStyleTemplate = try File(path: config.textStyle.template)
+		self.gitHubPersonalAccessToken = config.gitHubPersonalAccessToken
+	}
+	
+	private func createConfig() throws {
+		let questionaire = Questionaire(creatable: Config()) { (creatable) in
+			guard let completedConfig = creatable as? Config else {
+				return
+			}
+			do {
+				try self.save(config: completedConfig)
+			} catch {
+				print(error)
+			}
+		}
+		questionaire.startQuestionaire()
+		
+		try readConfig()
+	}
+	
+	private func save(config: Config) throws {
+		let encoder = JSONEncoder()
+		encoder.outputFormatting = .prettyPrinted
+		do {
+			let configFileData = try encoder.encode(config)
+			guard let configFileString = String(data: configFileData, encoding: .utf8) else {
+				// TODO: Throw error
+				return
+			}
+			
+			let styleSyncConfig = try projectFolder.createFileIfNeeded(
+				named: Constant.Config.fileName,
+				fileExtension: Constant.Config.fileType
+			)
+			try styleSyncConfig.write(string: configFileString)
+		} catch {
+			print(error)
+		}
 	}
 	
 	private func createZipManager(forSketchFile file: File) throws {
@@ -113,40 +174,8 @@ public final class StyleSync {
 	}
 
 	// MARK: - Run
-
-	private func save(config: Config) {
-		print(config)
-
-		let encoder = JSONEncoder()
-		encoder.outputFormatting = .prettyPrinted
-		do {
-			let configFileData = try encoder.encode(config)
-			guard let configFileString = String(data: configFileData, encoding: .utf8) else {
-				print("shittt")
-				return
-			}
-
-			print(configFileString)
-			let styleSyncConfig = try self.projectFolder.createFileIfNeeded(withName: "styleSyncConfig.json")
-			try styleSyncConfig.write(string: configFileString)
-		} catch {
-			print(error)
-		}
-	}
 	
 	public func run() throws {
-		let config = Config()
-		let didFinishQuestionaire: (Creatable) -> Void = { completedConfig in
-			print(completedConfig)
-			guard let configToSave = completedConfig as? Config else {
-				return
-			}
-			self.save(config: config)
-		}
-		let questionaire = Questionaire(creatable: config, didFinishQuestionaire: didFinishQuestionaire)
-		questionaire.startQuestionaire()
-		return
-		
 		defer {
 			do {
 				try zipManager.cleanup()
@@ -163,23 +192,24 @@ public final class StyleSync {
 		try createStyleCodeGenerators()
 		try updateFilesInProjectDirectoryAndFindUsedDeprecatedStyles()
 		
-		let oldColorStyles = (previousExportedStyles?.colorStyles ?? []).map({
+		let oldColorStyles = (previousExportedStyles?.color.colorStyles ?? []).map({
 			CodeTemplateReplacableStyle(colorStyle: $0, fileType: colorStyleCodeGenerator.fileExtension)
 		})
-		let oldTextStyles = (previousExportedStyles?.textStyles ?? []).map({
+		let oldTextStyles = (previousExportedStyles?.text.textStyles ?? []).map({
 			CodeTemplateReplacableStyle(textStyle: $0, fileType: textStyleCodeGenerator.fileExtension)
 		})
 		
 		let (colorStyles, textStyles) = getAllStyles()
+		let currentVersion = previousExportedStyles?.text.version ?? previousExportedStyles?.color.version
 		let version = Version(
 			oldColorStyles: oldColorStyles,
 			oldTextStyles: oldTextStyles,
 			newColorStyles: colorStyles,
 			newTextStyles: textStyles,
-			currentVersion: previousExportedStyles?.version
+			currentVersion: currentVersion
 		)
 		
-		guard previousExportedStyles?.version == nil || version != previousExportedStyles?.version else {
+		guard currentVersion == nil || version != currentVersion else {
 			print("🎉 Your styles are already up to date!")
 			return
 		}
@@ -190,51 +220,72 @@ public final class StyleSync {
 			colorStyles: colorStyles.map({ $0.style as? ColorStyle }).flatMap({$0}),
 			textStyles: textStyles.map({ $0.style as? TextStyle }).flatMap({$0})
 		)
-
-//		let (headBranchName, baseBranchName) = try createBranchAndCommitChanges(version: version)
-//		try generateScreenshots()
-		
-//		try submitPullRequest(
-//			headBranchName: headBranchName,
-//			baseBranchName: baseBranchName,
-//		oldColorStyles: oldColorStyles,
-//		newColorStyles: colorStyles,
-//		oldTextStyles: oldColorStyles,
-//		newTextStyles: textStyles
-//			version: version
-//		)
 		try printUpdatedStyles(
 			oldColorStyles: oldColorStyles,
 			newColorStyles: colorStyles,
 			oldTextStyles: oldTextStyles,
 			newTextStyles: textStyles
 		)
+		
+		guard let gitHubPersonalAccessToken = gitHubPersonalAccessToken else {
+			// TODO: Not running git actions
+			return
+		}
+
+		// TODO: Get this
+		let gitHubUsername = ""
+		let gitHubRepositoryName = ""
+		
+		let (headBranchName, baseBranchName) = try createBranchAndCommitChanges(version: version)
+		try generateScreenshots()
+		
+		try submitPullRequest(
+			username: gitHubUsername,
+			repositoryName: gitHubRepositoryName,
+			personalAccessToken: gitHubPersonalAccessToken,
+			headBranchName: headBranchName,
+			baseBranchName: baseBranchName,
+			oldColorStyles: oldColorStyles,
+			newColorStyles: colorStyles,
+			oldTextStyles: oldColorStyles,
+			newTextStyles: textStyles,
+			version: version
+		)
 	}
 	
 	// MARK: - Actions
-	
-	private func getPreviousExportedStyles() throws -> VersionedStyles? {
-		generatedRawStylesFile = try exportFolder.createFileIfNeeded(
-			named: Constant.exportedStylesFileName,
+
+	private func getPreviousExportedStyles() throws -> (text: VersionedStyle.Text, color: VersionedStyle.Color)? {
+		generatedRawTextStylesFile = try exportTextFolder.createFileIfNeeded(
+			named: Constant.exportedTextStylesFileName,
+			fileExtension: Constant.exportedStylesFileType
+		)
+		generatedRawColorStylesFile = try exportColorsFolder.createFileIfNeeded(
+			named: Constant.exportedColorStylesFileName,
 			fileExtension: Constant.exportedStylesFileType
 		)
 		
-		do {
-			return try generatedRawStylesFile.readAsDecodedJSON()
-		} catch {
+		guard
+			let versionedTextStyles: VersionedStyle.Text = try? generatedRawTextStylesFile.readAsDecodedJSON(),
+			let versionedColorStyles: VersionedStyle.Color = try? generatedRawColorStylesFile.readAsDecodedJSON()
+		else {
 			return nil
 		}
+		return (versionedTextStyles, versionedColorStyles)
 	}
 	
-	private func createStyleParsers(using sketchDocument: SketchDocument, previousExportedStyles: VersionedStyles?) {
+	private func createStyleParsers(
+		using sketchDocument: SketchDocument,
+		previousExportedStyles: (text: VersionedStyle.Text, color: VersionedStyle.Color)?
+	) {
 		colorStyleParser = StyleParser(
 			sketchDocument: sketchDocument,
-			previousStyles: previousExportedStyles?.colorStyles
+			previousStyles: previousExportedStyles?.color.colorStyles
 		)
 		textStyleParser = StyleParser(
 			sketchDocument: sketchDocument,
 			colorStyles: colorStyleParser.newStyles,
-			previousStyles: previousExportedStyles?.textStyles
+			previousStyles: previousExportedStyles?.text.textStyles
 		)
 	}
 	
@@ -245,13 +296,13 @@ public final class StyleSync {
 		colorStyleCodeGenerator = try CodeGenerator(template: colorStyleTemplate)
 		textStyleCodeGenerator = try CodeGenerator(template: textStyleTemplate)
 		
-		generatedColorStylesFile = try exportFolder.createFileIfNeeded(
-			named: Constant.colorStylesName,
-			fileExtension: colorStyleCodeGenerator.fileExtension
-		)
-		generatedTextStylesFile = try exportFolder.createFileIfNeeded(
+		generatedTextStylesFile = try exportTextFolder.createFileIfNeeded(
 			named: Constant.textStylesName,
 			fileExtension: textStyleCodeGenerator.fileExtension
+		)
+		generatedColorStylesFile = try exportColorsFolder.createFileIfNeeded(
+			named: Constant.colorStylesName,
+			fileExtension: colorStyleCodeGenerator.fileExtension
 		)
 	}
 	
@@ -370,25 +421,33 @@ public final class StyleSync {
 	}
 	
 	private func generateAndSaveVersionedStyles(version: Version, colorStyles: [ColorStyle], textStyles: [TextStyle]) throws {
-		let versionedStyles = VersionedStyles(
-			version: version,
-			colorStyles: colorStyles,
-			textStyles: textStyles
-		)
+		let versionedTextStyles = VersionedStyle.Text(version: version, textStyles: textStyles)
+		let versionedColorStyles = VersionedStyle.Color(version: version, colorStyles: colorStyles)
 		
 		let encoder = JSONEncoder()
-		let rawStylesData = try encoder.encode(versionedStyles)
-		try generatedRawStylesFile.write(data: rawStylesData)
+		encoder.outputFormatting = .prettyPrinted
+		let rawTextStylesData = try encoder.encode(versionedTextStyles)
+		let rawColorStylesData = try encoder.encode(versionedColorStyles)
+		
+		try generatedRawTextStylesFile.write(data: rawTextStylesData)
+		try generatedRawColorStylesFile.write(data: rawColorStylesData)
 	}
 	
 	private func createBranchAndCommitChanges(version: Version) throws -> (headBranchName: String, baseBranchName: String) {
-		print(generatedRawStylesFile)
+		let exportedTextFileNames = [generatedTextStylesFile, generatedRawTextStylesFile]
+			.map({ $0.name })
+		let exportedColorsFileNames = [generatedColorStylesFile, generatedRawColorStylesFile]
+			.map({ $0.name })
+		
 		let gitManager = try GitManager(
 			projectFolderPath: projectFolder.path,
-			exportFolderPath: exportFolder.path,
-			exportedFileNames: [generatedColorStylesFile.name, generatedTextStylesFile.name, generatedRawStylesFile.name],
+			exportTextFolderPath: exportTextFolder.name,
+			exportColorsFolderPath: exportColorsFolder.name,
+			exportedTextFileNames: exportedTextFileNames,
+			exportedColorsFileNames: exportedColorsFileNames,
 			version: version
 		)
+		
 		try gitManager.createStyleSyncBranch()
 		try gitManager.commitAllStyleUpdates()
 		try gitManager.checkoutOriginalBranch()
@@ -442,6 +501,9 @@ public final class StyleSync {
 	}
 	
 	private func submitPullRequest(
+		username: String,
+		repositoryName: String,
+		personalAccessToken: String,
 		headBranchName: String,
 		baseBranchName: String,
 		oldColorStyles: [CodeTemplateReplacableStyle],
@@ -451,9 +513,9 @@ public final class StyleSync {
 		version: Version
 	) throws {
 		let pullRequestManager = GitHubPullRequestManager(
-			username: gitHubUsername,
-			repositoryName: gitHubRepositoryName,
-			personalAccessToken: gitHubPersonalAccessToken
+			username: username,
+			repositoryName: repositoryName,
+			personalAccessToken: personalAccessToken
 		)
 		
 		let headingTemplate: Template = try pullRequestHeadingTemplate.readAsString()
@@ -607,5 +669,7 @@ public final class StyleSync {
 extension StyleSync {
 	enum Error: Swift.Error {
 		case invalidArguments
+		case failedToFindFile
+		case failedToReadFile
 	}
 }

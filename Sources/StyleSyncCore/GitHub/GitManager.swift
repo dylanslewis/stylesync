@@ -12,8 +12,10 @@ struct GitManager {
 	// MARK: - Stored properties
 	
 	private let projectFolderPath: String
-	private let exportFolderPath: String
-	private let exportedFileNames: [String]
+	private let exportTextFolderPath: String
+	private let exportColorsFolderPath: String
+	private let exportedTextFileNames: [String]
+	private let exportedColorsFileNames: [String]
 	private let version: Version
 	var originalBranchName: String!
 	
@@ -27,13 +29,17 @@ struct GitManager {
 	
 	init(
 		projectFolderPath: String,
-		exportFolderPath: String,
-		exportedFileNames: [String],
+		exportTextFolderPath: String,
+		exportColorsFolderPath: String,
+		exportedTextFileNames: [String],
+		exportedColorsFileNames: [String],
 		version: Version
 	) throws {
 		self.projectFolderPath = projectFolderPath
-		self.exportFolderPath = exportFolderPath
-		self.exportedFileNames = exportedFileNames
+		self.exportTextFolderPath = exportTextFolderPath
+		self.exportColorsFolderPath = exportColorsFolderPath
+		self.exportedTextFileNames = exportedTextFileNames
+		self.exportedColorsFileNames = exportedColorsFileNames
 		self.version = version
 		originalBranchName = try shellOut(to: .gitGetCurrentBranch())
 	}
@@ -46,10 +52,12 @@ struct GitManager {
 	}
 	
 	func commitAllStyleUpdates() throws {
-		try exportedFileNames.forEach { try shellOut(to: .gitAdd(atPath: $0), at: exportFolderPath) }
+		try exportedTextFileNames.forEach { try shellOut(to: .gitAdd(atPath: $0), at: exportTextFolderPath) }
+		try exportedColorsFileNames.forEach { try shellOut(to: .gitAdd(atPath: $0), at: exportColorsFolderPath) }
+		
 		try shellOut(
 			to: .gitCommitWithoutAdding(message: "Update style guide to version \(version.stringRepresentation)"),
-			at: exportFolderPath
+			at: projectFolderPath
 		)
 		try shellOut(to: .gitInitialPush(branch: styleSyncBranchName), at: projectFolderPath)
 	}
