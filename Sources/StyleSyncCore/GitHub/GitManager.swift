@@ -47,18 +47,27 @@ struct GitManager {
 	// MARK: - Actions
 	
 	func createStyleSyncBranch() throws {
+		print("Creating branch '\(styleSyncBranchName)'")
 		try shellOut(to: .gitCreateBranch(branch: styleSyncBranchName), at: projectFolderPath)
+		print("Checking out branch '\(styleSyncBranchName)'")
 		try shellOut(to: .gitCheckout(branch: styleSyncBranchName), at: projectFolderPath)
 	}
 	
 	func commitAllStyleUpdates() throws {
+		print("Adding files to commit:")
+		print(exportedTextFileNames.joined(separator: "\n"))
+		print(exportedColorsFileNames.joined(separator: "\n"))
+		
 		try exportedTextFileNames.forEach { try shellOut(to: .gitAdd(atPath: $0), at: exportTextFolderPath) }
 		try exportedColorsFileNames.forEach { try shellOut(to: .gitAdd(atPath: $0), at: exportColorsFolderPath) }
 		
+		
+		print("Committing changes")
 		try shellOut(
 			to: .gitCommitWithoutAdding(message: "Update style guide to version \(version.stringRepresentation)"),
 			at: projectFolderPath
 		)
+		print("Pushing changes")
 		try shellOut(to: .gitInitialPush(branch: styleSyncBranchName), at: projectFolderPath)
 	}
 	
@@ -103,6 +112,16 @@ private extension ShellOutCommand {
 		command.append(argument: "--set-upstream")
 		command.append(argument: "origin")
 		command.append(argument: branch)
+		return ShellOutCommand(string: command)
+	}
+}
+
+extension ShellOutCommand {
+	static func gitGetOriginURL() -> ShellOutCommand {
+		var command = "git"
+		command.append(argument: "remote")
+		command.append(argument: "get-url")
+		command.append(argument: "origin")
 		return ShellOutCommand(string: command)
 	}
 }
