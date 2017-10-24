@@ -114,10 +114,34 @@ public final class StyleSync {
 
 	// MARK: - Run
 
+	private func save(config: Config) {
+		print(config)
+
+		let encoder = JSONEncoder()
+		encoder.outputFormatting = .prettyPrinted
+		do {
+			let configFileData = try encoder.encode(config)
+			guard let configFileString = String(data: configFileData, encoding: .utf8) else {
+				print("shittt")
+				return
+			}
+
+			print(configFileString)
+			let styleSyncConfig = try self.projectFolder.createFileIfNeeded(withName: "styleSyncConfig.json")
+			try styleSyncConfig.write(string: configFileString)
+		} catch {
+			print(error)
+		}
+	}
+	
 	public func run() throws {
 		let config = Config()
 		let didFinishQuestionaire: (Creatable) -> Void = { completedConfig in
 			print(completedConfig)
+			guard let configToSave = completedConfig as? Config else {
+				return
+			}
+			self.save(config: config)
 		}
 		let questionaire = Questionaire(creatable: config, didFinishQuestionaire: didFinishQuestionaire)
 		questionaire.startQuestionaire()
