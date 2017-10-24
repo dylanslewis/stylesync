@@ -8,6 +8,7 @@
 
 import Cocoa
 import Files
+import ShellOut
 
 public final class StyleSync {
 	// MARK: - Constants
@@ -137,8 +138,7 @@ public final class StyleSync {
 		do {
 			let configFileData = try encoder.encode(config)
 			guard let configFileString = String(data: configFileData, encoding: .utf8) else {
-				// TODO: Throw error
-				return
+				throw Error.failedToSaveFile
 			}
 			
 			let styleSyncConfig = try projectFolder.createFileIfNeeded(
@@ -228,29 +228,34 @@ public final class StyleSync {
 		)
 		
 		guard let gitHubPersonalAccessToken = gitHubPersonalAccessToken else {
-			// TODO: Not running git actions
+			print("Your files have been generated. If you'd like to branch, commit and raise a pull request for these updates, add your GitHub Personal Access token to styleSyncConfig.json")
 			return
 		}
 
-		// TODO: Get this
-		let gitHubUsername = ""
-		let gitHubRepositoryName = ""
-		
-		let (headBranchName, baseBranchName) = try createBranchAndCommitChanges(version: version)
-		try generateScreenshots()
-		
-		try submitPullRequest(
-			username: gitHubUsername,
-			repositoryName: gitHubRepositoryName,
-			personalAccessToken: gitHubPersonalAccessToken,
-			headBranchName: headBranchName,
-			baseBranchName: baseBranchName,
-			oldColorStyles: oldColorStyles,
-			newColorStyles: colorStyles,
-			oldTextStyles: oldColorStyles,
-			newTextStyles: textStyles,
-			version: version
-		)
+		do {
+			let (gitHubUsername, gitHubRepositoryName) = try getGitHubUsernameAndRepositoryName()
+			let (headBranchName, baseBranchName) = try createBranchAndCommitChanges(version: version)
+			try generateScreenshots()
+			
+			try submitPullRequest(
+				username: gitHubUsername,
+				repositoryName: gitHubRepositoryName,
+				personalAccessToken: gitHubPersonalAccessToken,
+				headBranchName: headBranchName,
+				baseBranchName: baseBranchName,
+				oldColorStyles: oldColorStyles,
+				newColorStyles: colorStyles,
+				oldTextStyles: oldColorStyles,
+				newTextStyles: textStyles,
+				version: version
+			)
+		} catch {
+			if let shellOutError = error as? ShellOutError {
+				print(shellOutError.message)
+			} else {
+				throw error
+			}
+		}
 	}
 	
 	// MARK: - Actions
@@ -433,6 +438,20 @@ public final class StyleSync {
 		try generatedRawColorStylesFile.write(data: rawColorStylesData)
 	}
 	
+	private func getGitHubUsernameAndRepositoryName() throws -> (username: String, repositoryName: String) {
+		let shellOutput = try shellOut(to: .gitGetOriginURL())
+		guard
+			shellOutput.contains("git@github.com"),
+			let userNameAndRepositoryName = shellOutput.split(separator: ":").last?.split(separator: "/"),
+			userNameAndRepositoryName.count == 2,
+			let username = userNameAndRepositoryName.first,
+			let repositoryName = userNameAndRepositoryName.last
+		else {
+			throw Error.unexpectedConsoleOutput
+		}
+		return (String(username), String(repositoryName))
+	}
+	
 	private func createBranchAndCommitChanges(version: Version) throws -> (headBranchName: String, baseBranchName: String) {
 		let exportedTextFileNames = [generatedTextStylesFile, generatedRawTextStylesFile]
 			.map({ $0.name })
@@ -441,8 +460,8 @@ public final class StyleSync {
 		
 		let gitManager = try GitManager(
 			projectFolderPath: projectFolder.path,
-			exportTextFolderPath: exportTextFolder.name,
-			exportColorsFolderPath: exportColorsFolder.name,
+			exportTextFolderPath: exportTextFolder.path,
+			exportColorsFolderPath: exportColorsFolder.path,
 			exportedTextFileNames: exportedTextFileNames,
 			exportedColorsFileNames: exportedColorsFileNames,
 			version: version
@@ -671,5 +690,7 @@ extension StyleSync {
 		case invalidArguments
 		case failedToFindFile
 		case failedToReadFile
+		case failedToSaveFile
+		case unexpectedConsoleOutput
 	}
 }
