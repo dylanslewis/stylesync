@@ -1,0 +1,12 @@
+{
+  "gitHubPersonalAccessToken" : "39b9389d56689946d6ce58f6f85cd8778ff9a776",
+  "sketchDocument" : "..\/StyleSync-StyleGuide-iOS\/Design\/Sample.sketch",
+  "textStyle" : {
+    "template" : "Sources\/StyleSyncCore\/Templates\/TextStyles\/iOSSwift",
+    "exportDirectory" : "..\/StyleSync-StyleGuide-iOS\/StyleGuide\/GeneratedFiles\/"
+  },
+  "colorStyle" : {
+    "template" : "Sources\/StyleSyncCore\/Templates\/ColorStyles\/iOSSwift",
+    "exportDirectory" : "..\/StyleSync-StyleGuide-iOS\/StyleGuide\/GeneratedFiles\/"
+  }
+}
