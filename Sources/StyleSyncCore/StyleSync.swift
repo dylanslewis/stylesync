@@ -46,18 +46,6 @@ public final class StyleSync {
 
 	private var zipManager: ZipManager!
 	
-	private var pullRequestHeadingTemplate: File!
-	private var pullRequestStyleNameTemplate: File!
-	private var pullRequestAddedStyleTableTemplate: File!
-	private var pullRequestUpdatedStyleTableTemplate: File!
-	private var pullRequestDeprecatedStylesTemplate: File!
-
-	private var consoleHeadingTemplate: File!
-	private var consoleStyleNameTemplate: File!
-	private var consoleAddedStyleTableTemplate: File!
-	private var consoleUpdatedStyleTableTemplate: File!
-	private var consoleDeprecatedStylesTemplate: File!
-	
 	private var generatedColorStylesFile: File!
 	private var generatedTextStylesFile: File!
 	private var generatedRawTextStylesFile: File!
@@ -80,8 +68,6 @@ public final class StyleSync {
 		}
 		try getConfig()
 		try createZipManager(forSketchFile: sketchFile)
-		try createGitHubTemplateReferences()
-		try createConsoleTemplateReferences()
 	}
 	
 	// MARK: - Config
@@ -155,24 +141,6 @@ public final class StyleSync {
 		self.zipManager = try ZipManager(zippedFile: file)
 	}
 	
-	private func createGitHubTemplateReferences() throws {
-		let gitHubTemplatesBaseURL = try Folder.current.subfolder(atPath: "Sources/StyleSyncCore/Templates/GitHub")
-		self.pullRequestHeadingTemplate = try gitHubTemplatesBaseURL.file(named: "Heading")
-		self.pullRequestStyleNameTemplate = try gitHubTemplatesBaseURL.file(named: "StyleName")
-		self.pullRequestAddedStyleTableTemplate = try gitHubTemplatesBaseURL.file(named: "NewStyleTable")
-		self.pullRequestUpdatedStyleTableTemplate = try gitHubTemplatesBaseURL.file(named: "UpdatedStyleTable")
-		self.pullRequestDeprecatedStylesTemplate = try gitHubTemplatesBaseURL.file(named: "DeprecatedStylesTable")
-	}
-	
-	private func createConsoleTemplateReferences() throws {
-		let consoleTemplatesBaseURL = try Folder.current.subfolder(atPath: "Sources/StyleSyncCore/Templates/Console")
-		self.consoleHeadingTemplate = try consoleTemplatesBaseURL.file(named: "Heading")
-		self.consoleStyleNameTemplate = try consoleTemplatesBaseURL.file(named: "StyleName")
-		self.consoleAddedStyleTableTemplate = try consoleTemplatesBaseURL.file(named: "NewStyleTable")
-		self.consoleUpdatedStyleTableTemplate = try consoleTemplatesBaseURL.file(named: "UpdatedStyleTable")
-		self.consoleDeprecatedStylesTemplate = try consoleTemplatesBaseURL.file(named: "DeprecatedStylesTable")
-	}
-
 	// MARK: - Run
 	
 	public func run() throws {
@@ -536,18 +504,12 @@ public final class StyleSync {
 			personalAccessToken: personalAccessToken
 		)
 		
-		let headingTemplate: Template = try pullRequestHeadingTemplate.readAsString()
-		let styleNameTemplate: Template = try pullRequestStyleNameTemplate.readAsString()
-		let addedStyleTableTemplate: Template = try pullRequestAddedStyleTableTemplate.readAsString()
-		let updatedStyleTableTemplate: Template = try pullRequestUpdatedStyleTableTemplate.readAsString()
-		let deprecatedStylesTableTemplate: Template = try pullRequestDeprecatedStylesTemplate.readAsString()
-		
 		let pullRequestBodyGenerator = try StyleUpdateSummaryGenerator(
-			headingTemplate: headingTemplate,
-			styleNameTemplate: styleNameTemplate,
-			addedStyleTableTemplate: addedStyleTableTemplate,
-			updatedStyleTableTemplate: updatedStyleTableTemplate,
-			deprecatedStylesTableTemplate: deprecatedStylesTableTemplate
+			headingTemplate: GitHubTemplate.heading,
+			styleNameTemplate: GitHubTemplate.styleName,
+			addedStyleTableTemplate: GitHubTemplate.newStyleTable,
+			updatedStyleTableTemplate: GitHubTemplate.updatedStylesTable,
+			deprecatedStylesTableTemplate: GitHubTemplate.deprecatedStylesTable
 		)
 		
 		let body = pullRequestBodyGenerator.body(
@@ -574,18 +536,12 @@ public final class StyleSync {
 		oldTextStyles: [CodeTemplateReplacableStyle],
 		newTextStyles: [CodeTemplateReplacableStyle]
 	) throws {
-		let headingTemplate: Template = try consoleHeadingTemplate.readAsString()
-		let styleNameTemplate: Template = try consoleStyleNameTemplate.readAsString()
-		let addedStyleTableTemplate: Template = try consoleAddedStyleTableTemplate.readAsString()
-		let updatedStyleTableTemplate: Template = try consoleUpdatedStyleTableTemplate.readAsString()
-		let deprecatedStylesTableTemplate: Template = try consoleDeprecatedStylesTemplate.readAsString()
-
 		let consoleLogGenerator = try StyleUpdateSummaryGenerator(
-			headingTemplate: headingTemplate,
-			styleNameTemplate: styleNameTemplate,
-			addedStyleTableTemplate: addedStyleTableTemplate,
-			updatedStyleTableTemplate: updatedStyleTableTemplate,
-			deprecatedStylesTableTemplate: deprecatedStylesTableTemplate,
+			headingTemplate: ConsoleTemplate.heading,
+			styleNameTemplate: ConsoleTemplate.styleName,
+			addedStyleTableTemplate: ConsoleTemplate.newStyleTable,
+			updatedStyleTableTemplate: ConsoleTemplate.updatedStylesTable,
+			deprecatedStylesTableTemplate: ConsoleTemplate.deprecatedStylesTable,
 			shouldPrintStyleSyncLink: false
 		)
 		

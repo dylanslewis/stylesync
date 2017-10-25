@@ -1,4 +1,0 @@
-<#@fileExtension#>log
-<attributeDeclaration>
-<#=attributeName#>:		<#=attributeValue#>
-</attributeDeclaration>

@@ -1,6 +1,0 @@
-<#@fileExtension#>md
-| | Before | After |
-| --- | :---: | :---: |
-<attributeDeclaration>
-| <#=attributeName#> | `<#=oldValue#>` | `<#=newValue#>` |
-</attributeDeclaration>
