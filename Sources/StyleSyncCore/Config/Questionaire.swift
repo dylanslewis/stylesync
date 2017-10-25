@@ -25,7 +25,7 @@ struct Questionaire {
 				return
 			}
 			print("\n" + question.question)
-			let answer = readLine()
+			let answer = readLine() ?? ""
 			if let (newCreatable, newNextQuestion) = question.didAnswerQuestion(creatable, answer) {
 				if let newCreatable = newCreatable {
 					creatable = newCreatable
@@ -38,7 +38,7 @@ struct Questionaire {
 }
 
 struct Question {
-	typealias DidAnswerQuestion = (Creatable, String?) -> (Creatable?, Question?)?
+	typealias DidAnswerQuestion = (Creatable, String) -> (Creatable?, Question?)?
 	
 	var question: String
 	var didAnswerQuestion: DidAnswerQuestion
