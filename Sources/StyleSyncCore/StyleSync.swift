@@ -17,8 +17,8 @@ public final class StyleSync {
 		static let exportedTextStylesFileName = "exportedTextStyles"
 		static let exportedColorStylesFileName = "exportedColorStyles"
 		static let exportedStylesFileType: FileType = .json
-		static let colorStylesName = "ColorStyles"
-		static let textStylesName = "TextStyles"
+		static let defaultColorStylesName = "ColorStyles"
+		static let defaultTextStylesName = "TextStyles"
 		
 		enum Config {
 			static let fileName = "styleSyncConfig"
@@ -301,11 +301,11 @@ public final class StyleSync {
 		textStyleCodeGenerator = try CodeGenerator(template: textStyleTemplate)
 		
 		generatedTextStylesFile = try exportTextFolder.createFileIfNeeded(
-			named: Constant.textStylesName,
+			named: textStyleCodeGenerator.fileName ?? Constant.defaultTextStylesName,
 			fileExtension: textStyleCodeGenerator.fileExtension
 		)
 		generatedColorStylesFile = try exportColorsFolder.createFileIfNeeded(
-			named: Constant.colorStylesName,
+			named: colorStyleCodeGenerator.fileName ?? Constant.defaultColorStylesName,
 			fileExtension: colorStyleCodeGenerator.fileExtension
 		)
 	}

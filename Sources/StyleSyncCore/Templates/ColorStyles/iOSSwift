@@ -1,4 +1,5 @@
 <#@fileExtension#>swift
+<#@fileName#>UIColor+StyleGuide
 //
 <generatedFileHeader>
 //  <#=headerLine#>

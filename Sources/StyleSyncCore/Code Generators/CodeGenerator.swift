@@ -19,7 +19,8 @@ struct CodeGenerator {
 	private let template: Template
 	private var templateCodeLines: [String]
 	var fileExtension: FileType
-	
+	var fileName: String?
+
 	// MARK: - Initializer
 	
 	/// Creates a `CodeGenerator` with a given template and an array of groups
@@ -34,7 +35,7 @@ struct CodeGenerator {
 	init(template: Template) throws {
 		self.template = template
 		let templateLinesWithFileExtension = template.components(separatedBy: "\n")
-		(fileExtension, templateCodeLines) = try templateLinesWithFileExtension.extractingFileType()
+		(fileExtension, fileName, templateCodeLines) = try templateLinesWithFileExtension.extractingFileTypeAndFileName()
 	}
 	
 	// MARK: - Code Generation
@@ -103,15 +104,24 @@ extension CodeGenerator {
 
 private extension Array where Iterator.Element == String {
 	// FIXME: Add docs
-	func extractingFileType() throws -> (FileType, [String]) {
+	func extractingFileTypeAndFileName() throws -> (FileType, String?, [String]) {
 		let fileExtensionReference = "fileExtension".metadataPlaceholderReference
+		let fileNameReference = "fileName".metadataPlaceholderReference
+
 		var templateCodeLines = self
-		guard let (index, element) = enumerated().first(where: { $0.element.contains(fileExtensionReference) }) else {
+		guard let (fileReferenceIndex, fileReferenceElement) = templateCodeLines.enumerated().first(where: { $0.element.contains(fileExtensionReference) }) else {
 			throw CodeGenerator.Error.noFileExtensionFound
 		}
-		let fileType: FileType = element.replacingOccurrences(of: fileExtensionReference, with: "")
-		templateCodeLines.remove(at: index)
-		return (fileType, templateCodeLines)
+		let fileType: FileType = fileReferenceElement.replacingOccurrences(of: fileExtensionReference, with: "")
+		templateCodeLines.remove(at: fileReferenceIndex)
+		
+		var fileName: String?
+		if let (fileTypeIndex, fileTypeElement) = templateCodeLines.enumerated().first(where: { $0.element.contains(fileNameReference) }) {
+			fileName = fileTypeElement.replacingOccurrences(of: fileNameReference, with: "")
+			templateCodeLines.remove(at: fileTypeIndex)
+		}
+		
+		return (fileType, fileName, templateCodeLines)
 	}
 	
 	/// Replaces all placeholders in each of the array's code lines, by looking
