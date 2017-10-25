@@ -67,7 +67,6 @@ public final class StyleSync {
 			throw Error.invalidArguments
 		}
 		try getConfig()
-		try createZipManager(forSketchFile: sketchFile)
 	}
 	
 	// MARK: - Config
@@ -78,6 +77,7 @@ public final class StyleSync {
 		} catch Error.failedToFindFile {
 			try createConfig()
 		} catch {
+			print(error)
 			throw Error.failedToReadFile
 		}
 	}
@@ -152,12 +152,16 @@ public final class StyleSync {
 			}
 		}
 		
+		print("Extracting styles from \(sketchFile.path)")
+		try createZipManager(forSketchFile: sketchFile)
 		let sketchDocumentFile = try zipManager.getSketchDocument()
 		let sketchDocument: SketchDocument = try sketchDocumentFile.readAsDecodedJSON()
 		
 		let previousExportedStyles = try getPreviousExportedStyles()
 		createStyleParsers(using: sketchDocument, previousExportedStyles: previousExportedStyles)
 		try createStyleCodeGenerators()
+		
+		print("Updating any references to styles in your project")
 		try updateFilesInProjectDirectoryAndFindUsedDeprecatedStyles()
 		
 		let oldColorStyles = (previousExportedStyles?.color.colorStyles ?? []).map({
@@ -168,7 +172,8 @@ public final class StyleSync {
 		})
 		
 		let (colorStyles, textStyles) = getAllStyles()
-		let currentVersion = previousExportedStyles?.text.version ?? previousExportedStyles?.color.version
+		let previousVersion = previousExportedStyles?.text.version
+		let currentVersion = previousVersion ?? previousExportedStyles?.color.version
 		let version = Version(
 			oldColorStyles: oldColorStyles,
 			oldTextStyles: oldTextStyles,
@@ -177,26 +182,28 @@ public final class StyleSync {
 			currentVersion: currentVersion
 		)
 		
-		guard currentVersion == nil || version != currentVersion else {
-			print("🎉 Your styles are already up to date!")
-			return
+		if let previousVersionString = previousVersion?.stringRepresentation {
+			print("Comparing Sketch's styles with v\(previousVersionString)")
 		}
 
+		print("Generating styling code")
 		try generateAndSaveStyleCode(version: version, colorStyles: colorStyles, textStyles: textStyles)
 		try generateAndSaveVersionedStyles(
 			version: version,
 			colorStyles: colorStyles.map({ $0.style as? ColorStyle }).flatMap({$0}),
 			textStyles: textStyles.map({ $0.style as? TextStyle }).flatMap({$0})
 		)
+		
 		try printUpdatedStyles(
 			oldColorStyles: oldColorStyles,
 			newColorStyles: colorStyles,
 			oldTextStyles: oldTextStyles,
 			newTextStyles: textStyles
 		)
+		print("🎉 Your styles are now up to date!")
 		
 		guard let gitHubPersonalAccessToken = gitHubPersonalAccessToken else {
-			print("Your files have been generated. If you'd like to branch, commit and raise a pull request for these updates, add your GitHub Personal Access token to styleSyncConfig.json")
+			print("\nIf you'd like to branch, commit and raise a pull request for these updates, add your GitHub Personal Access token to styleSyncConfig.json")
 			return
 		}
 
