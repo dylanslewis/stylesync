@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		659283CA1FA1383200C8CC9F /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659283C91FA1383200C8CC9F /* ConfigManager.swift */; };
+		659283CB1FA1383200C8CC9F /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659283C91FA1383200C8CC9F /* ConfigManager.swift */; };
 		OBJ_102 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* Package.swift */; };
 		OBJ_108 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* Package.swift */; };
 		OBJ_114 /* CamelcasedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* CamelcasedTests.swift */; };
@@ -153,6 +155,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		659283C91FA1383200C8CC9F /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		"Files::Files::Product" /* Files.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Files.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* CodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerator.swift; sourceTree = "<group>"; };
 		OBJ_11 /* CodeTemplateReplaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTemplateReplaceable.swift; sourceTree = "<group>"; };
@@ -266,6 +269,7 @@
 		OBJ_12 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				659283C91FA1383200C8CC9F /* ConfigManager.swift */,
 				OBJ_13 /* Config.swift */,
 				OBJ_14 /* Questionaire.swift */,
 			);
@@ -779,6 +783,7 @@
 				OBJ_187 /* VersionedStyles.swift in Sources */,
 				OBJ_188 /* XcodeProject.swift in Sources */,
 				OBJ_189 /* ZipManager.swift in Sources */,
+				659283CB1FA1383200C8CC9F /* ConfigManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,6 +808,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_96 /* Package.swift in Sources */,
+				659283CA1FA1383200C8CC9F /* ConfigManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

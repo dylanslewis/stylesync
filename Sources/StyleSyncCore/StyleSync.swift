@@ -19,19 +19,16 @@ public final class StyleSync {
 		static let exportedStylesFileType: FileType = .json
 		static let defaultColorStylesName = "ColorStyles"
 		static let defaultTextStylesName = "TextStyles"
-		
-		enum Config {
-			static let fileName = "styleSyncConfig"
-			static let fileType: FileType = .json
-		}
 	}
 	
 	// MARK: - Stored properties
 
-	private var sketchFile: File!
-	private var colorStyleTemplate: File!
-	private var textStyleTemplate: File!
-	private var gitHubPersonalAccessToken: String?
+	var sketchFile: File!
+	var exportTextFolder: Folder!
+	var exportColorsFolder: Folder!
+	var colorStyleTemplate: File!
+	var textStyleTemplate: File!
+	var gitHubPersonalAccessToken: String?
 	
 	private var colorStyleParser: StyleParser<ColorStyle>!
 	private var textStyleParser: StyleParser<TextStyle>!
@@ -41,9 +38,7 @@ public final class StyleSync {
 	private var filesForDeprecatedTextStyle: [CodeTemplateReplacableStyle: [File]] = [:]
 
 	private let projectFolder: Folder = .current
-	private var exportTextFolder: Folder!
-	private var exportColorsFolder: Folder!
-
+	
 	private var zipManager: ZipManager!
 	
 	private var generatedColorStylesFile: File!
@@ -66,79 +61,18 @@ public final class StyleSync {
 		guard arguments.count == 1 else {
 			throw Error.invalidArguments
 		}
-		try getConfig()
-	}
-	
-	// MARK: - Config
-	
-	private func getConfig() throws {
-		do {
-			try readConfig()
-		} catch Error.failedToFindFile {
-			try createConfig()
-		} catch {
-			ErrorManager.log(error: error, context: .config)
-			throw Error.failedToReadFile
-		}
-	}
-	
-	private func readConfig() throws {
-		guard let configFile = try? projectFolder.file(
-			named: Constant.Config.fileName,
-			fileExtension: Constant.Config.fileType
-		) else {
-			throw Error.failedToFindFile
-		}
-		let config: Config = try configFile.readAsDecodedJSON()
+		let configManager = ConfigManager(projectFolder: projectFolder)
+		let config = try configManager.getConfig()
 		try parse(config: config)
 	}
 	
 	private func parse(config: Config) throws {
-		self.sketchFile = try File(path: config.sketchDocument)
-		self.exportTextFolder = try Folder(path: config.textStyle.exportDirectory)
-		self.exportColorsFolder = try Folder(path: config.colorStyle.exportDirectory)
-		self.colorStyleTemplate = try File(path: config.colorStyle.template)
-		self.textStyleTemplate = try File(path: config.textStyle.template)
-		self.gitHubPersonalAccessToken = config.gitHubPersonalAccessToken
-	}
-	
-	private func createConfig() throws {
-		let questionaire = Questionaire(creatable: Config()) { (creatable) in
-			guard let completedConfig = creatable as? Config else {
-				return
-			}
-			do {
-				try self.save(config: completedConfig)
-			} catch {
-				ErrorManager.log(error: error, context: .config)
-			}
-		}
-		questionaire.startQuestionaire()
-		
-		try readConfig()
-	}
-	
-	private func save(config: Config) throws {
-		let encoder = JSONEncoder()
-		encoder.outputFormatting = .prettyPrinted
-		do {
-			let configFileData = try encoder.encode(config)
-			guard let configFileString = String(data: configFileData, encoding: .utf8) else {
-				throw Error.failedToSaveFile
-			}
-			
-			let styleSyncConfig = try projectFolder.createFileIfNeeded(
-				named: Constant.Config.fileName,
-				fileExtension: Constant.Config.fileType
-			)
-			try styleSyncConfig.write(string: configFileString)
-		} catch {
-			ErrorManager.log(error: error, context: .config)
-		}
-	}
-	
-	private func createZipManager(forSketchFile file: File) throws {
-		self.zipManager = try ZipManager(zippedFile: file)
+		sketchFile = try File(path: config.sketchDocument)
+		exportTextFolder = try Folder(path: config.textStyle.exportDirectory)
+		exportColorsFolder = try Folder(path: config.colorStyle.exportDirectory)
+		colorStyleTemplate = try File(path: config.colorStyle.template)
+		textStyleTemplate = try File(path: config.textStyle.template)
+		gitHubPersonalAccessToken = config.gitHubPersonalAccessToken
 	}
 	
 	// MARK: - Run
@@ -234,6 +168,10 @@ public final class StyleSync {
 	
 	// MARK: - Actions
 
+	private func createZipManager(forSketchFile file: File) throws {
+		self.zipManager = try ZipManager(zippedFile: file)
+	}
+	
 	private func getPreviousExportedStyles() throws -> (text: VersionedStyle.Text, color: VersionedStyle.Color)? {
 		generatedRawTextStylesFile = try exportTextFolder.createFileIfNeeded(
 			named: Constant.exportedTextStylesFileName,
@@ -650,9 +588,6 @@ public final class StyleSync {
 extension StyleSync {
 	enum Error: Swift.Error {
 		case invalidArguments
-		case failedToFindFile
-		case failedToReadFile
-		case failedToSaveFile
 		case unexpectedConsoleOutput
 	}
 }
