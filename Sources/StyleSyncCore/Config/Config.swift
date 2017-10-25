@@ -35,7 +35,7 @@ extension Config: Creatable {
 			do {
 				_ = try File(path: answer)
 			} catch {
-				print(error)
+				ErrorManager.log(error: error, context: .config)
 				return nil
 			}
 			updatedConfig.sketchDocument = answer
@@ -56,7 +56,7 @@ extension Config: Creatable {
 			do {
 				_ = try File(path: answer)
 			} catch {
-				print(error)
+				ErrorManager.log(error: error, context: .config)
 				return nil
 			}
 			updatedConfig.colorStyle.template = answer
@@ -72,7 +72,7 @@ extension Config: Creatable {
 			do {
 				_ = try Folder(path: answer)
 			} catch {
-				print(error)
+				ErrorManager.log(error: error, context: .config)
 				return nil
 			}
 			updatedConfig.colorStyle.exportDirectory = answer
@@ -88,7 +88,7 @@ extension Config: Creatable {
 			do {
 				_ = try File(path: answer)
 			} catch {
-				print(error)
+				ErrorManager.log(error: error, context: .config)
 				return nil
 			}
 			updatedConfig.textStyle.template = answer
@@ -104,7 +104,7 @@ extension Config: Creatable {
 			do {
 				_ = try Folder(path: answer)
 			} catch {
-				print(error)
+				ErrorManager.log(error: error, context: .config)
 				return nil
 			}
 			updatedConfig.textStyle.exportDirectory = answer

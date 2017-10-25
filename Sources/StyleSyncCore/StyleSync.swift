@@ -77,7 +77,7 @@ public final class StyleSync {
 		} catch Error.failedToFindFile {
 			try createConfig()
 		} catch {
-			print(error)
+			ErrorManager.log(error: error, context: .config)
 			throw Error.failedToReadFile
 		}
 	}
@@ -110,7 +110,7 @@ public final class StyleSync {
 			do {
 				try self.save(config: completedConfig)
 			} catch {
-				print(error)
+				ErrorManager.log(error: error, context: .config)
 			}
 		}
 		questionaire.startQuestionaire()
@@ -133,7 +133,7 @@ public final class StyleSync {
 			)
 			try styleSyncConfig.write(string: configFileString)
 		} catch {
-			print(error)
+			ErrorManager.log(error: error, context: .config)
 		}
 	}
 	
@@ -148,7 +148,7 @@ public final class StyleSync {
 			do {
 				try zipManager.cleanup()
 			} catch {
-				print(error)
+				ErrorManager.log(error: error, context: .zipManager)
 			}
 		}
 		
@@ -570,7 +570,7 @@ public final class StyleSync {
 			do {
 				fileString = try file.readAsString()
 			} catch {
-				print(error)
+				ErrorManager.log(error: error, context: .projectReferenceUpdate)
 				return
 			}
 			currentAndMigratedStyles.forEach({
@@ -580,7 +580,7 @@ public final class StyleSync {
 			do {
 				try file.write(string: fileString)
 			} catch {
-				print(error)
+				ErrorManager.log(error: error, context: .projectReferenceUpdate)
 			}
 		}
 	}
@@ -594,7 +594,7 @@ public final class StyleSync {
 			do {
 				fileString = try file.readAsString()
 			} catch {
-				print(error)
+				ErrorManager.log(error: error, context: .projectReferenceUpdate)
 				return
 			}
 

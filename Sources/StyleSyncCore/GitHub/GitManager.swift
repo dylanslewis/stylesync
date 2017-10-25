@@ -61,7 +61,6 @@ struct GitManager {
 		try exportedTextFileNames.forEach { try shellOut(to: .gitAdd(atPath: $0), at: exportTextFolderPath) }
 		try exportedColorsFileNames.forEach { try shellOut(to: .gitAdd(atPath: $0), at: exportColorsFolderPath) }
 		
-		
 		print("Committing changes")
 		try shellOut(
 			to: .gitCommitWithoutAdding(message: "Update style guide to version \(version.stringRepresentation)"),

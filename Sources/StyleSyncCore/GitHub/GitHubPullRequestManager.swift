@@ -64,7 +64,7 @@ struct GitHubPullRequestManager {
 		
 		let task = session.dataTask(with: urlRequest) { (data, urlResponse, error) in
 			if let error = error {
-				print(error)
+				ErrorManager.log(error: error, context: .gitHubPullRequest)
 			}
 			completion()
 		}
