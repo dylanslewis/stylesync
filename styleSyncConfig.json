@@ -1,11 +1,11 @@
 {
   "sketchDocument" : "../StyleSync-StyleGuide-iOS/Design/Sample.sketch",
   "textStyle" : {
-    "template" : "Sources\/StyleSyncCore\/Templates\/TextStyles\/iOSSwift",
+    "template" : "Sources\/StyleSyncCore\/Templates\/TextStyles\/AndroidXML",
     "exportDirectory" : "..\/StyleSync-StyleGuide-iOS\/StyleGuide\/GeneratedFiles\/"
   },
   "colorStyle" : {
-    "template" : "Sources\/StyleSyncCore\/Templates\/ColorStyles\/iOSSwift",
+    "template" : "Sources\/StyleSyncCore\/Templates\/ColorStyles\/AndroidXML",
     "exportDirectory" : "..\/StyleSync-StyleGuide-iOS\/StyleGuide\/GeneratedFiles\/"
   }
 }
