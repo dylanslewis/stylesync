@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		659283CA1FA1383200C8CC9F /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659283C91FA1383200C8CC9F /* ConfigManager.swift */; };
 		659283CB1FA1383200C8CC9F /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659283C91FA1383200C8CC9F /* ConfigManager.swift */; };
+		659283CF1FA2671D00C8CC9F /* SketchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659283CE1FA2671D00C8CC9F /* SketchManager.swift */; };
 		OBJ_102 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* Package.swift */; };
 		OBJ_108 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* Package.swift */; };
 		OBJ_114 /* CamelcasedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* CamelcasedTests.swift */; };
@@ -156,6 +157,7 @@
 
 /* Begin PBXFileReference section */
 		659283C91FA1383200C8CC9F /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
+		659283CE1FA2671D00C8CC9F /* SketchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchManager.swift; sourceTree = "<group>"; };
 		"Files::Files::Product" /* Files.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Files.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* CodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerator.swift; sourceTree = "<group>"; };
 		OBJ_11 /* CodeTemplateReplaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTemplateReplaceable.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_39 /* SketchDocument.swift */,
+				659283CE1FA2671D00C8CC9F /* SketchManager.swift */,
 			);
 			path = Sketch;
 			sourceTree = "<group>";
@@ -762,6 +765,7 @@
 				OBJ_166 /* SketchDocument.swift in Sources */,
 				OBJ_167 /* StyleSync.swift in Sources */,
 				OBJ_168 /* CodeTemplateReplacableStyle.swift in Sources */,
+				659283CF1FA2671D00C8CC9F /* SketchManager.swift in Sources */,
 				OBJ_169 /* ColorStyle.swift in Sources */,
 				OBJ_170 /* Style.swift in Sources */,
 				OBJ_171 /* StyleParser.swift in Sources */,

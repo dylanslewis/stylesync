@@ -9,17 +9,18 @@ import Foundation
 import ShellOut
 
 enum ErrorManager {
-	static func log(error: Error, context: Context, isFatal: Bool = false) {
+	static func log(error: Error, context: Context) {
 		if let shellOutError = error as? ShellOutError {
 			print(shellOutError.message)
 		} else {
 			print(error)
 		}
-		
-		guard isFatal else {
-			return
-		}
+	}
+	
+	static func log(fatalError: Error, context: Context) -> Never {
+		log(error: fatalError, context: context)
 		print("If you believe this is a bug, please create an issue:\n\(GitHubLink.createIssue)")
+		exit(1)
 	}
 }
 
@@ -29,5 +30,6 @@ extension ErrorManager {
 		case projectReferenceUpdate
 		case config
 		case gitHubPullRequest
+		case sketch
 	}
 }

@@ -23,12 +23,12 @@ public final class StyleSync {
 	
 	// MARK: - Stored properties
 
-	var sketchFile: File!
-	var exportTextFolder: Folder!
-	var exportColorsFolder: Folder!
-	var colorStyleTemplate: File!
-	var textStyleTemplate: File!
-	var gitHubPersonalAccessToken: String?
+	private var sketchFile: File!
+	private var exportTextFolder: Folder!
+	private var exportColorsFolder: Folder!
+	private var colorStyleTemplate: File!
+	private var textStyleTemplate: File!
+	private var gitHubPersonalAccessToken: String?
 	
 	private var colorStyleParser: StyleParser<ColorStyle>!
 	private var textStyleParser: StyleParser<TextStyle>!
@@ -38,8 +38,6 @@ public final class StyleSync {
 	private var filesForDeprecatedTextStyle: [CodeTemplateReplacableStyle: [File]] = [:]
 
 	private let projectFolder: Folder = .current
-	
-	private var zipManager: ZipManager!
 	
 	private var generatedColorStylesFile: File!
 	private var generatedTextStylesFile: File!
@@ -78,18 +76,13 @@ public final class StyleSync {
 	// MARK: - Run
 	
 	public func run() throws {
-		defer {
-			do {
-				try zipManager.cleanup()
-			} catch {
-				ErrorManager.log(error: error, context: .zipManager)
-			}
+		let sketchManager = SketchManager(sketchFile: sketchFile)
+		let sketchDocument: SketchDocument
+		do {
+			sketchDocument = try sketchManager.getSketchDocument()
+		} catch {
+			ErrorManager.log(fatalError: error, context: .sketch)
 		}
-		
-		print("Extracting styles from \(sketchFile.path)")
-		try createZipManager(forSketchFile: sketchFile)
-		let sketchDocumentFile = try zipManager.getSketchDocument()
-		let sketchDocument: SketchDocument = try sketchDocumentFile.readAsDecodedJSON()
 		
 		let previousExportedStyles = try getPreviousExportedStyles()
 		createStyleParsers(using: sketchDocument, previousExportedStyles: previousExportedStyles)
@@ -141,36 +134,24 @@ public final class StyleSync {
 			return
 		}
 
-		do {
-			let (gitHubUsername, gitHubRepositoryName) = try getGitHubUsernameAndRepositoryName()
-			let (headBranchName, baseBranchName) = try createBranchAndCommitChanges(version: version)
-			
-			try submitPullRequest(
-				username: gitHubUsername,
-				repositoryName: gitHubRepositoryName,
-				personalAccessToken: gitHubPersonalAccessToken,
-				headBranchName: headBranchName,
-				baseBranchName: baseBranchName,
-				oldColorStyles: oldColorStyles,
-				newColorStyles: colorStyles,
-				oldTextStyles: oldColorStyles,
-				newTextStyles: textStyles,
-				version: version
-			)
-		} catch {
-			if let shellOutError = error as? ShellOutError {
-				print(shellOutError.message)
-			} else {
-				throw error
-			}
-		}
+		let (gitHubUsername, gitHubRepositoryName) = try getGitHubUsernameAndRepositoryName()
+		let (headBranchName, baseBranchName) = try createBranchAndCommitChanges(version: version)
+		
+		try submitPullRequest(
+			username: gitHubUsername,
+			repositoryName: gitHubRepositoryName,
+			personalAccessToken: gitHubPersonalAccessToken,
+			headBranchName: headBranchName,
+			baseBranchName: baseBranchName,
+			oldColorStyles: oldColorStyles,
+			newColorStyles: colorStyles,
+			oldTextStyles: oldColorStyles,
+			newTextStyles: textStyles,
+			version: version
+		)
 	}
 	
 	// MARK: - Actions
-
-	private func createZipManager(forSketchFile file: File) throws {
-		self.zipManager = try ZipManager(zippedFile: file)
-	}
 	
 	private func getPreviousExportedStyles() throws -> (text: VersionedStyle.Text, color: VersionedStyle.Color)? {
 		generatedRawTextStylesFile = try exportTextFolder.createFileIfNeeded(
