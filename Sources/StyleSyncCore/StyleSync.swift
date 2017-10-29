@@ -21,7 +21,7 @@ public final class StyleSync {
 		static let defaultTextStylesName = "TextStyles"
 	}
 	
-	// MARK: - Stored properties
+	// MARK: - Stored variables
 
 	private var config: Config!
 	
@@ -30,7 +30,7 @@ public final class StyleSync {
 
 	private let projectFolder: Folder = .current
 	
-	// MARK: - Computed properties
+	// MARK: - Computed variables
 
 	private var usedDeprecatedColorStyles: [CodeTemplateReplacableStyle] {
 		return Array(filesForDeprecatedColorStyle.keys)
@@ -42,6 +42,10 @@ public final class StyleSync {
 	// MARK: - Initializer
 	
 	public init(arguments: [String] = CommandLine.arguments) throws {
+		#if os(Linux)
+			print("StyleSync does not support Linux")
+			exit(1)
+		#endif
 		guard arguments.count == 1 else {
 			throw Error.invalidArguments
 		}
@@ -94,10 +98,12 @@ public final class StyleSync {
 		}
 		
 		let generatedRawTextStylesFile = try exportTextFolder.createFileIfNeeded(
-			withName: "\(Constant.exportedTextStylesFileName).\(Constant.exportedStylesFileType)"
+			named: Constant.exportedTextStylesFileName,
+			fileExtension: Constant.exportedStylesFileType
 		)
 		let generatedRawColorStylesFile = try exportColorsFolder.createFileIfNeeded(
-			withName: "\(Constant.exportedColorStylesFileName).\(Constant.exportedStylesFileType)"
+			named: Constant.exportedColorStylesFileName,
+			fileExtension: Constant.exportedStylesFileType
 		)
 			
 		let styleExtractor = StyleExtractor(
@@ -219,29 +225,29 @@ public final class StyleSync {
 			return
 		}
 
-		let (gitHubUsername, gitHubRepositoryName) = try getGitHubUsernameAndRepositoryName()
-		let (headBranchName, baseBranchName) = try createBranchAndCommitChanges(
-			version: version,
-			exportTextFolder: exportTextFolder,
-			exportColorsFolder: exportColorsFolder,
-			generatedTextStylesFile: generatedTextStylesFile,
-			generatedColorStylesFile: generatedColorStylesFile,
-			generatedRawTextStylesFile: generatedRawTextStylesFile,
-			generatedRawColorStylesFile: generatedRawColorStylesFile
-		)
-		
-		try submitPullRequest(
-			username: gitHubUsername,
-			repositoryName: gitHubRepositoryName,
-			personalAccessToken: gitHubPersonalAccessToken,
-			headBranchName: headBranchName,
-			baseBranchName: baseBranchName,
-			oldColorStyles: oldColorStyles,
-			newColorStyles: colorStyles,
-			oldTextStyles: oldColorStyles,
-			newTextStyles: textStyles,
-			version: version
-		)
+		let filesToCommit = [
+			generatedTextStylesFile,
+			generatedColorStylesFile,
+			generatedRawTextStylesFile,
+			generatedRawColorStylesFile
+		]
+		do {
+			let gitHubManager = try GitHubManager(
+				projectFolder: projectFolder,
+				fileNamesForDeprecatedStyleNames: fileNamesForDeprecatedStyleNames,
+				version: version,
+				personalAccessToken: gitHubPersonalAccessToken
+			)
+			try gitHubManager.createBranchAndCommitChangesAndSubmitPullRequest(
+				filesToCommit: filesToCommit,
+				oldTextStyles: oldTextStyles,
+				newTextStyles: textStyles,
+				oldColorStyles: oldColorStyles,
+				newColorStyles: colorStyles
+			)
+		} catch {
+			ErrorManager.log(fatalError: error, context: .gitHub)
+		}
 	}
 	
 	// MARK: - Actions
@@ -418,93 +424,6 @@ public final class StyleSync {
 		try generatedRawColorStylesFile.write(data: rawColorStylesData)
 	}
 	
-	private func getGitHubUsernameAndRepositoryName() throws -> (username: String, repositoryName: String) {
-		let shellOutput = try shellOut(to: .gitGetOriginURL())
-		guard
-			shellOutput.contains("git@github.com"),
-			let userNameAndRepositoryName = shellOutput.split(separator: ":").last?.split(separator: "/"),
-			userNameAndRepositoryName.count == 2,
-			let username = userNameAndRepositoryName.first,
-			let repositoryName = userNameAndRepositoryName.last
-		else {
-			throw Error.unexpectedConsoleOutput
-		}
-		return (String(username), String(repositoryName))
-	}
-	
-	private func createBranchAndCommitChanges(
-		version: Version,
-		exportTextFolder: Folder,
-		exportColorsFolder: Folder,
-		generatedTextStylesFile: File,
-		generatedColorStylesFile: File,
-		generatedRawTextStylesFile: File,
-		generatedRawColorStylesFile: File
-	) throws -> (headBranchName: String, baseBranchName: String) {
-		let exportedTextFileNames = [generatedTextStylesFile, generatedRawTextStylesFile]
-			.map({ $0.name })
-		let exportedColorsFileNames = [generatedColorStylesFile, generatedRawColorStylesFile]
-			.map({ $0.name })
-		
-		let gitManager = try GitManager(
-			projectFolderPath: projectFolder.path,
-			exportTextFolderPath: exportTextFolder.path,
-			exportColorsFolderPath: exportColorsFolder.path,
-			exportedTextFileNames: exportedTextFileNames,
-			exportedColorsFileNames: exportedColorsFileNames,
-			version: version
-		)
-		
-		try gitManager.createStyleSyncBranch()
-		try gitManager.commitAllStyleUpdates()
-		try gitManager.checkoutOriginalBranch()
-		return (gitManager.styleSyncBranchName, gitManager.originalBranchName)
-	}
-	
-	private func submitPullRequest(
-		username: String,
-		repositoryName: String,
-		personalAccessToken: String,
-		headBranchName: String,
-		baseBranchName: String,
-		oldColorStyles: [CodeTemplateReplacableStyle],
-		newColorStyles: [CodeTemplateReplacableStyle],
-		oldTextStyles: [CodeTemplateReplacableStyle],
-		newTextStyles: [CodeTemplateReplacableStyle],
-		version: Version
-	) throws {
-		let pullRequestManager = GitHubPullRequestManager(
-			username: username,
-			repositoryName: repositoryName,
-			personalAccessToken: personalAccessToken
-		)
-		
-		let pullRequestBodyGenerator = try StyleUpdateSummaryGenerator(
-			headingTemplate: GitHubTemplate.heading,
-			styleNameTemplate: GitHubTemplate.styleName,
-			addedStyleTableTemplate: GitHubTemplate.newStyleTable,
-			updatedStyleTableTemplate: GitHubTemplate.updatedStylesTable,
-			deprecatedStylesTableTemplate: GitHubTemplate.deprecatedStylesTable
-		)
-		
-		let body = pullRequestBodyGenerator.body(
-			fromOldColorStyles: oldColorStyles,
-			newColorStyles: newColorStyles,
-			oldTextStyles: oldTextStyles,
-			newTextStyles: newTextStyles,
-			fileNamesForDeprecatedStyleNames: fileNamesForDeprecatedStyleNames
-		)
-		
-		let pullRequest = GitHub.PullRequest(
-			title: "[StyleSync] Update style guide to version \(version.stringRepresentation)",
-			body: body,
-			head: headBranchName,
-			base: baseBranchName
-		)
-
-		try pullRequestManager.submit(pullRequest: pullRequest)
-	}
-	
 	private func printUpdatedStyles(
 		oldColorStyles: [CodeTemplateReplacableStyle],
 		newColorStyles: [CodeTemplateReplacableStyle],
@@ -618,7 +537,6 @@ public final class StyleSync {
 extension StyleSync {
 	enum Error: Swift.Error {
 		case invalidArguments
-		case unexpectedConsoleOutput
 		case noStylesFound
 	}
 }

@@ -49,7 +49,6 @@ struct GitHubPullRequestManager {
 		let request = URLRequest(url: pullRequestURL, httpMethod: .post, httpBody: pullRequestData)
 		
 		let semaphore = DispatchSemaphore(value: 0)
-		
 		make(urlRequest: request, base64EncodedCredential: base64LoginString) {
 			semaphore.signal()
 		}
@@ -64,7 +63,7 @@ struct GitHubPullRequestManager {
 		
 		let task = session.dataTask(with: urlRequest) { (data, urlResponse, error) in
 			if let error = error {
-				ErrorManager.log(error: error, context: .gitHubPullRequest)
+				ErrorManager.log(error: error, context: .gitHub)
 			}
 			completion()
 		}

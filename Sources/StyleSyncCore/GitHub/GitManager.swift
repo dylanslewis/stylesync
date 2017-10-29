@@ -7,15 +7,13 @@
 
 import Foundation
 import ShellOut
+import Files
 
 struct GitManager {
 	// MARK: - Stored properties
-	
-	private let projectFolderPath: String
-	private let exportTextFolderPath: String
-	private let exportColorsFolderPath: String
-	private let exportedTextFileNames: [String]
-	private let exportedColorsFileNames: [String]
+
+	private let projectFolder: Folder
+	private let filesToCommit: [File]
 	private let version: Version
 	var originalBranchName: String!
 	
@@ -24,22 +22,15 @@ struct GitManager {
 	var styleSyncBranchName: String {
 		return "styleSync/updateToVersion\(version.stringRepresentation)"
 	}
+	var projectFolderPath: String {
+		return projectFolder.path
+	}
 	
 	// MARK: - Initializer
 	
-	init(
-		projectFolderPath: String,
-		exportTextFolderPath: String,
-		exportColorsFolderPath: String,
-		exportedTextFileNames: [String],
-		exportedColorsFileNames: [String],
-		version: Version
-	) throws {
-		self.projectFolderPath = projectFolderPath
-		self.exportTextFolderPath = exportTextFolderPath
-		self.exportColorsFolderPath = exportColorsFolderPath
-		self.exportedTextFileNames = exportedTextFileNames
-		self.exportedColorsFileNames = exportedColorsFileNames
+	init(projectFolder: Folder, filesToCommit: [File], version: Version) throws {
+		self.projectFolder = projectFolder
+		self.filesToCommit = filesToCommit
 		self.version = version
 		originalBranchName = try shellOut(to: .gitGetCurrentBranch())
 	}
@@ -55,17 +46,19 @@ struct GitManager {
 	
 	func commitAllStyleUpdates() throws {
 		print("Adding files to commit:")
-		print(exportedTextFileNames.joined(separator: "\n"))
-		print(exportedColorsFileNames.joined(separator: "\n"))
+		print(filesToCommit.map({ $0.path }).joined(separator: "\n"))
 		
-		try exportedTextFileNames.forEach { try shellOut(to: .gitAdd(atPath: $0), at: exportTextFolderPath) }
-		try exportedColorsFileNames.forEach { try shellOut(to: .gitAdd(atPath: $0), at: exportColorsFolderPath) }
+		try filesToCommit
+			.map({ $0.path })
+			.forEach { try shellOut(to: .gitAdd(atPath: $0)) }
 		
 		print("Committing changes")
 		try shellOut(
 			to: .gitCommitWithoutAdding(message: "Update style guide to version \(version.stringRepresentation)"),
 			at: projectFolderPath
 		)
+		
+		// FIXME: Work out why this doesn't work on release builds
 		print("Pushing changes")
 		try shellOut(to: .gitInitialPush(branch: styleSyncBranchName), at: projectFolderPath)
 	}
@@ -83,7 +76,7 @@ private extension ShellOutCommand {
 	}
 	
 	static func gitCommitWithoutAdding(message: String) -> ShellOutCommand {
-		var command = "git commit -a -m"
+		var command = "git commit -m"
 		command.append(argument: message)
 		command.append(" --quiet")
 		return ShellOutCommand(string: command)
@@ -108,7 +101,6 @@ private extension ShellOutCommand {
 	static func gitInitialPush(branch: String) -> ShellOutCommand {
 		var command = "git"
 		command.append(argument: "push")
-		command.append(argument: "--set-upstream")
 		command.append(argument: "origin")
 		command.append(argument: branch)
 		return ShellOutCommand(string: command)

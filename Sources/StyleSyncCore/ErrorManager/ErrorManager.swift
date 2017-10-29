@@ -11,6 +11,7 @@ import ShellOut
 enum ErrorManager {
 	static func log(error: Error, context: Context) {
 		if let shellOutError = error as? ShellOutError {
+			print(shellOutError.output)
 			print(shellOutError.message)
 		} else {
 			print(error)
@@ -33,7 +34,7 @@ extension ErrorManager {
 		case zipManager
 		case projectReferenceUpdate
 		case config
-		case gitHubPullRequest
+		case gitHub
 		case sketch
 		case styleExtraction
 		case styleGeneration
