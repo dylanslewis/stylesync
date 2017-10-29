@@ -17,6 +17,10 @@ enum ErrorManager {
 		}
 	}
 	
+	static func log(warning: String, context: Context) {
+		print("⚠️  \(warning)")
+	}
+	
 	static func log(fatalError: Error, context: Context) -> Never {
 		log(error: fatalError, context: context)
 		print("If you believe this is a bug, please create an issue:\n\(GitHubLink.createIssue)")
@@ -31,5 +35,7 @@ extension ErrorManager {
 		case config
 		case gitHubPullRequest
 		case sketch
+		case styleExtraction
+		case styleGeneration
 	}
 }

@@ -8,13 +8,13 @@
 import Foundation
 import Files
 
-class Config: Codable {
-	var sketchDocument: String!
-	var colorStyle: Style = Style()
-	var textStyle: Style = Style()
-	var gitHubPersonalAccessToken: String?
+public class Config: Codable {
+	public var sketchDocument: String!
+	public var colorStyle: Style = Style()
+	public var textStyle: Style = Style()
+	public var gitHubPersonalAccessToken: String?
 	
-	class Style: Codable {
+	public class Style: Codable {
 		var template: String!
 		var exportDirectory: String!
 	}

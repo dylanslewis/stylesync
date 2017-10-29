@@ -46,10 +46,10 @@ extension Version {
 		oldTextStyles: [CodeTemplateReplacableStyle]?,
 		newColorStyles: [CodeTemplateReplacableStyle],
 		newTextStyles: [CodeTemplateReplacableStyle],
-		currentVersion: Version?
+		previousStylesVersion: Version?
 	) {
 		guard
-			let currentVersion = currentVersion,
+			let previousStylesVersion = previousStylesVersion,
 			let oldColorStyles = oldColorStyles,
 			let oldTextStyles = oldTextStyles
 		else {
@@ -79,11 +79,11 @@ extension Version {
 		
 		switch (didRemoveStyle, didStylesChange) {
 		case (true, _):
-			self = currentVersion.incrementingMajor()
+			self = previousStylesVersion.incrementingMajor()
 		case (false, true):
-			self = currentVersion.incrementingMinor()
+			self = previousStylesVersion.incrementingMinor()
 		case (false, false):
-			self = currentVersion
+			self = previousStylesVersion
 		}
 	}
 }

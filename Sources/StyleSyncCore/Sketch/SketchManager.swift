@@ -9,16 +9,9 @@ import Foundation
 import Files
 
 class SketchManager {
-	// MARK: - Constants
-	
-	private enum Constant {
-		
-	}
-	
 	// MARK: - Stored variables
 	
 	private var sketchFile: File
-	
 
 	// MARK: - Initializer
 	

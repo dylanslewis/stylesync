@@ -65,10 +65,11 @@ struct CodeGenerator {
 		} else {
 			allCodeTemplateReplaceables = codeTemplateReplacables
 		}
-			
+		
 		// Iterate over each group of `codeTemplateReplacables` and
 		var codeLines = templateCodeLines
-		allCodeTemplateReplaceables.forEach({ codeLines = codeLines.replacingCodePlaceholders(usingReplacementItems: $0) })
+		allCodeTemplateReplaceables
+			.forEach({ codeLines = codeLines.replacingCodePlaceholders(usingReplacementItems: $0) })
 		codeLines.validateCodeLines()
 		return codeLines.joined(separator: "\n")
 	}
@@ -208,7 +209,7 @@ private extension Array where Iterator.Element == String {
 		enumerated().forEach { arg in
 			let (offset, element) = arg
 			if element.contains("<#") {
-				print("⚠️ Unreplaced placeholder at line \(offset):\n" + element + "\n")
+				ErrorManager.log(warning: "Unreplaced placeholder at line \(offset):\n" + element + "\n", context: .styleGeneration)
 			}
 		}
 	}
