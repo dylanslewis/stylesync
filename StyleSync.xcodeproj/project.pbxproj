@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		652985881FA601CA00B0F782 /* ScreenshotManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652985871FA601CA00B0F782 /* ScreenshotManager.swift */; };
 		OBJ_100 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_106 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* Package.swift */; };
 		OBJ_112 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* Package.swift */; };
@@ -156,6 +157,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		652985871FA601CA00B0F782 /* ScreenshotManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScreenshotManager.swift; path = Sources/StyleSyncCore/Screenshots/ScreenshotManager.swift; sourceTree = SOURCE_ROOT; };
 		"Files::Files::Product" /* Files.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Files.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* CodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerator.swift; sourceTree = "<group>"; };
 		OBJ_11 /* CodeTemplateReplaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTemplateReplaceable.swift; sourceTree = "<group>"; };
@@ -269,6 +271,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		652985861FA601A000B0F782 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				652985871FA601CA00B0F782 /* ScreenshotManager.swift */,
+			);
+			path = Screenshots;
+			sourceTree = SOURCE_ROOT;
+		};
 		OBJ_12 /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -475,6 +485,7 @@
 		OBJ_8 /* StyleSyncCore */ = {
 			isa = PBXGroup;
 			children = (
+				652985861FA601A000B0F782 /* Screenshots */,
 				OBJ_9 /* Code Generators */,
 				OBJ_12 /* Config */,
 				OBJ_16 /* ErrorManager */,
@@ -784,6 +795,7 @@
 				OBJ_179 /* TextStyle.swift in Sources */,
 				OBJ_180 /* ConsoleDeprecatedStylesTable.swift in Sources */,
 				OBJ_181 /* ConsoleHeading.swift in Sources */,
+				652985881FA601CA00B0F782 /* ScreenshotManager.swift in Sources */,
 				OBJ_182 /* ConsoleNewStyleTable.swift in Sources */,
 				OBJ_183 /* ConsoleStyleName.swift in Sources */,
 				OBJ_184 /* ConsoleUpdatedStyleTable.swift in Sources */,
