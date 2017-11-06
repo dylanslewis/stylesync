@@ -61,6 +61,7 @@ struct GitManager {
 		// FIXME: Work out why this doesn't work on release builds
 		print("Pushing changes")
 		try shellOut(to: .gitInitialPush(branch: styleSyncBranchName), at: projectFolderPath)
+		print("Finished pushing changes")
 	}
 	
 	func checkoutOriginalBranch() throws {
@@ -101,6 +102,7 @@ private extension ShellOutCommand {
 	static func gitInitialPush(branch: String) -> ShellOutCommand {
 		var command = "git"
 		command.append(argument: "push")
+		command.append(argument: "--set-upstream")
 		command.append(argument: "origin")
 		command.append(argument: branch)
 		return ShellOutCommand(string: command)
