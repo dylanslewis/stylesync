@@ -92,63 +92,63 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6529858B1FA619EE00B0F782 /* PBXContainerItemProxy */ = {
+		65BDD6B31FB106EF0022F5C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "StyleSync::StyleSyncCore";
 			remoteInfo = StyleSyncCore;
 		};
-		6529858C1FA619EE00B0F782 /* PBXContainerItemProxy */ = {
+		65BDD6B41FB106EF0022F5C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "ShellOut::ShellOut";
 			remoteInfo = ShellOut;
 		};
-		6529858D1FA619EE00B0F782 /* PBXContainerItemProxy */ = {
+		65BDD6B51FB106EF0022F5C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Files::Files";
 			remoteInfo = Files;
 		};
-		6529858E1FA619EE00B0F782 /* PBXContainerItemProxy */ = {
+		65BDD6B61FB106EF0022F5C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "ShellOut::ShellOut";
 			remoteInfo = ShellOut;
 		};
-		6529858F1FA619EE00B0F782 /* PBXContainerItemProxy */ = {
+		65BDD6B71FB106EF0022F5C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Files::Files";
 			remoteInfo = Files;
 		};
-		652985901FA619EE00B0F782 /* PBXContainerItemProxy */ = {
+		65BDD6B81FB106EF0022F5C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "StyleSync::StyleSyncCore";
 			remoteInfo = StyleSyncCore;
 		};
-		652985911FA619EE00B0F782 /* PBXContainerItemProxy */ = {
+		65BDD6B91FB106EF0022F5C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "ShellOut::ShellOut";
 			remoteInfo = ShellOut;
 		};
-		652985921FA619EE00B0F782 /* PBXContainerItemProxy */ = {
+		65BDD6BA1FB106EF0022F5C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Files::Files";
 			remoteInfo = Files;
 		};
-		652985931FA619EF00B0F782 /* PBXContainerItemProxy */ = {
+		65BDD6BB1FB106F00022F5C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -218,7 +218,7 @@
 		OBJ_84 /* Design */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Design; sourceTree = SOURCE_ROOT; };
 		OBJ_87 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/dylanslewis/Developer/StyleSync/.build/checkouts/ShellOut.git--4208804319273938067/Package.swift"; sourceTree = "<group>"; };
 		OBJ_88 /* ShellOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellOut.swift; sourceTree = "<group>"; };
-		OBJ_90 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/dylanslewis/Developer/StyleSync/.build/checkouts/files.git-38808351534159693/Package.swift"; sourceTree = "<group>"; };
+		OBJ_90 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/dylanslewis/Developer/StyleSync/.build/checkouts/Files.git-6739420172119258925/Package.swift"; sourceTree = "<group>"; };
 		OBJ_91 /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
 		"ShellOut::ShellOut::Product" /* ShellOut.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ShellOut.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"StyleSync::StyleSync::Product" /* StyleSync */ = {isa = PBXFileReference; lastKnownFileType = text; path = StyleSync; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -512,19 +512,19 @@
 		OBJ_85 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_86 /* ShellOut 1.2.1 */,
+				OBJ_86 /* ShellOut 2.0.0 */,
 				OBJ_89 /* Files 1.12.0 */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
-		OBJ_86 /* ShellOut 1.2.1 */ = {
+		OBJ_86 /* ShellOut 2.0.0 */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_87 /* Package.swift */,
 				OBJ_88 /* ShellOut.swift */,
 			);
-			name = "ShellOut 1.2.1";
+			name = "ShellOut 2.0.0";
 			path = ".build/checkouts/ShellOut.git--4208804319273938067/Sources";
 			sourceTree = SOURCE_ROOT;
 		};
@@ -535,7 +535,7 @@
 				OBJ_91 /* Files.swift */,
 			);
 			name = "Files 1.12.0";
-			path = ".build/checkouts/files.git-38808351534159693/Sources";
+			path = ".build/checkouts/Files.git-6739420172119258925/Sources";
 			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_9 /* Code Generators */ = {
@@ -848,47 +848,47 @@
 		OBJ_127 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "StyleSync::StyleSyncCore" /* StyleSyncCore */;
-			targetProxy = 652985901FA619EE00B0F782 /* PBXContainerItemProxy */;
+			targetProxy = 65BDD6B81FB106EF0022F5C4 /* PBXContainerItemProxy */;
 		};
 		OBJ_129 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "ShellOut::ShellOut" /* ShellOut */;
-			targetProxy = 652985911FA619EE00B0F782 /* PBXContainerItemProxy */;
+			targetProxy = 65BDD6B91FB106EF0022F5C4 /* PBXContainerItemProxy */;
 		};
 		OBJ_131 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Files::Files" /* Files */;
-			targetProxy = 652985921FA619EE00B0F782 /* PBXContainerItemProxy */;
+			targetProxy = 65BDD6BA1FB106EF0022F5C4 /* PBXContainerItemProxy */;
 		};
 		OBJ_143 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "StyleSync::StyleSyncCore" /* StyleSyncCore */;
-			targetProxy = 6529858B1FA619EE00B0F782 /* PBXContainerItemProxy */;
+			targetProxy = 65BDD6B31FB106EF0022F5C4 /* PBXContainerItemProxy */;
 		};
 		OBJ_144 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "ShellOut::ShellOut" /* ShellOut */;
-			targetProxy = 6529858E1FA619EE00B0F782 /* PBXContainerItemProxy */;
+			targetProxy = 65BDD6B61FB106EF0022F5C4 /* PBXContainerItemProxy */;
 		};
 		OBJ_145 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Files::Files" /* Files */;
-			targetProxy = 6529858F1FA619EE00B0F782 /* PBXContainerItemProxy */;
+			targetProxy = 65BDD6B71FB106EF0022F5C4 /* PBXContainerItemProxy */;
 		};
 		OBJ_205 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "ShellOut::ShellOut" /* ShellOut */;
-			targetProxy = 6529858C1FA619EE00B0F782 /* PBXContainerItemProxy */;
+			targetProxy = 65BDD6B41FB106EF0022F5C4 /* PBXContainerItemProxy */;
 		};
 		OBJ_206 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Files::Files" /* Files */;
-			targetProxy = 6529858D1FA619EE00B0F782 /* PBXContainerItemProxy */;
+			targetProxy = 65BDD6B51FB106EF0022F5C4 /* PBXContainerItemProxy */;
 		};
 		OBJ_223 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "StyleSync::StyleSyncTests" /* StyleSyncTests */;
-			targetProxy = 652985931FA619EF00B0F782 /* PBXContainerItemProxy */;
+			targetProxy = 65BDD6BB1FB106F00022F5C4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -915,8 +915,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 3 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/3 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
-				SWIFT_VERSION = 3.0;
+				OTHER_SWIFT_FLAGS = "-swift-version 4 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -924,8 +924,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 3 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/3 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
-				SWIFT_VERSION = 3.0;
+				OTHER_SWIFT_FLAGS = "-swift-version 4 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1082,7 +1082,7 @@
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGET_NAME = ShellOut;
 			};
 			name = Debug;
@@ -1104,7 +1104,7 @@
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGET_NAME = ShellOut;
 			};
 			name = Release;
