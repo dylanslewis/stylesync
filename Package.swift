@@ -5,14 +5,18 @@ import PackageDescription
 
 let package = Package(
 	name: "StyleSync",
+	products: [
+		.executable(name: "StyleSync", targets: ["StyleSync"]),
+		.library(name: "StyleSyncCore", targets: ["StyleSyncCore"])
+	],
 	dependencies: [
 		.package(
-			url: "https://github.com/johnsundell/files.git",
+			url: "https://github.com/JohnSundell/Files.git",
 			from: "1.0.0"
 		),
 		.package(
 			url: "https://github.com/JohnSundell/ShellOut.git",
-			from: "1.0.0"
+			from: "2.0.0"
 		)
 	],
 	targets: [
