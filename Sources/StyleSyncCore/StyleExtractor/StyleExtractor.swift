@@ -8,7 +8,7 @@
 import Foundation
 import Files
 
-class StyleExtractor {
+final class StyleExtractor {
 	// MARK: - Stored variables
 	
 	private var generatedRawTextStylesFile: File!
