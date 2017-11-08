@@ -39,7 +39,9 @@ struct GitHubPullRequestManager {
 		let pullRequestData = try encoder.encode(pullRequest)
 		
 		let usernameAndPersonalAccessToken = "\(username):\(personalAccessToken)"
-		let loginData = usernameAndPersonalAccessToken.data(using: .utf8)!
+		guard let loginData = usernameAndPersonalAccessToken.data(using: .utf8) else {
+			throw Error.failedToCreateLoginData
+		}
 		let base64LoginString = loginData.base64EncodedString()
 		
 		guard let pullRequestURL = pullRequestURL else {
@@ -74,5 +76,6 @@ struct GitHubPullRequestManager {
 extension GitHubPullRequestManager {
 	enum Error: Swift.Error {
 		case cannotCreatePullRequestURL
+		case failedToCreateLoginData
 	}
 }

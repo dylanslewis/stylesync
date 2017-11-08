@@ -21,13 +21,7 @@ struct XcodeProject {
 	let projectDirectory: Folder
 	
 	func run(test: Test, scheme: String, device: iOSDeviceType = .iPhone7Plus, os: Version = .init(major: 11, minor: 0)) throws {
-		do {
-			try shellOut(to: .xcodeRunTest(test: test, scheme: scheme, device: device, os: os), at: projectDirectory.path)
-		} catch {
-			let error = error as! ShellOutError
-			print(error.message) // Prints STDERR
-			print(error.output) // Prints STDOUT
-		}
+		try shellOut(to: .xcodeRunTest(test: test, scheme: scheme, device: device, os: os), at: projectDirectory.path)
 	}
 }
 
