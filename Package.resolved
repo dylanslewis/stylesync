@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "Files",
-        "repositoryURL": "https://github.com/johnsundell/files.git",
+        "repositoryURL": "https://github.com/JohnSundell/Files.git",
         "state": {
           "branch": null,
           "revision": "c2b337cd9cbe91622830e7e0f8ca76845ba81ca6",
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/JohnSundell/ShellOut.git",
         "state": {
           "branch": null,
-          "revision": "c21f7a0e891e1301eac0a1b400857173f98aab45",
-          "version": "1.2.1"
+          "revision": "479a89d9bfa7585496bd4a3e4faffac5b01af37f",
+          "version": "2.0.0"
         }
       }
     ]
