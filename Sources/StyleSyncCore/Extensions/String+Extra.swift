@@ -18,8 +18,8 @@ public extension String {
 			capitalizedStringWithoutSpaces = self
 		}
 		
-		let firstCharacter = String(capitalizedStringWithoutSpaces.characters.prefix(1)).lowercased()
-		let otherCharacters = String(capitalizedStringWithoutSpaces.characters.dropFirst())
+		let firstCharacter = String(capitalizedStringWithoutSpaces.prefix(1)).lowercased()
+		let otherCharacters = String(capitalizedStringWithoutSpaces.dropFirst())
 		return firstCharacter + otherCharacters
 	}
 	
