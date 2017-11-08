@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		65EDA8C41FB3B5CB008CEB6D /* StyleExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDA8C31FB3B5CB008CEB6D /* StyleExporter.swift */; };
 		OBJ_103 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_109 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* Package.swift */; };
 		OBJ_115 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Package.swift */; };
@@ -158,6 +159,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		65EDA8C31FB3B5CB008CEB6D /* StyleExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StyleExporter.swift; path = StyleExporter/StyleExporter.swift; sourceTree = "<group>"; };
 		"Files::Files::Product" /* Files.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Files.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* CodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerator.swift; sourceTree = "<group>"; };
 		OBJ_11 /* CodeTemplateReplaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTemplateReplaceable.swift; sourceTree = "<group>"; };
@@ -368,7 +370,7 @@
 			path = Styles;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -378,7 +380,6 @@
 				OBJ_85 /* Dependencies */,
 				OBJ_92 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_54 /* Templates */ = {
@@ -480,6 +481,7 @@
 				OBJ_42 /* Sketch */,
 				OBJ_45 /* StyleExtractor */,
 				OBJ_47 /* StyleSync.swift */,
+				65EDA8C31FB3B5CB008CEB6D /* StyleExporter.swift */,
 				OBJ_48 /* Styles */,
 				OBJ_54 /* Templates */,
 				OBJ_67 /* Utilities */,
@@ -707,7 +709,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_92 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -774,6 +776,7 @@
 				OBJ_150 /* CodeGenerator.swift in Sources */,
 				OBJ_151 /* CodeTemplateReplaceable.swift in Sources */,
 				OBJ_152 /* Config.swift in Sources */,
+				65EDA8C41FB3B5CB008CEB6D /* StyleExporter.swift in Sources */,
 				OBJ_153 /* ConfigManager.swift in Sources */,
 				OBJ_154 /* Questionaire.swift in Sources */,
 				OBJ_155 /* ErrorManager.swift in Sources */,

@@ -37,6 +37,6 @@ extension ErrorManager {
 		case gitHub
 		case sketch
 		case styleExtraction
-		case styleGeneration
+		case styleExporting
 	}
 }

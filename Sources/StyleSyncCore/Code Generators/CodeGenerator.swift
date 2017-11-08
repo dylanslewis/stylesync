@@ -209,7 +209,7 @@ private extension Array where Iterator.Element == String {
 		enumerated().forEach { arg in
 			let (offset, element) = arg
 			if element.contains("<#") {
-				ErrorManager.log(warning: "Unreplaced placeholder at line \(offset):\n" + element + "\n", context: .styleGeneration)
+				ErrorManager.log(warning: "Unreplaced placeholder at line \(offset):\n" + element + "\n", context: .styleExporting)
 			}
 		}
 	}
