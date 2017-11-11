@@ -1,13 +1,13 @@
-language: objective-c
+os:
+  - linux
+  - osx
+language: generic
+sudo: required
+dist: trusty
 osx_image: xcode9.1
+install:
+  - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
 script:
   - swift build
-  - swift build -X
-  - swift test
-before_install:
-  - export SWIFT_VERSION=swift-4.0.2-RELEASE
-  - curl -O https://swift.org/builds/development/xcode/${SWIFT_VERSION}/${SWIFT_VERSION}-osx.pkg
-  - sudo installer -pkg ${SWIFT_VERSION}-osx.pkg -target /
-  - export TOOLCHAINS=swift
 notifications:
   email: false
