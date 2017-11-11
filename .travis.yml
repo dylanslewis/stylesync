@@ -1,3 +1,11 @@
 language: objective-c
+env:
+  - TOOLCHAINS=swift
+script:
+  - swift build --fetch
+before_install:
+  - TOOLCHAIN_VERSION=swift-4.0.2-RELEASE
+  - curl -O https://swift.org/builds/development/xcode/${TOOLCHAIN_VERSION}/${TOOLCHAIN_VERSION}-osx.pkg
+  - sudo installer -pkg ${TOOLCHAIN_VERSION}-osx.pkg -target /
 script:
     - swift build && xcodebuild -scheme StyleSync test
