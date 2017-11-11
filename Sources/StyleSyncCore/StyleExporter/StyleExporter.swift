@@ -202,12 +202,11 @@ final class StyleExporter {
 	///
 	/// - Parameters:
 	///   - deprecatedTextStyles: Deprecated text styles
-	///   - deprecatedColorStyles: Deprecated text styles
-	///   - latestTextStyles: The latest text styles
-	///   - latestColorStyles: The latest color styles
-	/// - Returns: Arrays of the latest and deprecated styles.
-	
-	// TODO: Update docs
+	///   - deprecatedColorStyles: Deprecated color styles
+	///   - latestTextStyles: The Sketch file's text styles
+	///   - latestColorStyles: The Sketch file's color styles
+	///   - textStylesFileExtension: The text style's export file extension
+	///   - colorStylesFileExtension: The color style's export file extension
 	private func processStyles(
 		deprecatedTextStyles: [TextStyle],
 		deprecatedColorStyles: [ColorStyle],

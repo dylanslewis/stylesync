@@ -167,7 +167,6 @@ struct StyleUpdateSummaryGenerator {
 		}
 	}
 	
-	// TODO: You can probably get this from the data found out already...
 	private func updatedStyles(oldStyles: [CodeTemplateReplacableStyle], newStyles: [CodeTemplateReplacableStyle]) -> [UpdatedStyle] {
 		return newStyles.flatMap { newStyle in
 			guard let oldStyle = oldStyles

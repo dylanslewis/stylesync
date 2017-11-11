@@ -113,7 +113,13 @@ extension CodeGenerator {
 // MARK: - Helpers
 
 private extension Array where Iterator.Element == String {
-	// FIXME: Add docs
+	/// Extracts the file type and name from an array of code lines, removes
+	///	those lines, to prepare the array of code lines for template
+	///	replacement.
+	///
+	/// - Returns: A tuple of the file type, file name and updated array of
+	///		template code lines.
+	/// - Throws: An error if the file extension can't be found.
 	func extractingFileTypeAndFileName() throws -> (FileType, String?, [String]) {
 		let fileExtensionReference = "fileExtension".metadataPlaceholderReference
 		let fileNameReference = "fileName".metadataPlaceholderReference
@@ -137,13 +143,12 @@ private extension Array where Iterator.Element == String {
 	/// Replaces all placeholders in each of the array's code lines, by looking
 	/// up the corresponding value in the `replacementDictionary`.
 	///
-	/// - Parameter replacementDictionary: A dictionary where the keys are the
-	///									   replacable element's placeholder and
-	///									   the value is the replacement for that
-	///									   placeholder.
-	/// - Returns: The original array with replaced placeholders.
-	
-	// FIXME: Update docs
+	/// - Parameters:
+	///   - replacementDictionary: The dictionary used to replace placeholders
+	///		with values
+	///   - isDeprecated: Whether the style is deprecated
+	/// - Returns: The original array with the placeholders replaced with
+	///		values.
 	func replacingCodePlaceholders(usingReplacementDictionary replacementDictionary: [String: String], isDeprecated: Bool) -> [String] {
 		let deprecatedKey = "deprecated"
 		let deprecatedReference = "\(deprecatedKey)=\(isDeprecated)".conditionalCodePlaceholderReference
