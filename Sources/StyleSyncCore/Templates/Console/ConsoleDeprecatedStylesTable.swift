@@ -1,7 +1,7 @@
 
 enum ConsoleTemplate {}
 
-// TODO: Do this in a better way when SPM supports resources.
+// TODO: Store in a file when SPM supports resources
 extension ConsoleTemplate {
 	static let deprecatedStylesTable = """
 	<#@fileExtension#>log
