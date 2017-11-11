@@ -35,8 +35,13 @@ public final class StyleSync {
 		case 1:
 			break
 		case 2 where arguments.last == "-h":
-			print("Help") // TODO: Add proper help message.
+			print(StyleSync.helpMessage)
+			exit(0)
+		case 2 where arguments.last == "-v":
+			print(StyleSync.versionMessage)
+			exit(0)
 		default:
+			print(StyleSync.helpMessage)
 			ErrorManager.log(fatalError: Error.invalidArguments, context: .arguments)
 		}
 		
@@ -146,7 +151,7 @@ public final class StyleSync {
 		}
 		
 		guard let gitHubPersonalAccessToken = gitHubPersonalAccessToken else {
-			print("\nIf you'd like to branch, commit and raise a pull request for these updates, add your GitHub Personal Access token to styleSyncConfig.json")
+			print("\nIf you'd like to branch, commit and raise a pull request for these updates, add your GitHub Personal Access token to `styleSyncConfig.json`")
 			exit(0)
 		}
 		
@@ -184,6 +189,20 @@ public final class StyleSync {
 		}
 		exit(0)
 	}
+}
+
+private extension StyleSync {
+	static var helpMessage: String {
+		return "stylesync v\(version)\n"
+			+ "\n"
+			+ "Run `stylesync` in the root directory of your project to set up a config file."
+	}
+	
+	static var versionMessage: String {
+		return "stylesync, version \(version)"
+	}
+	
+	private static let version = "1.0.0"
 }
 
 extension StyleSync {
