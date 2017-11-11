@@ -13,5 +13,4 @@ enum GitHubLink {
 	static let createIssue = baseURL.appendingPathComponent("issues/new")
 	static let templatesDirectory = baseURL.appendingPathComponent("issues/new") // FIXME: Use real URL
 	static let templateReadme = baseURL.appendingPathComponent("issues/new") // FIXME: Use real URL
-	
 }
