@@ -1,4 +1,4 @@
-<#@fileExtensionA#>xml
+<#@fileExtension#>xml
 <#@fileName#>StyleGuideColors
 /*
 <generatedFileHeader>
@@ -9,6 +9,6 @@
 <resources>
   <colorDeclaration>
   <#?deprecated=true#>/* Deprecated */
-  <color name="<#=colorName#>"><#=hex#></color>
+  <color name="<#=colorName#>">#<#=hex#></color>
   </colorDeclaration>
 </resources>

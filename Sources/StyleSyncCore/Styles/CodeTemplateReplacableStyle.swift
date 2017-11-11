@@ -56,11 +56,11 @@ struct CodeTemplateReplacableStyle: CodeTemplateReplacable {
 		self.replacementDictionary = [
 			"name": colorStyle.name,
 			"colorName": self.variableName,
-			"red": String(describing: colorStyle.color.redComponent),
-			"green": String(describing: colorStyle.color.greenComponent),
-			"blue": String(describing: colorStyle.color.blueComponent),
-			"alpha": String(describing: colorStyle.color.alphaComponent),
-			"hex": "#" + colorStyle.color.hex
+			"red": String(describing: colorStyle.color.components.red),
+			"green": String(describing: colorStyle.color.components.green),
+			"blue": String(describing: colorStyle.color.components.blue),
+			"alpha": String(describing: colorStyle.color.components.alpha),
+			"hex": colorStyle.color.hex
 		]
 		self.ignoredUpdateAttributes = ["red", "green", "blue", "alpha"]
 		self.isDeprecated = colorStyle.isDeprecated

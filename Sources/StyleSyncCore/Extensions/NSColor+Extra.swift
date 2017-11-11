@@ -8,7 +8,9 @@
 import Cocoa
 
 extension NSColor {
-	var components: (red: Int, green: Int, blue: Int, alpha: CGFloat) {
+	typealias Components = (red: Int, green: Int, blue: Int, alpha: CGFloat)
+	
+	var components: Components {
 		return (
 			roundedInteger(forComponent: redComponent),
 			roundedInteger(forComponent: greenComponent),
