@@ -10,7 +10,7 @@ import XCTest
 
 class VersionTests: XCTestCase {
 	func testCreatingVersionWithNoVersionIsVersionOne() {
-		let version = Version(oldColorStyles: nil, oldTextStyles: nil, newColorStyles: [], newTextStyles: [], currentVersion: nil)
+		let version = Version(oldColorStyles: nil, oldTextStyles: nil, newColorStyles: [], newTextStyles: [], previousStylesVersion: nil)
 		let expectedVersion = Version(major: 1, minor: 0)
 		XCTAssertEqual(version, expectedVersion)
 	}
@@ -110,7 +110,7 @@ class VersionTests: XCTestCase {
 			oldTextStyles: [],
 			newColorStyles: newColorStyles,
 			newTextStyles: [],
-			currentVersion: currentVersion
+			previousStylesVersion: currentVersion
 		)
 		let expectedVersion = Version(major: 2, minor: 0)
 		XCTAssertEqual(version, expectedVersion)
@@ -125,7 +125,7 @@ class VersionTests: XCTestCase {
 			oldTextStyles: [],
 			newColorStyles: newColorStyles,
 			newTextStyles: [],
-			currentVersion: currentVersion
+			previousStylesVersion: currentVersion
 		)
 		let expectedVersion = Version(major: 1, minor: 1)
 		XCTAssertEqual(version, expectedVersion)
@@ -140,7 +140,7 @@ class VersionTests: XCTestCase {
 			oldTextStyles: [],
 			newColorStyles: newColorStyles,
 			newTextStyles: [],
-			currentVersion: currentVersion
+			previousStylesVersion: currentVersion
 		)
 		let expectedVersion = Version(major: 1, minor: 0)
 		XCTAssertEqual(version, expectedVersion)
@@ -155,7 +155,7 @@ class VersionTests: XCTestCase {
 			oldTextStyles: [],
 			newColorStyles: newColorStyles,
 			newTextStyles: [],
-			currentVersion: currentVersion
+			previousStylesVersion: currentVersion
 		)
 		let expectedVersion = Version(major: 1, minor: 1)
 		XCTAssertEqual(version, expectedVersion)
@@ -170,7 +170,7 @@ class VersionTests: XCTestCase {
 			oldTextStyles: oldTextStyles,
 			newColorStyles: [],
 			newTextStyles: newTextStyles,
-			currentVersion: currentVersion
+			previousStylesVersion: currentVersion
 		)
 		let expectedVersion = Version(major: 2, minor: 0)
 		XCTAssertEqual(version, expectedVersion)
@@ -185,7 +185,7 @@ class VersionTests: XCTestCase {
 			oldTextStyles: oldTextStyles,
 			newColorStyles: [],
 			newTextStyles: newTextStyles,
-			currentVersion: currentVersion
+			previousStylesVersion: currentVersion
 		)
 		let expectedVersion = Version(major: 1, minor: 1)
 		XCTAssertEqual(version, expectedVersion)
@@ -200,7 +200,7 @@ class VersionTests: XCTestCase {
 			oldTextStyles: oldTextStyles,
 			newColorStyles: [],
 			newTextStyles: newTextStyles,
-			currentVersion: currentVersion
+			previousStylesVersion: currentVersion
 		)
 		let expectedVersion = Version(major: 1, minor: 0)
 		XCTAssertEqual(version, expectedVersion)
@@ -215,7 +215,7 @@ class VersionTests: XCTestCase {
 			oldTextStyles: oldTextStyles,
 			newColorStyles: [],
 			newTextStyles: newTextStyles,
-			currentVersion: currentVersion
+			previousStylesVersion: currentVersion
 		)
 		let expectedVersion = Version(major: 1, minor: 1)
 		XCTAssertEqual(version, expectedVersion)
@@ -232,7 +232,7 @@ class VersionTests: XCTestCase {
 			oldTextStyles: oldTextStyles,
 			newColorStyles: newColorStyles,
 			newTextStyles: newTextStyles,
-			currentVersion: currentVersion
+			previousStylesVersion: currentVersion
 		)
 		let expectedVersion = Version(major: 1, minor: 1)
 		XCTAssertEqual(version, expectedVersion)
@@ -249,7 +249,7 @@ class VersionTests: XCTestCase {
 			oldTextStyles: oldTextStyles,
 			newColorStyles: newColorStyles,
 			newTextStyles: newTextStyles,
-			currentVersion: currentVersion
+			previousStylesVersion: currentVersion
 		)
 		let expectedVersion = Version(major: 2, minor: 0)
 		XCTAssertEqual(version, expectedVersion)
@@ -266,7 +266,7 @@ class VersionTests: XCTestCase {
 			oldTextStyles: oldTextStyles,
 			newColorStyles: newColorStyles,
 			newTextStyles: newTextStyles,
-			currentVersion: currentVersion
+			previousStylesVersion: currentVersion
 		)
 		let expectedVersion = Version(major: 2, minor: 0)
 		XCTAssertEqual(version, expectedVersion)
