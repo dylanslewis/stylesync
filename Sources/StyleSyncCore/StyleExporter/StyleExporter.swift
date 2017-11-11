@@ -371,16 +371,22 @@ final class StyleExporter {
 		try generatedRawColorStylesFile.write(data: rawColorStylesData)
 	}
 	
-	private func printUpdatedStyles() throws {
-		let consoleLogGenerator = try StyleUpdateSummaryGenerator(
-			headingTemplate: ConsoleTemplate.heading,
-			styleNameTemplate: ConsoleTemplate.styleName,
-			addedStyleTableTemplate: ConsoleTemplate.newStyleTable,
-			updatedStyleTableTemplate: ConsoleTemplate.updatedStylesTable,
-			deprecatedStylesTableTemplate: ConsoleTemplate.deprecatedStylesTable,
-			shouldPrintStyleSyncLink: false
-		)
-		
+	private func printUpdatedStyles() {
+		let consoleLogGenerator: StyleUpdateSummaryGenerator
+		do {
+			consoleLogGenerator = try StyleUpdateSummaryGenerator(
+				headingTemplate: ConsoleTemplate.heading,
+				styleNameTemplate: ConsoleTemplate.styleName,
+				addedStyleTableTemplate: ConsoleTemplate.newStyleTable,
+				updatedStyleTableTemplate: ConsoleTemplate.updatedStylesTable,
+				deprecatedStylesTableTemplate: ConsoleTemplate.deprecatedStylesTable,
+				shouldPrintStyleSyncLink: false
+			)
+		} catch {
+			ErrorManager.log(error: error, context: .printStyles)
+			return
+		}
+
 		let consoleLog = consoleLogGenerator.body(
 			fromOldColorStyles: oldColorStyles,
 			newColorStyles: newColorStyles,
@@ -456,7 +462,7 @@ final class StyleExporter {
 				// name, then remove the deprecated one to avoid compilation
 				// issues.
 				if newStyles.contains(where: { return $0.variableName == style.variableName }) {
-					print("⚠️ Style with name \(style.variableName) was removed and added again with a different name.")
+					print("⚠️  Style with name \(style.variableName) was removed and added again with a different name.")
 					return false
 				} else {
 					return true

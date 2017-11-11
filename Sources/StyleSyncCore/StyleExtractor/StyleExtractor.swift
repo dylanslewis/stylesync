@@ -37,7 +37,7 @@ final class StyleExtractor {
 					let color = textStyleObject.value.textStyle.encodedAttributes.color.color,
 					let colorStyle = ColorStyle.colorStyle(for: color, in: latestColorStyles)
 				else {
-					print("⚠️ \(textStyleObject.name) does not use a color from the shared colour scheme")
+					print("⚠️  \(textStyleObject.name) does not use a color from the shared colour scheme")
 					return nil
 				}
 				return TextStyle(textStyleObject: textStyleObject, colorStyle: colorStyle)

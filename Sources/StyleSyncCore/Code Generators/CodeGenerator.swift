@@ -174,7 +174,7 @@ private extension Array where Iterator.Element == String {
 	/// - Returns: The code lines with replaced code placeholders.
 	func replacingCodePlaceholders(usingReplacementItems replacementItems: [CodeTemplateReplacable]) -> [String] {
 		guard let firstReplacementItem = replacementItems.first else {
-			print("⚠️ Unable to find element type.")
+			print("⚠️  Unable to find element type.")
 			return self
 		}
 		

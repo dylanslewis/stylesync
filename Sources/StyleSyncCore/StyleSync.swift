@@ -26,21 +26,25 @@ public final class StyleSync {
 	
 	// MARK: - Initializer
 	
-	public init(arguments: [String] = CommandLine.arguments) throws {
+	public init(arguments: [String] = CommandLine.arguments) {
 		#if os(Linux)
 			print("StyleSync does not support Linux")
 			exit(1)
 		#endif
 		guard arguments.count == 1 else {
-			throw Error.invalidArguments
+			ErrorManager.log(fatalError: Error.invalidArguments, context: .arguments)
 		}
 		let configManager = ConfigManager(projectFolder: projectFolder)
-		self.config = try configManager.getConfig()
+		do {
+			self.config = try configManager.getConfig()
+		} catch {
+			ErrorManager.log(fatalError: error, context: .config)
+		}
 	}
 	
 	// MARK: - Run
 	
-	public func run() throws {
+	public func run() {
 		let sketchDocumentFile: File
 		let exportTextFolder: Folder
 		let exportColorsFolder: Folder
@@ -56,7 +60,7 @@ public final class StyleSync {
 			ErrorManager.log(fatalError: error, context: .config)
 		}
 		
-		try run(
+		run(
 			sketchDocumentFile: sketchDocumentFile,
 			exportTextFolder: exportTextFolder,
 			exportColorsFolder: exportColorsFolder,
@@ -73,7 +77,7 @@ public final class StyleSync {
 		textStyleTemplateFile: File,
 		colorStyleTemplateFile: File,
 		gitHubPersonalAccessToken: String?
-	) throws {
+	) {
 		let sketchManager = SketchManager(sketchFile: sketchDocumentFile)
 		let sketchDocument: SketchDocument
 		do {
@@ -82,14 +86,20 @@ public final class StyleSync {
 			ErrorManager.log(fatalError: error, context: .sketch)
 		}
 		
-		let generatedRawTextStylesFile = try exportTextFolder.createFileIfNeeded(
-			named: Constant.exportedTextStylesFileName,
-			fileExtension: Constant.exportedStylesFileType
-		)
-		let generatedRawColorStylesFile = try exportColorsFolder.createFileIfNeeded(
-			named: Constant.exportedColorStylesFileName,
-			fileExtension: Constant.exportedStylesFileType
-		)
+		let generatedRawTextStylesFile: File
+		let generatedRawColorStylesFile: File
+		do {
+			generatedRawTextStylesFile = try exportTextFolder.createFileIfNeeded(
+				named: Constant.exportedTextStylesFileName,
+				fileExtension: Constant.exportedStylesFileType
+			)
+			generatedRawColorStylesFile = try exportColorsFolder.createFileIfNeeded(
+				named: Constant.exportedColorStylesFileName,
+				fileExtension: Constant.exportedStylesFileType
+			)
+		} catch {
+			ErrorManager.log(fatalError: error, context: .files)
+		}
 			
 		let styleExtractor = StyleExtractor(
 			generatedRawTextStylesFile: generatedRawTextStylesFile,
@@ -130,7 +140,7 @@ public final class StyleSync {
 		
 		guard let gitHubPersonalAccessToken = gitHubPersonalAccessToken else {
 			print("\nIf you'd like to branch, commit and raise a pull request for these updates, add your GitHub Personal Access token to styleSyncConfig.json")
-			return
+			exit(0)
 		}
 		
 		let generatedTextStylesFile: File = styleExporter.generatedTextStylesFile
@@ -165,6 +175,7 @@ public final class StyleSync {
 		} catch {
 			ErrorManager.log(fatalError: error, context: .gitHub)
 		}
+		exit(0)
 	}
 }
 
