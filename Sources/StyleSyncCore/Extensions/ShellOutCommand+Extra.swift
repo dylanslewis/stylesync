@@ -11,7 +11,6 @@ extension ShellOutCommand {
 	static func makeDirectory(directory: String) -> ShellOutCommand {
 		var command = "mkdir"
 		command.append(argument: directory)
-		print(command)
 		return ShellOutCommand(string: command)
 	}
 	

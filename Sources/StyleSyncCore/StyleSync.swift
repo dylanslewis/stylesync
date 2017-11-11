@@ -28,9 +28,9 @@ public final class StyleSync {
 	
 	public init(arguments: [String] = CommandLine.arguments) {
 		#if os(Linux)
-			print("StyleSync does not support Linux")
-			exit(1)
+			ErrorManager.log(fatalError: .unsupportedPlatform, context: .initialization)
 		#endif
+		
 		guard arguments.count == 1 else {
 			ErrorManager.log(fatalError: Error.invalidArguments, context: .arguments)
 		}
@@ -181,6 +181,7 @@ public final class StyleSync {
 
 extension StyleSync {
 	enum Error: Swift.Error {
+		case unsupportedPlatform
 		case invalidArguments
 		case noStylesFound
 	}

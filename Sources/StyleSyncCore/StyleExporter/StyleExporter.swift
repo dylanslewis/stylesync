@@ -187,8 +187,8 @@ final class StyleExporter {
 			generatedRawColorStylesFile: generatedRawColorStylesFile
 		)
 		
-		try printUpdatedStyles()
-		print("🎉  Your styles are now up to date!")
+		printUpdatedStyles()
+		print("🎉  Successfully generated style files at:\n\(generatedTextStylesFile.path)\n\(generatedColorStylesFile.path)")
 	}
 	
 	private func createStyleParsers(latestTextStyles: [TextStyle], latestColorStyles: [ColorStyle]) -> (text: StyleParser<TextStyle>, color: StyleParser<ColorStyle>) {
@@ -462,7 +462,7 @@ final class StyleExporter {
 				// name, then remove the deprecated one to avoid compilation
 				// issues.
 				if newStyles.contains(where: { return $0.variableName == style.variableName }) {
-					print("⚠️  Style with name \(style.variableName) was removed and added again with a different name.")
+					ErrorManager.log(warning: "Style with name \(style.variableName) was removed and added again with a different name.")
 					return false
 				} else {
 					return true

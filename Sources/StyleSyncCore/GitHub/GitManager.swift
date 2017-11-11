@@ -40,6 +40,7 @@ struct GitManager {
 	func createStyleSyncBranch() throws {
 		print("Creating branch '\(styleSyncBranchName)'")
 		try shellOut(to: .gitCreateBranch(branch: styleSyncBranchName), at: projectFolderPath)
+		
 		print("Checking out branch '\(styleSyncBranchName)'")
 		try shellOut(to: .gitCheckout(branch: styleSyncBranchName), at: projectFolderPath)
 	}
@@ -58,10 +59,10 @@ struct GitManager {
 			at: projectFolderPath
 		)
 		
-		// FIXME: Work out why this doesn't work on release builds
 		print("Pushing changes")
 		try shellOut(to: .gitInitialPush(branch: styleSyncBranchName), at: projectFolderPath)
-		print("Finished pushing changes")
+		
+		print("🎉  Successfully pushed updated style files to `origin/\(styleSyncBranchName)`")
 	}
 	
 	func checkoutOriginalBranch() throws {

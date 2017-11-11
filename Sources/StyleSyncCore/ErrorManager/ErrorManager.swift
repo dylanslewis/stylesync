@@ -14,11 +14,16 @@ enum ErrorManager {
 			print(shellOutError.output)
 			print(shellOutError.message)
 		} else {
-			print(error)
+//			switch context {
+//			case .printStyles where error == CodeGenerator.Error.noFileExtensionFound:
+//				print("Failed to print styles")
+//			default:
+				print(error)
+//			}
 		}
 	}
 	
-	static func log(warning: String, context: Context) {
+	static func log(warning: String) {
 		print("⚠️  \(warning)")
 	}
 	

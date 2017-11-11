@@ -37,7 +37,7 @@ final class StyleExtractor {
 					let color = textStyleObject.value.textStyle.encodedAttributes.color.color,
 					let colorStyle = ColorStyle.colorStyle(for: color, in: latestColorStyles)
 				else {
-					print("⚠️  \(textStyleObject.name) does not use a color from the shared colour scheme")
+					ErrorManager.log(warning: "\(textStyleObject.name) does not use a color from the shared colour scheme")
 					return nil
 				}
 				return TextStyle(textStyleObject: textStyleObject, colorStyle: colorStyle)
@@ -77,6 +77,7 @@ final class StyleExtractor {
 			versionedTextStyle: versionedTextStyles,
 			versionedColorStyle: versionedColorStyles
 		)
+		
 		print("Found previously exported styles at v\(previousVersion.stringRepresentation)")
 		return (versionedTextStyles.textStyles, versionedColorStyles.colorStyles, previousVersion)
 	}
@@ -88,7 +89,9 @@ final class StyleExtractor {
 		let textVersion = versionedTextStyle.version
 		let colorVersion = versionedColorStyle.version
 		if textVersion != colorVersion {
-			print("Mismatching versions: \(textVersion.stringRepresentation) (Text) and \(colorVersion.stringRepresentation) (Color)")
+			ErrorManager.log(
+				warning: "Mismatching versions: \(textVersion.stringRepresentation) (Text) and \(colorVersion.stringRepresentation) (Color)"
+			)
 		}
 		return textVersion
 	}

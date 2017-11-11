@@ -174,7 +174,7 @@ private extension Array where Iterator.Element == String {
 	/// - Returns: The code lines with replaced code placeholders.
 	func replacingCodePlaceholders(usingReplacementItems replacementItems: [CodeTemplateReplacable]) -> [String] {
 		guard let firstReplacementItem = replacementItems.first else {
-			print("⚠️  Unable to find element type.")
+			ErrorManager.log(warning: "Unable to find element type during code replacement")
 			return self
 		}
 		
@@ -209,7 +209,7 @@ private extension Array where Iterator.Element == String {
 		enumerated().forEach { arg in
 			let (offset, element) = arg
 			if element.contains("<#") {
-				ErrorManager.log(warning: "Unreplaced placeholder at line \(offset):\n" + element + "\n", context: .styleExporting)
+				ErrorManager.log(warning: "Unreplaced placeholder at line \(offset):\n" + element + "\n")
 			}
 		}
 	}
