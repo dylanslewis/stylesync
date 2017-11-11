@@ -14,12 +14,11 @@ enum ErrorManager {
 			print(shellOutError.output)
 			print(shellOutError.message)
 		} else {
-//			switch context {
-//			case .printStyles where error == CodeGenerator.Error.noFileExtensionFound:
-//				print("Failed to print styles")
-//			default:
-				print(error)
-//			}
+			print(error)
+		}
+		
+		if let contextInformation = context.information {
+			print(contextInformation)
 		}
 	}
 	
@@ -38,14 +37,34 @@ enum ErrorManager {
 extension ErrorManager {
 	enum Context {
 		case arguments
-		case files
-		case zipManager
-		case projectReferenceUpdate
+		case questionnaire
 		case config
-		case gitHub
+		case files
 		case sketch
-		case printStyles
+		case gitHub
 		case styleExtraction
-		case styleExporting
+		case stylesExport
+		case printStyles
+	}
+}
+
+extension ErrorManager.Context {
+	var information: String? {
+		switch self {
+		case .arguments:
+			return "Unexpected arguments. Call `stylesync -h` for help."
+		case .config:
+			return "Error finding `styleSyncConfig.json`. Make sure you run Style Sync from the root directory of your project, which should contain `styleSyncConfig.json`."
+		case .sketch:
+			return "Error extracting Sketch file."
+		case .gitHub:
+			return "Error submitting code to GitHub."
+		case .styleExtraction:
+			return "Error extracting styles."
+		case .stylesExport:
+			return "Error exporting styles."
+		case .questionnaire, .files, .printStyles:
+			return nil
+		}
 	}
 }

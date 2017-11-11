@@ -407,7 +407,7 @@ final class StyleExporter {
 			do {
 				fileString = try file.readAsString()
 			} catch {
-				ErrorManager.log(error: error, context: .projectReferenceUpdate)
+				ErrorManager.log(error: error, context: .files)
 				return
 			}
 			currentAndMigratedStyles.forEach({
@@ -417,7 +417,7 @@ final class StyleExporter {
 			do {
 				try file.write(string: fileString)
 			} catch {
-				ErrorManager.log(error: error, context: .projectReferenceUpdate)
+				ErrorManager.log(error: error, context: .files)
 			}
 		}
 	}
@@ -431,7 +431,7 @@ final class StyleExporter {
 			do {
 				fileString = try file.readAsString()
 			} catch {
-				ErrorManager.log(error: error, context: .projectReferenceUpdate)
+				ErrorManager.log(error: error, context: .files)
 				return
 			}
 			

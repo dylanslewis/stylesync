@@ -22,24 +22,31 @@ public final class StyleSync {
 	// MARK: - Stored variables
 
 	private var config: Config!
-	private let projectFolder: Folder = .current
+	private let projectFolder: Folder!
 	
 	// MARK: - Initializer
 	
-	public init(arguments: [String] = CommandLine.arguments) {
+	public init(arguments: [String] = CommandLine.arguments, projectFolder: Folder = .current) {
 		#if os(Linux)
 			ErrorManager.log(fatalError: .unsupportedPlatform, context: .initialization)
 		#endif
 		
-		guard arguments.count == 1 else {
+		switch arguments.count {
+		case 1:
+			break
+		case 2 where arguments.last == "-h":
+			print("Help") // TODO: Add proper help message.
+		default:
 			ErrorManager.log(fatalError: Error.invalidArguments, context: .arguments)
 		}
+		
 		let configManager = ConfigManager(projectFolder: projectFolder)
 		do {
-			self.config = try configManager.getConfig()
+			config = try configManager.getConfig()
 		} catch {
 			ErrorManager.log(fatalError: error, context: .config)
 		}
+		self.projectFolder = projectFolder
 	}
 	
 	// MARK: - Run
@@ -57,7 +64,7 @@ public final class StyleSync {
 			textStyleTemplateFile = try File(path: config.textStyle.template)
 			colorStyleTemplateFile = try File(path: config.colorStyle.template)
 		} catch {
-			ErrorManager.log(fatalError: error, context: .config)
+			ErrorManager.log(fatalError: error, context: .files)
 		}
 		
 		run(
@@ -135,7 +142,7 @@ public final class StyleSync {
 		do {
 			try styleExporter.exportStyles()
 		} catch {
-			ErrorManager.log(fatalError: error, context: .styleExporting)
+			ErrorManager.log(fatalError: error, context: .stylesExport)
 		}
 		
 		guard let gitHubPersonalAccessToken = gitHubPersonalAccessToken else {

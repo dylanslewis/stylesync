@@ -36,8 +36,7 @@ class ConfigManager {
 		} catch File.Error.readFailed {
 			return try createConfig()
 		} catch {
-			ErrorManager.log(error: error, context: .config)
-			throw File.Error.readFailed
+			throw error
 		}
 	}
 	
@@ -47,8 +46,8 @@ class ConfigManager {
 		guard let configFile = try? projectFolder.file(
 			named: Constant.Config.fileName,
 			fileExtension: Constant.Config.fileType
-			) else {
-				throw File.Error.readFailed
+		) else {
+			throw File.Error.readFailed
 		}
 		return try configFile.readAsDecodedJSON()
 	}
@@ -61,7 +60,7 @@ class ConfigManager {
 			do {
 				try self.save(config: completedConfig)
 			} catch {
-				ErrorManager.log(error: error, context: .config)
+				ErrorManager.log(error: error, context: .files)
 			}
 		}
 		questionaire.startQuestionaire()
@@ -71,19 +70,16 @@ class ConfigManager {
 	private func save(config: Config) throws {
 		let encoder = JSONEncoder()
 		encoder.outputFormatting = .prettyPrinted
-		do {
-			let configFileData = try encoder.encode(config)
-			guard let configFileString = String(data: configFileData, encoding: .utf8) else {
-				throw File.Error.writeFailed
-			}
-			
-			let styleSyncConfig = try projectFolder.createFileIfNeeded(
-				named: Constant.Config.fileName,
-				fileExtension: Constant.Config.fileType
-			)
-			try styleSyncConfig.write(string: configFileString)
-		} catch {
-			ErrorManager.log(error: error, context: .config)
+		
+		let configFileData = try encoder.encode(config)
+		guard let configFileString = String(data: configFileData, encoding: .utf8) else {
+			throw File.Error.writeFailed
 		}
+		
+		let styleSyncConfig = try projectFolder.createFileIfNeeded(
+			named: Constant.Config.fileName,
+			fileExtension: Constant.Config.fileType
+		)
+		try styleSyncConfig.write(string: configFileString)
 	}
 }
