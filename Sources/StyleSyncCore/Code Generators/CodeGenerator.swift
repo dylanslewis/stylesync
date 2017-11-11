@@ -96,8 +96,17 @@ private extension CodeGenerator {
 // MARK: - Error
 
 extension CodeGenerator {
-	enum Error: Swift.Error {
+	enum Error: Swift.Error, CustomStringConvertible {
 		case noFileExtensionFound
+		
+		/// A string describing the error.
+		public var description: String {
+			switch self {
+			case .noFileExtensionFound:
+				let fileExtensionReference = "fileExtension".metadataPlaceholderReference
+				return "Failed to find file extension in template. Make sure to include \(fileExtensionReference) in your template file.\nSee \(GitHubLink.templateReadme) for more information on how to create a template."
+			}
+		}
 	}
 }
 

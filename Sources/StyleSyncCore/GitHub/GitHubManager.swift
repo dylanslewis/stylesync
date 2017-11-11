@@ -132,7 +132,15 @@ class GitHubManager {
 }
 
 extension GitHubManager {
-	enum Error: Swift.Error {
+	enum Error: Swift.Error, CustomStringConvertible {
 		case unexpectedConsoleOutput
+		
+		/// A string describing the error.
+		public var description: String {
+			switch self {
+			case .unexpectedConsoleOutput:
+				return "Failed to extract username and remote repository name."
+			}
+		}
 	}
 }

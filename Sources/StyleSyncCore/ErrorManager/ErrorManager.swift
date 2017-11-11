@@ -18,7 +18,7 @@ enum ErrorManager {
 		}
 		
 		if let contextInformation = context.information {
-			print(contextInformation)
+			print("\n" + contextInformation)
 		}
 	}
 	
@@ -27,7 +27,11 @@ enum ErrorManager {
 	}
 	
 	static func log(fatalError: Error, context: Context, file: String = #file, line: Int = #line) -> Never {
-		print("⛔️  Fatal error at \(file):\(line) (\(context)")
+		var fileName: String?
+		if let fileNameSubstring = file.split(separator: "/").last {
+			fileName = String(fileNameSubstring)
+		}
+		print("\n⛔️  Fatal error at \(fileName ?? file):\(line) (\(context))")
 		log(error: fatalError, context: context)
 		print("\nIf you believe this is a bug, please create an issue on GitHub, making sure to include the error log:\n\(GitHubLink.createIssue)\n")
 		exit(1)
@@ -51,8 +55,6 @@ extension ErrorManager {
 extension ErrorManager.Context {
 	var information: String? {
 		switch self {
-		case .arguments:
-			return "Unexpected arguments. Call `stylesync -h` for help."
 		case .config:
 			return "Error finding `styleSyncConfig.json`. Make sure you run Style Sync from the root directory of your project, which should contain `styleSyncConfig.json`."
 		case .sketch:
@@ -63,7 +65,7 @@ extension ErrorManager.Context {
 			return "Error extracting styles."
 		case .stylesExport:
 			return "Error exporting styles."
-		case .questionnaire, .files, .printStyles:
+		case .arguments, .questionnaire, .files, .printStyles:
 			return nil
 		}
 	}

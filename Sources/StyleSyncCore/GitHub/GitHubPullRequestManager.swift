@@ -74,8 +74,16 @@ struct GitHubPullRequestManager {
 }
 
 extension GitHubPullRequestManager {
-	enum Error: Swift.Error {
+	enum Error: Swift.Error, CustomStringConvertible {
 		case cannotCreatePullRequestURL
 		case failedToCreateLoginData
+		
+		/// A string describing the error.
+		public var description: String {
+			switch self {
+			case .failedToCreateLoginData, .cannotCreatePullRequestURL:
+				return "Failed to extract username and GitHub personal access token. Please make sure you are running Style Sync in a git repository and that your GitHub Personal Access Token is correct in `styleSyncConfig.json`"
+			}
+		}
 	}
 }

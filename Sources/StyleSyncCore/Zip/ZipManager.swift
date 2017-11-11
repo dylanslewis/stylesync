@@ -26,7 +26,7 @@ struct ZipManager {
 	
 	init(zippedFile: File) throws {
 		guard let parentFolder = zippedFile.parent else {
-			throw Error.failedToFindParentFolder
+			throw Error.failedToFindParentFolder(file: zippedFile)
 		}
 		self.zippedFile = zippedFile
 		self.parentFolder = parentFolder
@@ -49,8 +49,16 @@ struct ZipManager {
 }
 
 extension ZipManager {
-	enum Error: Swift.Error {
-		case failedToFindParentFolder
+	enum Error: Swift.Error, CustomStringConvertible {
+		case failedToFindParentFolder(file: File)
+		
+		/// A string describing the error.
+		public var description: String {
+			switch self {
+			case .failedToFindParentFolder(let file):
+				return "Failed to find the parent folder of \(file.path)"
+			}
+		}
 	}
 }
 

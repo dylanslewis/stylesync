@@ -187,9 +187,21 @@ public final class StyleSync {
 }
 
 extension StyleSync {
-	enum Error: Swift.Error {
+	enum Error: Swift.Error, CustomStringConvertible {
 		case unsupportedPlatform
 		case invalidArguments
 		case noStylesFound
+		
+		/// A string describing the error.
+		public var description: String {
+			switch self {
+			case .unsupportedPlatform:
+				return "Style Sync requires Cocoa to extract styles from a Sketch file, so cannot be run on Linux."
+			case .invalidArguments:
+				return "Unexpected arguments. Call `stylesync -h` for help."
+			case .noStylesFound:
+				return "No styles found in your Sketch document. Look at https://www.sketchapp.com/docs/styling/shared-styles/ for details on how to add Shared Styles to your Sketch document."
+			}
+		}
 	}
 }
