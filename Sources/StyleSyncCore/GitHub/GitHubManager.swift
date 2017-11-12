@@ -121,7 +121,7 @@ class GitHubManager {
 		)
 		
 		let pullRequest = GitHub.PullRequest(
-			title: "[StyleSync] Update style guide to version \(version.stringRepresentation)",
+			title: "[stylesync] Update style guide to version \(version.stringRepresentation)",
 			body: body,
 			head: headBranchName,
 			base: baseBranchName
