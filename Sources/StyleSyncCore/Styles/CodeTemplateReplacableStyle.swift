@@ -26,7 +26,7 @@ struct CodeTemplateReplacableStyle: CodeTemplateReplacable {
 		let fileExtension = FileExtension(rawValue: fileType)
 		let letterSpacingEm = textStyle.kerning / textStyle.pointSize
 		let lineSpacingExtra = textStyle.lineHeight - textStyle.pointSize
-		let lineSpacingMultiplier = textStyle.lineHeight / textStyle.pointSize
+		let lineSpacingMultiplier = (textStyle.lineHeight / textStyle.pointSize).rounded(toPlaces: 2)
 		
 		self.variableName = textStyle.name.codeName(fileExtension, variableType: .textStyleName)
 		self.style = textStyle
