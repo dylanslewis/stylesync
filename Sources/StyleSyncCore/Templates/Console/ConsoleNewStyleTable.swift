@@ -6,5 +6,6 @@ extension ConsoleTemplate {
 	<attributeDeclaration>
 	<#=attributeName#>:		<#=attributeValue#>
 	</attributeDeclaration>
+
 	"""
 }

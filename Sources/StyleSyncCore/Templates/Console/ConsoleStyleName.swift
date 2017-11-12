@@ -6,5 +6,6 @@ extension ConsoleTemplate {
 	<styleDeclaration>
 	<#=styleName#>
 	</styleDeclaration>
+
 	"""
 }

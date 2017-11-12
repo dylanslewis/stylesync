@@ -11,10 +11,10 @@ struct StyleUpdateSummaryGenerator {
 	// MARK: - Constant
 	
 	private enum HeadingName {
-		static let added = "✅ Added Styles"
-		static let updated = "💅 Updated Styles"
-		static let removed = "⛔ Removed Styles"
-		static let deprecated = "⚠️ Deprecated Styles"
+		static let added = "✅  Added Styles"
+		static let updated = "💅  Updated Styles"
+		static let removed = "⛔  Removed Styles"
+		static let deprecated = "⚠️  Deprecated Styles"
 	}
 	
 	// MARK: - Stored properties

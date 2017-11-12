@@ -11,5 +11,6 @@ extension ConsoleTemplate {
 	<styleDeclaration>
 	`<#=styleName#>` is still used in the following files: <#=fileNames#>
 	</styleDeclaration>
+
 	"""
 }
