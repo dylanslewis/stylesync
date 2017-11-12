@@ -45,6 +45,7 @@ struct TextStyle: Style, Codable {
 			let pointSize = textAttributes.font.pointSize,
 			let lineHeight = textAttributes.paragraphStyle.paragraphStyle?.maximumLineHeight
 		else {
+			ErrorManager.log(warning: "Failed to parse text style with name \(textStyleObject.name)\n\n\(textStyleObject)", isBug: true)
 			return nil
 		}
 		

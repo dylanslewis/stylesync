@@ -23,6 +23,7 @@ struct ColorStyle: Style {
 	
 	init?(colorStyleObject: SketchDocument.ColorStyles.Object, isDeprecated: Bool = false) {
 		guard let colorFill = colorStyleObject.value.fills.first else {
+			ErrorManager.log(warning: "Failed to parse color style with name \(colorStyleObject.name)\n\n\(colorStyleObject)", isBug: true)
 			return nil
 		}
 		let red = colorFill.color.red

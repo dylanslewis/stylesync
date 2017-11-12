@@ -22,8 +22,12 @@ enum ErrorManager {
 		}
 	}
 	
-	static func log(warning: String) {
+	static func log(warning: String, isBug: Bool = false) {
 		print("⚠️  \(warning)")
+		
+		if isBug {
+			print("\n🙏  Please file a bug at \(GitHubLink.createIssue), making sure to include the warning log\n")
+		}
 	}
 	
 	static func log(fatalError: Error, context: Context, file: String = #file, line: Int = #line) -> Never {
@@ -33,7 +37,7 @@ enum ErrorManager {
 		}
 		print("\n⛔️  Fatal error at \(fileName ?? file):\(line) (\(context))")
 		log(error: fatalError, context: context)
-		print("\nIf you believe this is a bug, please create an issue on GitHub, making sure to include the error log:\n\(GitHubLink.createIssue)\n")
+		print("\nIf you believe this is a bug, please create an issue on GitHub at \(GitHubLink.createIssue), making sure to include the error log\n")
 		exit(1)
 	}
 }
