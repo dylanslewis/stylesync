@@ -8,7 +8,7 @@
 import Foundation
 
 enum GitHubLink {
-	private static let baseURL = URL(string: "https://github.com/dylanlewis/stylesync")!
+	private static let baseURL = URL(string: "https://github.com/dylanslewis/stylesync")!
 	
 	static let createIssue = baseURL.appendingPathComponent("issues/new")
 	static let templatesDirectory = baseURL.appendingPathComponent("tree/master/Sources/StyleSyncCore/Templates")
