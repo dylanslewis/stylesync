@@ -7,7 +7,7 @@ let package = Package(
 	name: "stylesync",
 	products: [
 		.executable(name: "stylesync", targets: ["stylesync"]),
-		.library(name: "stylesyncCore", targets: ["stylesyncCore"])
+		.library(name: "StyleSyncCore", targets: ["StyleSyncCore"])
 	],
 	dependencies: [
 		.package(
@@ -22,15 +22,15 @@ let package = Package(
 	targets: [
 		.target(
 			name: "stylesync",
-			dependencies: ["stylesyncCore"]
+			dependencies: ["StyleSyncCore"]
 		),
 		.target(
-			name: "stylesyncCore",
+			name: "StyleSyncCore",
 			dependencies: ["Files", "ShellOut"]
 		),
 		.testTarget(
 			name: "stylesyncTests",
-			dependencies: ["stylesyncCore"]
+			dependencies: ["StyleSyncCore"]
 		)
 	]
 )
