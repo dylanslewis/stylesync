@@ -78,7 +78,7 @@ final class StyleExtractor {
 			versionedColorStyle: versionedColorStyles
 		)
 		
-		print("Found previously exported styles at v\(previousVersion.stringRepresentation)")
+		print("🔍  Found previously exported styles at v\(previousVersion.stringRepresentation)")
 		return (versionedTextStyles.textStyles, versionedColorStyles.colorStyles, previousVersion)
 	}
 	
