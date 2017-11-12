@@ -47,9 +47,9 @@ extension Config: Creatable {
 		return Question(question: "🎨 What is the relative path of your color template file?") { (updatedSelf, answer) -> (Config?, Question?)? in
 			guard let updatedConfig = updatedSelf as? Config, ["", "help"].contains(answer) == false else {
 				let helpMessage = "\nPlease give the relative path to your Template file.\n"
-					+ "You can get a default template from \(GitHubLink.templatesDirectory)\n"
+					+ "You can find sample templates at \(GitHubLink.templatesDirectory)\n"
 					+ "\n"
-					+ "If you'd like to make your own template, check out \(GitHubLink.templateReadme)"
+					+ "To create your own template, check out \(GitHubLink.templateReadme)"
 				print(helpMessage)
 				return nil
 			}
