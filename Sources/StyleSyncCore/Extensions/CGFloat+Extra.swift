@@ -7,12 +7,12 @@
 
 import Foundation
 
-extension CGFloat {
+public extension CGFloat {
 	var roundedToTwoDecimalPlaces: CGFloat {
 		return rounded(toPlaces: 2)
 	}
 	
-	func rounded(toPlaces places: Int) -> CGFloat {
+	public func rounded(toPlaces places: Int) -> CGFloat {
 		let divisor = pow(10.0, CGFloat(places))
 		return (self * divisor).rounded() / divisor
 	}

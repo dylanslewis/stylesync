@@ -22,9 +22,9 @@ public extension SketchDocument {
 		public let objects: [Object]
 		
 		public struct Object: Codable {
-			let name: String
-			let value: Value
-			let identifier: String
+			public let name: String
+			public let value: Value
+			public let identifier: String
 			
 			enum CodingKeys: String, CodingKey {
 				case name
@@ -32,17 +32,17 @@ public extension SketchDocument {
 				case identifier = "do_objectID"
 			}
 			
-			struct Value: Codable {
-				let fills: [Fill]
+			public struct Value: Codable {
+				public let fills: [Fill]
 				
-				struct Fill: Codable {
-					let color: Color
+				public struct Fill: Codable {
+					public let color: Color
 
-					struct Color: Codable {
-						let red: CGFloat
-						let green: CGFloat
-						let blue: CGFloat
-						let alpha: CGFloat
+					public struct Color: Codable {
+						public let red: CGFloat
+						public let green: CGFloat
+						public let blue: CGFloat
+						public let alpha: CGFloat
 					}
 				}
 			}
@@ -54,12 +54,12 @@ public extension SketchDocument {
 
 public extension SketchDocument {
 	public struct TextStyles: Codable {
-		let objects: [Object]
+		public let objects: [Object]
 		
-		struct Object: Codable {
-			let name: String
-			let value: Value
-			let identifier: String
+		public struct Object: Codable {
+			public let name: String
+			public let value: Value
+			public let identifier: String
 			
 			enum CodingKeys: String, CodingKey {
 				case name
@@ -67,24 +67,24 @@ public extension SketchDocument {
 				case identifier = "do_objectID"
 			}
 			
-			struct Value: Codable {
-				let textStyle: TextStyle
+			public struct Value: Codable {
+				public let textStyle: TextStyle
 				
-				struct TextStyle: Codable {
-					let encodedAttributes: EncodedAttributes
-					
-					struct EncodedAttributes: Codable {
-						let font: Font
-						let color: Color
-						let paragraphStyle: ParagraphStyle
+				public struct TextStyle: Codable {
+					public let encodedAttributes: EncodedAttributes
+
+					public struct EncodedAttributes: Codable {
+						public let font: Font
+						public let color: Color
+						public let paragraphStyle: ParagraphStyle
 						public let kerning: CGFloat?
 						
-						struct Font: Codable {
+						public struct Font: Codable {
 							let sixtyFourBitRepresentation: String
-							var fontName: String? {
+							public var fontName: String? {
 								return fontDescriptor?.fontAttributes[NSFontDescriptor.AttributeName.name] as? String
 							}
-							var pointSize: CGFloat? {
+							public var pointSize: CGFloat? {
 								return fontDescriptor?.pointSize
 							}
 							private var fontDescriptor: NSFontDescriptor? {
@@ -96,9 +96,9 @@ public extension SketchDocument {
 							}
 						}
 						
-						struct Color: Codable {
+						public struct Color: Codable {
 							let sixtyFourBitRepresentation: String
-							var color: NSColor? {
+							public var color: NSColor? {
 								return sixtyFourBitRepresentation.unarchivedObject()
 							}
 							
@@ -107,9 +107,9 @@ public extension SketchDocument {
 							}
 						}
 						
-						struct ParagraphStyle: Codable {
+						public struct ParagraphStyle: Codable {
 							let sixtyFourBitRepresentation: String
-							var paragraphStyle: NSParagraphStyle? {
+							public var paragraphStyle: NSParagraphStyle? {
 								return sixtyFourBitRepresentation.unarchivedObject()
 							}
 							
