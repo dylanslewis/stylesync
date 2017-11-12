@@ -77,7 +77,7 @@ public extension SketchDocument {
 						let font: Font
 						let color: Color
 						let paragraphStyle: ParagraphStyle
-						let kerning: CGFloat
+						public let kerning: CGFloat?
 						
 						struct Font: Codable {
 							let sixtyFourBitRepresentation: String

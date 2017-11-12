@@ -52,7 +52,7 @@ struct TextStyle: Style, Codable {
 		self.identifier = textStyleObject.identifier
 		self.fontName = fontName
 		self.pointSize = pointSize.roundedToTwoDecimalPlaces
-		self.kerning = textAttributes.kerning.roundedToTwoDecimalPlaces
+		self.kerning = textAttributes.kerning?.roundedToTwoDecimalPlaces ?? 0
 		self.lineHeight = lineHeight.roundedToTwoDecimalPlaces
 		self.colorStyle = colorStyle
 		self.isDeprecated = isDeprecated
