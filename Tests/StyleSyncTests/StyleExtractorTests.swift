@@ -47,8 +47,16 @@ class StyleExtractorTests: XCTestCase {
 	
 	override func tearDown() {
 		// Remove the previously generated style files.
-		try? previouslyExportedTextStyles.delete()
-		try? previouslyExportedColorStyles.delete()
+		do {
+			try previouslyExportedTextStyles.delete()
+		} catch {
+			print(error)
+		}
+		do {
+			try previouslyExportedColorStyles.delete()
+		} catch {
+			print(error)
+		}
 		super.tearDown()
 	}
 	
