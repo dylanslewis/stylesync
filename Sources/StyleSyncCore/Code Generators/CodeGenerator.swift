@@ -11,15 +11,15 @@ import Foundation
 /// A `String` of a code template, where replacable ranges are denoted as
 /// `<replacableDeclaration>` and `</replacableDeclaration>`, and replaceable
 /// elements are denoted as `<#=replaceableElement#>`
-typealias Template = String
+public typealias Template = String
 
-struct CodeGenerator {
+public struct CodeGenerator {
 	// MARK: - Stored properties
 	
 	private let template: Template
 	private var templateCodeLines: [String]
-	var fileExtension: FileType
-	var fileName: String?
+	public var fileExtension: FileType
+	public var fileName: String?
 
 	// MARK: - Initializer
 	
@@ -32,7 +32,7 @@ struct CodeGenerator {
 	/// - Parameters:
 	///   - template: The template of code to generate.
 	/// - Throws: An error if the file extension cannot be found.
-	init(template: Template) throws {
+	public init(template: Template) throws {
 		self.template = template
 		let templateLinesWithFileExtension = template.components(separatedBy: "\n")
 		(fileExtension, fileName, templateCodeLines) = try templateLinesWithFileExtension.extractingFileTypeAndFileName()
@@ -51,7 +51,7 @@ struct CodeGenerator {
 	///   - version: The version of the style guide
 	/// - Returns: The generated code of the template replacables and the
 	///			   template.
-	func generatedCode(for codeTemplateReplacables: [[CodeTemplateReplacable]], version: Version? = nil) -> String {
+	public func generatedCode(for codeTemplateReplacables: [[CodeTemplateReplacable]], version: Version? = nil) -> String {
 		let allCodeTemplateReplaceables: [[CodeTemplateReplacable]]
 		if let version = version {
 			let headerLines = """
@@ -66,7 +66,8 @@ struct CodeGenerator {
 			allCodeTemplateReplaceables = codeTemplateReplacables
 		}
 		
-		// Iterate over each group of `codeTemplateReplacables` and
+		// Iterate over each group of `codeTemplateReplacables` and replace the
+		// placeholders.
 		var codeLines = templateCodeLines
 		allCodeTemplateReplaceables
 			.forEach({ codeLines = codeLines.replacingCodePlaceholders(usingReplacementItems: $0) })
@@ -74,7 +75,7 @@ struct CodeGenerator {
 		return codeLines.joined(separator: "\n")
 	}
 	
-	func generatedCode(for codeTemplateReplaceable: CodeTemplateReplacable) -> String {
+	public func generatedCode(for codeTemplateReplaceable: CodeTemplateReplacable) -> String {
 		return generatedCode(for: [[codeTemplateReplaceable]])
 	}
 }

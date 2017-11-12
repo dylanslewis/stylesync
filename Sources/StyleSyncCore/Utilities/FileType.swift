@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias FileType = String
+public typealias FileType = String
 
 extension FileType {
 	static let json: FileType = "json"

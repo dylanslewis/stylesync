@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CodeTemplateReplacable {
+public protocol CodeTemplateReplacable {
 	var declarationName: String { get }
 	var replacementDictionary: [String: String] { get }
 	var ignoredUpdateAttributes: [String] { get }

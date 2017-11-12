@@ -9,16 +9,16 @@
 import Foundation
 
 /// A major and minor version representation.
-struct Version {
+public struct Version {
 	var major: Int
 	var minor: Int
 	
-	init(major: Int, minor: Int) {
+	public init(major: Int, minor: Int) {
 		self.major = major
 		self.minor = minor
 	}
 	
-	init?(versionString: String) {
+	public init?(versionString: String) {
 		let numberFormatter = NumberFormatter()
 		let versionComponents = versionString
 			.components(separatedBy: ".")
@@ -35,7 +35,7 @@ struct Version {
 		self.init(major: major, minor: minor)
 	}
 	
-	var stringRepresentation: String {
+	public var stringRepresentation: String {
 		return "\(major).\(minor)"
 	}
 }
@@ -116,7 +116,7 @@ extension Version {
 }
 
 extension Version: Equatable {
-	static func == (lhs: Version, rhs: Version) -> Bool {
+	public static func == (lhs: Version, rhs: Version) -> Bool {
 		return lhs.major == rhs.major
 			&& lhs.minor == rhs.minor
 	}
