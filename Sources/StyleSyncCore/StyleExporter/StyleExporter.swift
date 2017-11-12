@@ -135,7 +135,7 @@ final class StyleExporter {
 			fileExtension: colorStylesFileExtension
 		)
 		
-		let (newColorStyles, newTextStyles) = processStyles(
+		(newColorStyles, newTextStyles) = processStyles(
 			deprecatedTextStyles: deprecatedTextStyles,
 			deprecatedColorStyles: deprecatedColorStyles,
 			latestTextStyles: latestTextStyles,
@@ -143,8 +143,6 @@ final class StyleExporter {
 			textStylesFileExtension: textStylesFileExtension,
 			colorStylesFileExtension: colorStylesFileExtension
 		)
-		self.newColorStyles = newColorStyles
-		self.newTextStyles = newTextStyles
 		
 		print("Updating references to styles in your project")
 		let ignoredFiles: [File] = [
@@ -161,6 +159,9 @@ final class StyleExporter {
 			deprecatedColorStyles: deprecatedColorStyles,
 			ignoredFiles: ignoredFiles
 		)
+		
+		newTextStyles = newTextStyles + usedDeprecatedTextStyles
+		newColorStyles = newColorStyles + usedDeprecatedColorStyles
 		
 		oldColorStyles = previouslyExportedColorStyles.map({
 			CodeTemplateReplacableStyle(colorStyle: $0, fileType: colorStyleCodeGenerator.fileExtension)
@@ -244,7 +245,7 @@ final class StyleExporter {
 	private func createStyleCodeGenerators(
 		textStyleTemplateFile: File,
 		colorStyleTemplateFile: File
-		) throws -> (text: CodeGenerator, color: CodeGenerator) {
+	) throws -> (text: CodeGenerator, color: CodeGenerator) {
 		let colorStyleTemplate: Template = try colorStyleTemplateFile.readAsString()
 		let textStyleTemplate: Template = try textStyleTemplateFile.readAsString()
 		
@@ -261,7 +262,7 @@ final class StyleExporter {
 		deprecatedTextStyles: [TextStyle],
 		deprecatedColorStyles: [ColorStyle],
 		ignoredFiles: [File]
-		) throws {
+	) throws {
 		let supportedFileTypes: Set<FileType> = [
 			textStylesFileExtension,
 			colorStylesFileExtension
@@ -313,16 +314,12 @@ final class StyleExporter {
 		]
 		
 		projectFolder
-			.makeSubfolderSequence(recursive: true, includeHidden: false)
-			.forEach { folder in
-				folder
-					.makeFileSequence(recursive: true, includeHidden: false)
-					.filter({ supportedFileTypes.contains($0.extension ?? "") })
-					.filter({ !ignoredFiles.contains($0) })
-					.forEach({ file in
-						allOperations.forEach(({ $0(file) }))
-					})
-		}
+			.makeFileSequence(recursive: true, includeHidden: false)
+			.filter({ supportedFileTypes.contains($0.extension ?? "") })
+			.filter({ !ignoredFiles.contains($0) })
+			.forEach({ file in
+				allOperations.forEach(({ $0(file) }))
+			})
 	}
 	
 	private func updateVersion() {
