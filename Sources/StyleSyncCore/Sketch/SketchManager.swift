@@ -8,20 +8,20 @@
 import Foundation
 import Files
 
-class SketchManager {
+public class SketchManager {
 	// MARK: - Stored variables
 	
 	private var sketchFile: File
 
 	// MARK: - Initializer
 	
-	init(sketchFile: File) {
+	public init(sketchFile: File) {
 		self.sketchFile = sketchFile
 	}
 	
 	// MARK: - Actions
 
-	func getSketchDocument() throws -> SketchDocument {
+	public func getSketchDocument() throws -> SketchDocument {
 		print("Extracting styles from \(sketchFile.path)")
 		
 		let zipManager = try ZipManager(zippedFile: sketchFile)

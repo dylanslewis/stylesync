@@ -10,18 +10,18 @@ import Cocoa
 
 // MARK: - Sketch Document
 
-struct SketchDocument: Codable {
-	let layerStyles: ColorStyles
-	let layerTextStyles: TextStyles
+public struct SketchDocument: Codable {
+	public let layerStyles: ColorStyles
+	public let layerTextStyles: TextStyles
 }
 
 // MARK: - Color Styles
 
-extension SketchDocument {
-	struct ColorStyles: Codable {
-		let objects: [Object]
+public extension SketchDocument {
+	public struct ColorStyles: Codable {
+		public let objects: [Object]
 		
-		struct Object: Codable {
+		public struct Object: Codable {
 			let name: String
 			let value: Value
 			let identifier: String
@@ -52,8 +52,8 @@ extension SketchDocument {
 
 // MARK: - Text Styles
 
-extension SketchDocument {
-	struct TextStyles: Codable {
+public extension SketchDocument {
+	public struct TextStyles: Codable {
 		let objects: [Object]
 		
 		struct Object: Codable {
