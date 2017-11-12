@@ -60,7 +60,7 @@ extension ErrorManager.Context {
 	var information: String? {
 		switch self {
 		case .config:
-			return "Error finding `styleSyncConfig.json`. Make sure you run Style Sync from the root directory of your project, which should contain `styleSyncConfig.json`."
+			return "Error finding `stylesyncConfig.json`. Make sure you run Style Sync from the root directory of your project, which should contain `stylesyncConfig.json`."
 		case .sketch:
 			return "Error extracting Sketch file."
 		case .gitHub:

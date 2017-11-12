@@ -13,7 +13,7 @@ class ConfigManager {
 	
 	private enum Constant {
 		enum Config {
-			static let fileName = "styleSyncConfig"
+			static let fileName = "stylesyncConfig"
 			static let fileType: FileType = .json
 		}
 	}
@@ -76,10 +76,10 @@ class ConfigManager {
 			throw File.Error.writeFailed
 		}
 		
-		let styleSyncConfig = try projectFolder.createFileIfNeeded(
+		let stylesyncConfig = try projectFolder.createFileIfNeeded(
 			named: Constant.Config.fileName,
 			fileExtension: Constant.Config.fileType
 		)
-		try styleSyncConfig.write(string: configFileString)
+		try stylesyncConfig.write(string: configFileString)
 	}
 }

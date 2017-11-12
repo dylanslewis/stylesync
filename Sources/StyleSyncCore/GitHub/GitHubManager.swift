@@ -85,7 +85,7 @@ class GitHubManager {
 		try gitManager.createStyleSyncBranch()
 		try gitManager.commitAllStyleUpdates()
 		try gitManager.checkoutOriginalBranch()
-		return (gitManager.styleSyncBranchName, gitManager.originalBranchName)
+		return (gitManager.stylesyncBranchName, gitManager.originalBranchName)
 	}
 	
 	private func submitPullRequest(

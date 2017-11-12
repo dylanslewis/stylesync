@@ -4,10 +4,10 @@
 import PackageDescription
 
 let package = Package(
-	name: "StyleSync",
+	name: "stylesync",
 	products: [
-		.executable(name: "StyleSync", targets: ["StyleSync"]),
-		.library(name: "StyleSyncCore", targets: ["StyleSyncCore"])
+		.executable(name: "stylesync", targets: ["stylesync"]),
+		.library(name: "stylesyncCore", targets: ["stylesyncCore"])
 	],
 	dependencies: [
 		.package(
@@ -21,16 +21,16 @@ let package = Package(
 	],
 	targets: [
 		.target(
-			name: "StyleSync",
-			dependencies: ["StyleSyncCore"]
+			name: "stylesync",
+			dependencies: ["stylesyncCore"]
 		),
 		.target(
-			name: "StyleSyncCore",
+			name: "stylesyncCore",
 			dependencies: ["Files", "ShellOut"]
 		),
 		.testTarget(
-			name: "StyleSyncTests",
-			dependencies: ["StyleSyncCore"]
+			name: "stylesyncTests",
+			dependencies: ["stylesyncCore"]
 		)
 	]
 )

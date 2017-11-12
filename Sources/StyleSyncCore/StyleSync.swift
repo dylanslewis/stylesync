@@ -151,7 +151,7 @@ public final class StyleSync {
 		}
 		
 		guard let gitHubPersonalAccessToken = gitHubPersonalAccessToken else {
-			print("\nIf you'd like to branch, commit and raise a pull request for these updates, add your GitHub Personal Access token to `styleSyncConfig.json`")
+			print("\nIf you'd like to branch, commit and raise a pull request for these updates, add your GitHub Personal Access token to `stylesyncConfig.json`")
 			exit(0)
 		}
 		

@@ -19,8 +19,8 @@ struct GitManager {
 	
 	// MARK: - Computed properties
 	
-	var styleSyncBranchName: String {
-		return "styleSync/updateToVersion\(version.stringRepresentation)"
+	var stylesyncBranchName: String {
+		return "stylesync/updateToVersion\(version.stringRepresentation)"
 	}
 	var projectFolderPath: String {
 		return projectFolder.path
@@ -38,11 +38,11 @@ struct GitManager {
 	// MARK: - Actions
 	
 	func createStyleSyncBranch() throws {
-		print("Creating branch '\(styleSyncBranchName)'")
-		try shellOut(to: .gitCreateBranch(branch: styleSyncBranchName), at: projectFolderPath)
+		print("Creating branch '\(stylesyncBranchName)'")
+		try shellOut(to: .gitCreateBranch(branch: stylesyncBranchName), at: projectFolderPath)
 		
-		print("Checking out branch '\(styleSyncBranchName)'")
-		try shellOut(to: .gitCheckout(branch: styleSyncBranchName), at: projectFolderPath)
+		print("Checking out branch '\(stylesyncBranchName)'")
+		try shellOut(to: .gitCheckout(branch: stylesyncBranchName), at: projectFolderPath)
 	}
 	
 	func commitAllStyleUpdates() throws {
@@ -60,9 +60,9 @@ struct GitManager {
 		)
 		
 		print("Pushing changes")
-		try shellOut(to: .gitInitialPush(branch: styleSyncBranchName), at: projectFolderPath)
+		try shellOut(to: .gitInitialPush(branch: stylesyncBranchName), at: projectFolderPath)
 		
-		print("🎉  Successfully pushed updated style files to `origin/\(styleSyncBranchName)`")
+		print("🎉  Successfully pushed updated style files to `origin/\(stylesyncBranchName)`")
 	}
 	
 	func checkoutOriginalBranch() throws {
