@@ -11,6 +11,6 @@ enum GitHubLink {
 	private static let baseURL = URL(string: "https://github.com/dylanlewis/stylesync")!
 	
 	static let createIssue = baseURL.appendingPathComponent("issues/new")
-	static let templatesDirectory = baseURL.appendingPathComponent("issues/new") // FIXME: Use real URL
-	static let templateReadme = baseURL.appendingPathComponent("issues/new") // FIXME: Use real URL
+	static let templatesDirectory = baseURL.appendingPathComponent("tree/master/Sources/StyleSyncCore/Templates")
+	static let templateReadme = baseURL.appendingPathComponent("tree/master/Sources/StyleSyncCore/Templates/README.md")
 }
