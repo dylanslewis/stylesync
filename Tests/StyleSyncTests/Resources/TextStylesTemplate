@@ -1,0 +1,13 @@
+<#@fileExtension#>fileExtension
+<#@fileName#>TextStyles
+
+<textStyleDeclaration>
+<#?deprecated=true#>// Deprecated
+let <#=textStyleName#> = TextStyle(
+	fontName: <#=fontName#>,
+	pointSize: <#=pointSize#>,
+	color: <#=color#>,
+	kerning: <#=kerning#>,
+	lineHeight: <#=lineHeight#>
+)
+</textStyleDeclaration>
