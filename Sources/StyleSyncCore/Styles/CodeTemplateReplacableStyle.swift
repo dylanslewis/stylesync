@@ -43,7 +43,7 @@ struct CodeTemplateReplacableStyle: CodeTemplateReplacable {
 			"lineSpacingMultiplier": String(describing: lineSpacingMultiplier),
 			"color": textStyle.colorStyle.name.codeName(fileExtension, variableType: .colorStyleName)
 		]
-		self.ignoredUpdateAttributes = []
+		self.ignoredUpdateAttributes = ["letterSpacingEm", "lineSpacingExtra", "lineSpacingMultiplier"]
 		self.isDeprecated = textStyle.isDeprecated
 	}
 	
