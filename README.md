@@ -60,7 +60,7 @@ You can install **stylesync** using the [Swift Package Manager](https://github.c
 $ git clone https://github.com/dylanslewis/stylesync.git
 $ cd stylesync
 $ swift build -c release -Xswiftc -static-stdlib
-$ cp -f .build/release/stylesync /usr/local/bin/marathon
+$ cp -f .build/release/stylesync /usr/local/bin/stylesync
 ```
 
 # How to use
