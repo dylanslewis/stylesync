@@ -23,6 +23,8 @@ public class Config: Codable {
 // MARK: - Creatable
 
 extension Config: Creatable {
+	// MARK: - Questions
+	
 	var firstQuestion: Question {
 		return sketchDocumentLocation
 	}
@@ -54,7 +56,12 @@ extension Config: Creatable {
 				return nil
 			}
 			do {
-				_ = try File(path: answer)
+				let templateFile = try File(path: answer)
+				try templateFile.validateAsTemplateFile()
+			} catch let error as TemplateFileError {
+				ErrorManager.log(warning: self.invalidTemplateError)
+				ErrorManager.log(error: error, context: .questionnaire)
+				return nil
 			} catch {
 				ErrorManager.log(error: error, context: .questionnaire)
 				return nil
@@ -86,7 +93,12 @@ extension Config: Creatable {
 				return nil
 			}
 			do {
-				_ = try File(path: answer)
+				let templateFile = try File(path: answer)
+				try templateFile.validateAsTemplateFile()
+			} catch let error as TemplateFileError {
+				ErrorManager.log(warning: self.invalidTemplateError)
+				ErrorManager.log(error: error, context: .questionnaire)
+				return nil
 			} catch {
 				ErrorManager.log(error: error, context: .questionnaire)
 				return nil
@@ -120,6 +132,17 @@ extension Config: Creatable {
 			updatedConfig.gitHubPersonalAccessToken = answer
 			return (updatedConfig, nil)
 		}
+	}
+
+	// MARK: - Errors
+	
+	private var invalidTemplateError: String {
+		return """
+		Invalid template file name.
+		Expected format: {GeneratedFileName}.{generatedFileExtension}-template.txt
+		
+		See \(GitHubLink.templateReadme) for details.
+		"""
 	}
 }
 
