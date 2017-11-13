@@ -10,8 +10,8 @@ If you would prefer to use a sample template, they are available for the followi
 
 | Platform | Language | Templates |
 | --- | --- | --- |
-| iOS, tvOS, watchOS | Swift | [Color Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/ColorStyles/iOSSwift) • [Text Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/TextStyles/iOSSwift)
-| Android | XML | [Color Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/ColorStyles/AndroidXML) • [Text Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/TextStyles/AndroidXML) |
+| iOS, tvOS, watchOS | Swift | [Color Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/ColorStyles/iOSColorStyles.swift-template.txt) • [Text Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/TextStyles/iOSTextStyles.swift-template.txt)
+| Android | XML | [Color Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/ColorStyles/AndroidColorStyles.xml-template.txt) • [Text Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/TextStyles/AndroidTextStyles.xml-template.txt) |
 
 ## Declarations
 
