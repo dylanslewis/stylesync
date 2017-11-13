@@ -373,6 +373,7 @@ final class StyleExporter {
 				addedStyleTableTemplate: ConsoleTemplate.newStyleTable,
 				updatedStyleTableTemplate: ConsoleTemplate.updatedStylesTable,
 				deprecatedStylesTableTemplate: ConsoleTemplate.deprecatedStylesTable,
+				fileExtension: .log,
 				shouldPrintStyleSyncLink: false
 			)
 		} catch {

@@ -109,7 +109,8 @@ class GitHubManager {
 			styleNameTemplate: GitHubTemplate.styleName,
 			addedStyleTableTemplate: GitHubTemplate.newStyleTable,
 			updatedStyleTableTemplate: GitHubTemplate.updatedStylesTable,
-			deprecatedStylesTableTemplate: GitHubTemplate.deprecatedStylesTable
+			deprecatedStylesTableTemplate: GitHubTemplate.deprecatedStylesTable,
+			fileExtension: .markdown
 		)
 		
 		let body = pullRequestBodyGenerator.body(

@@ -34,13 +34,14 @@ struct StyleUpdateSummaryGenerator {
 		addedStyleTableTemplate: Template,
 		updatedStyleTableTemplate: Template,
 		deprecatedStylesTableTemplate: Template,
+		fileExtension: FileType,
 		shouldPrintStyleSyncLink: Bool = true
 	) throws {
-		self.headingGenerator = CodeGenerator(template: headingTemplate, fileExtension: .log)
-		self.styleNameGenerator = CodeGenerator(template: styleNameTemplate, fileExtension: .log)
-		self.addedStyleTableGenerator = CodeGenerator(template: addedStyleTableTemplate, fileExtension: .log)
-		self.updatedStyleTableGenerator = CodeGenerator(template: updatedStyleTableTemplate, fileExtension: .log)
-		self.deprecatedStylesTableGenerator = CodeGenerator(template: deprecatedStylesTableTemplate, fileExtension: .log)
+		self.headingGenerator = CodeGenerator(template: headingTemplate, fileExtension: fileExtension)
+		self.styleNameGenerator = CodeGenerator(template: styleNameTemplate, fileExtension: fileExtension)
+		self.addedStyleTableGenerator = CodeGenerator(template: addedStyleTableTemplate, fileExtension: fileExtension)
+		self.updatedStyleTableGenerator = CodeGenerator(template: updatedStyleTableTemplate, fileExtension: fileExtension)
+		self.deprecatedStylesTableGenerator = CodeGenerator(template: deprecatedStylesTableTemplate, fileExtension: fileExtension)
 		self.shouldPrintStyleSyncLink = shouldPrintStyleSyncLink
 	}
 	
