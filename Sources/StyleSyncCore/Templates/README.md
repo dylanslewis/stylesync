@@ -2,25 +2,26 @@
 
 **stylesync** uses templates to generate code, so that it can export code in the **language** and **format** you require for your project.
 
-The **text styles** template and a **color styles** template should be stored as files in your project, and referenced in `stylesyncConfig.json`.
+The **text styles** template and the **color styles** template should be stored as files in your project, and referenced in `stylesyncConfig.json`.
 
 ## Sample Templates
 
-If you would prefer to use a sample template, they are available for the following platforms and languages.
+If you would prefer to use a sample template, they are available for the following platforms and languages:
 
 | Platform | Language | Templates |
 | --- | --- | --- |
 | iOS, tvOS, watchOS | Swift | [Color Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/ColorStyles/iOSSwift) • [Text Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/TextStyles/iOSSwift)
 | Android | XML | [Color Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/ColorStyles/AndroidXML) • [Text Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/TextStyles/AndroidXML) |
+
 ## Declarations
 
-These define the start and end of a section of the template, such as the header section or a style section. They are opened with `<declaration>` and closed with `</declaration>`, and **must** occupy a single line. They can be repeated as many times as you like in the template.
+These define the start and end of a section of the template, such as the header section or a style section. They are opened with `<{declaration}>` and closed with `</{declaration}>`, both of which **must** appear on their own line. They can be repeated as many times as you like within the template.
 
 | Declaration | Definition |
 | --- | --- |
 | `<generatedFileHeader>` | Information about the file (optional) |
 | `<colorDeclaration>` | Color style (only available in the color template) |
-| `<textStyleDeclaration>` | Text style style (only available in the text style template) |
+| `<textStyleDeclaration>` | Text style (only available in the text style template) |
 
 ## Placeholders
 
@@ -74,7 +75,7 @@ Defines a placeholder that is dependant on a condition. The placeholder must be 
 
 | Placeholder | Definition |
 | --- | --- |
-| `<#=deprecated=true#>` | Whether the style is deprecated |
+| `<#?deprecated=true#>` | Whether the style is deprecated |
 
 ## Example
 
