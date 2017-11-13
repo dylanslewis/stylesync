@@ -6,9 +6,12 @@
 //
 
 import XCTest
-import StyleSyncCore
+@testable import StyleSyncCore
+import Files
 
 class CodeGeneratorTests: XCTestCase {
+	private var currentFolder: Folder = .current
+	
 	// MARK: - Subtypes
 	
 	private struct SimpleCodeTemplateReplaceable: CodeTemplateReplacable {
@@ -26,55 +29,49 @@ class CodeGeneratorTests: XCTestCase {
 	
 	// MARK: - Tests
 	
-	func testInitializingCodeGeneratorWithATemplateWithNoFileExtensionThrowsAnError() {
-		let template = """
-			<#@fileName#>fileName
-			"""
+	func testInitializingCodeGeneratorWithATemplateFileWithNoFileExtensionThrowsAnError() throws {
+		let template = ""
+		let templateFile = try currentFolder.createFile(named: "Test", contents: template)
 		
-		XCTAssertThrowsError(try CodeGenerator(template: template))
+		XCTAssertThrowsError(try CodeGenerator(templateFile: templateFile))
+		try templateFile.delete()
 	}
 	
-	func testInitializingCodeGeneratorWithATemplateWithAFileExtensionExtractsTheFileExtension() {
-		let template = """
-			<#@fileExtension#>fileExtension
-			"""
+	func testInitializingCodeGeneratorWithATemplateFileWithAnInvalidFileExtensionThrowsAnError() throws {
+		let template = ""
+		let templateFile = try currentFolder.createFile(named: "Test.txt", contents: template)
 		
-		let codeGenerator = self.codeGenerator(for: template)
+		XCTAssertThrowsError(try CodeGenerator(templateFile: templateFile))
+		try templateFile.delete()
+	}
+	
+	func testInitializingCodeGeneratorWithATemplateFileWithAValidFileExtensionExtractsTheFileExtension() throws {
+		let template = ""
+		let templateFile = try currentFolder.createFile(named: "Test.fileExtension-template.txt", contents: template)
+		
+		let codeGenerator = self.codeGenerator(forTemplateFile: templateFile)
 		XCTAssertEqual(codeGenerator.fileExtension, "fileExtension")
+		try templateFile.delete()
 	}
 	
-	func testInitializingCodeGeneratorWithATemplateWithAFileNameExtractsTheFileName() {
-		let template = """
-			<#@fileName#>fileName
-			<#@fileExtension#>fileExtension
-			"""
-		
-		let codeGenerator = self.codeGenerator(for: template)
-		XCTAssertEqual(codeGenerator.fileName, "fileName")
-	}
-	
-	func testGeneratedCodeDoesNotContainAnyMetadataReferences() {
-		let template = """
-			<#@fileExtension#>fileExtension
-			"""
-		
-		let codeGenerator = self.codeGenerator(for: template)
-		let generatedCode = codeGenerator.generatedCode(for: [[]])
-		
-		let expectedGeneratedCode = ""
-		XCTAssertEqual(generatedCode, expectedGeneratedCode)
+	func testInitializingCodeGeneratorWithATemplateWithAFileNameExtractsTheFileName() throws {
+		let template = ""
+		let templateFile = try currentFolder.createFile(named: "FileName.fileExtension-template.txt", contents: template)
+
+		let codeGenerator = self.codeGenerator(forTemplateFile: templateFile)
+		XCTAssertEqual(codeGenerator.fileName, "FileName")
+		try templateFile.delete()
 	}
 	
 	func testGeneratingCodeForATemplateWithOneReferenceReplacesPlaceholder() {
 		let template = """
-			<#@fileExtension#>fileExtension
 			<placeholderDeclaration>
 			replacedReference = <#=placeholder#>
 			</placeholderDeclaration>
 			"""
 		
-		let codeGenerator = self.codeGenerator(for: template)
-		
+		let codeGenerator = self.codeGenerator(forTemplate: template)
+
 		let codeTemplateReplacable = SimpleCodeTemplateReplaceable(
 			declarationName: "placeholderDeclaration",
 			replacementDictionary: ["placeholder": "replacedPlaceholder"]
@@ -89,7 +86,6 @@ class CodeGeneratorTests: XCTestCase {
 	
 	func testGeneratedCodeForTemplateWithTwoIdenticalReferencesReplacesAllPlaceholders() {
 		let template = """
-			<#@fileExtension#>fileExtension
 			<placeholderDeclaration>
 			replacedReference = <#=placeholder#>
 			</placeholderDeclaration>
@@ -99,8 +95,8 @@ class CodeGeneratorTests: XCTestCase {
 			</placeholderDeclaration>
 			"""
 		
-		let codeGenerator = self.codeGenerator(for: template)
-		
+		let codeGenerator = self.codeGenerator(forTemplate: template)
+
 		let codeTemplateReplacable = SimpleCodeTemplateReplaceable(
 			declarationName: "placeholderDeclaration",
 			replacementDictionary: ["placeholder": "replacedPlaceholder"]
@@ -117,7 +113,6 @@ class CodeGeneratorTests: XCTestCase {
 	
 	func testGeneratedCodeForTemplateWithTwoDifferentReferencesReplacesAllPlaceholders() {
 		let template = """
-			<#@fileExtension#>fileExtension
 			<placeholderDeclarationOne>
 			replacedReferenceOne = <#=placeholderOne#>
 			</placeholderDeclarationOne>
@@ -127,8 +122,8 @@ class CodeGeneratorTests: XCTestCase {
 			</placeholderDeclarationTwo>
 			"""
 		
-		let codeGenerator = self.codeGenerator(for: template)
-		
+		let codeGenerator = self.codeGenerator(forTemplate: template)
+
 		let codeTemplateReplacableOne = SimpleCodeTemplateReplaceable(
 			declarationName: "placeholderDeclarationOne",
 			replacementDictionary: ["placeholderOne": "replacedPlaceholderOne"]
@@ -149,14 +144,13 @@ class CodeGeneratorTests: XCTestCase {
 	
 	func testGeneratingCodeWithADeprecatedReferenceReplacesDeprecationPlaceholder() {
 		let template = """
-			<#@fileExtension#>fileExtension
 			<placeholderDeclaration>
 			<#?deprecated=true#>Deprecated
 			replacedReference = <#=placeholder#>
 			</placeholderDeclaration>
 			"""
 		
-		let codeGenerator = self.codeGenerator(for: template)
+		let codeGenerator = self.codeGenerator(forTemplate: template)
 		
 		let codeTemplateReplacable = SimpleCodeTemplateReplaceable(
 			declarationName: "placeholderDeclaration",
@@ -174,14 +168,13 @@ class CodeGeneratorTests: XCTestCase {
 	
 	func testGeneratingCodeWithAnUndeprecatedReferenceRemovesDeprecationPlaceholder() {
 		let template = """
-			<#@fileExtension#>fileExtension
 			<placeholderDeclaration>
 			<#?deprecated=true#>Deprecated
 			replacedReference = <#=placeholder#>
 			</placeholderDeclaration>
 			"""
 		
-		let codeGenerator = self.codeGenerator(for: template)
+		let codeGenerator = self.codeGenerator(forTemplate: template)
 		
 		let codeTemplateReplacable = SimpleCodeTemplateReplaceable(
 			declarationName: "placeholderDeclaration",
@@ -198,15 +191,14 @@ class CodeGeneratorTests: XCTestCase {
 	
 	func testGeneratingCodeWithAnUndeprecatedReferenceAndAFalseConditionReplacesDeprecationPlaceholder() {
 		let template = """
-			<#@fileExtension#>fileExtension
 			<placeholderDeclaration>
 			<#?deprecated=false#>Deprecated
 			replacedReference = <#=placeholder#>
 			</placeholderDeclaration>
 			"""
 		
-		let codeGenerator = self.codeGenerator(for: template)
-		
+		let codeGenerator = self.codeGenerator(forTemplate: template)
+
 		let codeTemplateReplacable = SimpleCodeTemplateReplaceable(
 			declarationName: "placeholderDeclaration",
 			replacementDictionary: ["placeholder": "replacedPlaceholder"],
@@ -223,11 +215,15 @@ class CodeGeneratorTests: XCTestCase {
 	
 	// MARK: - Helpers
 	
-	private func codeGenerator(for template: Template) -> CodeGenerator {
+	private func codeGenerator(forTemplateFile templateFile: File) -> CodeGenerator {
 		do {
-			return try CodeGenerator(template: template)
+			return try CodeGenerator(templateFile: templateFile)
 		} catch {
 			XCTFailAndAbort(error.localizedDescription)
 		}
+	}
+	
+	private func codeGenerator(forTemplate template: Template) -> CodeGenerator {
+		return CodeGenerator(template: template, fileExtension: "fileExtension")
 	}
 }

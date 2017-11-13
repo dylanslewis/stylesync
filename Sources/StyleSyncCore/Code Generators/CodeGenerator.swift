@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Files
 
 /// A `String` of a code template, where replacable ranges are denoted as
 /// `<replacableDeclaration>` and `</replacableDeclaration>`, and replaceable
@@ -27,15 +28,28 @@ public struct CodeGenerator {
 	/// of elements to replace. Each element of each group will have code
 	/// generated for it, using the provided template.
 	///
-	/// - Warning: The template must have a file extension.
+	/// - Parameter templateFile: A File containing a code template.
+	/// - Throws: An error if the file extension cannot be found.
+	public init(templateFile: File) throws {
+		try templateFile.validateAsTemplateFile()
+		self.template = try templateFile.readAsString()
+		self.fileExtension = try templateFile.templateFileExtension()
+		self.fileName = templateFile.templateFileName
+		self.templateCodeLines = template.components(separatedBy: "\n")
+	}
+	
+	/// Creates a `CodeGenerator` with a given template and an array of groups
+	/// of elements to replace. Each element of each group will have code
+	/// generated for it, using the provided template.
 	///
 	/// - Parameters:
-	///   - template: The template of code to generate.
-	/// - Throws: An error if the file extension cannot be found.
-	public init(template: Template) throws {
+	///   - template: A code template.
+	///   - fileExtension: The generated file's extension.
+	///   - fileName: The generated file's name.
+	public init(template: Template, fileExtension: String, fileName: String? = nil) {
 		self.template = template
-		let templateLinesWithFileExtension = template.components(separatedBy: "\n")
-		(fileExtension, fileName, templateCodeLines) = try templateLinesWithFileExtension.extractingFileTypeAndFileName()
+		self.fileExtension = fileExtension
+		self.templateCodeLines = template.components(separatedBy: "\n")
 	}
 	
 	// MARK: - Code Generation
@@ -113,34 +127,32 @@ extension CodeGenerator {
 
 // MARK: - Helpers
 
-private extension Array where Iterator.Element == String {
-	/// Extracts the file type and name from an array of code lines, removes
-	///	those lines, to prepare the array of code lines for template
-	///	replacement.
-	///
-	/// - Returns: A tuple of the file type, file name and updated array of
-	///		template code lines.
-	/// - Throws: An error if the file extension can't be found.
-	func extractingFileTypeAndFileName() throws -> (FileType, String?, [String]) {
-		let fileExtensionReference = "fileExtension".metadataPlaceholderReference
-		let fileNameReference = "fileName".metadataPlaceholderReference
-
-		var templateCodeLines = self
-		guard let (fileReferenceIndex, fileReferenceElement) = templateCodeLines.enumerated().first(where: { $0.element.contains(fileExtensionReference) }) else {
-			throw CodeGenerator.Error.noFileExtensionFound
+private extension File {
+	var templateFileName: String? {
+		guard let fileExtensionAndTemplate = self.fileExtensionAndTemplate else {
+			return nil
 		}
-		let fileType: FileType = fileReferenceElement.replacingOccurrences(of: fileExtensionReference, with: "")
-		templateCodeLines.remove(at: fileReferenceIndex)
-		
-		var fileName: String?
-		if let (fileTypeIndex, fileTypeElement) = templateCodeLines.enumerated().first(where: { $0.element.contains(fileNameReference) }) {
-			fileName = fileTypeElement.replacingOccurrences(of: fileNameReference, with: "")
-			templateCodeLines.remove(at: fileTypeIndex)
-		}
-		
-		return (fileType, fileName, templateCodeLines)
+		let templateFileNameSubstring = nameExcludingExtension
+			.replacingOccurrences(of: fileExtensionAndTemplate, with: "")
+			.dropLast()
+		return String(templateFileNameSubstring)
 	}
 	
+	func templateFileExtension() throws -> String {
+		guard let fileExtensionAndTemplate = self.fileExtensionAndTemplate else {
+			throw CodeGenerator.Error.noFileExtensionFound
+		}
+		return fileExtensionAndTemplate
+			.replacingOccurrences(of: "-template", with: "")
+	}
+	
+	private var fileExtensionAndTemplate: String? {
+		let fileNameComponents = nameExcludingExtension.components(separatedBy: ".")
+		return fileNameComponents.last
+	}
+}
+
+private extension Array where Iterator.Element == String {
 	/// Replaces all placeholders in each of the array's code lines, by looking
 	/// up the corresponding value in the `replacementDictionary`.
 	///

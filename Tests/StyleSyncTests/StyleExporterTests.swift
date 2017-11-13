@@ -20,8 +20,8 @@ class StyleExporterTests: XCTestCase {
 	// MARK: - Stored variables
 	
 	private let projectFolder: Folder = .current
-	private let textStylesTemplate: File = try! testResources.file(named: "TextStylesTemplate")
-	private let colorStylesTemplate: File = try! testResources.file(named: "ColorStylesTemplate")
+	private let textStylesTemplate: File = try! testResources.file(named: "TextStylesTemplate.fileExtension-template.txt")
+	private let colorStylesTemplate: File = try! testResources.file(named: "ColorStylesTemplate.fileExtension-template.txt")
 	
 	private let deprecatedColorStyle = ColorStyle(
 		name: "Deprecated Color Style",

@@ -16,3 +16,17 @@ extension File {
 		return try decoder.decode(D.self, from: fileData)
 	}
 }
+
+// MARK: - File + Template
+
+extension File {
+	func validateAsTemplateFile() throws {
+		if !name.contains("-template.txt") {
+			throw TemplateFileError.invalidFileName
+		}
+	}
+}
+
+enum TemplateFileError: Error {
+	case invalidFileName
+}

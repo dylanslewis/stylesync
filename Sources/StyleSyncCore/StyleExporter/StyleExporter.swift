@@ -246,11 +246,8 @@ final class StyleExporter {
 		textStyleTemplateFile: File,
 		colorStyleTemplateFile: File
 	) throws -> (text: CodeGenerator, color: CodeGenerator) {
-		let colorStyleTemplate: Template = try colorStyleTemplateFile.readAsString()
-		let textStyleTemplate: Template = try textStyleTemplateFile.readAsString()
-		
-		let textStyleCodeGenerator = try CodeGenerator(template: textStyleTemplate)
-		let colorStyleCodeGenerator = try CodeGenerator(template: colorStyleTemplate)
+		let textStyleCodeGenerator = try CodeGenerator(templateFile: textStyleTemplateFile)
+		let colorStyleCodeGenerator = try CodeGenerator(templateFile: colorStyleTemplateFile)
 		return (textStyleCodeGenerator, colorStyleCodeGenerator)
 	}
 	

@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "stylesync::stylesyncCore"
-               BuildableName = "stylesyncCore.framework"
-               BlueprintName = "stylesyncCore"
+               BlueprintIdentifier = "stylesync::StyleSyncCore"
+               BuildableName = "StyleSyncCore.framework"
+               BlueprintName = "StyleSyncCore"
                ReferencedContainer = "container:stylesync.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

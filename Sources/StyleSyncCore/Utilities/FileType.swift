@@ -11,6 +11,7 @@ public typealias FileType = String
 
 extension FileType {
 	static let json: FileType = "json"
+	static let log: FileType = "log"
 	static let xcodeProject: FileType = "xcodeproj"
 	static let xcodeScheme: FileType = "xcscheme"
 }

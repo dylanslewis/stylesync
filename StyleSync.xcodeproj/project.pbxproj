@@ -32,11 +32,11 @@
 		OBJ_136 /* StyleExtractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* StyleExtractorTests.swift */; };
 		OBJ_137 /* XCTest+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* XCTest+Extra.swift */; };
 		OBJ_138 /* VersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_93 /* VersionTests.swift */; };
-		OBJ_140 /* stylesyncCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "stylesync::stylesyncCore::Product" /* stylesyncCore.framework */; };
+		OBJ_140 /* StyleSyncCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "stylesync::StyleSyncCore::Product" /* StyleSyncCore.framework */; };
 		OBJ_141 /* ShellOut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "ShellOut::ShellOut::Product" /* ShellOut.framework */; };
 		OBJ_142 /* Files.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Files::Files::Product" /* Files.framework */; };
 		OBJ_154 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* main.swift */; };
-		OBJ_156 /* stylesyncCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "stylesync::stylesyncCore::Product" /* stylesyncCore.framework */; };
+		OBJ_156 /* StyleSyncCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "stylesync::StyleSyncCore::Product" /* StyleSyncCore.framework */; };
 		OBJ_157 /* ShellOut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "ShellOut::ShellOut::Product" /* ShellOut.framework */; };
 		OBJ_158 /* Files.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Files::Files::Product" /* Files.framework */; };
 		OBJ_166 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerator.swift */; };
@@ -99,63 +99,63 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		656975281FB8D89C00547373 /* PBXContainerItemProxy */ = {
+		656975311FBA25A200547373 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = "stylesync::stylesyncCore";
-			remoteInfo = stylesyncCore;
+			remoteGlobalIDString = "stylesync::StyleSyncCore";
+			remoteInfo = StyleSyncCore;
 		};
-		656975291FB8D89C00547373 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "ShellOut::ShellOut";
-			remoteInfo = ShellOut;
-		};
-		6569752A1FB8D89C00547373 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Files::Files";
-			remoteInfo = Files;
-		};
-		6569752B1FB8D89C00547373 /* PBXContainerItemProxy */ = {
+		656975321FBA25A200547373 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "ShellOut::ShellOut";
 			remoteInfo = ShellOut;
 		};
-		6569752C1FB8D89C00547373 /* PBXContainerItemProxy */ = {
+		656975331FBA25A200547373 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Files::Files";
 			remoteInfo = Files;
 		};
-		6569752D1FB8D89C00547373 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "stylesync::stylesyncCore";
-			remoteInfo = stylesyncCore;
-		};
-		6569752E1FB8D89C00547373 /* PBXContainerItemProxy */ = {
+		656975341FBA25A200547373 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "ShellOut::ShellOut";
 			remoteInfo = ShellOut;
 		};
-		6569752F1FB8D89C00547373 /* PBXContainerItemProxy */ = {
+		656975351FBA25A200547373 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Files::Files";
 			remoteInfo = Files;
 		};
-		656975301FB8D89D00547373 /* PBXContainerItemProxy */ = {
+		656975361FBA25A200547373 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "stylesync::StyleSyncCore";
+			remoteInfo = StyleSyncCore;
+		};
+		656975371FBA25A200547373 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "ShellOut::ShellOut";
+			remoteInfo = ShellOut;
+		};
+		656975381FBA25A200547373 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Files::Files";
+			remoteInfo = Files;
+		};
+		656975391FBA25A400547373 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -235,8 +235,8 @@
 		OBJ_97 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/dylanslewis/Developer/StyleSync/.build/checkouts/ShellOut.git--4208804319273938067/Package.swift"; sourceTree = "<group>"; };
 		OBJ_98 /* ShellOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellOut.swift; sourceTree = "<group>"; };
 		"ShellOut::ShellOut::Product" /* ShellOut.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ShellOut.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"stylesync::StyleSyncCore::Product" /* StyleSyncCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = StyleSyncCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"stylesync::stylesync::Product" /* stylesync */ = {isa = PBXFileReference; lastKnownFileType = text; path = stylesync; sourceTree = BUILT_PRODUCTS_DIR; };
-		"stylesync::stylesyncCore::Product" /* stylesyncCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = stylesyncCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"stylesync::stylesyncTests::Product" /* stylesyncTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = stylesyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -245,7 +245,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_140 /* stylesyncCore.framework in Frameworks */,
+				OBJ_140 /* StyleSyncCore.framework in Frameworks */,
 				OBJ_141 /* ShellOut.framework in Frameworks */,
 				OBJ_142 /* Files.framework in Frameworks */,
 			);
@@ -255,7 +255,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_156 /* stylesyncCore.framework in Frameworks */,
+				OBJ_156 /* StyleSyncCore.framework in Frameworks */,
 				OBJ_157 /* ShellOut.framework in Frameworks */,
 				OBJ_158 /* Files.framework in Frameworks */,
 			);
@@ -292,7 +292,7 @@
 			children = (
 				"stylesync::stylesyncTests::Product" /* stylesyncTests.xctest */,
 				"stylesync::stylesync::Product" /* stylesync */,
-				"stylesync::stylesyncCore::Product" /* stylesyncCore.framework */,
+				"stylesync::StyleSyncCore::Product" /* StyleSyncCore.framework */,
 				"ShellOut::ShellOut::Product" /* ShellOut.framework */,
 				"Files::Files::Product" /* Files.framework */,
 			);
@@ -461,7 +461,7 @@
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_8 /* stylesyncCore */,
+				OBJ_8 /* StyleSyncCore */,
 				OBJ_80 /* stylesync */,
 			);
 			name = Sources;
@@ -492,7 +492,7 @@
 			path = Zip;
 			sourceTree = "<group>";
 		};
-		OBJ_8 /* stylesyncCore */ = {
+		OBJ_8 /* StyleSyncCore */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_9 /* Code Generators */,
@@ -513,8 +513,8 @@
 				OBJ_76 /* Xcode */,
 				OBJ_78 /* Zip */,
 			);
-			name = stylesyncCore;
-			path = Sources/stylesyncCore;
+			name = StyleSyncCore;
+			path = Sources/StyleSyncCore;
 			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_80 /* stylesync */ = {
@@ -667,6 +667,24 @@
 			productName = ShellOutPackageDescription;
 			productType = "com.apple.product-type.framework";
 		};
+		"stylesync::StyleSyncCore" /* StyleSyncCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_162 /* Build configuration list for PBXNativeTarget "StyleSyncCore" */;
+			buildPhases = (
+				OBJ_165 /* Sources */,
+				OBJ_219 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_222 /* PBXTargetDependency */,
+				OBJ_223 /* PBXTargetDependency */,
+			);
+			name = StyleSyncCore;
+			productName = StyleSyncCore;
+			productReference = "stylesync::StyleSyncCore::Product" /* StyleSyncCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		"stylesync::SwiftPMPackageDescription" /* stylesyncPackageDescription */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_109 /* Build configuration list for PBXNativeTarget "stylesyncPackageDescription" */;
@@ -699,24 +717,6 @@
 			productName = stylesync;
 			productReference = "stylesync::stylesync::Product" /* stylesync */;
 			productType = "com.apple.product-type.tool";
-		};
-		"stylesync::stylesyncCore" /* stylesyncCore */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_162 /* Build configuration list for PBXNativeTarget "stylesyncCore" */;
-			buildPhases = (
-				OBJ_165 /* Sources */,
-				OBJ_219 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				OBJ_222 /* PBXTargetDependency */,
-				OBJ_223 /* PBXTargetDependency */,
-			);
-			name = stylesyncCore;
-			productName = stylesyncCore;
-			productReference = "stylesync::stylesyncCore::Product" /* stylesyncCore.framework */;
-			productType = "com.apple.product-type.framework";
 		};
 		"stylesync::stylesyncTests" /* stylesyncTests */ = {
 			isa = PBXNativeTarget;
@@ -762,7 +762,7 @@
 				"Files::SwiftPMPackageDescription" /* FilesPackageDescription */,
 				"stylesync::stylesyncTests" /* stylesyncTests */,
 				"stylesync::stylesync" /* stylesync */,
-				"stylesync::stylesyncCore" /* stylesyncCore */,
+				"stylesync::StyleSyncCore" /* StyleSyncCore */,
 				"ShellOut::ShellOut" /* ShellOut */,
 				"Files::Files" /* Files */,
 				"stylesync::stylesyncPackageTests::ProductTarget" /* stylesyncPackageTests */,
@@ -899,48 +899,48 @@
 /* Begin PBXTargetDependency section */
 		OBJ_143 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = "stylesync::stylesyncCore" /* stylesyncCore */;
-			targetProxy = 6569752D1FB8D89C00547373 /* PBXContainerItemProxy */;
+			target = "stylesync::StyleSyncCore" /* StyleSyncCore */;
+			targetProxy = 656975361FBA25A200547373 /* PBXContainerItemProxy */;
 		};
 		OBJ_145 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "ShellOut::ShellOut" /* ShellOut */;
-			targetProxy = 6569752E1FB8D89C00547373 /* PBXContainerItemProxy */;
+			targetProxy = 656975371FBA25A200547373 /* PBXContainerItemProxy */;
 		};
 		OBJ_147 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Files::Files" /* Files */;
-			targetProxy = 6569752F1FB8D89C00547373 /* PBXContainerItemProxy */;
+			targetProxy = 656975381FBA25A200547373 /* PBXContainerItemProxy */;
 		};
 		OBJ_159 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = "stylesync::stylesyncCore" /* stylesyncCore */;
-			targetProxy = 656975281FB8D89C00547373 /* PBXContainerItemProxy */;
+			target = "stylesync::StyleSyncCore" /* StyleSyncCore */;
+			targetProxy = 656975311FBA25A200547373 /* PBXContainerItemProxy */;
 		};
 		OBJ_160 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "ShellOut::ShellOut" /* ShellOut */;
-			targetProxy = 6569752B1FB8D89C00547373 /* PBXContainerItemProxy */;
+			targetProxy = 656975341FBA25A200547373 /* PBXContainerItemProxy */;
 		};
 		OBJ_161 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Files::Files" /* Files */;
-			targetProxy = 6569752C1FB8D89C00547373 /* PBXContainerItemProxy */;
+			targetProxy = 656975351FBA25A200547373 /* PBXContainerItemProxy */;
 		};
 		OBJ_222 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "ShellOut::ShellOut" /* ShellOut */;
-			targetProxy = 656975291FB8D89C00547373 /* PBXContainerItemProxy */;
+			targetProxy = 656975321FBA25A200547373 /* PBXContainerItemProxy */;
 		};
 		OBJ_223 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Files::Files" /* Files */;
-			targetProxy = 6569752A1FB8D89C00547373 /* PBXContainerItemProxy */;
+			targetProxy = 656975331FBA25A200547373 /* PBXContainerItemProxy */;
 		};
 		OBJ_240 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "stylesync::stylesyncTests" /* stylesyncTests */;
-			targetProxy = 656975301FB8D89D00547373 /* PBXContainerItemProxy */;
+			targetProxy = 656975391FBA25A400547373 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1082,16 +1082,16 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = stylesync.xcodeproj/stylesyncCore_Info.plist;
+				INFOPLIST_FILE = stylesync.xcodeproj/StyleSyncCore_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = stylesyncCore;
+				PRODUCT_BUNDLE_IDENTIFIER = StyleSyncCore;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
-				TARGET_NAME = stylesyncCore;
+				TARGET_NAME = StyleSyncCore;
 			};
 			name = Debug;
 		};
@@ -1104,16 +1104,16 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = stylesync.xcodeproj/stylesyncCore_Info.plist;
+				INFOPLIST_FILE = stylesync.xcodeproj/StyleSyncCore_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = stylesyncCore;
+				PRODUCT_BUNDLE_IDENTIFIER = StyleSyncCore;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
-				TARGET_NAME = stylesyncCore;
+				TARGET_NAME = StyleSyncCore;
 			};
 			name = Release;
 		};
@@ -1307,7 +1307,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_162 /* Build configuration list for PBXNativeTarget "stylesyncCore" */ = {
+		OBJ_162 /* Build configuration list for PBXNativeTarget "StyleSyncCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_163 /* Debug */,
