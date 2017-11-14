@@ -133,5 +133,5 @@ Example templates are available for the following platforms and languages:
 
 | Platform | Language | Templates |
 | --- | --- | --- |
-| iOS, tvOS, watchOS | Swift | [Color Styles](https://raw.githubusercontent.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/ColorStyles/iOSColorStyles.swift-template.txt/download) • [Text Styles](https://raw.githubusercontent.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/TextStyles/iOSTextStyles.swift-template.txt/download)
-| Android | XML | [Color Styles](https://raw.githubusercontent.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/ColorStyles/AndroidColorStyles.xml-template.txt/download) • [Text Styles](https://raw.githubusercontent.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/TextStyles/AndroidTextStyles.xml-template.txt/download) |
+| iOS, tvOS, watchOS | Swift | [Color Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/ColorStyles/iOSColorStyles.swift-template.txt) • [Text Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/TextStyles/iOSTextStyles.swift-template.txt)
+| Android | XML | [Color Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/ColorStyles/AndroidColorStyles.xml-template.txt) • [Text Styles](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/TextStyles/AndroidTextStyles.xml-template.txt) |
