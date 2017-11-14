@@ -79,7 +79,7 @@ Defines a placeholder that is dependant on a condition. The placeholder must be 
 
 ## Example
 
-The following template:
+The following template with a file name of `UIColor+DesignSystem.swift-template.txt`:
 ```
 <#@fileExtension#>swift
 <#@fileName#>UIColor+StyleGuide
@@ -101,7 +101,7 @@ extension UIColor {
 }
 ```
 
-could generate a file named `UIColor+StyleGuide.swift` that looks like:
+could generate a file named `UIColor+DesignSystem.swift` that looks like:
 ```swift
 //
 //  Style Guide v1.1
