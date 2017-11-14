@@ -260,11 +260,6 @@ final class StyleExporter {
 		deprecatedColorStyles: [ColorStyle],
 		ignoredFiles: [File]
 	) throws {
-		let supportedFileTypes: Set<FileType> = [
-			textStylesFileExtension,
-			colorStylesFileExtension
-		]
-		
 		// Update style references.
 		let currentAndMigratedTextReplacableStyles = currentAndMigratedTextStyles
 			.map({ currentAndMigratedTextStyle -> (CodeTemplateReplacableStyle, CodeTemplateReplacableStyle) in
@@ -312,7 +307,15 @@ final class StyleExporter {
 		
 		projectFolder
 			.makeFileSequence(recursive: true, includeHidden: false)
-			.filter({ supportedFileTypes.contains($0.extension ?? "") })
+			.filter({ file -> Bool in
+				// Only update files that are encoded as `String`.
+				do {
+					_ = try file.readAsString()
+				} catch {
+					return false
+				}
+				return true
+			})
 			.filter({ !ignoredFiles.contains($0) })
 			.forEach({ file in
 				allOperations.forEach(({ $0(file) }))
