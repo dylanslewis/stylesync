@@ -70,7 +70,8 @@ class GitHubManager {
 		else {
 			throw Error.unexpectedConsoleOutput
 		}
-		return (String(username), String(repositoryName))
+		let repositoryNameWithoutDotGit = repositoryName.replacingOccurrences(of: ".git", with: "")
+		return (String(username), repositoryNameWithoutDotGit)
 	}
 	
 	private func createBranchAndCommitChanges(
