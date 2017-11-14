@@ -82,7 +82,9 @@ There are two types of placeholder: **value** (`=`) and **conditional** (`?`).
 
 ## Value placeholders
 
-Defines a style's value. These are all optional, so you can use the value that best suits your project. If a value is not available, please [create an issue](https://github.com/dylanslewis/stylesync/issues/new).
+These represent a property value, such as a color style's hex value. These are all optional, so you can use the value that best suits your project.
+
+If a value is not available, please [create an issue](https://github.com/dylanslewis/stylesync/issues/new).
 
 #### Color Style
 
@@ -113,7 +115,7 @@ Defines a style's value. These are all optional, so you can use the value that b
 
 ## Optional placeholders
 
-Defines a placeholder that is dependant on a condition, such as a style being [deprecated](https://github.com/dylanslewis/stylesync/blob/master/README.md/#deprecation). The placeholder must be on the same line as the code that to generate if the condition is satisfied.
+These represent a placeholder that is dependant on a condition, such as a style being [deprecated](https://github.com/dylanslewis/stylesync/blob/master/README.md/#deprecation). The placeholder must be on the same line as the code to generate if the condition is satisfied.
 
 | Placeholder | Definition |
 | --- | --- |
