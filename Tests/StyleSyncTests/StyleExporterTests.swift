@@ -107,6 +107,14 @@ class StyleExporterTests: XCTestCase {
 		}
 		deleteFileWithReferencesToDeprecatedStyles()
 		deleteFileWithReferencesToNewStyles()
+		
+		do {
+			try testResources.file(named: "TextStylesTemplate.fileExtension").delete()
+			try testResources.file(named: "ColorStylesTemplate.fileExtension").delete()
+		} catch {
+			print(error)
+		}
+		
 		super.tearDown()
 	}
 	
@@ -231,8 +239,8 @@ class StyleExporterTests: XCTestCase {
 			projectFolder: projectFolder,
 			textStyleTemplateFile: textStylesTemplate,
 			colorStyleTemplateFile: colorStylesTemplate,
-			exportTextFolder: projectFolder,
-			exportColorsFolder: projectFolder,
+			exportTextFolder: testResources,
+			exportColorsFolder: testResources,
 			generatedRawTextStylesFile: generatedRawTextStylesFile,
 			generatedRawColorStylesFile: generatedRawColorStylesFile,
 			previousStylesVersion: .firstVersion
