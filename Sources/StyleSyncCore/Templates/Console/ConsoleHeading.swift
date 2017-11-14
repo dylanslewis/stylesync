@@ -3,7 +3,6 @@
 extension ConsoleTemplate {
 	static let heading = """
 
-	<#@fileExtension#>log
 	<headingDeclaration>
 	<#=headingName#>
 	--------------------------------------------------------------------------------

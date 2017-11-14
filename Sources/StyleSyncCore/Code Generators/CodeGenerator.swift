@@ -118,8 +118,12 @@ extension CodeGenerator {
 		public var description: String {
 			switch self {
 			case .noFileExtensionFound:
-				let fileExtensionReference = "fileExtension".metadataPlaceholderReference
-				return "Failed to find file extension in template. Make sure to include \(fileExtensionReference) in your template file.\nSee \(GitHubLink.templateReadme) for more information on how to create a template."
+				return """
+				Invalid template file name.
+				Expected format: {GeneratedFileName}.{generatedFileExtension}-template.txt
+				
+				See \(GitHubLink.templateReadme) for details.
+				"""
 			}
 		}
 	}
@@ -263,10 +267,6 @@ private extension String {
 	
 	var codePlaceholderEndReference: String {
 		return replaceableReference(withSymbol: "/")
-	}
-	
-	var metadataPlaceholderReference: String {
-		return replaceableReference(withSymbol: "@")
 	}
 	
 	/// Wraps the current string in a declaration start reference.

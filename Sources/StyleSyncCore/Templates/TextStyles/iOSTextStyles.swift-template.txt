@@ -1,5 +1,3 @@
-<#@fileExtension#>swift
-<#@fileName#>TextStyles
 //
 <generatedFileHeader>
 //  <#=headerLine#>

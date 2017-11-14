@@ -1,5 +1,3 @@
-<#@fileExtension#>xml
-<#@fileName#>StyleGuideTextStyles
 /*
 <generatedFileHeader>
  * <#=headerLine#>
