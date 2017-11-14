@@ -85,4 +85,4 @@ Just note that you'll need to run `swift build` to install the dependancies if y
 
 # License
 
-**stylesync** is available under the MIT license. See the [`LICENSE`](LICENSE.md) file for more information.
+**stylesync** is available under the MIT license. See the [`LICENSE`](LICENSE) file for more information.
