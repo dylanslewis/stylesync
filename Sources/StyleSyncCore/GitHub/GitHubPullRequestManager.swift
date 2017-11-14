@@ -82,7 +82,11 @@ extension GitHubPullRequestManager {
 		public var description: String {
 			switch self {
 			case .failedToCreateLoginData, .cannotCreatePullRequestURL:
-				return "Failed to extract username and GitHub personal access token. Please make sure you are running Style Sync in a git repository and that your GitHub Personal Access Token is correct in `stylesyncConfig.json`"
+				return """
+				Failed to extract username and GitHub personal access token. Please make sure you are running Style Sync in a git repository and that your GitHub Personal Access Token is correct in `stylesyncConfig.json`.
+				
+				You can view your personal access tokens at \(GitHubLink.personalAccessTokens).
+				"""
 			}
 		}
 	}
