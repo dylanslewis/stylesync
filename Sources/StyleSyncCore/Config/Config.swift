@@ -128,7 +128,7 @@ extension Config: Creatable {
 		return Question(question: """
 			If you would like Style Sync to make a branch, commit, push and raise a pull request for styling changes, please enter your GitHub personal access token. (optional)
 
-			You can do this at \(GitHubLink.personalAccessTokens)
+			You create one with `repo` access at \(GitHubLink.personalAccessTokens).
 			""") { (updatedSelf, answer) -> (Config?, Question?)? in
 			guard let updatedConfig = updatedSelf as? Config, !answer.isEmpty else {
 				return (nil, nil)

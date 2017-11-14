@@ -155,7 +155,7 @@ public final class StyleSync {
 			
 			If you'd like to branch, commit and raise a pull request for these updates, add your GitHub Personal Access token to `stylesyncConfig.json`
 
-			You can create a personal access token at \(GitHubLink.personalAccessTokens).
+			You create one with `repo` access at \(GitHubLink.personalAccessTokens).
 			""")
 			exit(0)
 		}
