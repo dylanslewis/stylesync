@@ -66,8 +66,11 @@ $ cp -f .build/release/stylesync /usr/local/bin/stylesync
 # How to use
 
 If you’re using **stylesync** for the first time, you can run `stylesync` from your project’s root directory and you’ll be taken through a set up wizard. Once completed, a `stylesyncConfig.json` file will be saved, so next time you can simply run `stylesync`.
+# Sample project
 
 `TODO: Add speed run video`
+
+See `stylesync` in action in this [small sample project](https://github.com/dylanslewis/stylesync-styleguide-ios), which showcases a design system in a simple iOS app. It’s already set up with templates and a `stylesyncConfig.json` file, so you can just run `stylesync` to see how it works!
 
 # Contributions
 
