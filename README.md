@@ -39,7 +39,7 @@ This means your Sketch file can be a **single source of truth** for your brandâ€
 
 **stylesync** exports code based on templates, which means you can export code that matches your project's platform, language and style.
 
-The template files look very similar to the exported code, except placeholder values are denoted using a simple templating language, *e.g.* `<#=hex#>`. You can find out more about [creating templates](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/README.md).
+The template files look very similar to the exported code, except placeholder values are denoted using a simple templating language, *e.g.* `<#=hex#>`. The [Templates README](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/README.md) contains more information templates, with links to some examples.
 
 ## Continuous integration
 
