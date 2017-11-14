@@ -65,7 +65,10 @@ $ cp -f .build/release/stylesync /usr/local/bin/stylesync
 
 # How to use
 
-If you’re using **stylesync** for the first time, you can run `stylesync` from your project’s root directory and you’ll be taken through a set up wizard. Once completed, a `stylesyncConfig.json` file will be saved, so next time you can simply run `stylesync`.
+Before using **stylesync**, you’ll need to create a **text style template** and **color style template**. The [Templates README](https://github.com/dylanslewis/stylesync/blob/master/Sources/StyleSyncCore/Templates/README.md) contains information on how to create a template, and links to some examples.
+
+After creating your template, you can run `stylesync` from your project’s root directory and you’ll be taken through a set up wizard. Once completed, a `stylesyncConfig.json` file will be saved, so next time you can simply run `stylesync`.
+
 # Sample project
 
 `TODO: Add speed run video`
