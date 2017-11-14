@@ -80,3 +80,5 @@ See `stylesync` in action in this [small sample project](https://github.com/dyla
 A tool that improves collaboration between designers and developers should be available to everyone for free, which is why **stylesync** is open source.
 
 If you find a bug or want to add an interesting feature, feel free to [raise an issue](https://github.com/dylanslewis/stylesync/issues/new) or [submit a pull request](https://github.com/dylanslewis/stylesync/compare).
+
+Just note that you'll need to run `swift build` to install the dependancies if you want to use the Xcode project.
