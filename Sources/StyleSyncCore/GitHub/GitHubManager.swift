@@ -50,7 +50,7 @@ class GitHubManager {
 		try submitPullRequest(
 			headBranchName: headBranchName,
 			baseBranchName: baseBranchName,
-			oldTextStyles: oldColorStyles,
+			oldTextStyles: oldTextStyles,
 			newTextStyles: newTextStyles,
 			oldColorStyles: oldColorStyles,
 			newColorStyles: newColorStyles
