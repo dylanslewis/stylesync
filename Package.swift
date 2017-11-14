@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
 	name: "stylesync",
 	products: [
-		.executable(name: "stylesync", targets: ["stylesync"]),
+		.executable(name: "stylesync", targets: ["StyleSync"]),
 		.library(name: "StyleSyncCore", targets: ["StyleSyncCore"])
 	],
 	dependencies: [
@@ -21,7 +21,7 @@ let package = Package(
 	],
 	targets: [
 		.target(
-			name: "stylesync",
+			name: "StyleSync",
 			dependencies: ["StyleSyncCore"]
 		),
 		.target(
@@ -29,7 +29,7 @@ let package = Package(
 			dependencies: ["Files", "ShellOut"]
 		),
 		.testTarget(
-			name: "stylesyncTests",
+			name: "StyleSyncTests",
 			dependencies: ["StyleSyncCore"]
 		)
 	]

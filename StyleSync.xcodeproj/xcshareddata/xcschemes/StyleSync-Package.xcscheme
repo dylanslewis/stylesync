@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "stylesync::stylesync"
-               BuildableName = "stylesync"
-               BlueprintName = "stylesync"
+               BlueprintIdentifier = "stylesync::StyleSync"
+               BuildableName = "StyleSync"
+               BlueprintName = "StyleSync"
                ReferencedContainer = "container:stylesync.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -75,9 +75,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "stylesync::stylesyncTests"
-               BuildableName = "stylesyncTests.xctest"
-               BlueprintName = "stylesyncTests"
+               BlueprintIdentifier = "stylesync::StyleSyncTests"
+               BuildableName = "StyleSyncTests.xctest"
+               BlueprintName = "StyleSyncTests"
                ReferencedContainer = "container:stylesync.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -99,9 +99,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "stylesync::stylesync"
-            BuildableName = "stylesync"
-            BlueprintName = "stylesync"
+            BlueprintIdentifier = "stylesync::StyleSync"
+            BuildableName = "StyleSync"
+            BlueprintName = "StyleSync"
             ReferencedContainer = "container:stylesync.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
