@@ -82,3 +82,7 @@ A tool that improves collaboration between designers and developers should be av
 If you find a bug or want to add an interesting feature, feel free to [raise an issue](https://github.com/dylanslewis/stylesync/issues/new) or [submit a pull request](https://github.com/dylanslewis/stylesync/compare).
 
 Just note that you'll need to run `swift build` to install the dependancies if you want to use the Xcode project.
+
+# License
+
+stylesync is available under the MIT license. See the [`LICENSE`](LICENSE.md) file for more information.
