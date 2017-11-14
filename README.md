@@ -16,7 +16,7 @@
     </a>
 </p>
 
-Welcome to **stylesync**, a command line tool that extracts text and colour styles from a [Sketch](https://www.sketchapp.com/) document, and generates **native** code for your project's platform, language and style.
+Welcome to **stylesync**, a command line tool that extracts text and colour styles from a [Sketch](https://www.sketchapp.com/) document, and generates **native** code for your project's **platform**, **language** and **style**.
 
 # Why?
 
