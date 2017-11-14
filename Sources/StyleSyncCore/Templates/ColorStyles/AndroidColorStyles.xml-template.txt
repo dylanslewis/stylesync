@@ -5,8 +5,8 @@
  */
 
 <resources>
-  <colorDeclaration>
+<colorDeclaration>
   <#?deprecated=true#>/* Deprecated */
   <color name="<#=colorName#>">#<#=hex#></color>
-  </colorDeclaration>
+</colorDeclaration>
 </resources>

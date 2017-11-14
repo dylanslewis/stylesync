@@ -7,10 +7,10 @@
 import UIKit
 
 extension UIColor {
-	<colorDeclaration>
+<colorDeclaration>
 
 	/// #<#=hex#>
 	<#?deprecated=true#>@available(*, deprecated)
 	public static let <#=colorName#> = UIColor(red: <#=red#>/255, green: <#=green#>/255, blue: <#=blue#>/255, alpha: <#=alpha#>)
-	</colorDeclaration>
+</colorDeclaration>
 }
