@@ -239,8 +239,8 @@ class StyleExporterTests: XCTestCase {
 			projectFolder: projectFolder,
 			textStyleTemplateFile: textStylesTemplate,
 			colorStyleTemplateFile: colorStylesTemplate,
-			exportTextFolder: testResources,
-			exportColorsFolder: testResources,
+			exportTextFolder: projectFolder,
+			exportColorsFolder: projectFolder,
 			generatedRawTextStylesFile: generatedRawTextStylesFile,
 			generatedRawColorStylesFile: generatedRawColorStylesFile,
 			previousStylesVersion: .firstVersion
