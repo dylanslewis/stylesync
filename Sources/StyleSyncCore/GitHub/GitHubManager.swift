@@ -62,7 +62,7 @@ class GitHubManager {
 	private static func getGitHubUsernameAndRepositoryName() throws -> (username: String, repositoryName: String) {
 		let shellOutput = try shellOut(to: .gitGetOriginURL())
 		guard
-			shellOutput.contains("git@github.com"),
+			shellOutput.contains("git@"),
 			let userNameAndRepositoryName = shellOutput.split(separator: ":").last?.split(separator: "/"),
 			userNameAndRepositoryName.count == 2,
 			let username = userNameAndRepositoryName.first,
