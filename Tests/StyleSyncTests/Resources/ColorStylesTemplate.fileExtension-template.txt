@@ -1,6 +1,3 @@
-<#@fileExtension#>fileExtension
-<#@fileName#>ColorStyles
-
 <colorDeclaration>
 <#?deprecated=true#>// Deprecated
 let <#=colorName#> = Color(red: <#=red#>, green: <#=green#>, blue: <#=blue#>, alpha: <#=alpha#>)

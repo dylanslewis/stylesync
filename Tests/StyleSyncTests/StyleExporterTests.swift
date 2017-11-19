@@ -24,13 +24,13 @@ class StyleExporterTests: XCTestCase {
 	private let colorStylesTemplate: File = try! testResources.file(named: "ColorStylesTemplate.fileExtension-template.txt")
 	
 	private let deprecatedColorStyle = ColorStyle(
-		name: "Deprecated Color Style",
+		name: "Deprecated Style Color",
 		identifier: "C1",
 		color: .red,
 		isDeprecated: true
 	)
 	private let newColorStyle = ColorStyle(
-		name: "New Color Style",
+		name: "New Style Color",
 		identifier: "C2",
 		color: .green,
 		isDeprecated: false
@@ -47,7 +47,7 @@ class StyleExporterTests: XCTestCase {
 	
 	private var renamedNewColorStyle: ColorStyle {
 		return ColorStyle(
-			name: "Renamed New Color Style",
+			name: "Renamed New Style Color",
 			identifier: newColorStyle.identifier,
 			color: newColorStyle.color,
 			isDeprecated: false
@@ -56,7 +56,7 @@ class StyleExporterTests: XCTestCase {
 	
 	private var deprecatedTextStyle: TextStyle {
 		return TextStyle(
-			name: "Deprecated Text Style",
+			name: "Deprecated Style Text",
 			identifier: "T1",
 			fontName: "FontName",
 			pointSize: 16,
@@ -68,7 +68,7 @@ class StyleExporterTests: XCTestCase {
 	}
 	private var newTextStyle: TextStyle {
 		return TextStyle(
-			name: "New Text Style",
+			name: "New Style Text",
 			identifier: "T2",
 			fontName: "DifferentFontName",
 			pointSize: 18,
@@ -80,7 +80,7 @@ class StyleExporterTests: XCTestCase {
 	}
 	private var renamedNewTextStyle: TextStyle {
 		return TextStyle(
-			name: "Renamed New Text Style",
+			name: "Renamed New Style Text",
 			identifier: newTextStyle.identifier,
 			fontName: newTextStyle.fontName,
 			pointSize: newTextStyle.pointSize,
