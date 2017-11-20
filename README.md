@@ -71,7 +71,7 @@ After creating your template, you can run `stylesync` from your project’s root
 
 # Sample project
 
-`TODO: Add speed run video`
+[![Vimeo](Design/Vimeo.png)](https://vimeo.com/243729044)
 
 See `stylesync` in action in this [small sample project](https://github.com/dylanslewis/stylesync-styleguide-ios), which showcases a design system in a simple iOS app. It’s already set up with templates and a `stylesyncConfig.json` file, so you can just run `stylesync` to see how it works!
 
