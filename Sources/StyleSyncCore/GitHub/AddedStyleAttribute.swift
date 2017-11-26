@@ -1,8 +1,7 @@
 //
-//  AddedStyleAttribute.swift
-//  StyleSyncPackageDescription
-//
-//  Created by Dylan Lewis on 04/09/2017.
+//  stylesync
+//  Created by Dylan Lewis
+//  Licensed under the MIT license. See LICENSE file.
 //
 
 import Foundation

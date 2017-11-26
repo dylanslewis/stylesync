@@ -1,9 +1,7 @@
 //
-//  SketchSketchDocument.swift
-//  StyleSync
-//
-//  Created by Dylan Lewis on 12/08/2017.
-//  Copyright © 2017 Dylan Lewis. All rights reserved.
+//  stylesync
+//  Created by Dylan Lewis
+//  Licensed under the MIT license. See LICENSE file.
 //
 
 import Cocoa

@@ -1,8 +1,7 @@
 //
-//  XCTest+Extra.swift
-//  StyleSyncTests
-//
-//  Created by Dylan Lewis on 12/11/2017.
+//  stylesync
+//  Created by Dylan Lewis
+//  Licensed under the MIT license. See LICENSE file.
 //
 
 import XCTest

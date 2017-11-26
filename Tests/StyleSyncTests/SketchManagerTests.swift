@@ -1,8 +1,7 @@
 //
-//  SketchManagerTests.swift
-//  StyleSyncTests
-//
-//  Created by Dylan Lewis on 11/11/2017.
+//  stylesync
+//  Created by Dylan Lewis
+//  Licensed under the MIT license. See LICENSE file.
 //
 
 import XCTest
