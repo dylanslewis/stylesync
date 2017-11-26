@@ -1,0 +1,21 @@
+//
+<generatedFileHeader>
+//  <#=headerLine#>
+</generatedFileHeader>
+//
+
+import UIKit
+
+extension TextStyle {
+<textStyleDeclaration>
+
+	<#?deprecated=true#>@available(*, deprecated)
+	static let <#=textStyleName#> = TextStyle(
+		fontName: "<#=fontName#>",
+		pointSize: <#=pointSize#>,
+		color: .<#=color#>,
+		kerning: <#=kerning#>,
+		lineHeight: <#=lineHeight#>
+	)
+</textStyleDeclaration>
+}

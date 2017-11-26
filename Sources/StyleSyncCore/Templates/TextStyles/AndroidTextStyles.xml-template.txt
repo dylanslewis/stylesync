@@ -1,0 +1,17 @@
+/*
+<generatedFileHeader>
+ * <#=headerLine#>
+</generatedFileHeader>
+ */
+
+<resources>
+<textStyleDeclaration>
+  <#?deprecated=true#>/* Deprecated */
+  <style name="<#=textStyleName#>">
+    <item name="android:textSize"><#=pointSize#>sp</item>
+    <item name="android:letterSpacing"><#=letterSpacingEm#></item>
+    <item name="android:lineSpacingExtra"><#=lineSpacingExtra#>sp</item>
+    <item name="android:font">@font/<#=fontName#>.tff</item>
+  </style>
+</textStyleDeclaration>
+</resources>

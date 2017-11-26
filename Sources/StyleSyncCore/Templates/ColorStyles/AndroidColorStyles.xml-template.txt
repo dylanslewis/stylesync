@@ -1,0 +1,12 @@
+/*
+<generatedFileHeader>
+ * <#=headerLine#>
+</generatedFileHeader>
+ */
+
+<resources>
+<colorDeclaration>
+  <#?deprecated=true#>/* Deprecated */
+  <color name="<#=colorName#>">#<#=hex#></color>
+</colorDeclaration>
+</resources>
