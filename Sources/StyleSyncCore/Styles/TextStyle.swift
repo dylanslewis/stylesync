@@ -28,12 +28,19 @@ struct TextStyle: Style, Codable {
 		colorStyle: ColorStyle,
 		isDeprecated: Bool
 	) {
+		let nonZeroLineHeight: CGFloat
+		if lineHeight == 0, let defaultLineHeight = NSFont.defaultLineHeight(fontName: fontName, pointSize: pointSize) {
+			nonZeroLineHeight = defaultLineHeight
+		} else {
+			nonZeroLineHeight = lineHeight
+		}
+		
 		self.name = name
 		self.identifier = identifier
 		self.fontName = fontName
-		self.pointSize = pointSize
-		self.kerning = kerning
-		self.lineHeight = lineHeight
+		self.pointSize = pointSize.roundedToTwoDecimalPlaces
+		self.kerning = kerning.roundedToTwoDecimalPlaces
+		self.lineHeight = nonZeroLineHeight.roundedToTwoDecimalPlaces
 		self.colorStyle = colorStyle
 		self.isDeprecated = isDeprecated
 	}
@@ -48,15 +55,17 @@ struct TextStyle: Style, Codable {
 			ErrorManager.log(warning: "Failed to parse text style with name \(textStyleObject.name)\n\n\(textStyleObject)", isBug: true)
 			return nil
 		}
-		
-		self.name = textStyleObject.name
-		self.identifier = textStyleObject.identifier
-		self.fontName = fontName
-		self.pointSize = pointSize.roundedToTwoDecimalPlaces
-		self.kerning = textAttributes.kerning?.roundedToTwoDecimalPlaces ?? 0
-		self.lineHeight = lineHeight.roundedToTwoDecimalPlaces
-		self.colorStyle = colorStyle
-		self.isDeprecated = isDeprecated
+	
+		self.init(
+			name: textStyleObject.name,
+			identifier: textStyleObject.identifier,
+			fontName: fontName,
+			pointSize: pointSize,
+			kerning: textAttributes.kerning ?? 0,
+			lineHeight: lineHeight,
+			colorStyle: colorStyle,
+			isDeprecated: isDeprecated
+		)
 	}
 }
 
