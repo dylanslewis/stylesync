@@ -32,6 +32,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		656099271FCB33E100D17EDC /* NSFont+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656099231FCB331700D17EDC /* NSFont+Extra.swift */; };
 		OBJ_113 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_119 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* Package.swift */; };
 		OBJ_125 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* Package.swift */; };
@@ -183,6 +184,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		656099231FCB331700D17EDC /* NSFont+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFont+Extra.swift"; sourceTree = "<group>"; };
 		"Files::Files::Product" /* Files.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Files.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* CodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerator.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/dylanslewis/Developer/StyleSync/.build/checkouts/Files.git-6739420172119258925/Package.swift"; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				OBJ_25 /* ShellOutCommand+Extra.swift */,
 				OBJ_26 /* String+Extra.swift */,
 				OBJ_27 /* URLRequest+Extra.swift */,
+				656099231FCB331700D17EDC /* NSFont+Extra.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
