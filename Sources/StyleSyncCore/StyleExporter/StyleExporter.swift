@@ -408,7 +408,14 @@ final class StyleExporter {
 				return
 			}
 			currentAndMigratedStyles.forEach({
-				fileString = fileString.replacingOccurrences(of: $0.0.variableName, with: $0.1.variableName)
+				var containsOccurence = true
+				repeat {
+					guard let range = fileString.range(of: $0.0.variableName, whereSurroundingCharactersAreNotContainedIn: .alphanumerics) else {
+						containsOccurence = false
+						return
+					}
+					fileString = fileString.replacingCharacters(in: range, with: $0.1.variableName)
+				} while containsOccurence == true
 			})
 			
 			do {
