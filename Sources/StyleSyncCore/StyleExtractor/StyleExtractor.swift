@@ -12,7 +12,7 @@ final class StyleExtractor {
 	
 	private var generatedRawTextStylesFile: File!
 	private var generatedRawColorStylesFile: File!
-	private var sketchDocument: SketchDocument!
+	private var styleInput: StyleInput
 	
 	// MARK: - Computed variables
 	
@@ -30,21 +30,41 @@ final class StyleExtractor {
 	}
 	
 	lazy var latestTextStyles: [TextStyle] = {
-		return sketchDocument.layerTextStyles.objects
-			.flatMap { textStyleObject -> TextStyle? in
-				guard
-					let color = textStyleObject.value.textStyle.encodedAttributes.color.color,
-					let colorStyle = ColorStyle.colorStyle(for: color, in: latestColorStyles)
-				else {
-					ErrorManager.log(warning: "\(textStyleObject.name) does not use a color from the shared colour scheme")
-					return nil
-				}
-				return TextStyle(textStyleObject: textStyleObject, colorStyle: colorStyle)
+		switch styleInput {
+		case .sketch(let sketchDocument):
+			return sketchDocument.layerTextStyles.objects
+				.flatMap { textStyleObject -> TextStyle? in
+					guard
+						let color = textStyleObject.value.textStyle.encodedAttributes.color.color,
+						let colorStyle = ColorStyle.colorStyle(for: color, in: latestColorStyles)
+					else {
+						ErrorManager.log(warning: "\(textStyleObject.name) does not use a color from the shared colour scheme")
+						return nil
+					}
+					return TextStyle(textStyleObject: textStyleObject, colorStyle: colorStyle)
+			}
+		case .lona(_, let textStyles):
+			return textStyles
+				.flatMap { lonaTextStyle -> TextStyle? in
+					guard
+						let colorStyle = latestColorStyles.first(where: { $0.identifier == lonaTextStyle.colorName })
+					else {
+						ErrorManager.log(warning: "\(lonaTextStyle.name) does not use a color from the shared colour scheme")
+						return nil
+					}
+					return TextStyle(lonaTextStyle: lonaTextStyle, colorStyle: colorStyle)
+			}
 		}
+		
 	}()
 	lazy var latestColorStyles: [ColorStyle] = {
-		return sketchDocument.layerStyles.objects
-			.flatMap({ ColorStyle(colorStyleObject: $0) })
+		switch styleInput {
+		case .sketch(let sketchDocument):
+			return sketchDocument.layerStyles.objects
+				.flatMap({ ColorStyle(colorStyleObject: $0) })
+		case .lona(let colors, _):
+			return colors.map({ ColorStyle(lonaColor: $0) })
+		}
 	}()
 	
 	// MARK: - Initializer
@@ -52,11 +72,11 @@ final class StyleExtractor {
 	init(
 		generatedRawTextStylesFile: File,
 		generatedRawColorStylesFile: File,
-		sketchDocument: SketchDocument
+		styleInput: StyleInput
 	) {
 		self.generatedRawTextStylesFile = generatedRawTextStylesFile
 		self.generatedRawColorStylesFile = generatedRawColorStylesFile
-		self.sketchDocument = sketchDocument
+		self.styleInput = styleInput
 	}
 	
 	// MARK: - Helpers

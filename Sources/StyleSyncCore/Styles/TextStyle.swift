@@ -65,6 +65,23 @@ struct TextStyle: Style, Codable {
 			isDeprecated: isDeprecated
 		)
 	}
+	
+	init?(lonaTextStyle: Lona.Text, colorStyle: ColorStyle, isDeprecated: Bool = false) {
+		guard let font = NSFontManager.shared.font(withFamily: lonaTextStyle.fontFamily, traits: [], weight: Int(lonaTextStyle.fontWeight)!, size: lonaTextStyle.fontSize) else {
+			return nil
+		}
+		
+		self.init(
+			name: lonaTextStyle.name,
+			identifier: lonaTextStyle.identifier,
+			fontName: font.fontName,
+			pointSize: lonaTextStyle.fontSize,
+			kerning: lonaTextStyle.letterSpacing,
+			lineHeight: lonaTextStyle.lineHeight,
+			colorStyle: colorStyle,
+			isDeprecated: isDeprecated
+		)
+	}
 }
 
 // MARK: - Equatable

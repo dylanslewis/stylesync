@@ -9,22 +9,22 @@
 /* Begin PBXAggregateTarget section */
 		"stylesync::stylesync::ProductTarget" /* stylesync */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_242 /* Build configuration list for PBXAggregateTarget "stylesync" */;
+			buildConfigurationList = OBJ_251 /* Build configuration list for PBXAggregateTarget "stylesync" */;
 			buildPhases = (
 			);
 			dependencies = (
-				OBJ_245 /* PBXTargetDependency */,
+				OBJ_254 /* PBXTargetDependency */,
 			);
 			name = stylesync;
 			productName = stylesync;
 		};
 		"stylesync::stylesyncPackageTests::ProductTarget" /* stylesyncPackageTests */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_237 /* Build configuration list for PBXAggregateTarget "stylesyncPackageTests" */;
+			buildConfigurationList = OBJ_246 /* Build configuration list for PBXAggregateTarget "stylesyncPackageTests" */;
 			buildPhases = (
 			);
 			dependencies = (
-				OBJ_240 /* PBXTargetDependency */,
+				OBJ_249 /* PBXTargetDependency */,
 			);
 			name = stylesyncPackageTests;
 			productName = stylesyncPackageTests;
@@ -32,151 +32,152 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		656099261FCB333E00D17EDC /* NSFontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656099251FCB333E00D17EDC /* NSFontTests.swift */; };
-		656099271FCB33E100D17EDC /* NSFont+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656099231FCB331700D17EDC /* NSFont+Extra.swift */; };
-		656099291FCB349F00D17EDC /* TextStyleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656099281FCB349F00D17EDC /* TextStyleTests.swift */; };
-		OBJ_113 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
-		OBJ_119 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* Package.swift */; };
-		OBJ_125 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* Package.swift */; };
-		OBJ_131 /* CodeGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* CodeGeneratorTests.swift */; };
-		OBJ_132 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_86 /* Resources.swift */; };
-		OBJ_133 /* SketchManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* SketchManagerTests.swift */; };
-		OBJ_134 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* StringTests.swift */; };
-		OBJ_135 /* StyleExporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_89 /* StyleExporterTests.swift */; };
-		OBJ_136 /* StyleExtractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* StyleExtractorTests.swift */; };
-		OBJ_137 /* XCTest+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* XCTest+Extra.swift */; };
-		OBJ_138 /* VersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_93 /* VersionTests.swift */; };
-		OBJ_140 /* StyleSyncCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "stylesync::StyleSyncCore::Product" /* StyleSyncCore.framework */; };
-		OBJ_141 /* ShellOut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "ShellOut::ShellOut::Product" /* ShellOut.framework */; };
-		OBJ_142 /* Files.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Files::Files::Product" /* Files.framework */; };
-		OBJ_154 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* main.swift */; };
-		OBJ_156 /* StyleSyncCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "stylesync::StyleSyncCore::Product" /* StyleSyncCore.framework */; };
-		OBJ_157 /* ShellOut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "ShellOut::ShellOut::Product" /* ShellOut.framework */; };
-		OBJ_158 /* Files.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Files::Files::Product" /* Files.framework */; };
-		OBJ_166 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerator.swift */; };
-		OBJ_167 /* CodeTemplateReplaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CodeTemplateReplaceable.swift */; };
-		OBJ_168 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Config.swift */; };
-		OBJ_169 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* ConfigManager.swift */; };
-		OBJ_170 /* Questionaire.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Questionaire.swift */; };
-		OBJ_171 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* ErrorManager.swift */; };
-		OBJ_172 /* CodableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* CodableError.swift */; };
-		OBJ_173 /* CGFloat+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* CGFloat+Extra.swift */; };
-		OBJ_174 /* File+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* File+Extra.swift */; };
-		OBJ_175 /* Folder+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Folder+Extra.swift */; };
-		OBJ_176 /* NSColor+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* NSColor+Extra.swift */; };
-		OBJ_177 /* ShellOutCommand+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ShellOutCommand+Extra.swift */; };
-		OBJ_178 /* String+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* String+Extra.swift */; };
-		OBJ_179 /* URLRequest+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* URLRequest+Extra.swift */; };
-		OBJ_180 /* AddedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* AddedStyle.swift */; };
-		OBJ_181 /* AddedStyleAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* AddedStyleAttribute.swift */; };
-		OBJ_182 /* DeprecatedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* DeprecatedStyle.swift */; };
-		OBJ_183 /* GitHubManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* GitHubManager.swift */; };
-		OBJ_184 /* GitHubPullRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* GitHubPullRequestManager.swift */; };
-		OBJ_185 /* GitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* GitManager.swift */; };
-		OBJ_186 /* PullRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* PullRequest.swift */; };
-		OBJ_187 /* RemovedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* RemovedStyle.swift */; };
-		OBJ_188 /* StyleUpdateSummaryGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* StyleUpdateSummaryGenerator.swift */; };
-		OBJ_189 /* UpdatedAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* UpdatedAttribute.swift */; };
-		OBJ_190 /* UpdatedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* UpdatedStyle.swift */; };
-		OBJ_191 /* ScreenshotManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* ScreenshotManager.swift */; };
-		OBJ_192 /* SketchDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* SketchDocument.swift */; };
-		OBJ_193 /* SketchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* SketchManager.swift */; };
-		OBJ_194 /* StyleExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* StyleExporter.swift */; };
-		OBJ_195 /* StyleExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* StyleExtractor.swift */; };
-		OBJ_196 /* StyleSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* StyleSync.swift */; };
-		OBJ_197 /* CodeTemplateReplacableStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* CodeTemplateReplacableStyle.swift */; };
-		OBJ_198 /* ColorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* ColorStyle.swift */; };
-		OBJ_199 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* Style.swift */; };
-		OBJ_200 /* StyleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* StyleParser.swift */; };
-		OBJ_201 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* TextStyle.swift */; };
-		OBJ_202 /* ConsoleDeprecatedStylesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* ConsoleDeprecatedStylesTable.swift */; };
-		OBJ_203 /* ConsoleHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* ConsoleHeading.swift */; };
-		OBJ_204 /* ConsoleNewStyleTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* ConsoleNewStyleTable.swift */; };
-		OBJ_205 /* ConsoleStyleName.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* ConsoleStyleName.swift */; };
-		OBJ_206 /* ConsoleUpdatedStyleTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* ConsoleUpdatedStyleTable.swift */; };
-		OBJ_207 /* GitHubDeprecatedStylesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* GitHubDeprecatedStylesTable.swift */; };
-		OBJ_208 /* GitHubHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* GitHubHeading.swift */; };
-		OBJ_209 /* GitHubNewStyleTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* GitHubNewStyleTable.swift */; };
-		OBJ_210 /* GitHubStyleName.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* GitHubStyleName.swift */; };
-		OBJ_211 /* GitHubUpdatedStyleTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* GitHubUpdatedStyleTable.swift */; };
-		OBJ_212 /* CodeNameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* CodeNameable.swift */; };
-		OBJ_213 /* FileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* FileType.swift */; };
-		OBJ_214 /* GitHubLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* GitHubLink.swift */; };
-		OBJ_215 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* Version.swift */; };
-		OBJ_216 /* VersionedStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* VersionedStyles.swift */; };
-		OBJ_217 /* XcodeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* XcodeProject.swift */; };
-		OBJ_218 /* ZipManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* ZipManager.swift */; };
-		OBJ_220 /* ShellOut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "ShellOut::ShellOut::Product" /* ShellOut.framework */; };
-		OBJ_221 /* Files.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Files::Files::Product" /* Files.framework */; };
-		OBJ_228 /* ShellOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* ShellOut.swift */; };
-		OBJ_234 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* Files.swift */; };
+		OBJ_118 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_124 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* Package.swift */; };
+		OBJ_130 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* Package.swift */; };
+		OBJ_136 /* CodeGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* CodeGeneratorTests.swift */; };
+		OBJ_137 /* NSFontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* NSFontTests.swift */; };
+		OBJ_138 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Resources.swift */; };
+		OBJ_139 /* SketchManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* SketchManagerTests.swift */; };
+		OBJ_140 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* StringTests.swift */; };
+		OBJ_141 /* StyleExporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_93 /* StyleExporterTests.swift */; };
+		OBJ_142 /* StyleExtractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_94 /* StyleExtractorTests.swift */; };
+		OBJ_143 /* TextStyleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_95 /* TextStyleTests.swift */; };
+		OBJ_144 /* XCTest+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* XCTest+Extra.swift */; };
+		OBJ_145 /* VersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* VersionTests.swift */; };
+		OBJ_147 /* StyleSyncCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "stylesync::StyleSyncCore::Product" /* StyleSyncCore.framework */; };
+		OBJ_148 /* ShellOut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "ShellOut::ShellOut::Product" /* ShellOut.framework */; };
+		OBJ_149 /* Files.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Files::Files::Product" /* Files.framework */; };
+		OBJ_161 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* main.swift */; };
+		OBJ_163 /* StyleSyncCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "stylesync::StyleSyncCore::Product" /* StyleSyncCore.framework */; };
+		OBJ_164 /* ShellOut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "ShellOut::ShellOut::Product" /* ShellOut.framework */; };
+		OBJ_165 /* Files.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Files::Files::Product" /* Files.framework */; };
+		OBJ_173 /* CodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* CodeGenerator.swift */; };
+		OBJ_174 /* CodeTemplateReplaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CodeTemplateReplaceable.swift */; };
+		OBJ_175 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Config.swift */; };
+		OBJ_176 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* ConfigManager.swift */; };
+		OBJ_177 /* Questionaire.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Questionaire.swift */; };
+		OBJ_178 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* ErrorManager.swift */; };
+		OBJ_179 /* CodableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* CodableError.swift */; };
+		OBJ_180 /* CGFloat+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* CGFloat+Extra.swift */; };
+		OBJ_181 /* File+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* File+Extra.swift */; };
+		OBJ_182 /* Folder+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Folder+Extra.swift */; };
+		OBJ_183 /* NSColor+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* NSColor+Extra.swift */; };
+		OBJ_184 /* NSFont+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* NSFont+Extra.swift */; };
+		OBJ_185 /* ShellOutCommand+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* ShellOutCommand+Extra.swift */; };
+		OBJ_186 /* String+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* String+Extra.swift */; };
+		OBJ_187 /* URLRequest+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* URLRequest+Extra.swift */; };
+		OBJ_188 /* AddedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* AddedStyle.swift */; };
+		OBJ_189 /* AddedStyleAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* AddedStyleAttribute.swift */; };
+		OBJ_190 /* DeprecatedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* DeprecatedStyle.swift */; };
+		OBJ_191 /* GitHubManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* GitHubManager.swift */; };
+		OBJ_192 /* GitHubPullRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* GitHubPullRequestManager.swift */; };
+		OBJ_193 /* GitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* GitManager.swift */; };
+		OBJ_194 /* PullRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* PullRequest.swift */; };
+		OBJ_195 /* RemovedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* RemovedStyle.swift */; };
+		OBJ_196 /* StyleUpdateSummaryGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* StyleUpdateSummaryGenerator.swift */; };
+		OBJ_197 /* UpdatedAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* UpdatedAttribute.swift */; };
+		OBJ_198 /* UpdatedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* UpdatedStyle.swift */; };
+		OBJ_199 /* Lona.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Lona.swift */; };
+		OBJ_200 /* ScreenshotManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* ScreenshotManager.swift */; };
+		OBJ_201 /* SketchDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* SketchDocument.swift */; };
+		OBJ_202 /* SketchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* SketchManager.swift */; };
+		OBJ_203 /* StyleExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* StyleExporter.swift */; };
+		OBJ_204 /* StyleExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* StyleExtractor.swift */; };
+		OBJ_205 /* StyleSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* StyleSync.swift */; };
+		OBJ_206 /* CodeTemplateReplacableStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* CodeTemplateReplacableStyle.swift */; };
+		OBJ_207 /* ColorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* ColorStyle.swift */; };
+		OBJ_208 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* Style.swift */; };
+		OBJ_209 /* StyleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* StyleParser.swift */; };
+		OBJ_210 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* TextStyle.swift */; };
+		OBJ_211 /* ConsoleDeprecatedStylesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* ConsoleDeprecatedStylesTable.swift */; };
+		OBJ_212 /* ConsoleHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* ConsoleHeading.swift */; };
+		OBJ_213 /* ConsoleNewStyleTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* ConsoleNewStyleTable.swift */; };
+		OBJ_214 /* ConsoleStyleName.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* ConsoleStyleName.swift */; };
+		OBJ_215 /* ConsoleUpdatedStyleTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* ConsoleUpdatedStyleTable.swift */; };
+		OBJ_216 /* GitHubDeprecatedStylesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* GitHubDeprecatedStylesTable.swift */; };
+		OBJ_217 /* GitHubHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* GitHubHeading.swift */; };
+		OBJ_218 /* GitHubNewStyleTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* GitHubNewStyleTable.swift */; };
+		OBJ_219 /* GitHubStyleName.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* GitHubStyleName.swift */; };
+		OBJ_220 /* GitHubUpdatedStyleTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* GitHubUpdatedStyleTable.swift */; };
+		OBJ_221 /* CodeNameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* CodeNameable.swift */; };
+		OBJ_222 /* FileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* FileType.swift */; };
+		OBJ_223 /* GitHubLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* GitHubLink.swift */; };
+		OBJ_224 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* Version.swift */; };
+		OBJ_225 /* VersionedStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* VersionedStyles.swift */; };
+		OBJ_226 /* XcodeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* XcodeProject.swift */; };
+		OBJ_227 /* ZipManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* ZipManager.swift */; };
+		OBJ_229 /* ShellOut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "ShellOut::ShellOut::Product" /* ShellOut.framework */; };
+		OBJ_230 /* Files.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Files::Files::Product" /* Files.framework */; };
+		OBJ_237 /* ShellOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* ShellOut.swift */; };
+		OBJ_243 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* Files.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		65A1A6A61FBB908B007C6AFF /* PBXContainerItemProxy */ = {
+		65101DC61FCE128A00CAAA0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "stylesync::StyleSyncCore";
 			remoteInfo = StyleSyncCore;
 		};
-		65A1A6A71FBB908B007C6AFF /* PBXContainerItemProxy */ = {
+		65101DC71FCE128A00CAAA0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "ShellOut::ShellOut";
 			remoteInfo = ShellOut;
 		};
-		65A1A6A81FBB908B007C6AFF /* PBXContainerItemProxy */ = {
+		65101DC81FCE128A00CAAA0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Files::Files";
 			remoteInfo = Files;
 		};
-		65A1A6A91FBB908B007C6AFF /* PBXContainerItemProxy */ = {
+		65101DC91FCE128A00CAAA0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "ShellOut::ShellOut";
 			remoteInfo = ShellOut;
 		};
-		65A1A6AA1FBB908B007C6AFF /* PBXContainerItemProxy */ = {
+		65101DCA1FCE128A00CAAA0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Files::Files";
 			remoteInfo = Files;
 		};
-		65A1A6AB1FBB908B007C6AFF /* PBXContainerItemProxy */ = {
+		65101DCB1FCE128A00CAAA0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "stylesync::StyleSyncCore";
 			remoteInfo = StyleSyncCore;
 		};
-		65A1A6AC1FBB908B007C6AFF /* PBXContainerItemProxy */ = {
+		65101DCC1FCE128A00CAAA0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "ShellOut::ShellOut";
 			remoteInfo = ShellOut;
 		};
-		65A1A6AD1FBB908B007C6AFF /* PBXContainerItemProxy */ = {
+		65101DCD1FCE128A00CAAA0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Files::Files";
 			remoteInfo = Files;
 		};
-		65A1A6AE1FBB908E007C6AFF /* PBXContainerItemProxy */ = {
+		65101DCE1FCE128B00CAAA0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "stylesync::StyleSyncTests";
 			remoteInfo = StyleSyncTests;
 		};
-		65A1A6AF1FBB908E007C6AFF /* PBXContainerItemProxy */ = {
+		65101DCF1FCE128B00CAAA0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -186,13 +187,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		656099231FCB331700D17EDC /* NSFont+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFont+Extra.swift"; sourceTree = "<group>"; };
-		656099251FCB333E00D17EDC /* NSFontTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSFontTests.swift; sourceTree = "<group>"; };
-		656099281FCB349F00D17EDC /* TextStyleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyleTests.swift; sourceTree = "<group>"; };
 		"Files::Files::Product" /* Files.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Files.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* CodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerator.swift; sourceTree = "<group>"; };
-		OBJ_100 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/dylanslewis/Developer/StyleSync/.build/checkouts/Files.git-6739420172119258925/Package.swift"; sourceTree = "<group>"; };
-		OBJ_101 /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
+		OBJ_102 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/dylanslewis/Developer/stylesync/.build/checkouts/ShellOut.git--4208804319273938067/Package.swift"; sourceTree = "<group>"; };
+		OBJ_103 /* ShellOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellOut.swift; sourceTree = "<group>"; };
+		OBJ_105 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/dylanslewis/Developer/stylesync/.build/checkouts/Files.git-6739420172119258925/Package.swift"; sourceTree = "<group>"; };
+		OBJ_106 /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
 		OBJ_11 /* CodeTemplateReplaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTemplateReplaceable.swift; sourceTree = "<group>"; };
 		OBJ_13 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		OBJ_14 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
@@ -203,61 +203,63 @@
 		OBJ_22 /* File+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "File+Extra.swift"; sourceTree = "<group>"; };
 		OBJ_23 /* Folder+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+Extra.swift"; sourceTree = "<group>"; };
 		OBJ_24 /* NSColor+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extra.swift"; sourceTree = "<group>"; };
-		OBJ_25 /* ShellOutCommand+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShellOutCommand+Extra.swift"; sourceTree = "<group>"; };
-		OBJ_26 /* String+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extra.swift"; sourceTree = "<group>"; };
-		OBJ_27 /* URLRequest+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extra.swift"; sourceTree = "<group>"; };
-		OBJ_29 /* AddedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedStyle.swift; sourceTree = "<group>"; };
-		OBJ_30 /* AddedStyleAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedStyleAttribute.swift; sourceTree = "<group>"; };
-		OBJ_31 /* DeprecatedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeprecatedStyle.swift; sourceTree = "<group>"; };
-		OBJ_32 /* GitHubManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubManager.swift; sourceTree = "<group>"; };
-		OBJ_33 /* GitHubPullRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubPullRequestManager.swift; sourceTree = "<group>"; };
-		OBJ_34 /* GitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitManager.swift; sourceTree = "<group>"; };
-		OBJ_35 /* PullRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequest.swift; sourceTree = "<group>"; };
-		OBJ_36 /* RemovedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovedStyle.swift; sourceTree = "<group>"; };
-		OBJ_37 /* StyleUpdateSummaryGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleUpdateSummaryGenerator.swift; sourceTree = "<group>"; };
-		OBJ_38 /* UpdatedAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedAttribute.swift; sourceTree = "<group>"; };
-		OBJ_39 /* UpdatedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedStyle.swift; sourceTree = "<group>"; };
-		OBJ_41 /* ScreenshotManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotManager.swift; sourceTree = "<group>"; };
-		OBJ_43 /* SketchDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchDocument.swift; sourceTree = "<group>"; };
-		OBJ_44 /* SketchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchManager.swift; sourceTree = "<group>"; };
-		OBJ_46 /* StyleExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleExporter.swift; sourceTree = "<group>"; };
-		OBJ_48 /* StyleExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleExtractor.swift; sourceTree = "<group>"; };
-		OBJ_49 /* StyleSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSync.swift; sourceTree = "<group>"; };
-		OBJ_51 /* CodeTemplateReplacableStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTemplateReplacableStyle.swift; sourceTree = "<group>"; };
-		OBJ_52 /* ColorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStyle.swift; sourceTree = "<group>"; };
-		OBJ_53 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
-		OBJ_54 /* StyleParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleParser.swift; sourceTree = "<group>"; };
-		OBJ_55 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
-		OBJ_58 /* ConsoleDeprecatedStylesTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleDeprecatedStylesTable.swift; sourceTree = "<group>"; };
-		OBJ_59 /* ConsoleHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleHeading.swift; sourceTree = "<group>"; };
+		OBJ_25 /* NSFont+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFont+Extra.swift"; sourceTree = "<group>"; };
+		OBJ_26 /* ShellOutCommand+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShellOutCommand+Extra.swift"; sourceTree = "<group>"; };
+		OBJ_27 /* String+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extra.swift"; sourceTree = "<group>"; };
+		OBJ_28 /* URLRequest+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extra.swift"; sourceTree = "<group>"; };
+		OBJ_30 /* AddedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedStyle.swift; sourceTree = "<group>"; };
+		OBJ_31 /* AddedStyleAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedStyleAttribute.swift; sourceTree = "<group>"; };
+		OBJ_32 /* DeprecatedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeprecatedStyle.swift; sourceTree = "<group>"; };
+		OBJ_33 /* GitHubManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubManager.swift; sourceTree = "<group>"; };
+		OBJ_34 /* GitHubPullRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubPullRequestManager.swift; sourceTree = "<group>"; };
+		OBJ_35 /* GitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitManager.swift; sourceTree = "<group>"; };
+		OBJ_36 /* PullRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequest.swift; sourceTree = "<group>"; };
+		OBJ_37 /* RemovedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovedStyle.swift; sourceTree = "<group>"; };
+		OBJ_38 /* StyleUpdateSummaryGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleUpdateSummaryGenerator.swift; sourceTree = "<group>"; };
+		OBJ_39 /* UpdatedAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedAttribute.swift; sourceTree = "<group>"; };
+		OBJ_40 /* UpdatedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedStyle.swift; sourceTree = "<group>"; };
+		OBJ_42 /* Lona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lona.swift; sourceTree = "<group>"; };
+		OBJ_44 /* ScreenshotManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotManager.swift; sourceTree = "<group>"; };
+		OBJ_46 /* SketchDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchDocument.swift; sourceTree = "<group>"; };
+		OBJ_47 /* SketchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchManager.swift; sourceTree = "<group>"; };
+		OBJ_49 /* StyleExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleExporter.swift; sourceTree = "<group>"; };
+		OBJ_51 /* StyleExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleExtractor.swift; sourceTree = "<group>"; };
+		OBJ_52 /* StyleSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSync.swift; sourceTree = "<group>"; };
+		OBJ_54 /* CodeTemplateReplacableStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTemplateReplacableStyle.swift; sourceTree = "<group>"; };
+		OBJ_55 /* ColorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStyle.swift; sourceTree = "<group>"; };
+		OBJ_56 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		OBJ_57 /* StyleParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleParser.swift; sourceTree = "<group>"; };
+		OBJ_58 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_60 /* ConsoleNewStyleTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleNewStyleTable.swift; sourceTree = "<group>"; };
-		OBJ_61 /* ConsoleStyleName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleStyleName.swift; sourceTree = "<group>"; };
-		OBJ_62 /* ConsoleUpdatedStyleTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleUpdatedStyleTable.swift; sourceTree = "<group>"; };
-		OBJ_64 /* GitHubDeprecatedStylesTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubDeprecatedStylesTable.swift; sourceTree = "<group>"; };
-		OBJ_65 /* GitHubHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubHeading.swift; sourceTree = "<group>"; };
-		OBJ_66 /* GitHubNewStyleTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNewStyleTable.swift; sourceTree = "<group>"; };
-		OBJ_67 /* GitHubStyleName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubStyleName.swift; sourceTree = "<group>"; };
-		OBJ_68 /* GitHubUpdatedStyleTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUpdatedStyleTable.swift; sourceTree = "<group>"; };
-		OBJ_70 /* CodeNameable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeNameable.swift; sourceTree = "<group>"; };
-		OBJ_71 /* FileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileType.swift; sourceTree = "<group>"; };
-		OBJ_72 /* GitHubLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLink.swift; sourceTree = "<group>"; };
-		OBJ_74 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
-		OBJ_75 /* VersionedStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionedStyles.swift; sourceTree = "<group>"; };
-		OBJ_77 /* XcodeProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeProject.swift; sourceTree = "<group>"; };
-		OBJ_79 /* ZipManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipManager.swift; sourceTree = "<group>"; };
-		OBJ_81 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		OBJ_84 /* CodeGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGeneratorTests.swift; sourceTree = "<group>"; };
-		OBJ_86 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
-		OBJ_87 /* SketchManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchManagerTests.swift; sourceTree = "<group>"; };
-		OBJ_88 /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
-		OBJ_89 /* StyleExporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleExporterTests.swift; sourceTree = "<group>"; };
-		OBJ_90 /* StyleExtractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleExtractorTests.swift; sourceTree = "<group>"; };
-		OBJ_92 /* XCTest+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extra.swift"; sourceTree = "<group>"; };
-		OBJ_93 /* VersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionTests.swift; sourceTree = "<group>"; };
-		OBJ_94 /* Design */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Design; sourceTree = SOURCE_ROOT; };
-		OBJ_97 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/dylanslewis/Developer/StyleSync/.build/checkouts/ShellOut.git--4208804319273938067/Package.swift"; sourceTree = "<group>"; };
-		OBJ_98 /* ShellOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellOut.swift; sourceTree = "<group>"; };
+		OBJ_61 /* ConsoleDeprecatedStylesTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleDeprecatedStylesTable.swift; sourceTree = "<group>"; };
+		OBJ_62 /* ConsoleHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleHeading.swift; sourceTree = "<group>"; };
+		OBJ_63 /* ConsoleNewStyleTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleNewStyleTable.swift; sourceTree = "<group>"; };
+		OBJ_64 /* ConsoleStyleName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleStyleName.swift; sourceTree = "<group>"; };
+		OBJ_65 /* ConsoleUpdatedStyleTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleUpdatedStyleTable.swift; sourceTree = "<group>"; };
+		OBJ_67 /* GitHubDeprecatedStylesTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubDeprecatedStylesTable.swift; sourceTree = "<group>"; };
+		OBJ_68 /* GitHubHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubHeading.swift; sourceTree = "<group>"; };
+		OBJ_69 /* GitHubNewStyleTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNewStyleTable.swift; sourceTree = "<group>"; };
+		OBJ_70 /* GitHubStyleName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubStyleName.swift; sourceTree = "<group>"; };
+		OBJ_71 /* GitHubUpdatedStyleTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUpdatedStyleTable.swift; sourceTree = "<group>"; };
+		OBJ_73 /* CodeNameable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeNameable.swift; sourceTree = "<group>"; };
+		OBJ_74 /* FileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileType.swift; sourceTree = "<group>"; };
+		OBJ_75 /* GitHubLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLink.swift; sourceTree = "<group>"; };
+		OBJ_77 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		OBJ_78 /* VersionedStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionedStyles.swift; sourceTree = "<group>"; };
+		OBJ_80 /* XcodeProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeProject.swift; sourceTree = "<group>"; };
+		OBJ_82 /* ZipManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipManager.swift; sourceTree = "<group>"; };
+		OBJ_84 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		OBJ_87 /* CodeGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGeneratorTests.swift; sourceTree = "<group>"; };
+		OBJ_88 /* NSFontTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSFontTests.swift; sourceTree = "<group>"; };
+		OBJ_90 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		OBJ_91 /* SketchManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchManagerTests.swift; sourceTree = "<group>"; };
+		OBJ_92 /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
+		OBJ_93 /* StyleExporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleExporterTests.swift; sourceTree = "<group>"; };
+		OBJ_94 /* StyleExtractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleExtractorTests.swift; sourceTree = "<group>"; };
+		OBJ_95 /* TextStyleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyleTests.swift; sourceTree = "<group>"; };
+		OBJ_97 /* XCTest+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extra.swift"; sourceTree = "<group>"; };
+		OBJ_98 /* VersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionTests.swift; sourceTree = "<group>"; };
+		OBJ_99 /* Design */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Design; sourceTree = SOURCE_ROOT; };
 		"ShellOut::ShellOut::Product" /* ShellOut.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ShellOut.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"stylesync::StyleSync::Product" /* StyleSync */ = {isa = PBXFileReference; lastKnownFileType = text; path = StyleSync; sourceTree = BUILT_PRODUCTS_DIR; };
 		"stylesync::StyleSyncCore::Product" /* StyleSyncCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = StyleSyncCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -265,43 +267,43 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_139 /* Frameworks */ = {
+		OBJ_146 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_140 /* StyleSyncCore.framework in Frameworks */,
-				OBJ_141 /* ShellOut.framework in Frameworks */,
-				OBJ_142 /* Files.framework in Frameworks */,
+				OBJ_147 /* StyleSyncCore.framework in Frameworks */,
+				OBJ_148 /* ShellOut.framework in Frameworks */,
+				OBJ_149 /* Files.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_155 /* Frameworks */ = {
+		OBJ_162 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_156 /* StyleSyncCore.framework in Frameworks */,
-				OBJ_157 /* ShellOut.framework in Frameworks */,
-				OBJ_158 /* Files.framework in Frameworks */,
+				OBJ_163 /* StyleSyncCore.framework in Frameworks */,
+				OBJ_164 /* ShellOut.framework in Frameworks */,
+				OBJ_165 /* Files.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_219 /* Frameworks */ = {
+		OBJ_228 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_220 /* ShellOut.framework in Frameworks */,
-				OBJ_221 /* Files.framework in Frameworks */,
+				OBJ_229 /* ShellOut.framework in Frameworks */,
+				OBJ_230 /* Files.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_229 /* Frameworks */ = {
+		OBJ_238 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_235 /* Frameworks */ = {
+		OBJ_244 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
@@ -311,7 +313,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		OBJ_102 /* Products */ = {
+		OBJ_100 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_101 /* ShellOut 2.0.0 */,
+				OBJ_104 /* Files 2.0.1 */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		OBJ_101 /* ShellOut 2.0.0 */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_102 /* Package.swift */,
+				OBJ_103 /* ShellOut.swift */,
+			);
+			name = "ShellOut 2.0.0";
+			path = ".build/checkouts/ShellOut.git--4208804319273938067/Sources";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_104 /* Files 2.0.1 */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_105 /* Package.swift */,
+				OBJ_106 /* Files.swift */,
+			);
+			name = "Files 2.0.1";
+			path = ".build/checkouts/Files.git-6739420172119258925/Sources";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_107 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				"stylesync::StyleSyncTests::Product" /* StyleSyncTests.xctest */,
@@ -356,164 +387,165 @@
 				OBJ_22 /* File+Extra.swift */,
 				OBJ_23 /* Folder+Extra.swift */,
 				OBJ_24 /* NSColor+Extra.swift */,
-				OBJ_25 /* ShellOutCommand+Extra.swift */,
-				OBJ_26 /* String+Extra.swift */,
-				OBJ_27 /* URLRequest+Extra.swift */,
-				656099231FCB331700D17EDC /* NSFont+Extra.swift */,
+				OBJ_25 /* NSFont+Extra.swift */,
+				OBJ_26 /* ShellOutCommand+Extra.swift */,
+				OBJ_27 /* String+Extra.swift */,
+				OBJ_28 /* URLRequest+Extra.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		OBJ_28 /* GitHub */ = {
+		OBJ_29 /* GitHub */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_29 /* AddedStyle.swift */,
-				OBJ_30 /* AddedStyleAttribute.swift */,
-				OBJ_31 /* DeprecatedStyle.swift */,
-				OBJ_32 /* GitHubManager.swift */,
-				OBJ_33 /* GitHubPullRequestManager.swift */,
-				OBJ_34 /* GitManager.swift */,
-				OBJ_35 /* PullRequest.swift */,
-				OBJ_36 /* RemovedStyle.swift */,
-				OBJ_37 /* StyleUpdateSummaryGenerator.swift */,
-				OBJ_38 /* UpdatedAttribute.swift */,
-				OBJ_39 /* UpdatedStyle.swift */,
+				OBJ_30 /* AddedStyle.swift */,
+				OBJ_31 /* AddedStyleAttribute.swift */,
+				OBJ_32 /* DeprecatedStyle.swift */,
+				OBJ_33 /* GitHubManager.swift */,
+				OBJ_34 /* GitHubPullRequestManager.swift */,
+				OBJ_35 /* GitManager.swift */,
+				OBJ_36 /* PullRequest.swift */,
+				OBJ_37 /* RemovedStyle.swift */,
+				OBJ_38 /* StyleUpdateSummaryGenerator.swift */,
+				OBJ_39 /* UpdatedAttribute.swift */,
+				OBJ_40 /* UpdatedStyle.swift */,
 			);
 			path = GitHub;
 			sourceTree = "<group>";
 		};
-		OBJ_40 /* Screenshots */ = {
+		OBJ_41 /* Lona */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_41 /* ScreenshotManager.swift */,
+				OBJ_42 /* Lona.swift */,
+			);
+			path = Lona;
+			sourceTree = "<group>";
+		};
+		OBJ_43 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_44 /* ScreenshotManager.swift */,
 			);
 			path = Screenshots;
 			sourceTree = "<group>";
 		};
-		OBJ_42 /* Sketch */ = {
+		OBJ_45 /* Sketch */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_43 /* SketchDocument.swift */,
-				OBJ_44 /* SketchManager.swift */,
+				OBJ_46 /* SketchDocument.swift */,
+				OBJ_47 /* SketchManager.swift */,
 			);
 			path = Sketch;
 			sourceTree = "<group>";
 		};
-		OBJ_45 /* StyleExporter */ = {
+		OBJ_48 /* StyleExporter */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_46 /* StyleExporter.swift */,
+				OBJ_49 /* StyleExporter.swift */,
 			);
 			path = StyleExporter;
 			sourceTree = "<group>";
 		};
-		OBJ_47 /* StyleExtractor */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_48 /* StyleExtractor.swift */,
-			);
-			path = StyleExtractor;
-			sourceTree = "<group>";
-		};
-		OBJ_5 = {
+		OBJ_5 /*  */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
-				OBJ_82 /* Tests */,
-				OBJ_94 /* Design */,
-				OBJ_95 /* Dependencies */,
-				OBJ_102 /* Products */,
+				OBJ_85 /* Tests */,
+				OBJ_99 /* Design */,
+				OBJ_100 /* Dependencies */,
+				OBJ_107 /* Products */,
 			);
+			name = "";
 			sourceTree = "<group>";
 		};
-		OBJ_50 /* Styles */ = {
+		OBJ_50 /* StyleExtractor */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_51 /* CodeTemplateReplacableStyle.swift */,
-				OBJ_52 /* ColorStyle.swift */,
-				OBJ_53 /* Style.swift */,
-				OBJ_54 /* StyleParser.swift */,
-				OBJ_55 /* TextStyle.swift */,
+				OBJ_51 /* StyleExtractor.swift */,
+			);
+			path = StyleExtractor;
+			sourceTree = "<group>";
+		};
+		OBJ_53 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_54 /* CodeTemplateReplacableStyle.swift */,
+				OBJ_55 /* ColorStyle.swift */,
+				OBJ_56 /* Style.swift */,
+				OBJ_57 /* StyleParser.swift */,
+				OBJ_58 /* TextStyle.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
 		};
-		OBJ_56 /* Templates */ = {
+		OBJ_59 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_57 /* Console */,
-				OBJ_63 /* GitHub */,
+				OBJ_60 /* Console */,
+				OBJ_66 /* GitHub */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
 		};
-		OBJ_57 /* Console */ = {
+		OBJ_60 /* Console */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_58 /* ConsoleDeprecatedStylesTable.swift */,
-				OBJ_59 /* ConsoleHeading.swift */,
-				OBJ_60 /* ConsoleNewStyleTable.swift */,
-				OBJ_61 /* ConsoleStyleName.swift */,
-				OBJ_62 /* ConsoleUpdatedStyleTable.swift */,
+				OBJ_61 /* ConsoleDeprecatedStylesTable.swift */,
+				OBJ_62 /* ConsoleHeading.swift */,
+				OBJ_63 /* ConsoleNewStyleTable.swift */,
+				OBJ_64 /* ConsoleStyleName.swift */,
+				OBJ_65 /* ConsoleUpdatedStyleTable.swift */,
 			);
 			path = Console;
 			sourceTree = "<group>";
 		};
-		OBJ_63 /* GitHub */ = {
+		OBJ_66 /* GitHub */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_64 /* GitHubDeprecatedStylesTable.swift */,
-				OBJ_65 /* GitHubHeading.swift */,
-				OBJ_66 /* GitHubNewStyleTable.swift */,
-				OBJ_67 /* GitHubStyleName.swift */,
-				OBJ_68 /* GitHubUpdatedStyleTable.swift */,
+				OBJ_67 /* GitHubDeprecatedStylesTable.swift */,
+				OBJ_68 /* GitHubHeading.swift */,
+				OBJ_69 /* GitHubNewStyleTable.swift */,
+				OBJ_70 /* GitHubStyleName.swift */,
+				OBJ_71 /* GitHubUpdatedStyleTable.swift */,
 			);
 			path = GitHub;
-			sourceTree = "<group>";
-		};
-		OBJ_69 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_70 /* CodeNameable.swift */,
-				OBJ_71 /* FileType.swift */,
-				OBJ_72 /* GitHubLink.swift */,
-			);
-			path = Utilities;
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_8 /* StyleSyncCore */,
-				OBJ_80 /* StyleSync */,
+				OBJ_83 /* StyleSync */,
 			);
 			name = Sources;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_73 /* Versions */ = {
+		OBJ_72 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_74 /* Version.swift */,
-				OBJ_75 /* VersionedStyles.swift */,
+				OBJ_73 /* CodeNameable.swift */,
+				OBJ_74 /* FileType.swift */,
+				OBJ_75 /* GitHubLink.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		OBJ_76 /* Versions */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_77 /* Version.swift */,
+				OBJ_78 /* VersionedStyles.swift */,
 			);
 			path = Versions;
 			sourceTree = "<group>";
 		};
-		OBJ_76 /* Xcode */ = {
+		OBJ_79 /* Xcode */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_77 /* XcodeProject.swift */,
+				OBJ_80 /* XcodeProject.swift */,
 			);
 			path = Xcode;
-			sourceTree = "<group>";
-		};
-		OBJ_78 /* Zip */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_79 /* ZipManager.swift */,
-			);
-			path = Zip;
 			sourceTree = "<group>";
 		};
 		OBJ_8 /* StyleSyncCore */ = {
@@ -524,62 +556,71 @@
 				OBJ_16 /* ErrorManager */,
 				OBJ_18 /* Errors */,
 				OBJ_20 /* Extensions */,
-				OBJ_28 /* GitHub */,
-				OBJ_40 /* Screenshots */,
-				OBJ_42 /* Sketch */,
-				OBJ_45 /* StyleExporter */,
-				OBJ_47 /* StyleExtractor */,
-				OBJ_49 /* StyleSync.swift */,
-				OBJ_50 /* Styles */,
-				OBJ_56 /* Templates */,
-				OBJ_69 /* Utilities */,
-				OBJ_73 /* Versions */,
-				OBJ_76 /* Xcode */,
-				OBJ_78 /* Zip */,
+				OBJ_29 /* GitHub */,
+				OBJ_41 /* Lona */,
+				OBJ_43 /* Screenshots */,
+				OBJ_45 /* Sketch */,
+				OBJ_48 /* StyleExporter */,
+				OBJ_50 /* StyleExtractor */,
+				OBJ_52 /* StyleSync.swift */,
+				OBJ_53 /* Styles */,
+				OBJ_59 /* Templates */,
+				OBJ_72 /* Utilities */,
+				OBJ_76 /* Versions */,
+				OBJ_79 /* Xcode */,
+				OBJ_81 /* Zip */,
 			);
 			name = StyleSyncCore;
 			path = Sources/StyleSyncCore;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_80 /* StyleSync */ = {
+		OBJ_81 /* Zip */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_81 /* main.swift */,
+				OBJ_82 /* ZipManager.swift */,
+			);
+			path = Zip;
+			sourceTree = "<group>";
+		};
+		OBJ_83 /* StyleSync */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_84 /* main.swift */,
 			);
 			name = StyleSync;
 			path = Sources/StyleSync;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_82 /* Tests */ = {
+		OBJ_85 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_83 /* StyleSyncTests */,
+				OBJ_86 /* StyleSyncTests */,
 			);
 			name = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_83 /* StyleSyncTests */ = {
+		OBJ_86 /* StyleSyncTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_84 /* CodeGeneratorTests.swift */,
-				OBJ_85 /* Resources */,
-				OBJ_87 /* SketchManagerTests.swift */,
-				OBJ_88 /* StringTests.swift */,
-				656099251FCB333E00D17EDC /* NSFontTests.swift */,
-				656099281FCB349F00D17EDC /* TextStyleTests.swift */,
-				OBJ_89 /* StyleExporterTests.swift */,
-				OBJ_90 /* StyleExtractorTests.swift */,
-				OBJ_91 /* Utilities */,
-				OBJ_93 /* VersionTests.swift */,
+				OBJ_87 /* CodeGeneratorTests.swift */,
+				OBJ_88 /* NSFontTests.swift */,
+				OBJ_89 /* Resources */,
+				OBJ_91 /* SketchManagerTests.swift */,
+				OBJ_92 /* StringTests.swift */,
+				OBJ_93 /* StyleExporterTests.swift */,
+				OBJ_94 /* StyleExtractorTests.swift */,
+				OBJ_95 /* TextStyleTests.swift */,
+				OBJ_96 /* Utilities */,
+				OBJ_98 /* VersionTests.swift */,
 			);
 			name = StyleSyncTests;
 			path = Tests/StyleSyncTests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_85 /* Resources */ = {
+		OBJ_89 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_86 /* Resources.swift */,
+				OBJ_90 /* Resources.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -593,52 +634,23 @@
 			path = "Code Generators";
 			sourceTree = "<group>";
 		};
-		OBJ_91 /* Utilities */ = {
+		OBJ_96 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_92 /* XCTest+Extra.swift */,
+				OBJ_97 /* XCTest+Extra.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
-		};
-		OBJ_95 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_96 /* ShellOut 2.0.0 */,
-				OBJ_99 /* Files 2.0.1 */,
-			);
-			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		OBJ_96 /* ShellOut 2.0.0 */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_97 /* Package.swift */,
-				OBJ_98 /* ShellOut.swift */,
-			);
-			name = "ShellOut 2.0.0";
-			path = ".build/checkouts/ShellOut.git--4208804319273938067/Sources";
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_99 /* Files 2.0.1 */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_100 /* Package.swift */,
-				OBJ_101 /* Files.swift */,
-			);
-			name = "Files 2.0.1";
-			path = ".build/checkouts/Files.git-6739420172119258925/Sources";
-			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
 		"Files::Files" /* Files */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_230 /* Build configuration list for PBXNativeTarget "Files" */;
+			buildConfigurationList = OBJ_239 /* Build configuration list for PBXNativeTarget "Files" */;
 			buildPhases = (
-				OBJ_233 /* Sources */,
-				OBJ_235 /* Frameworks */,
+				OBJ_242 /* Sources */,
+				OBJ_244 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -651,9 +663,9 @@
 		};
 		"Files::SwiftPMPackageDescription" /* FilesPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_121 /* Build configuration list for PBXNativeTarget "FilesPackageDescription" */;
+			buildConfigurationList = OBJ_126 /* Build configuration list for PBXNativeTarget "FilesPackageDescription" */;
 			buildPhases = (
-				OBJ_124 /* Sources */,
+				OBJ_129 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -665,10 +677,10 @@
 		};
 		"ShellOut::ShellOut" /* ShellOut */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_224 /* Build configuration list for PBXNativeTarget "ShellOut" */;
+			buildConfigurationList = OBJ_233 /* Build configuration list for PBXNativeTarget "ShellOut" */;
 			buildPhases = (
-				OBJ_227 /* Sources */,
-				OBJ_229 /* Frameworks */,
+				OBJ_236 /* Sources */,
+				OBJ_238 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -681,9 +693,9 @@
 		};
 		"ShellOut::SwiftPMPackageDescription" /* ShellOutPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_115 /* Build configuration list for PBXNativeTarget "ShellOutPackageDescription" */;
+			buildConfigurationList = OBJ_120 /* Build configuration list for PBXNativeTarget "ShellOutPackageDescription" */;
 			buildPhases = (
-				OBJ_118 /* Sources */,
+				OBJ_123 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -695,17 +707,17 @@
 		};
 		"stylesync::StyleSync" /* StyleSync */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_150 /* Build configuration list for PBXNativeTarget "StyleSync" */;
+			buildConfigurationList = OBJ_157 /* Build configuration list for PBXNativeTarget "StyleSync" */;
 			buildPhases = (
-				OBJ_153 /* Sources */,
-				OBJ_155 /* Frameworks */,
+				OBJ_160 /* Sources */,
+				OBJ_162 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_159 /* PBXTargetDependency */,
-				OBJ_160 /* PBXTargetDependency */,
-				OBJ_161 /* PBXTargetDependency */,
+				OBJ_166 /* PBXTargetDependency */,
+				OBJ_167 /* PBXTargetDependency */,
+				OBJ_168 /* PBXTargetDependency */,
 			);
 			name = StyleSync;
 			productName = StyleSync;
@@ -714,16 +726,16 @@
 		};
 		"stylesync::StyleSyncCore" /* StyleSyncCore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_162 /* Build configuration list for PBXNativeTarget "StyleSyncCore" */;
+			buildConfigurationList = OBJ_169 /* Build configuration list for PBXNativeTarget "StyleSyncCore" */;
 			buildPhases = (
-				OBJ_165 /* Sources */,
-				OBJ_219 /* Frameworks */,
+				OBJ_172 /* Sources */,
+				OBJ_228 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_222 /* PBXTargetDependency */,
-				OBJ_223 /* PBXTargetDependency */,
+				OBJ_231 /* PBXTargetDependency */,
+				OBJ_232 /* PBXTargetDependency */,
 			);
 			name = StyleSyncCore;
 			productName = StyleSyncCore;
@@ -732,17 +744,17 @@
 		};
 		"stylesync::StyleSyncTests" /* StyleSyncTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_127 /* Build configuration list for PBXNativeTarget "StyleSyncTests" */;
+			buildConfigurationList = OBJ_132 /* Build configuration list for PBXNativeTarget "StyleSyncTests" */;
 			buildPhases = (
-				OBJ_130 /* Sources */,
-				OBJ_139 /* Frameworks */,
+				OBJ_135 /* Sources */,
+				OBJ_146 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_143 /* PBXTargetDependency */,
-				OBJ_145 /* PBXTargetDependency */,
-				OBJ_147 /* PBXTargetDependency */,
+				OBJ_150 /* PBXTargetDependency */,
+				OBJ_152 /* PBXTargetDependency */,
+				OBJ_154 /* PBXTargetDependency */,
 			);
 			name = StyleSyncTests;
 			productName = StyleSyncTests;
@@ -751,9 +763,9 @@
 		};
 		"stylesync::SwiftPMPackageDescription" /* stylesyncPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_109 /* Build configuration list for PBXNativeTarget "stylesyncPackageDescription" */;
+			buildConfigurationList = OBJ_114 /* Build configuration list for PBXNativeTarget "stylesyncPackageDescription" */;
 			buildPhases = (
-				OBJ_112 /* Sources */,
+				OBJ_117 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -778,8 +790,8 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5;
-			productRefGroup = OBJ_102 /* Products */;
+			mainGroup = OBJ_5 /*  */;
+			productRefGroup = OBJ_107 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -798,189 +810,190 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_112 /* Sources */ = {
+		OBJ_117 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_113 /* Package.swift in Sources */,
+				OBJ_118 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_118 /* Sources */ = {
+		OBJ_123 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_119 /* Package.swift in Sources */,
+				OBJ_124 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_124 /* Sources */ = {
+		OBJ_129 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_125 /* Package.swift in Sources */,
+				OBJ_130 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_130 /* Sources */ = {
+		OBJ_135 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_131 /* CodeGeneratorTests.swift in Sources */,
-				OBJ_132 /* Resources.swift in Sources */,
-				656099261FCB333E00D17EDC /* NSFontTests.swift in Sources */,
-				OBJ_133 /* SketchManagerTests.swift in Sources */,
-				OBJ_134 /* StringTests.swift in Sources */,
-				OBJ_135 /* StyleExporterTests.swift in Sources */,
-				656099291FCB349F00D17EDC /* TextStyleTests.swift in Sources */,
-				OBJ_136 /* StyleExtractorTests.swift in Sources */,
-				OBJ_137 /* XCTest+Extra.swift in Sources */,
-				OBJ_138 /* VersionTests.swift in Sources */,
+				OBJ_136 /* CodeGeneratorTests.swift in Sources */,
+				OBJ_137 /* NSFontTests.swift in Sources */,
+				OBJ_138 /* Resources.swift in Sources */,
+				OBJ_139 /* SketchManagerTests.swift in Sources */,
+				OBJ_140 /* StringTests.swift in Sources */,
+				OBJ_141 /* StyleExporterTests.swift in Sources */,
+				OBJ_142 /* StyleExtractorTests.swift in Sources */,
+				OBJ_143 /* TextStyleTests.swift in Sources */,
+				OBJ_144 /* XCTest+Extra.swift in Sources */,
+				OBJ_145 /* VersionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_153 /* Sources */ = {
+		OBJ_160 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_154 /* main.swift in Sources */,
+				OBJ_161 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_165 /* Sources */ = {
+		OBJ_172 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_166 /* CodeGenerator.swift in Sources */,
-				OBJ_167 /* CodeTemplateReplaceable.swift in Sources */,
-				OBJ_168 /* Config.swift in Sources */,
-				OBJ_169 /* ConfigManager.swift in Sources */,
-				OBJ_170 /* Questionaire.swift in Sources */,
-				OBJ_171 /* ErrorManager.swift in Sources */,
-				OBJ_172 /* CodableError.swift in Sources */,
-				OBJ_173 /* CGFloat+Extra.swift in Sources */,
-				OBJ_174 /* File+Extra.swift in Sources */,
-				OBJ_175 /* Folder+Extra.swift in Sources */,
-				OBJ_176 /* NSColor+Extra.swift in Sources */,
-				OBJ_177 /* ShellOutCommand+Extra.swift in Sources */,
-				OBJ_178 /* String+Extra.swift in Sources */,
-				OBJ_179 /* URLRequest+Extra.swift in Sources */,
-				OBJ_180 /* AddedStyle.swift in Sources */,
-				OBJ_181 /* AddedStyleAttribute.swift in Sources */,
-				OBJ_182 /* DeprecatedStyle.swift in Sources */,
-				OBJ_183 /* GitHubManager.swift in Sources */,
-				OBJ_184 /* GitHubPullRequestManager.swift in Sources */,
-				OBJ_185 /* GitManager.swift in Sources */,
-				OBJ_186 /* PullRequest.swift in Sources */,
-				OBJ_187 /* RemovedStyle.swift in Sources */,
-				OBJ_188 /* StyleUpdateSummaryGenerator.swift in Sources */,
-				OBJ_189 /* UpdatedAttribute.swift in Sources */,
-				OBJ_190 /* UpdatedStyle.swift in Sources */,
-				OBJ_191 /* ScreenshotManager.swift in Sources */,
-				OBJ_192 /* SketchDocument.swift in Sources */,
-				OBJ_193 /* SketchManager.swift in Sources */,
-				OBJ_194 /* StyleExporter.swift in Sources */,
-				OBJ_195 /* StyleExtractor.swift in Sources */,
-				OBJ_196 /* StyleSync.swift in Sources */,
-				OBJ_197 /* CodeTemplateReplacableStyle.swift in Sources */,
-				OBJ_198 /* ColorStyle.swift in Sources */,
-				OBJ_199 /* Style.swift in Sources */,
-				OBJ_200 /* StyleParser.swift in Sources */,
-				OBJ_201 /* TextStyle.swift in Sources */,
-				OBJ_202 /* ConsoleDeprecatedStylesTable.swift in Sources */,
-				OBJ_203 /* ConsoleHeading.swift in Sources */,
-				OBJ_204 /* ConsoleNewStyleTable.swift in Sources */,
-				OBJ_205 /* ConsoleStyleName.swift in Sources */,
-				OBJ_206 /* ConsoleUpdatedStyleTable.swift in Sources */,
-				OBJ_207 /* GitHubDeprecatedStylesTable.swift in Sources */,
-				OBJ_208 /* GitHubHeading.swift in Sources */,
-				OBJ_209 /* GitHubNewStyleTable.swift in Sources */,
-				656099271FCB33E100D17EDC /* NSFont+Extra.swift in Sources */,
-				OBJ_210 /* GitHubStyleName.swift in Sources */,
-				OBJ_211 /* GitHubUpdatedStyleTable.swift in Sources */,
-				OBJ_212 /* CodeNameable.swift in Sources */,
-				OBJ_213 /* FileType.swift in Sources */,
-				OBJ_214 /* GitHubLink.swift in Sources */,
-				OBJ_215 /* Version.swift in Sources */,
-				OBJ_216 /* VersionedStyles.swift in Sources */,
-				OBJ_217 /* XcodeProject.swift in Sources */,
-				OBJ_218 /* ZipManager.swift in Sources */,
+				OBJ_173 /* CodeGenerator.swift in Sources */,
+				OBJ_174 /* CodeTemplateReplaceable.swift in Sources */,
+				OBJ_175 /* Config.swift in Sources */,
+				OBJ_176 /* ConfigManager.swift in Sources */,
+				OBJ_177 /* Questionaire.swift in Sources */,
+				OBJ_178 /* ErrorManager.swift in Sources */,
+				OBJ_179 /* CodableError.swift in Sources */,
+				OBJ_180 /* CGFloat+Extra.swift in Sources */,
+				OBJ_181 /* File+Extra.swift in Sources */,
+				OBJ_182 /* Folder+Extra.swift in Sources */,
+				OBJ_183 /* NSColor+Extra.swift in Sources */,
+				OBJ_184 /* NSFont+Extra.swift in Sources */,
+				OBJ_185 /* ShellOutCommand+Extra.swift in Sources */,
+				OBJ_186 /* String+Extra.swift in Sources */,
+				OBJ_187 /* URLRequest+Extra.swift in Sources */,
+				OBJ_188 /* AddedStyle.swift in Sources */,
+				OBJ_189 /* AddedStyleAttribute.swift in Sources */,
+				OBJ_190 /* DeprecatedStyle.swift in Sources */,
+				OBJ_191 /* GitHubManager.swift in Sources */,
+				OBJ_192 /* GitHubPullRequestManager.swift in Sources */,
+				OBJ_193 /* GitManager.swift in Sources */,
+				OBJ_194 /* PullRequest.swift in Sources */,
+				OBJ_195 /* RemovedStyle.swift in Sources */,
+				OBJ_196 /* StyleUpdateSummaryGenerator.swift in Sources */,
+				OBJ_197 /* UpdatedAttribute.swift in Sources */,
+				OBJ_198 /* UpdatedStyle.swift in Sources */,
+				OBJ_199 /* Lona.swift in Sources */,
+				OBJ_200 /* ScreenshotManager.swift in Sources */,
+				OBJ_201 /* SketchDocument.swift in Sources */,
+				OBJ_202 /* SketchManager.swift in Sources */,
+				OBJ_203 /* StyleExporter.swift in Sources */,
+				OBJ_204 /* StyleExtractor.swift in Sources */,
+				OBJ_205 /* StyleSync.swift in Sources */,
+				OBJ_206 /* CodeTemplateReplacableStyle.swift in Sources */,
+				OBJ_207 /* ColorStyle.swift in Sources */,
+				OBJ_208 /* Style.swift in Sources */,
+				OBJ_209 /* StyleParser.swift in Sources */,
+				OBJ_210 /* TextStyle.swift in Sources */,
+				OBJ_211 /* ConsoleDeprecatedStylesTable.swift in Sources */,
+				OBJ_212 /* ConsoleHeading.swift in Sources */,
+				OBJ_213 /* ConsoleNewStyleTable.swift in Sources */,
+				OBJ_214 /* ConsoleStyleName.swift in Sources */,
+				OBJ_215 /* ConsoleUpdatedStyleTable.swift in Sources */,
+				OBJ_216 /* GitHubDeprecatedStylesTable.swift in Sources */,
+				OBJ_217 /* GitHubHeading.swift in Sources */,
+				OBJ_218 /* GitHubNewStyleTable.swift in Sources */,
+				OBJ_219 /* GitHubStyleName.swift in Sources */,
+				OBJ_220 /* GitHubUpdatedStyleTable.swift in Sources */,
+				OBJ_221 /* CodeNameable.swift in Sources */,
+				OBJ_222 /* FileType.swift in Sources */,
+				OBJ_223 /* GitHubLink.swift in Sources */,
+				OBJ_224 /* Version.swift in Sources */,
+				OBJ_225 /* VersionedStyles.swift in Sources */,
+				OBJ_226 /* XcodeProject.swift in Sources */,
+				OBJ_227 /* ZipManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_227 /* Sources */ = {
+		OBJ_236 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_228 /* ShellOut.swift in Sources */,
+				OBJ_237 /* ShellOut.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_233 /* Sources */ = {
+		OBJ_242 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_234 /* Files.swift in Sources */,
+				OBJ_243 /* Files.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_143 /* PBXTargetDependency */ = {
+		OBJ_150 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "stylesync::StyleSyncCore" /* StyleSyncCore */;
-			targetProxy = 65A1A6AB1FBB908B007C6AFF /* PBXContainerItemProxy */;
+			targetProxy = 65101DCB1FCE128A00CAAA0D /* PBXContainerItemProxy */;
 		};
-		OBJ_145 /* PBXTargetDependency */ = {
+		OBJ_152 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "ShellOut::ShellOut" /* ShellOut */;
-			targetProxy = 65A1A6AC1FBB908B007C6AFF /* PBXContainerItemProxy */;
+			targetProxy = 65101DCC1FCE128A00CAAA0D /* PBXContainerItemProxy */;
 		};
-		OBJ_147 /* PBXTargetDependency */ = {
+		OBJ_154 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Files::Files" /* Files */;
-			targetProxy = 65A1A6AD1FBB908B007C6AFF /* PBXContainerItemProxy */;
+			targetProxy = 65101DCD1FCE128A00CAAA0D /* PBXContainerItemProxy */;
 		};
-		OBJ_159 /* PBXTargetDependency */ = {
+		OBJ_166 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "stylesync::StyleSyncCore" /* StyleSyncCore */;
-			targetProxy = 65A1A6A61FBB908B007C6AFF /* PBXContainerItemProxy */;
+			targetProxy = 65101DC61FCE128A00CAAA0D /* PBXContainerItemProxy */;
 		};
-		OBJ_160 /* PBXTargetDependency */ = {
+		OBJ_167 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "ShellOut::ShellOut" /* ShellOut */;
-			targetProxy = 65A1A6A91FBB908B007C6AFF /* PBXContainerItemProxy */;
+			targetProxy = 65101DC91FCE128A00CAAA0D /* PBXContainerItemProxy */;
 		};
-		OBJ_161 /* PBXTargetDependency */ = {
+		OBJ_168 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Files::Files" /* Files */;
-			targetProxy = 65A1A6AA1FBB908B007C6AFF /* PBXContainerItemProxy */;
+			targetProxy = 65101DCA1FCE128A00CAAA0D /* PBXContainerItemProxy */;
 		};
-		OBJ_222 /* PBXTargetDependency */ = {
+		OBJ_231 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "ShellOut::ShellOut" /* ShellOut */;
-			targetProxy = 65A1A6A71FBB908B007C6AFF /* PBXContainerItemProxy */;
+			targetProxy = 65101DC71FCE128A00CAAA0D /* PBXContainerItemProxy */;
 		};
-		OBJ_223 /* PBXTargetDependency */ = {
+		OBJ_232 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Files::Files" /* Files */;
-			targetProxy = 65A1A6A81FBB908B007C6AFF /* PBXContainerItemProxy */;
+			targetProxy = 65101DC81FCE128A00CAAA0D /* PBXContainerItemProxy */;
 		};
-		OBJ_240 /* PBXTargetDependency */ = {
+		OBJ_249 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "stylesync::StyleSyncTests" /* StyleSyncTests */;
-			targetProxy = 65A1A6AE1FBB908E007C6AFF /* PBXContainerItemProxy */;
+			targetProxy = 65101DCE1FCE128B00CAAA0D /* PBXContainerItemProxy */;
 		};
-		OBJ_245 /* PBXTargetDependency */ = {
+		OBJ_254 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "stylesync::StyleSync" /* StyleSync */;
-			targetProxy = 65A1A6AF1FBB908E007C6AFF /* PBXContainerItemProxy */;
+			targetProxy = 65101DCF1FCE128B00CAAA0D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_110 /* Debug */ = {
+		OBJ_115 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -989,7 +1002,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_111 /* Release */ = {
+		OBJ_116 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -998,7 +1011,7 @@
 			};
 			name = Release;
 		};
-		OBJ_116 /* Debug */ = {
+		OBJ_121 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -1007,7 +1020,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_117 /* Release */ = {
+		OBJ_122 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -1016,7 +1029,7 @@
 			};
 			name = Release;
 		};
-		OBJ_122 /* Debug */ = {
+		OBJ_127 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -1025,7 +1038,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_123 /* Release */ = {
+		OBJ_128 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -1034,7 +1047,7 @@
 			};
 			name = Release;
 		};
-		OBJ_128 /* Debug */ = {
+		OBJ_133 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -1052,7 +1065,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_129 /* Release */ = {
+		OBJ_134 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -1070,7 +1083,7 @@
 			};
 			name = Release;
 		};
-		OBJ_151 /* Debug */ = {
+		OBJ_158 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1089,7 +1102,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_152 /* Release */ = {
+		OBJ_159 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1108,7 +1121,7 @@
 			};
 			name = Release;
 		};
-		OBJ_163 /* Debug */ = {
+		OBJ_170 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1130,7 +1143,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_164 /* Release */ = {
+		OBJ_171 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1152,7 +1165,7 @@
 			};
 			name = Release;
 		};
-		OBJ_225 /* Debug */ = {
+		OBJ_234 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1174,7 +1187,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_226 /* Release */ = {
+		OBJ_235 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1196,7 +1209,7 @@
 			};
 			name = Release;
 		};
-		OBJ_231 /* Debug */ = {
+		OBJ_240 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1218,7 +1231,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_232 /* Release */ = {
+		OBJ_241 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -1240,25 +1253,25 @@
 			};
 			name = Release;
 		};
-		OBJ_238 /* Debug */ = {
+		OBJ_247 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		OBJ_239 /* Release */ = {
+		OBJ_248 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Release;
 		};
-		OBJ_243 /* Debug */ = {
+		OBJ_252 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		OBJ_244 /* Release */ = {
+		OBJ_253 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
@@ -1309,56 +1322,56 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		OBJ_109 /* Build configuration list for PBXNativeTarget "stylesyncPackageDescription" */ = {
+		OBJ_114 /* Build configuration list for PBXNativeTarget "stylesyncPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_110 /* Debug */,
-				OBJ_111 /* Release */,
+				OBJ_115 /* Debug */,
+				OBJ_116 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_115 /* Build configuration list for PBXNativeTarget "ShellOutPackageDescription" */ = {
+		OBJ_120 /* Build configuration list for PBXNativeTarget "ShellOutPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_116 /* Debug */,
-				OBJ_117 /* Release */,
+				OBJ_121 /* Debug */,
+				OBJ_122 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_121 /* Build configuration list for PBXNativeTarget "FilesPackageDescription" */ = {
+		OBJ_126 /* Build configuration list for PBXNativeTarget "FilesPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_122 /* Debug */,
-				OBJ_123 /* Release */,
+				OBJ_127 /* Debug */,
+				OBJ_128 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_127 /* Build configuration list for PBXNativeTarget "StyleSyncTests" */ = {
+		OBJ_132 /* Build configuration list for PBXNativeTarget "StyleSyncTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_128 /* Debug */,
-				OBJ_129 /* Release */,
+				OBJ_133 /* Debug */,
+				OBJ_134 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_150 /* Build configuration list for PBXNativeTarget "StyleSync" */ = {
+		OBJ_157 /* Build configuration list for PBXNativeTarget "StyleSync" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_151 /* Debug */,
-				OBJ_152 /* Release */,
+				OBJ_158 /* Debug */,
+				OBJ_159 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_162 /* Build configuration list for PBXNativeTarget "StyleSyncCore" */ = {
+		OBJ_169 /* Build configuration list for PBXNativeTarget "StyleSyncCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_163 /* Debug */,
-				OBJ_164 /* Release */,
+				OBJ_170 /* Debug */,
+				OBJ_171 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -1372,38 +1385,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_224 /* Build configuration list for PBXNativeTarget "ShellOut" */ = {
+		OBJ_233 /* Build configuration list for PBXNativeTarget "ShellOut" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_225 /* Debug */,
-				OBJ_226 /* Release */,
+				OBJ_234 /* Debug */,
+				OBJ_235 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_230 /* Build configuration list for PBXNativeTarget "Files" */ = {
+		OBJ_239 /* Build configuration list for PBXNativeTarget "Files" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_231 /* Debug */,
-				OBJ_232 /* Release */,
+				OBJ_240 /* Debug */,
+				OBJ_241 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_237 /* Build configuration list for PBXAggregateTarget "stylesyncPackageTests" */ = {
+		OBJ_246 /* Build configuration list for PBXAggregateTarget "stylesyncPackageTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_238 /* Debug */,
-				OBJ_239 /* Release */,
+				OBJ_247 /* Debug */,
+				OBJ_248 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_242 /* Build configuration list for PBXAggregateTarget "stylesync" */ = {
+		OBJ_251 /* Build configuration list for PBXAggregateTarget "stylesync" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_243 /* Debug */,
-				OBJ_244 /* Release */,
+				OBJ_252 /* Debug */,
+				OBJ_253 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

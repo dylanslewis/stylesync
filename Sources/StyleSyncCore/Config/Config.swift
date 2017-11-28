@@ -8,7 +8,8 @@ import Foundation
 import Files
 
 public class Config: Codable {
-	public var sketchDocument: String!
+	public var sketchDocument: String?
+	public var lona: Lona?
 	public var colorStyle: Style = Style()
 	public var textStyle: Style = Style()
 	public var gitHubPersonalAccessToken: String?
@@ -16,6 +17,11 @@ public class Config: Codable {
 	public class Style: Codable {
 		var template: String!
 		var exportDirectory: String!
+	}
+	
+	public class Lona: Codable {
+		public var colors: String
+		public var text: String
 	}
 }
 

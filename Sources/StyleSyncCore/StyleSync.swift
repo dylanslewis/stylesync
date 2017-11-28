@@ -8,6 +8,11 @@ import Cocoa
 import Files
 import ShellOut
 
+enum StyleInput {
+	case sketch(sketchDocument: SketchDocument)
+	case lona(colors: [Lona.Color], textStyles: [Lona.Text])
+}
+
 public final class StyleSync {
 	// MARK: - Constants
 	
@@ -55,13 +60,21 @@ public final class StyleSync {
 	// MARK: - Run
 	
 	public func run() {
-		let sketchDocumentFile: File
+		var sketchDocumentFile: File?
+		var lonaColorsFile: File?
+		var lonaTextStylesFile: File?
 		let exportTextFolder: Folder
 		let exportColorsFolder: Folder
 		let textStyleTemplateFile: File
 		let colorStyleTemplateFile: File
 		do {
-			sketchDocumentFile = try File(path: config.sketchDocument)
+			if let sketchDocument = config.sketchDocument {
+				sketchDocumentFile = try File(path: sketchDocument)
+			}
+			if let lona = config.lona {
+				lonaColorsFile = try File(path: lona.colors)
+				lonaTextStylesFile = try File(path: lona.text)
+			}
 			exportTextFolder = try Folder(path: config.textStyle.exportDirectory)
 			exportColorsFolder = try Folder(path: config.colorStyle.exportDirectory)
 			textStyleTemplateFile = try File(path: config.textStyle.template)
@@ -72,6 +85,8 @@ public final class StyleSync {
 		
 		run(
 			sketchDocumentFile: sketchDocumentFile,
+			lonaColorsFile: lonaColorsFile,
+			lonaTextStylesFile: lonaTextStylesFile,
 			exportTextFolder: exportTextFolder,
 			exportColorsFolder: exportColorsFolder,
 			textStyleTemplateFile: textStyleTemplateFile,
@@ -81,19 +96,38 @@ public final class StyleSync {
 	}
 	
 	public func run(
-		sketchDocumentFile: File,
+		sketchDocumentFile: File?,
+		lonaColorsFile: File?,
+		lonaTextStylesFile: File?,
 		exportTextFolder: Folder,
 		exportColorsFolder: Folder,
 		textStyleTemplateFile: File,
 		colorStyleTemplateFile: File,
 		gitHubPersonalAccessToken: String?
 	) {
-		let sketchManager = SketchManager(sketchFile: sketchDocumentFile)
-		let sketchDocument: SketchDocument
-		do {
-			sketchDocument = try sketchManager.getSketchDocument()
-		} catch {
-			ErrorManager.log(fatalError: error, context: .sketch)
+		let styleInput: StyleInput
+		if let sketchDocumentFile = sketchDocumentFile {
+			let sketchManager = SketchManager(sketchFile: sketchDocumentFile)
+			let sketchDocument: SketchDocument
+			do {
+				sketchDocument = try sketchManager.getSketchDocument()
+			} catch {
+				ErrorManager.log(fatalError: error, context: .sketch)
+			}
+			styleInput = .sketch(sketchDocument: sketchDocument)
+		} else if let lonaColorsFile = lonaColorsFile, let lonaTextStylesFile = lonaTextStylesFile {
+			let lonaColors: Lona
+			let lonaTextStyles: Lona
+			do {
+				lonaColors = try lonaColorsFile.readAsDecodedJSON()
+				lonaTextStyles = try lonaTextStylesFile.readAsDecodedJSON()
+			} catch {
+				ErrorManager.log(fatalError: error, context: .sketch)
+			}
+			// TODO: Don't force unwrap. Decode these better.
+			styleInput = .lona(colors: lonaColors.colors!, textStyles: lonaTextStyles.textStyles!)
+		} else {
+			exit(1)
 		}
 		
 		let generatedRawTextStylesFile: File
@@ -114,7 +148,7 @@ public final class StyleSync {
 		let styleExtractor = StyleExtractor(
 			generatedRawTextStylesFile: generatedRawTextStylesFile,
 			generatedRawColorStylesFile: generatedRawColorStylesFile,
-			sketchDocument: sketchDocument
+			styleInput: styleInput
 		)
 	
 		let previouslyExportedTextStyles = styleExtractor.previouslyExportedTextStyles ?? []
@@ -123,7 +157,7 @@ public final class StyleSync {
 		
 		let latestTextStyles = styleExtractor.latestTextStyles
 		let latestColorStyles = styleExtractor.latestColorStyles
-	
+		
 		guard !(latestTextStyles.isEmpty || latestColorStyles.isEmpty) else {
 			ErrorManager.log(fatalError: Error.noStylesFound, context: .styleExtraction)
 		}

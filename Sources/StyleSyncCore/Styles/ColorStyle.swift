@@ -10,12 +10,14 @@ struct ColorStyle: Style {
 	let name: String
 	let identifier: String
 	let color: NSColor
+	let comment: String?
 	var isDeprecated: Bool
 	
 	init(name: String, identifier: String, color: NSColor, isDeprecated: Bool) {
 		self.name = name
 		self.identifier = identifier
 		self.color = color
+		self.comment = nil
 		self.isDeprecated = isDeprecated
 	}
 	
@@ -32,6 +34,15 @@ struct ColorStyle: Style {
 		self.name = colorStyleObject.name
 		self.identifier = colorStyleObject.identifier
 		self.color = NSColor(red: red, green: green, blue: blue, alpha: alpha)
+		self.comment = nil
+		self.isDeprecated = isDeprecated
+	}
+	
+	init(lonaColor: Lona.Color, isDeprecated: Bool = false) {
+		self.name = lonaColor.name
+		self.identifier = lonaColor.identifier
+		self.color = lonaColor.color
+		self.comment = lonaColor.comment
 		self.isDeprecated = isDeprecated
 	}
 }
@@ -40,7 +51,7 @@ struct ColorStyle: Style {
 
 extension ColorStyle: Codable {
 	enum CodingKeys: String, CodingKey {
-		case name, identifier, red, green, blue, alpha, isDeprecated
+		case name, identifier, red, green, blue, alpha, comment, isDeprecated
 	}
 	
 	init(from decoder: Decoder) throws {
@@ -53,6 +64,7 @@ extension ColorStyle: Codable {
 		self.name = try container.decode(String.self, forKey: .name)
 		self.identifier = try container.decode(String.self, forKey: .identifier)
 		self.color = NSColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
+		self.comment = try container.decode(String.self, forKey: .comment)
 		self.isDeprecated = try container.decode(Bool.self, forKey: .isDeprecated)
 	}
 	
@@ -64,6 +76,7 @@ extension ColorStyle: Codable {
 		try container.encode(color.greenComponent*255, forKey: .green)
 		try container.encode(color.blueComponent*255, forKey: .blue)
 		try container.encode(color.alphaComponent, forKey: .alpha)
+		try container.encode(comment, forKey: .comment)
 		try container.encode(isDeprecated, forKey: .isDeprecated)
 	}
 }

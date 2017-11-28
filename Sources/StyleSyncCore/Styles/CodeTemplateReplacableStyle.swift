@@ -59,7 +59,8 @@ struct CodeTemplateReplacableStyle: CodeTemplateReplacable {
 			"green": String(describing: colorStyle.color.components.green),
 			"blue": String(describing: colorStyle.color.components.blue),
 			"alpha": String(describing: colorStyle.color.components.alpha),
-			"hex": colorStyle.color.hex
+			"hex": colorStyle.color.hex,
+			"comment": colorStyle.comment ?? "" // TODO: Handle its optionality better
 		]
 		self.ignoredUpdateAttributes = ["red", "green", "blue", "alpha"]
 		self.isDeprecated = colorStyle.isDeprecated
