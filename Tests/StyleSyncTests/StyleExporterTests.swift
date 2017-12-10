@@ -209,6 +209,43 @@ class StyleExporterTests: XCTestCase {
 			"""
 		XCTAssertEqual(fileWithReferencesToNewStylesString, expectedFileWithReferencesToNewStylesString)
 	}
+
+	func testWhenNoStyleIsRenamedThenMutatedFilesIsEmpty() {
+		createFileWithReferencesToNewStyles()
+		
+		let styleExporter = getStylesExporterAndExportStyles(
+			latestTextStyles: [newTextStyle],
+			latestColorStyles: [newColorStyle],
+			previouslyExportedTextStyles: [newTextStyle],
+			previouslyExportedColorStyles: [newColorStyle]
+		)
+		
+		let expectedFiles: Set<File> = []
+		XCTAssertEqual(styleExporter.mutatedFiles, expectedFiles)
+	}
+	
+	func testWhenAStyleIsRenamedThenMutatedFilesContainsTheUpdatedFiles() {
+		createFileWithReferencesToNewStyles()
+		
+		let styleExporter = getStylesExporterAndExportStyles(
+			latestTextStyles: [renamedNewTextStyle],
+			latestColorStyles: [renamedNewColorStyle],
+			previouslyExportedTextStyles: [newTextStyle],
+			previouslyExportedColorStyles: [newColorStyle]
+		)
+		
+		let expectedFiles: Set<File>
+		do {
+			let fileWithReferencesToNewStyles = try projectFolder.file(
+				named: Constant.fileWithReferencesToNewStylesName
+			)
+			expectedFiles = [fileWithReferencesToNewStyles]
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
+
+		XCTAssertEqual(styleExporter.mutatedFiles, expectedFiles)
+	}
 	
 	func testNewStylesContainsAllTheLatestStyles() {
 		let styleExporter = getStylesExporterAndExportStyles(
