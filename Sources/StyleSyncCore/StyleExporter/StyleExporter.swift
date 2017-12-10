@@ -53,6 +53,7 @@ final class StyleExporter {
 		return Array(filesForDeprecatedTextStyle.keys)
 	}
 	
+	private(set) var mutatedFiles: Set<File> = []
 	var fileNamesForDeprecatedStyleNames: [String: [String]] {
 		var fileNamesForDeprecatedStyleNames: [String: [String]] = [:]
 		Array(filesForDeprecatedColorStyle.keys)
@@ -276,10 +277,12 @@ final class StyleExporter {
 			})
 		
 		let updateOldColorStyleReferencesOperation = updateOldReferencesFileOperation(
-			currentAndMigratedStyles: currentAndMigratedColorReplacableStyles
+			currentAndMigratedStyles: currentAndMigratedColorReplacableStyles,
+			mutatedFiles: &mutatedFiles
 		)
 		let updateOldTextStyleReferencesOperation = updateOldReferencesFileOperation(
-			currentAndMigratedStyles: currentAndMigratedTextReplacableStyles
+			currentAndMigratedStyles: currentAndMigratedTextReplacableStyles,
+			mutatedFiles: &mutatedFiles
 		)
 		
 		// Find used deprecated styles.
@@ -396,7 +399,8 @@ final class StyleExporter {
 	// MARK: - Helpers
 	
 	private func updateOldReferencesFileOperation(
-		currentAndMigratedStyles: [(CodeTemplateReplacableStyle, CodeTemplateReplacableStyle)]
+		currentAndMigratedStyles: [(CodeTemplateReplacableStyle, CodeTemplateReplacableStyle)],
+		mutatedFiles: inout Set<File>
 	) -> FileOperation {
 		return { file in
 			var fileString: String
@@ -414,6 +418,7 @@ final class StyleExporter {
 						return
 					}
 					fileString = fileString.replacingCharacters(in: range, with: $0.1.variableName)
+					mutatedFiles.insert(file)
 				} while containsOccurence == true
 			})
 			
