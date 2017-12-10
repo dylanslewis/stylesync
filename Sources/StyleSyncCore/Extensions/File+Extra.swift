@@ -29,3 +29,11 @@ extension File {
 enum TemplateFileError: Error {
 	case invalidFileName
 }
+
+// MARK: - Hashable
+
+extension File: Hashable {
+	public var hashValue: Int {
+		return path.hashValue
+	}
+}
