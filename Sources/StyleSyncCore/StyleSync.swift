@@ -166,13 +166,14 @@ public final class StyleSync {
 		let oldColorStyles: [CodeTemplateReplacableStyle] = styleExporter.oldColorStyles
 		let newTextStyles: [CodeTemplateReplacableStyle] = styleExporter.newTextStyles
 		let newColorStyles: [CodeTemplateReplacableStyle] = styleExporter.newColorStyles
-
+		let mutatedFiles: Set<File> = styleExporter.mutatedFiles
+		
 		let filesToCommit = [
 			generatedTextStylesFile,
 			generatedColorStylesFile,
 			generatedRawTextStylesFile,
 			generatedRawColorStylesFile
-		]
+		] + mutatedFiles
 		do {
 			let gitHubManager = try GitHubManager(
 				projectFolder: projectFolder,

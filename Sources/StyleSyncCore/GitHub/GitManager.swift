@@ -54,7 +54,7 @@ struct GitManager {
 		
 		print("Committing changes")
 		try shellOut(
-			to: .gitCommit(message: "Update style guide to version \(version.stringRepresentation)"),
+			to: .gitCommitWithoutAdding(message: "Update style guide to version \(version.stringRepresentation)"),
 			at: projectFolderPath
 		)
 		
