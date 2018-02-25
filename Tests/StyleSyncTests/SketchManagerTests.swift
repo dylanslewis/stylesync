@@ -84,9 +84,16 @@ class SketchManagerTests: XCTestCase {
 		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 0)
 	}
 
-	func testSketchFileWithFiveTextStylesAndFiveColorStylesIsParsedCorrectly() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStyles")
+	func testSketchFileWithFiveTextStylesAndFiveColorStylesIsParsedCorrectlyPreVersion48() throws {
+		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStylesPreVersion48")
 
+		XCTAssertEqual(sketchDocument.layerTextStyles.objects.count, 5)
+		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 5)
+	}
+	
+	func testSketchFileWithFiveTextStylesAndFiveColorStylesIsParsedCorrectlyPostVersion48() throws {
+		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStylesPostVersion48")
+		
 		XCTAssertEqual(sketchDocument.layerTextStyles.objects.count, 5)
 		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 5)
 	}
