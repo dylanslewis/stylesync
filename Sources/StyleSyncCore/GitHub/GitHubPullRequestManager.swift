@@ -1,8 +1,7 @@
 //
-//  GitHubPullRequestManager.swift
-//  StyleSyncPackageDescription
-//
-//  Created by Dylan Lewis on 03/09/2017.
+//  stylesync
+//  Created by Dylan Lewis
+//  Licensed under the MIT license. See LICENSE file.
 //
 
 import Foundation
@@ -64,7 +63,16 @@ struct GitHubPullRequestManager {
 		let session = URLSession(configuration: config)
 		
 		let task = session.dataTask(with: urlRequest) { (data, urlResponse, error) in
-			if let error = error {
+			if let httpURLResponse = urlResponse as? HTTPURLResponse {
+				let statusCode = httpURLResponse.statusCode
+				if 200..<300 ~= statusCode {
+					print("🎉  Successfully created pull request")
+				} else {
+					let localizedDescription = HTTPURLResponse.localizedString(forStatusCode: httpURLResponse.statusCode)
+					let error = Error.invalidResponse(localizedDescription: localizedDescription)
+					ErrorManager.log(fatalError: error, context: .gitHub)
+				}
+			} else if let error = error {
 				ErrorManager.log(fatalError: error, context: .gitHub)
 			}
 			completion()
@@ -77,6 +85,7 @@ extension GitHubPullRequestManager {
 	enum Error: Swift.Error, CustomStringConvertible {
 		case cannotCreatePullRequestURL
 		case failedToCreateLoginData
+		case invalidResponse(localizedDescription: String)
 		
 		/// A string describing the error.
 		public var description: String {
@@ -86,6 +95,12 @@ extension GitHubPullRequestManager {
 				Failed to extract username and GitHub personal access token. Please make sure you are running Style Sync in a git repository and that your GitHub Personal Access Token is correct in `stylesyncConfig.json`.
 				
 				You can view your personal access tokens at \(GitHubLink.personalAccessTokens).
+				"""
+			case .invalidResponse(let localizedDescription):
+				return """
+				Failed to submit pull request: \(localizedDescription)
+				
+				You can check your personal access tokens at \(GitHubLink.personalAccessTokens).
 				"""
 			}
 		}

@@ -1,8 +1,7 @@
 //
-//  StyleExporter.swift
-//  StyleSyncCore
-//
-//  Created by Dylan Lewis on 08/11/2017.
+//  stylesync
+//  Created by Dylan Lewis
+//  Licensed under the MIT license. See LICENSE file.
 //
 
 import Foundation
@@ -54,6 +53,7 @@ final class StyleExporter {
 		return Array(filesForDeprecatedTextStyle.keys)
 	}
 	
+	private(set) var mutatedFiles: Set<File> = []
 	var fileNamesForDeprecatedStyleNames: [String: [String]] {
 		var fileNamesForDeprecatedStyleNames: [String: [String]] = [:]
 		Array(filesForDeprecatedColorStyle.keys)
@@ -277,10 +277,12 @@ final class StyleExporter {
 			})
 		
 		let updateOldColorStyleReferencesOperation = updateOldReferencesFileOperation(
-			currentAndMigratedStyles: currentAndMigratedColorReplacableStyles
+			currentAndMigratedStyles: currentAndMigratedColorReplacableStyles,
+			mutatedFiles: &mutatedFiles
 		)
 		let updateOldTextStyleReferencesOperation = updateOldReferencesFileOperation(
-			currentAndMigratedStyles: currentAndMigratedTextReplacableStyles
+			currentAndMigratedStyles: currentAndMigratedTextReplacableStyles,
+			mutatedFiles: &mutatedFiles
 		)
 		
 		// Find used deprecated styles.
@@ -397,7 +399,8 @@ final class StyleExporter {
 	// MARK: - Helpers
 	
 	private func updateOldReferencesFileOperation(
-		currentAndMigratedStyles: [(CodeTemplateReplacableStyle, CodeTemplateReplacableStyle)]
+		currentAndMigratedStyles: [(CodeTemplateReplacableStyle, CodeTemplateReplacableStyle)],
+		mutatedFiles: inout Set<File>
 	) -> FileOperation {
 		return { file in
 			var fileString: String
@@ -408,7 +411,15 @@ final class StyleExporter {
 				return
 			}
 			currentAndMigratedStyles.forEach({
-				fileString = fileString.replacingOccurrences(of: $0.0.variableName, with: $0.1.variableName)
+				var containsOccurence = true
+				repeat {
+					guard let range = fileString.range(of: $0.0.variableName, whereSurroundingCharactersAreNotContainedIn: .alphanumerics) else {
+						containsOccurence = false
+						return
+					}
+					fileString = fileString.replacingCharacters(in: range, with: $0.1.variableName)
+					mutatedFiles.insert(file)
+				} while containsOccurence == true
 			})
 			
 			do {

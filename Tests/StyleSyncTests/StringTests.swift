@@ -1,13 +1,11 @@
 //
-//  StringTests.swift
-//  StyleSync
-//
-//  Created by Dylan Lewis on 02/09/2017.
-//  Copyright © 2017 Dylan Lewis. All rights reserved.
+//  stylesync
+//  Created by Dylan Lewis
+//  Licensed under the MIT license. See LICENSE file.
 //
 
 import XCTest
-import StyleSyncCore
+@testable import StyleSyncCore
 
 class StringTests: XCTestCase {
 	// MARK: Camelcased
@@ -116,5 +114,100 @@ class StringTests: XCTestCase {
 		let originalString = "capitalized space "
 		let expectedString = "CapitalizedSpace"
 		XCTAssertEqual(originalString.capitalizedWithoutSpaceSeparators, expectedString)
+	}
+	
+	// MARK: - Range accounting for surrounding characters
+	
+	func testStringWithNoSurroundingCharactersIsValid() {
+		let string = "abcString"
+		let stringToSearchFor = "abcString"
+		
+		let expectedRange = string.range(of: stringToSearchFor)
+		let range = string.range(of: stringToSearchFor, whereSurroundingCharactersAreNotContainedIn: .alphanumerics)
+		XCTAssertEqual(range, expectedRange)
+	}
+	
+	func testStringWithAlphanumericCharacterBeforeRangeReturnsNil() {
+		let string = "AabcString"
+		let stringToSearchFor = "abcString"
+		
+		let range = string.range(of: stringToSearchFor, whereSurroundingCharactersAreNotContainedIn: .alphanumerics)
+		XCTAssertNil(range)
+	}
+	
+	func testStringWithMutlipleAlphanumericCharactersBeforeRangeReturnsNil() {
+		let string = "ABabcString"
+		let stringToSearchFor = "abcString"
+		
+		let range = string.range(of: stringToSearchFor, whereSurroundingCharactersAreNotContainedIn: .alphanumerics)
+		XCTAssertNil(range)
+	}
+	
+	func testStringWithNonAlphanumericCharacterBeforeRangeIsValid() {
+		let string = ".abcString"
+		let stringToSearchFor = "abcString"
+		
+		let expectedRange = string.range(of: stringToSearchFor)
+		let range = string.range(of: stringToSearchFor, whereSurroundingCharactersAreNotContainedIn: .alphanumerics)
+		XCTAssertEqual(range, expectedRange)
+	}
+	
+	func testStringWithAlphanumericCharacterAfterRangeReturnsNil() {
+		let string = "abcStringA"
+		let stringToSearchFor = "abcString"
+		
+		let range = string.range(of: stringToSearchFor, whereSurroundingCharactersAreNotContainedIn: .alphanumerics)
+		XCTAssertNil(range)
+	}
+	
+	func testStringWithMutlipleAlphanumericCharactersAfterRangeReturnsNil() {
+		let string = "abcStringAB"
+		let stringToSearchFor = "abcString"
+		
+		let range = string.range(of: stringToSearchFor, whereSurroundingCharactersAreNotContainedIn: .alphanumerics)
+		XCTAssertNil(range)
+	}
+	
+	func testStringWithNonAlphanumericCharacterAfterRangeIsValid() {
+		let string = "abcString)"
+		let stringToSearchFor = "abcString"
+		
+		let expectedRange = string.range(of: stringToSearchFor)
+		let range = string.range(of: stringToSearchFor, whereSurroundingCharactersAreNotContainedIn: .alphanumerics)
+		XCTAssertEqual(range, expectedRange)
+	}
+	
+	func testStringWithAlphanumericCharactersSurroundingRangeReturnsNil() {
+		let string = "0abcString1"
+		let stringToSearchFor = "abcString"
+		
+		let range = string.range(of: stringToSearchFor, whereSurroundingCharactersAreNotContainedIn: .alphanumerics)
+		XCTAssertNil(range)
+	}
+	
+	func testStringWithNonAlphanumericCharactersSurroundingRangeIsValid() {
+		let string = " abcString "
+		let stringToSearchFor = "abcString"
+		
+		let expectedRange = string.range(of: stringToSearchFor)
+		let range = string.range(of: stringToSearchFor, whereSurroundingCharactersAreNotContainedIn: .alphanumerics)
+		XCTAssertEqual(range, expectedRange)
+	}
+	
+	func testRangeOfEmptyStringIsNil() {
+		let string = "abcString"
+		let stringToSearchFor = ""
+		
+		let range = string.range(of: stringToSearchFor, whereSurroundingCharactersAreNotContainedIn: .alphanumerics)
+		XCTAssertNil(range)
+	}
+	
+	func testRangeOfSingleCharacterStringStringIsValid() {
+		let string = "a"
+		let stringToSearchFor = "a"
+		
+		let expectedRange = string.range(of: stringToSearchFor)
+		let range = string.range(of: stringToSearchFor, whereSurroundingCharactersAreNotContainedIn: .alphanumerics)
+		XCTAssertEqual(range, expectedRange)
 	}
 }

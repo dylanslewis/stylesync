@@ -1,8 +1,7 @@
 //
-//  SketchManager.swift
-//  StyleSyncCore
-//
-//  Created by Dylan Lewis on 26/10/2017.
+//  stylesync
+//  Created by Dylan Lewis
+//  Licensed under the MIT license. See LICENSE file.
 //
 
 import Foundation

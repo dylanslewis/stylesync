@@ -1,8 +1,7 @@
 //
-//  StyleExporterTests.swift
-//  StyleSyncTests
-//
-//  Created by Dylan Lewis on 12/11/2017.
+//  stylesync
+//  Created by Dylan Lewis
+//  Licensed under the MIT license. See LICENSE file.
 //
 
 import XCTest
@@ -209,6 +208,43 @@ class StyleExporterTests: XCTestCase {
 			\(renamedNewColorStyle.name.camelcased)
 			"""
 		XCTAssertEqual(fileWithReferencesToNewStylesString, expectedFileWithReferencesToNewStylesString)
+	}
+
+	func testWhenNoStyleIsRenamedThenMutatedFilesIsEmpty() {
+		createFileWithReferencesToNewStyles()
+		
+		let styleExporter = getStylesExporterAndExportStyles(
+			latestTextStyles: [newTextStyle],
+			latestColorStyles: [newColorStyle],
+			previouslyExportedTextStyles: [newTextStyle],
+			previouslyExportedColorStyles: [newColorStyle]
+		)
+		
+		let expectedFiles: Set<File> = []
+		XCTAssertEqual(styleExporter.mutatedFiles, expectedFiles)
+	}
+	
+	func testWhenAStyleIsRenamedThenMutatedFilesContainsTheUpdatedFiles() {
+		createFileWithReferencesToNewStyles()
+		
+		let styleExporter = getStylesExporterAndExportStyles(
+			latestTextStyles: [renamedNewTextStyle],
+			latestColorStyles: [renamedNewColorStyle],
+			previouslyExportedTextStyles: [newTextStyle],
+			previouslyExportedColorStyles: [newColorStyle]
+		)
+		
+		let expectedFiles: Set<File>
+		do {
+			let fileWithReferencesToNewStyles = try projectFolder.file(
+				named: Constant.fileWithReferencesToNewStylesName
+			)
+			expectedFiles = [fileWithReferencesToNewStyles]
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
+
+		XCTAssertEqual(styleExporter.mutatedFiles, expectedFiles)
 	}
 	
 	func testNewStylesContainsAllTheLatestStyles() {

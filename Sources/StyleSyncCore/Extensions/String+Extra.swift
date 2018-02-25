@@ -1,9 +1,7 @@
 //
-//  String+Extra.swift
-//  StyleSync
-//
-//  Created by Dylan Lewis on 12/08/2017.
-//  Copyright © 2017 Dylan Lewis. All rights reserved.
+//  stylesync
+//  Created by Dylan Lewis
+//  Licensed under the MIT license. See LICENSE file.
 //
 
 import Foundation
@@ -107,6 +105,53 @@ public extension String {
 			mutableSelf = mutableSelf.replacingOccurrences(of: doubleCharacter, with: String(character))
 		} while mutableSelf.contains(doubleCharacter)
 		return mutableSelf
+	}
+	
+	/// Finds the range of a given string, and only returns it if the
+	///	`Character`s before and after the range are not contained in the given
+	///	`characterSet`
+	///
+	/// - Parameters:
+	///   - string: The `String` to find the range of.
+	///   - characterSet: The `CharacterSet` to compare with.
+	/// - Returns: The range of `string`.
+	func range(of string: String, whereSurroundingCharactersAreNotContainedIn characterSet: CharacterSet) -> Range<Index>? {
+		guard let range = self.range(of: string) else {
+			return nil
+		}
+		
+		if range.upperBound < endIndex {
+			// There is a character after the range that was found.
+			
+			// The `upperBound` is already corresponds to the index after the
+			// range.
+			//
+			// - SeeAlso: https://developer.apple.com/documentation/swift/range/1778545-upperbound
+			let characterAfterRange = self[range.upperBound]
+			
+			if characterAfterRange.characterSet.isSubset(of: characterSet) {
+				return nil
+			}
+		}
+		
+		if range.lowerBound > startIndex {
+			// There is a character before the range that was found.
+			let indexBeforeRange = index(before: range.lowerBound)
+			let characterBeforeRange = self[indexBeforeRange]
+			
+			if characterBeforeRange.characterSet.isSubset(of: characterSet) {
+				return nil
+			}
+		}
+		
+		return range
+	}
+}
+
+private extension Character {
+	/// Returns a `CharacterSet` contains only `self`.
+	var characterSet: CharacterSet {
+		return CharacterSet(charactersIn: String(self))
 	}
 }
 

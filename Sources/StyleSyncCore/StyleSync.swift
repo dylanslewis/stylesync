@@ -1,9 +1,7 @@
 //
-//  StyleSync.swift
-//  StyleSync
-//
-//  Created by Dylan Lewis on 09/08/2017.
-//  Copyright © 2017 Dylan Lewis. All rights reserved.
+//  stylesync
+//  Created by Dylan Lewis
+//  Licensed under the MIT license. See LICENSE file.
 //
 
 import Cocoa
@@ -168,13 +166,14 @@ public final class StyleSync {
 		let oldColorStyles: [CodeTemplateReplacableStyle] = styleExporter.oldColorStyles
 		let newTextStyles: [CodeTemplateReplacableStyle] = styleExporter.newTextStyles
 		let newColorStyles: [CodeTemplateReplacableStyle] = styleExporter.newColorStyles
-
+		let mutatedFiles: Set<File> = styleExporter.mutatedFiles
+		
 		let filesToCommit = [
 			generatedTextStylesFile,
 			generatedColorStylesFile,
 			generatedRawTextStylesFile,
 			generatedRawColorStylesFile
-		]
+		] + mutatedFiles
 		do {
 			let gitHubManager = try GitHubManager(
 				projectFolder: projectFolder,

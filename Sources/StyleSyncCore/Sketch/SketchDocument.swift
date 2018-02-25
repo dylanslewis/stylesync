@@ -1,9 +1,7 @@
 //
-//  SketchSketchDocument.swift
-//  StyleSync
-//
-//  Created by Dylan Lewis on 12/08/2017.
-//  Copyright © 2017 Dylan Lewis. All rights reserved.
+//  stylesync
+//  Created by Dylan Lewis
+//  Licensed under the MIT license. See LICENSE file.
 //
 
 import Cocoa
@@ -75,7 +73,7 @@ public extension SketchDocument {
 
 					public struct EncodedAttributes: Codable {
 						public let font: Font
-						public let color: Color
+						public let color: NSColor
 						public let paragraphStyle: ParagraphStyle
 						public let kerning: CGFloat?
 						
@@ -96,7 +94,7 @@ public extension SketchDocument {
 							}
 						}
 						
-						public struct Color: Codable {
+						public struct PreVersion48Color: Codable {
 							let sixtyFourBitRepresentation: String
 							public var color: NSColor? {
 								return sixtyFourBitRepresentation.unarchivedObject()
@@ -104,6 +102,23 @@ public extension SketchDocument {
 							
 							enum CodingKeys: String, CodingKey {
 								case sixtyFourBitRepresentation = "_archive"
+							}
+						}
+						
+						public struct PostVersion48Color: Codable {
+							let red: CGFloat
+							let green: CGFloat
+							let blue: CGFloat
+							let alpha: CGFloat
+							public var color: NSColor {
+								return NSColor(red: red, green: green, blue: blue, alpha: alpha)
+							}
+							
+							public init(color: NSColor) {
+								self.red = color.redComponent
+								self.green = color.greenComponent
+								self.blue = color.blueComponent
+								self.alpha = color.alphaComponent
 							}
 						}
 						
@@ -118,11 +133,55 @@ public extension SketchDocument {
 							}
 						}
 						
+						public init(from decoder: Decoder) throws {
+							let values = try decoder.container(keyedBy: CodingKeys.self)
+							do {
+								// First try to decode using the old
+								// standard.
+								let rawRepresentation = try values.decode(PreVersion48Color.self, forKey: .preVersion48Color)
+								guard let color = rawRepresentation.color else {
+									throw Error.failedToParseColor
+								}
+								self.color = color
+							} catch {
+								let explicitRepresentation = try values.decode(PostVersion48Color.self, forKey: .postVersion48Color)
+								self.color = explicitRepresentation.color
+							}
+							self.font = try values.decode(Font.self, forKey: .font)
+							self.paragraphStyle = try values.decode(ParagraphStyle.self, forKey: .paragraphStyle)
+							do {
+								self.kerning = try values.decode(CGFloat.self, forKey: .kerning)
+							} catch {
+								self.kerning = nil
+							}
+						}
+						
+						public init(font: Font, color: NSColor, paragraphStyle: ParagraphStyle, kerning: CGFloat?) {
+							self.font = font
+							self.color = color
+							self.paragraphStyle = paragraphStyle
+							self.kerning = kerning
+						}
+						
+						public func encode(to encoder: Encoder) throws {
+							var container = encoder.container(keyedBy: CodingKeys.self)
+							let postVersion48Color = PostVersion48Color(color: color)
+							try container.encode(postVersion48Color, forKey: .postVersion48Color)
+							try container.encode(font, forKey: .font)
+							try container.encode(paragraphStyle, forKey: .paragraphStyle)
+							try container.encode(kerning, forKey: .kerning)
+						}
+						
 						enum CodingKeys: String, CodingKey {
 							case font = "MSAttributedStringFontAttribute"
-							case color = "NSColor"
+							case preVersion48Color = "NSColor"
+							case postVersion48Color = "MSAttributedStringColorDictionaryAttribute"
 							case kerning = "NSKern"
 							case paragraphStyle = "NSParagraphStyle"
+						}
+						
+						enum Error: Swift.Error {
+							case failedToParseColor
 						}
 					}
 				}

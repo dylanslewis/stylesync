@@ -32,6 +32,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		656099261FCB333E00D17EDC /* NSFontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656099251FCB333E00D17EDC /* NSFontTests.swift */; };
+		656099271FCB33E100D17EDC /* NSFont+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656099231FCB331700D17EDC /* NSFont+Extra.swift */; };
+		656099291FCB349F00D17EDC /* TextStyleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656099281FCB349F00D17EDC /* TextStyleTests.swift */; };
 		OBJ_113 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_119 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* Package.swift */; };
 		OBJ_125 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* Package.swift */; };
@@ -183,6 +186,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		656099231FCB331700D17EDC /* NSFont+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFont+Extra.swift"; sourceTree = "<group>"; };
+		656099251FCB333E00D17EDC /* NSFontTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSFontTests.swift; sourceTree = "<group>"; };
+		656099281FCB349F00D17EDC /* TextStyleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyleTests.swift; sourceTree = "<group>"; };
 		"Files::Files::Product" /* Files.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Files.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* CodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeGenerator.swift; sourceTree = "<group>"; };
 		OBJ_100 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/dylanslewis/Developer/StyleSync/.build/checkouts/Files.git-6739420172119258925/Package.swift"; sourceTree = "<group>"; };
@@ -353,6 +359,7 @@
 				OBJ_25 /* ShellOutCommand+Extra.swift */,
 				OBJ_26 /* String+Extra.swift */,
 				OBJ_27 /* URLRequest+Extra.swift */,
+				656099231FCB331700D17EDC /* NSFont+Extra.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -408,7 +415,7 @@
 			path = StyleExtractor;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -418,7 +425,6 @@
 				OBJ_95 /* Dependencies */,
 				OBJ_102 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_50 /* Styles */ = {
@@ -559,6 +565,8 @@
 				OBJ_85 /* Resources */,
 				OBJ_87 /* SketchManagerTests.swift */,
 				OBJ_88 /* StringTests.swift */,
+				656099251FCB333E00D17EDC /* NSFontTests.swift */,
+				656099281FCB349F00D17EDC /* TextStyleTests.swift */,
 				OBJ_89 /* StyleExporterTests.swift */,
 				OBJ_90 /* StyleExtractorTests.swift */,
 				OBJ_91 /* Utilities */,
@@ -763,14 +771,14 @@
 			attributes = {
 				LastUpgradeCheck = 9999;
 			};
-			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "stylesync" */;
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "StyleSync" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_102 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -820,9 +828,11 @@
 			files = (
 				OBJ_131 /* CodeGeneratorTests.swift in Sources */,
 				OBJ_132 /* Resources.swift in Sources */,
+				656099261FCB333E00D17EDC /* NSFontTests.swift in Sources */,
 				OBJ_133 /* SketchManagerTests.swift in Sources */,
 				OBJ_134 /* StringTests.swift in Sources */,
 				OBJ_135 /* StyleExporterTests.swift in Sources */,
+				656099291FCB349F00D17EDC /* TextStyleTests.swift in Sources */,
 				OBJ_136 /* StyleExtractorTests.swift in Sources */,
 				OBJ_137 /* XCTest+Extra.swift in Sources */,
 				OBJ_138 /* VersionTests.swift in Sources */,
@@ -885,6 +895,7 @@
 				OBJ_207 /* GitHubDeprecatedStylesTable.swift in Sources */,
 				OBJ_208 /* GitHubHeading.swift in Sources */,
 				OBJ_209 /* GitHubNewStyleTable.swift in Sources */,
+				656099271FCB33E100D17EDC /* NSFont+Extra.swift in Sources */,
 				OBJ_210 /* GitHubStyleName.swift in Sources */,
 				OBJ_211 /* GitHubUpdatedStyleTable.swift in Sources */,
 				OBJ_212 /* CodeNameable.swift in Sources */,
@@ -1352,7 +1363,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_2 /* Build configuration list for PBXProject "stylesync" */ = {
+		OBJ_2 /* Build configuration list for PBXProject "StyleSync" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_3 /* Debug */,
