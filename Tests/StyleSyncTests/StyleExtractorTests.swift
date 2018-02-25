@@ -181,14 +181,9 @@ class StyleExtractorTests: XCTestCase {
 			sixtyFourBitRepresentation: "YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKUHCBYaIFUkbnVsbNcJCgsMDQ4PEBESEhQUFVYkY2xhc3NaTlNUYWJTdG9wc1xOU1RleHRCbG9ja3NbTlNUZXh0TGlzdHNfEA9OU01heExpbmVIZWlnaHRfEA9OU01pbkxpbmVIZWlnaHRbTlNBbGlnbm1lbnSABIAAgAKAAiNANAAAAAAAABAB0hcJGBlaTlMub2JqZWN0c6CAA9IbHB0eWiRjbGFzc25hbWVYJGNsYXNzZXNXTlNBcnJheaIdH1hOU09iamVjdNIbHCEiXxAXTlNNdXRhYmxlUGFyYWdyYXBoU3R5bGWjISMfXxAQTlNQYXJhZ3JhcGhTdHlsZV8QD05TS2V5ZWRBcmNoaXZlctEmJ1Ryb290gAEACAARABoAIwAtADIANwA9AEMAUgBZAGQAcQB9AI8AoQCtAK8AsQCzALUAvgDAAMUA0ADRANMA2ADjAOwA9AD3AQABBQEfASMBNgFIAUsBUAAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAFS"
 		)
 		
-		let colorData = NSKeyedArchiver.archivedData(withRootObject: color)
-		let sketchColor = SketchDocument.TextStyles.Object.Value.TextStyle.EncodedAttributes.Color(
-			sixtyFourBitRepresentation: colorData.base64EncodedString()
-		)
-
 		let encodedAttributes = SketchDocument.TextStyles.Object.Value.TextStyle.EncodedAttributes(
 			font: sketchFont,
-			color: sketchColor,
+			color: color,
 			paragraphStyle: sketchParagraphStyle,
 			kerning: 0
 		)

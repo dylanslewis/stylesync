@@ -37,7 +37,7 @@ class SketchManagerTests: XCTestCase {
 		XCTAssertEqual(font.pointSize, 16)
 		
 		let expectedColor = NSColor(red: 100/255, green: 110/255, blue: 120/255, alpha: 0.9)
-		XCTAssertEqual(encodedAttributes.color.color, expectedColor)
+		XCTAssertEqual(encodedAttributes.color, expectedColor)
 		
 		let paragraphStyle = encodedAttributes.paragraphStyle.paragraphStyle
 		XCTAssertEqual(paragraphStyle?.alignment, .right)
