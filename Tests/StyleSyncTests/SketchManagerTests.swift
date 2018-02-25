@@ -37,7 +37,7 @@ class SketchManagerTests: XCTestCase {
 		XCTAssertEqual(font.pointSize, 16)
 		
 		let expectedColor = NSColor(red: 100/255, green: 110/255, blue: 120/255, alpha: 0.9)
-		XCTAssertEqual(encodedAttributes.color.color, expectedColor)
+		XCTAssertEqual(encodedAttributes.color, expectedColor)
 		
 		let paragraphStyle = encodedAttributes.paragraphStyle.paragraphStyle
 		XCTAssertEqual(paragraphStyle?.alignment, .right)
@@ -84,9 +84,16 @@ class SketchManagerTests: XCTestCase {
 		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 0)
 	}
 
-	func testSketchFileWithFiveTextStylesAndFiveColorStylesIsParsedCorrectly() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStyles")
+	func testSketchFileWithFiveTextStylesAndFiveColorStylesIsParsedCorrectlyPreVersion48() throws {
+		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStylesPreVersion48")
 
+		XCTAssertEqual(sketchDocument.layerTextStyles.objects.count, 5)
+		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 5)
+	}
+	
+	func testSketchFileWithFiveTextStylesAndFiveColorStylesIsParsedCorrectlyPostVersion48() throws {
+		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStylesPostVersion48")
+		
 		XCTAssertEqual(sketchDocument.layerTextStyles.objects.count, 5)
 		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 5)
 	}
