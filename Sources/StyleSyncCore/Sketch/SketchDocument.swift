@@ -147,12 +147,23 @@ public extension SketchDocument {
 								let explicitRepresentation = try values.decode(PostVersion48Color.self, forKey: .postVersion48Color)
 								self.color = explicitRepresentation.color
 							}
+							
 							self.font = try values.decode(Font.self, forKey: .font)
-							self.paragraphStyle = try values.decode(ParagraphStyle.self, forKey: .paragraphStyle)
+							
 							do {
-								self.kerning = try values.decode(CGFloat.self, forKey: .kerning)
+								self.paragraphStyle = try values.decode(ParagraphStyle.self, forKey: .preVersion49ParagraphStyle)
 							} catch {
-								self.kerning = nil
+								self.paragraphStyle = try values.decode(ParagraphStyle.self, forKey: .postVersion49ParagraphStyle)
+							}
+							
+							do {
+								self.kerning = try values.decode(CGFloat.self, forKey: .preVersion49Kerning)
+							} catch {
+								do {
+									self.kerning = try values.decode(CGFloat.self, forKey: .postVersion49Kerning)
+								} catch {
+									self.kerning = nil
+								}
 							}
 						}
 						
@@ -168,16 +179,18 @@ public extension SketchDocument {
 							let postVersion48Color = PostVersion48Color(color: color)
 							try container.encode(postVersion48Color, forKey: .postVersion48Color)
 							try container.encode(font, forKey: .font)
-							try container.encode(paragraphStyle, forKey: .paragraphStyle)
-							try container.encode(kerning, forKey: .kerning)
+							try container.encode(paragraphStyle, forKey: .postVersion49ParagraphStyle)
+							try container.encode(kerning, forKey: .postVersion49Kerning)
 						}
 						
 						enum CodingKeys: String, CodingKey {
 							case font = "MSAttributedStringFontAttribute"
 							case preVersion48Color = "NSColor"
 							case postVersion48Color = "MSAttributedStringColorDictionaryAttribute"
-							case kerning = "NSKern"
-							case paragraphStyle = "NSParagraphStyle"
+							case preVersion49Kerning = "NSKern"
+							case postVersion49Kerning = "kerning"
+							case preVersion49ParagraphStyle = "NSParagraphStyle"
+							case postVersion49ParagraphStyle = "paragraphStyle"
 						}
 						
 						enum Error: Swift.Error {
