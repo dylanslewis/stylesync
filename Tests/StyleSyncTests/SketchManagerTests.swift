@@ -24,12 +24,22 @@ class SketchManagerTests: XCTestCase {
 	}
 	
 	func testSketchFileWithOneTextStyleIsParsedCorrectlyPreVersion49() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithOneTextStylePreVersion49")
+		let sketchDocument: SketchDocument
+		do {
+			sketchDocument = try self.sketchDocument(withName: "SketchFileWithOneTextStylePreVersion49")
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
 		assertSketchFileWithOneTextStyleIsParsedCorrectly(sketchDocument)
 	}
 	
 	func testSketchFileWithOneTextStyleIsParsedCorrectlyPostVersion49() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithOneTextStylePostVersion49")
+		let sketchDocument: SketchDocument
+		do {
+			sketchDocument = try self.sketchDocument(withName: "SketchFileWithOneTextStylePostVersion49")
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
 		assertSketchFileWithOneTextStyleIsParsedCorrectly(sketchDocument)
 	}
 	
@@ -63,7 +73,12 @@ class SketchManagerTests: XCTestCase {
 	}
 	
 	func testSketchFileWithOneColorStyleIsParsedCorrectly() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithOneColorStyle")
+		let sketchDocument: SketchDocument
+		do {
+			sketchDocument = try self.sketchDocument(withName: "SketchFileWithOneColorStyle")
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
 		
 		guard let colorStyle = sketchDocument.layerStyles.objects.first else {
 			return XCTFail("Failed to find color style")
@@ -90,28 +105,48 @@ class SketchManagerTests: XCTestCase {
 	}
 
 	func testSketchFileWithNoSharedTextStylesIsParsedCorrectly() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithNoStyles")
+		let sketchDocument: SketchDocument
+		do {
+			sketchDocument = try self.sketchDocument(withName: "SketchFileWithNoStyles")
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
 
 		XCTAssertEqual(sketchDocument.layerTextStyles.objects.count, 0)
 		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 0)
 	}
 
 	func testSketchFileWithFiveTextStylesAndFiveColorStylesIsParsedCorrectlyPreVersion48() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStylesPreVersion48")
+		let sketchDocument: SketchDocument
+		do {
+			sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStylesPreVersion48")
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
 
 		XCTAssertEqual(sketchDocument.layerTextStyles.objects.count, 5)
 		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 5)
 	}
 	
 	func testSketchFileWithFiveTextStylesAndFiveColorStylesIsParsedCorrectlyPostVersion48() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStylesPostVersion48")
+		let sketchDocument: SketchDocument
+		do {
+			sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStylesPostVersion48")
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
 		
 		XCTAssertEqual(sketchDocument.layerTextStyles.objects.count, 5)
 		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 5)
 	}
 	
 	func testSketchFileWithFiveTextStylesAndFiveColorStylesIsParsedCorrectlyPostVersion49() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStylesPostVersion49")
+		let sketchDocument: SketchDocument
+		do {
+			sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStylesPostVersion49")
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
 		
 		XCTAssertEqual(sketchDocument.layerTextStyles.objects.count, 5)
 		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 5)
