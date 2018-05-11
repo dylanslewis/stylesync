@@ -61,10 +61,10 @@ class SketchManagerTests: XCTestCase {
 		let expectedColor = NSColor(red: 100/255, green: 110/255, blue: 120/255, alpha: 0.9)
 		XCTAssertEqual(encodedAttributes.color, expectedColor)
 		
-		let paragraphStyle = encodedAttributes.paragraphStyle.paragraphStyle
-		XCTAssertEqual(paragraphStyle?.alignment, .right)
-		XCTAssertEqual(paragraphStyle?.minimumLineHeight, 20)
-		XCTAssertEqual(paragraphStyle?.maximumLineHeight, 20)
+		let paragraphStyle = encodedAttributes.paragraphStyle
+		XCTAssertEqual(paragraphStyle.textAlignment, .right)
+		XCTAssertEqual(paragraphStyle.minimumLineHeight, 20)
+		XCTAssertEqual(paragraphStyle.maximumLineHeight, 20)
 		
 		XCTAssertEqual(encodedAttributes.kerning, 1)
 		
