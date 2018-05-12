@@ -121,9 +121,25 @@ extension Version {
 	static let firstVersion = Version(versionString: "1.0")!
 }
 
+// MARK: - Equatable
+
 extension Version: Equatable {
 	public static func == (lhs: Version, rhs: Version) -> Bool {
 		return lhs.major == rhs.major
 			&& lhs.minor == rhs.minor
+	}
+}
+
+// MARK: - Comparable
+
+extension Version: Comparable {
+	public static func <(lhs: Version, rhs: Version) -> Bool {
+		if lhs.major == rhs.major {
+			return lhs.minor < rhs.minor
+		} else if lhs.major < rhs.major {
+			return true
+		} else {
+			return false
+		}
 	}
 }
