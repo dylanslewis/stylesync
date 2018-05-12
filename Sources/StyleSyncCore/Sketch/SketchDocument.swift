@@ -160,8 +160,8 @@ public extension SketchDocument {
 						
 						public func encode(to encoder: Encoder) throws {
 							var container = encoder.container(keyedBy: CodingKeys.self)
-							let postVersion48Color = Color(color: color)
-							try container.encode(postVersion48Color, forKey: .color)
+							let color = Color(color: self.color)
+							try container.encode(color, forKey: .color)
 							try container.encode(font, forKey: .font)
 							try container.encode(paragraphStyle, forKey: .paragraphStyle)
 							try container.encode(kerning, forKey: .kerning)
