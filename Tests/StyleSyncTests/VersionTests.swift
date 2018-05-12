@@ -57,6 +57,36 @@ class VersionTests: XCTestCase {
 		XCTAssertEqual(incrementedMajorVersion.minor, expectedMinorVersion)
 	}
 	
+	func testComparingEqualVersionsWithNoMinorReturnsCorrectValue() {
+		let lhsVersion = Version(major: 1, minor: 0)
+		let rhsVersion = Version(major: 1, minor: 0)
+		XCTAssertTrue(lhsVersion == rhsVersion)
+	}
+	
+	func testComparingEqualVersionsWithMinorReturnsCorrectValue() {
+		let lhsVersion = Version(major: 1, minor: 1)
+		let rhsVersion = Version(major: 1, minor: 1)
+		XCTAssertTrue(lhsVersion == rhsVersion)
+	}
+	
+	func testComparingLargerMajorVersionReturnsCorrectValue() {
+		let lhsVersion = Version(major: 2, minor: 0)
+		let rhsVersion = Version(major: 1, minor: 0)
+		XCTAssertTrue(lhsVersion > rhsVersion)
+	}
+	
+	func testComparingLargerMinorVersionReturnsCorrectValue() {
+		let lhsVersion = Version(major: 1, minor: 1)
+		let rhsVersion = Version(major: 1, minor: 0)
+		XCTAssertTrue(lhsVersion > rhsVersion)
+	}
+	
+	func testComparingLargerMinorButSmallerMajorReturnCorrectValue() {
+		let lhsVersion = Version(major: 2, minor: 0)
+		let rhsVersion = Version(major: 1, minor: 1)
+		XCTAssertTrue(lhsVersion > rhsVersion)
+	}
+	
 	private let redColorStyle = ColorStyle(name: "Red", identifier: "1", color: .red, isDeprecated: false)
 	private let greenColorStyle = ColorStyle(name: "Green", identifier: "2", color: .green, isDeprecated: false)
 	private var newRedColorStyle: ColorStyle {
