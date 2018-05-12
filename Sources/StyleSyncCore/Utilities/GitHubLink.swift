@@ -13,4 +13,5 @@ enum GitHubLink {
 	static let templatesDirectory = baseURL.appendingPathComponent("tree/master/Sources/StyleSyncCore/Templates")
 	static let templateReadme = baseURL.appendingPathComponent("tree/master/Sources/StyleSyncCore/Templates/README.md")
 	static let personalAccessTokens = URL(string: "https://github.com/settings/tokens")!
+	static let lastSupportedVersionBefore50 = baseURL.appendingPathComponent("releases/tag/v1.0.2")
 }

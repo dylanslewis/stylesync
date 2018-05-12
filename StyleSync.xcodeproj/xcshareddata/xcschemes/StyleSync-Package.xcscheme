@@ -17,7 +17,7 @@
                BlueprintIdentifier = "stylesync::StyleSync"
                BuildableName = "StyleSync"
                BlueprintName = "StyleSync"
-               ReferencedContainer = "container:stylesync.xcodeproj">
+               ReferencedContainer = "container:StyleSync.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "stylesync::StyleSyncCore"
                BuildableName = "StyleSyncCore.framework"
                BlueprintName = "StyleSyncCore"
-               ReferencedContainer = "container:stylesync.xcodeproj">
+               ReferencedContainer = "container:StyleSync.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "ShellOut::ShellOut"
                BuildableName = "ShellOut.framework"
                BlueprintName = "ShellOut"
-               ReferencedContainer = "container:stylesync.xcodeproj">
+               ReferencedContainer = "container:StyleSync.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -59,7 +59,7 @@
                BlueprintIdentifier = "Files::Files"
                BuildableName = "Files.framework"
                BlueprintName = "Files"
-               ReferencedContainer = "container:stylesync.xcodeproj">
+               ReferencedContainer = "container:StyleSync.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -78,7 +78,7 @@
                BlueprintIdentifier = "stylesync::StyleSyncTests"
                BuildableName = "StyleSyncTests.xctest"
                BlueprintName = "StyleSyncTests"
-               ReferencedContainer = "container:stylesync.xcodeproj">
+               ReferencedContainer = "container:StyleSync.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -102,7 +102,7 @@
             BlueprintIdentifier = "stylesync::StyleSync"
             BuildableName = "StyleSync"
             BlueprintName = "StyleSync"
-            ReferencedContainer = "container:stylesync.xcodeproj">
+            ReferencedContainer = "container:StyleSync.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>

@@ -15,8 +15,13 @@ class VersionTests: XCTestCase {
 	}
 	
 	func testCreatingVersionWithInvalidStringReturnsNil() {
-		let version = Version(versionString: "1")
+		let version = Version(versionString: "")
 		XCTAssertNil(version)
+	}
+	
+	func testCreatingVersionWithOnlyMajorStringReturnsVersion() {
+		let version = Version(versionString: "1")
+		XCTAssertNotNil(version)
 	}
 	
 	func testCreatingVersionWithValidStringReturnsVersion() {
@@ -50,6 +55,36 @@ class VersionTests: XCTestCase {
 		let incrementedMajorVersion = version.incrementingMajor()
 		let expectedMinorVersion = 0
 		XCTAssertEqual(incrementedMajorVersion.minor, expectedMinorVersion)
+	}
+	
+	func testComparingEqualVersionsWithNoMinorReturnsCorrectValue() {
+		let lhsVersion = Version(major: 1, minor: 0)
+		let rhsVersion = Version(major: 1, minor: 0)
+		XCTAssertTrue(lhsVersion == rhsVersion)
+	}
+	
+	func testComparingEqualVersionsWithMinorReturnsCorrectValue() {
+		let lhsVersion = Version(major: 1, minor: 1)
+		let rhsVersion = Version(major: 1, minor: 1)
+		XCTAssertTrue(lhsVersion == rhsVersion)
+	}
+	
+	func testComparingLargerMajorVersionReturnsCorrectValue() {
+		let lhsVersion = Version(major: 2, minor: 0)
+		let rhsVersion = Version(major: 1, minor: 0)
+		XCTAssertTrue(lhsVersion > rhsVersion)
+	}
+	
+	func testComparingLargerMinorVersionReturnsCorrectValue() {
+		let lhsVersion = Version(major: 1, minor: 1)
+		let rhsVersion = Version(major: 1, minor: 0)
+		XCTAssertTrue(lhsVersion > rhsVersion)
+	}
+	
+	func testComparingLargerMinorButSmallerMajorReturnCorrectValue() {
+		let lhsVersion = Version(major: 2, minor: 0)
+		let rhsVersion = Version(major: 1, minor: 1)
+		XCTAssertTrue(lhsVersion > rhsVersion)
 	}
 	
 	private let redColorStyle = ColorStyle(name: "Red", identifier: "1", color: .red, isDeprecated: false)
