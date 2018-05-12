@@ -13,6 +13,7 @@ struct ZipManager {
 	
 	private enum Constant {
 		static let exportFolderName = "UnzippedSketchFiles"
+		static let sketchMetadataFileName = "meta.json"
 		static let sketchDocumentFileName = "document.json"
 	}
 	
@@ -33,17 +34,34 @@ struct ZipManager {
 	
 	// MARK: - Actions
 	
+	func getSketchMetadata() throws -> File {
+		let folder = try rawSketchFilesDirectory()
+		return try folder.file(named: Constant.sketchMetadataFileName)
+	}
+	
 	func getSketchDocument() throws -> File {
-		let exportFolder = try parentFolder.createSubfolder(named: Constant.exportFolderName)
-		try shellOut(to: .unzip(zippedFile: zippedFile.path, exportDirectory: exportFolder.path))
-		
-		let sketchDocument = try exportFolder.file(named: Constant.sketchDocumentFileName)
-		return sketchDocument
+		let folder = try rawSketchFilesDirectory()
+		return try folder.file(named: Constant.sketchDocumentFileName)
 	}
 	
 	func cleanup() throws {
 		let exportFolder = try parentFolder.subfolder(named: Constant.exportFolderName)
 		try shellOut(to: .removeDirectory(directory: exportFolder.path))
+	}
+	
+	// MARK: - Helpers
+	
+	private func rawSketchFilesDirectory() throws -> Folder {
+		let exportFolder: Folder
+		do {
+			exportFolder = try parentFolder.subfolder(named: Constant.exportFolderName)
+		} catch {
+			exportFolder = try parentFolder.createSubfolder(named: Constant.exportFolderName)
+		}
+		if exportFolder.files.count == 0 {
+			try shellOut(to: .unzip(zippedFile: zippedFile.path, exportDirectory: exportFolder.path))
+		}
+		return exportFolder
 	}
 }
 

@@ -23,14 +23,22 @@ public struct Version {
 			.flatMap { component in
 				return numberFormatter.number(from: component)?.intValue
 		}
-		guard
+		
+		if
+			versionComponents.count == 1,
+			let major = versionComponents.first
+		{
+			self.init(major: major, minor: 0)
+		} else if
 			versionComponents.count == 2,
 			let major = versionComponents.first,
 			let minor = versionComponents.last
+		{
+			self.init(major: major, minor: minor)
+		}
 		else {
 			return nil
 		}
-		self.init(major: major, minor: minor)
 	}
 	
 	public var stringRepresentation: String {
@@ -113,9 +121,25 @@ extension Version {
 	static let firstVersion = Version(versionString: "1.0")!
 }
 
+// MARK: - Equatable
+
 extension Version: Equatable {
 	public static func == (lhs: Version, rhs: Version) -> Bool {
 		return lhs.major == rhs.major
 			&& lhs.minor == rhs.minor
+	}
+}
+
+// MARK: - Comparable
+
+extension Version: Comparable {
+	public static func <(lhs: Version, rhs: Version) -> Bool {
+		if lhs.major == rhs.major {
+			return lhs.minor < rhs.minor
+		} else if lhs.major < rhs.major {
+			return true
+		} else {
+			return false
+		}
 	}
 }

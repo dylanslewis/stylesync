@@ -78,34 +78,26 @@ public extension SketchDocument {
 						public let kerning: CGFloat?
 						
 						public struct Font: Codable {
-							let sixtyFourBitRepresentation: String
-							public var fontName: String? {
-								return fontDescriptor?.fontAttributes[NSFontDescriptor.AttributeName.name] as? String
+							public let attributes: Attributes
+							public var fontName: String {
+								return attributes.fontName
 							}
-							public var pointSize: CGFloat? {
-								return fontDescriptor?.pointSize
-							}
-							private var fontDescriptor: NSFontDescriptor? {
-								return sixtyFourBitRepresentation.unarchivedObject()
+							public var pointSize: CGFloat {
+								return attributes.pointSize
 							}
 							
-							enum CodingKeys: String, CodingKey {
-								case sixtyFourBitRepresentation = "_archive"
+							public struct Attributes: Codable {
+								public let fontName: String
+								public let pointSize: CGFloat
+								
+								enum CodingKeys: String, CodingKey {
+									case fontName = "name"
+									case pointSize = "size"
+								}
 							}
 						}
 						
-						public struct PreVersion48Color: Codable {
-							let sixtyFourBitRepresentation: String
-							public var color: NSColor? {
-								return sixtyFourBitRepresentation.unarchivedObject()
-							}
-							
-							enum CodingKeys: String, CodingKey {
-								case sixtyFourBitRepresentation = "_archive"
-							}
-						}
-						
-						public struct PostVersion48Color: Codable {
+						public struct Color: Codable {
 							let red: CGFloat
 							let green: CGFloat
 							let blue: CGFloat
@@ -123,47 +115,31 @@ public extension SketchDocument {
 						}
 						
 						public struct ParagraphStyle: Codable {
-							let sixtyFourBitRepresentation: String
-							public var paragraphStyle: NSParagraphStyle? {
-								return sixtyFourBitRepresentation.unarchivedObject()
+							public var textAlignment: NSTextAlignment
+							public var minimumLineHeight: CGFloat?
+							public var maximumLineHeight: CGFloat?
+							
+							public init(
+								textAlignment: NSTextAlignment,
+								minimumLineHeight: CGFloat?,
+								maximumLineHeight: CGFloat?
+							) {
+								self.textAlignment = textAlignment
+								self.minimumLineHeight = minimumLineHeight
+								self.maximumLineHeight = maximumLineHeight
+							}
+							
+							public init(from decoder: Decoder) throws {
+								let values = try decoder.container(keyedBy: CodingKeys.self)
+								self.textAlignment = try values.decode(NSTextAlignment.self, forKey: .textAlignment)
+								self.minimumLineHeight = try? values.decode(CGFloat.self, forKey: .minimumLineHeight)
+								self.maximumLineHeight = try? values.decode(CGFloat.self, forKey: .maximumLineHeight)
 							}
 							
 							enum CodingKeys: String, CodingKey {
-								case sixtyFourBitRepresentation = "_archive"
-							}
-						}
-						
-						public init(from decoder: Decoder) throws {
-							let values = try decoder.container(keyedBy: CodingKeys.self)
-							do {
-								// First try to decode using the old
-								// standard.
-								let rawRepresentation = try values.decode(PreVersion48Color.self, forKey: .preVersion48Color)
-								guard let color = rawRepresentation.color else {
-									throw Error.failedToParseColor
-								}
-								self.color = color
-							} catch {
-								let explicitRepresentation = try values.decode(PostVersion48Color.self, forKey: .postVersion48Color)
-								self.color = explicitRepresentation.color
-							}
-							
-							self.font = try values.decode(Font.self, forKey: .font)
-							
-							do {
-								self.paragraphStyle = try values.decode(ParagraphStyle.self, forKey: .preVersion49ParagraphStyle)
-							} catch {
-								self.paragraphStyle = try values.decode(ParagraphStyle.self, forKey: .postVersion49ParagraphStyle)
-							}
-							
-							do {
-								self.kerning = try values.decode(CGFloat.self, forKey: .preVersion49Kerning)
-							} catch {
-								do {
-									self.kerning = try values.decode(CGFloat.self, forKey: .postVersion49Kerning)
-								} catch {
-									self.kerning = nil
-								}
+								case textAlignment = "alignment"
+								case minimumLineHeight = "minimumLineHeight"
+								case maximumLineHeight = "maximumLineHeight"
 							}
 						}
 						
@@ -174,23 +150,28 @@ public extension SketchDocument {
 							self.kerning = kerning
 						}
 						
+						public init(from decoder: Decoder) throws {
+							let values = try decoder.container(keyedBy: CodingKeys.self)
+							self.color = try values.decode(Color.self, forKey: .color).color
+							self.font = try values.decode(Font.self, forKey: .font)
+							self.paragraphStyle = try values.decode(ParagraphStyle.self, forKey: .paragraphStyle)
+							self.kerning = try? values.decode(CGFloat.self, forKey: .kerning)
+						}
+						
 						public func encode(to encoder: Encoder) throws {
 							var container = encoder.container(keyedBy: CodingKeys.self)
-							let postVersion48Color = PostVersion48Color(color: color)
-							try container.encode(postVersion48Color, forKey: .postVersion48Color)
+							let color = Color(color: self.color)
+							try container.encode(color, forKey: .color)
 							try container.encode(font, forKey: .font)
-							try container.encode(paragraphStyle, forKey: .postVersion49ParagraphStyle)
-							try container.encode(kerning, forKey: .postVersion49Kerning)
+							try container.encode(paragraphStyle, forKey: .paragraphStyle)
+							try container.encode(kerning, forKey: .kerning)
 						}
 						
 						enum CodingKeys: String, CodingKey {
 							case font = "MSAttributedStringFontAttribute"
-							case preVersion48Color = "NSColor"
-							case postVersion48Color = "MSAttributedStringColorDictionaryAttribute"
-							case preVersion49Kerning = "NSKern"
-							case postVersion49Kerning = "kerning"
-							case preVersion49ParagraphStyle = "NSParagraphStyle"
-							case postVersion49ParagraphStyle = "paragraphStyle"
+							case color = "MSAttributedStringColorAttribute"
+							case kerning = "kerning"
+							case paragraphStyle = "paragraphStyle"
 						}
 						
 						enum Error: Swift.Error {
@@ -202,3 +183,5 @@ public extension SketchDocument {
 		}
 	}
 }
+
+extension NSTextAlignment: Codable {}

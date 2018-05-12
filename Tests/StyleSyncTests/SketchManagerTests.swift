@@ -23,13 +23,13 @@ class SketchManagerTests: XCTestCase {
 		}
 	}
 	
-	func testSketchFileWithOneTextStyleIsParsedCorrectlyPreVersion49() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithOneTextStylePreVersion49")
-		assertSketchFileWithOneTextStyleIsParsedCorrectly(sketchDocument)
-	}
-	
-	func testSketchFileWithOneTextStyleIsParsedCorrectlyPostVersion49() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithOneTextStylePostVersion49")
+	func testSketchFileWithOneTextStyleIsParsedCorrectly() throws {
+		let sketchDocument: SketchDocument
+		do {
+			sketchDocument = try self.sketchDocument(withName: "SketchFileWithOneTextStyle")
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
 		assertSketchFileWithOneTextStyleIsParsedCorrectly(sketchDocument)
 	}
 	
@@ -51,10 +51,10 @@ class SketchManagerTests: XCTestCase {
 		let expectedColor = NSColor(red: 100/255, green: 110/255, blue: 120/255, alpha: 0.9)
 		XCTAssertEqual(encodedAttributes.color, expectedColor)
 		
-		let paragraphStyle = encodedAttributes.paragraphStyle.paragraphStyle
-		XCTAssertEqual(paragraphStyle?.alignment, .right)
-		XCTAssertEqual(paragraphStyle?.minimumLineHeight, 20)
-		XCTAssertEqual(paragraphStyle?.maximumLineHeight, 20)
+		let paragraphStyle = encodedAttributes.paragraphStyle
+		XCTAssertEqual(paragraphStyle.textAlignment, .right)
+		XCTAssertEqual(paragraphStyle.minimumLineHeight, 20)
+		XCTAssertEqual(paragraphStyle.maximumLineHeight, 20)
 		
 		XCTAssertEqual(encodedAttributes.kerning, 1)
 		
@@ -63,7 +63,12 @@ class SketchManagerTests: XCTestCase {
 	}
 	
 	func testSketchFileWithOneColorStyleIsParsedCorrectly() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithOneColorStyle")
+		let sketchDocument: SketchDocument
+		do {
+			sketchDocument = try self.sketchDocument(withName: "SketchFileWithOneColorStyle")
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
 		
 		guard let colorStyle = sketchDocument.layerStyles.objects.first else {
 			return XCTFail("Failed to find color style")
@@ -90,31 +95,43 @@ class SketchManagerTests: XCTestCase {
 	}
 
 	func testSketchFileWithNoSharedTextStylesIsParsedCorrectly() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithNoStyles")
+		let sketchDocument: SketchDocument
+		do {
+			sketchDocument = try self.sketchDocument(withName: "SketchFileWithNoStyles")
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
 
 		XCTAssertEqual(sketchDocument.layerTextStyles.objects.count, 0)
 		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 0)
 	}
 
-	func testSketchFileWithFiveTextStylesAndFiveColorStylesIsParsedCorrectlyPreVersion48() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStylesPreVersion48")
+	func testSketchFileWithFiveTextStylesAndFiveColorStylesIsParsedCorrectly() throws {
+		let sketchDocument: SketchDocument
+		do {
+			sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStyles")
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
 
 		XCTAssertEqual(sketchDocument.layerTextStyles.objects.count, 5)
 		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 5)
 	}
 	
-	func testSketchFileWithFiveTextStylesAndFiveColorStylesIsParsedCorrectlyPostVersion48() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStylesPostVersion48")
-		
-		XCTAssertEqual(sketchDocument.layerTextStyles.objects.count, 5)
-		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 5)
-	}
-	
-	func testSketchFileWithFiveTextStylesAndFiveColorStylesIsParsedCorrectlyPostVersion49() throws {
-		let sketchDocument = try self.sketchDocument(withName: "SketchFileWithFiveTextStylesAndFiveColorStylesPostVersion49")
-		
-		XCTAssertEqual(sketchDocument.layerTextStyles.objects.count, 5)
-		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 5)
+	func testPreVersion50SketchFileCannotBeParsed() throws {
+		do {
+			try self.sketchDocument(withName: "PreVersion50")
+		} catch {
+			guard let sketchManagerError = error as? SketchManager.Error else {
+				return XCTFail("Incorrect error type: \(type(of: error))")
+			}
+			switch sketchManagerError {
+			case .unsupportedVersion:
+				// noop, correct error
+				return
+			}
+		}
+		XCTFail("Error should have been thrown")
 	}
 	
 	// MARK: - Helpers

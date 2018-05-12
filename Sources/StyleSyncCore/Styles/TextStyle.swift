@@ -45,20 +45,17 @@ struct TextStyle: Style, Codable {
 	
 	init?(textStyleObject: SketchDocument.TextStyles.Object, colorStyle: ColorStyle, isDeprecated: Bool = false) {
 		let textAttributes = textStyleObject.value.textStyle.encodedAttributes
-		guard
-			let fontName = textAttributes.font.fontName,
-			let pointSize = textAttributes.font.pointSize,
-			let lineHeight = textAttributes.paragraphStyle.paragraphStyle?.maximumLineHeight
-		else {
+		guard let lineHeight = textAttributes.paragraphStyle.maximumLineHeight else {
 			ErrorManager.log(warning: "Failed to parse text style with name \(textStyleObject.name)\n\n\(textStyleObject)", isBug: true)
 			return nil
 		}
+		let font = textAttributes.font
 	
 		self.init(
 			name: textStyleObject.name,
 			identifier: textStyleObject.identifier,
-			fontName: fontName,
-			pointSize: pointSize,
+			fontName: font.fontName,
+			pointSize: font.pointSize,
 			kerning: textAttributes.kerning ?? 0,
 			lineHeight: lineHeight,
 			colorStyle: colorStyle,
