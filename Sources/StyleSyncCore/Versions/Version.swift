@@ -23,14 +23,22 @@ public struct Version {
 			.flatMap { component in
 				return numberFormatter.number(from: component)?.intValue
 		}
-		guard
+		
+		if
+			versionComponents.count == 1,
+			let major = versionComponents.first
+		{
+			self.init(major: major, minor: 0)
+		} else if
 			versionComponents.count == 2,
 			let major = versionComponents.first,
 			let minor = versionComponents.last
+		{
+			self.init(major: major, minor: minor)
+		}
 		else {
 			return nil
 		}
-		self.init(major: major, minor: minor)
 	}
 	
 	public var stringRepresentation: String {

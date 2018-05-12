@@ -15,8 +15,13 @@ class VersionTests: XCTestCase {
 	}
 	
 	func testCreatingVersionWithInvalidStringReturnsNil() {
-		let version = Version(versionString: "1")
+		let version = Version(versionString: "")
 		XCTAssertNil(version)
+	}
+	
+	func testCreatingVersionWithOnlyMajorStringReturnsVersion() {
+		let version = Version(versionString: "1")
+		XCTAssertNotNil(version)
 	}
 	
 	func testCreatingVersionWithValidStringReturnsVersion() {
