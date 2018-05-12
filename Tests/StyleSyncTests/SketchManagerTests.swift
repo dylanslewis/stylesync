@@ -118,6 +118,22 @@ class SketchManagerTests: XCTestCase {
 		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 5)
 	}
 	
+	func testPreVersion50SketchFileCannotBeParsed() throws {
+		do {
+			try self.sketchDocument(withName: "PreVersion50")
+		} catch {
+			guard let sketchManagerError = error as? SketchManager.Error else {
+				return XCTFail("Incorrect error type: \(type(of: error))")
+			}
+			switch sketchManagerError {
+			case .unsupportedVersion:
+				// noop, correct error
+				return
+			}
+		}
+		XCTFail("Error should have been thrown")
+	}
+	
 	// MARK: - Helpers
 	
 	private func sketchDocument(withName name: String) throws -> SketchDocument {
