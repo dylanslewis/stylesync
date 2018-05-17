@@ -146,6 +146,29 @@ public extension String {
 		
 		return range
 	}
+	
+	/// Remove trailing whitespace.
+	public var removingTrailingWhitespace: String {
+		return replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
+	}
+	
+	/// Remove common shell escape characters.
+	public var removingEscapeCharacters: String {
+		// These are the known characters that are escaped when dragging a file
+		// from Finder to Terminal. Add any others you come across.
+		let escapableCharacters = ["\\", " "]
+		
+		var selfWithoutEscapeCharacters = self
+		for escapeCharacter in escapableCharacters {
+			selfWithoutEscapeCharacters = selfWithoutEscapeCharacters.replacingOccurrences(of: "\\\(escapeCharacter)", with: escapeCharacter)
+		}
+		return selfWithoutEscapeCharacters
+	}
+	
+	/// Wraps the current string in double quotes.
+	public var wrappedInQuotes: String {
+		return "\"\(self)\""
+	}
 }
 
 private extension Character {

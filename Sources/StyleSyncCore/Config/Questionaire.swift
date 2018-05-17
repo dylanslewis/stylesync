@@ -25,7 +25,8 @@ struct Questionaire {
 			}
 			print("\n" + question.question)
 			let answer = readLine() ?? ""
-			if let (newCreatable, newNextQuestion) = question.didAnswerQuestion(creatable, answer) {
+			let cleanedAnswer = answer.removingEscapeCharacters.removingTrailingWhitespace
+			if let (newCreatable, newNextQuestion) = question.didAnswerQuestion(creatable, cleanedAnswer) {
 				if let newCreatable = newCreatable {
 					creatable = newCreatable
 				}

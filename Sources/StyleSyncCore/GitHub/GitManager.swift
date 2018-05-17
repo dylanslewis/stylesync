@@ -72,7 +72,7 @@ struct GitManager {
 private extension ShellOutCommand {
 	static func gitAdd(atPath path: String) -> ShellOutCommand {
 		var command = "git add"
-		command.append(argument: path)
+		command.append(argument: path.wrappedInQuotes)
 		return ShellOutCommand(string: command)
 	}
 	

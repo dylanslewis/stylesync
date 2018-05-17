@@ -210,4 +210,62 @@ class StringTests: XCTestCase {
 		let range = string.range(of: stringToSearchFor, whereSurroundingCharactersAreNotContainedIn: .alphanumerics)
 		XCTAssertEqual(range, expectedRange)
 	}
+	
+	// MARK: Trailing whitespace
+	
+	func testTabAtTheEndOfAStringIsRemoved() {
+		let string = "a\t"
+		let expectedString = "a"
+		XCTAssertEqual(string.removingTrailingWhitespace, expectedString)
+	}
+	
+	func testSpaceAtTheEndOfAStringIsRemoved() {
+		let string = "a "
+		let expectedString = "a"
+		XCTAssertEqual(string.removingTrailingWhitespace, expectedString)
+	}
+	
+	func testTabAtTheBeginningOfAStringIsNotRemoved() {
+		let string = "\ta"
+		let expectedString = "\ta"
+		XCTAssertEqual(string.removingTrailingWhitespace, expectedString)
+	}
+	
+	func testSpaceAtTheBeginningOfAStringIsNotRemoved() {
+		let string = " a"
+		let expectedString = " a"
+		XCTAssertEqual(string.removingTrailingWhitespace, expectedString)
+	}
+	
+	func testTabInTheMiddleOfAStringIsNotRemoved() {
+		let string = "a\tb"
+		let expectedString = "a\tb"
+		XCTAssertEqual(string.removingTrailingWhitespace, expectedString)
+	}
+	
+	func testSpaceInTheMiddleOfAStringIsNotRemoved() {
+		let string = "a b"
+		let expectedString = "a b"
+		XCTAssertEqual(string.removingTrailingWhitespace, expectedString)
+	}
+	
+	// MARK: Escape characters
+	
+	func testEscapedSpaceInStringIsRemoved() {
+		let string = "a\\ b"
+		let expectedString = "a b"
+		XCTAssertEqual(string.removingEscapeCharacters, expectedString)
+	}
+	
+	func testEscapedEscapeCharacterInStringIsRemoved() {
+		let string = "a\\\\b"
+		let expectedString = "a\\b"
+		XCTAssertEqual(string.removingEscapeCharacters, expectedString)
+	}
+	
+	func testEmojiInStringIsNotRemoved() {
+		let string = "a💖b"
+		let expectedString = "a💖b"
+		XCTAssertEqual(string.removingEscapeCharacters, expectedString)
+	}
 }

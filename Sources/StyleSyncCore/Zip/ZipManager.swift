@@ -81,7 +81,7 @@ extension ZipManager {
 
 private extension ShellOutCommand {
 	static func unzip(zippedFile file: String, exportDirectory: String) -> ShellOutCommand {
-		let command = "unzip \(file) -d \(exportDirectory)"
+		let command = "unzip \(file.wrappedInQuotes) -d \(exportDirectory.wrappedInQuotes)"
 		return ShellOutCommand(string: command)
 	}
 }
