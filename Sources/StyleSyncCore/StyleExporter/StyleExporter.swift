@@ -182,8 +182,8 @@ final class StyleExporter {
 		)
 		try generateAndSaveVersionedStyles(
 			version: version,
-			colorStyles: newColorStyles.map({ $0.style as? ColorStyle }).flatMap({$0}),
-			textStyles: newTextStyles.map({ $0.style as? TextStyle }).flatMap({$0}),
+			colorStyles: newColorStyles.map({ $0.style as? ColorStyle }).compactMap({$0}),
+			textStyles: newTextStyles.map({ $0.style as? TextStyle }).compactMap({$0}),
 			generatedRawTextStylesFile: generatedRawTextStylesFile,
 			generatedRawColorStylesFile: generatedRawColorStylesFile
 		)

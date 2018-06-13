@@ -81,7 +81,7 @@ struct StyleUpdateSummaryGenerator {
 		}
 
 		return sections
-			.flatMap({ $0 })
+			.compactMap({ $0 })
 			.joined(separator: "\n")
 	}
 	
@@ -159,7 +159,7 @@ struct StyleUpdateSummaryGenerator {
 	}
 	
 	private func addedStyles(oldStyles: [CodeTemplateReplacableStyle], newStyles: [CodeTemplateReplacableStyle]) -> [AddedStyle] {
-		return newStyles.flatMap { newStyle in
+		return newStyles.compactMap { newStyle in
 			guard oldStyles.first(where: { $0.identifier == newStyle.identifier }) == nil else {
 				return nil
 			}
@@ -168,7 +168,7 @@ struct StyleUpdateSummaryGenerator {
 	}
 	
 	private func updatedStyles(oldStyles: [CodeTemplateReplacableStyle], newStyles: [CodeTemplateReplacableStyle]) -> [UpdatedStyle] {
-		return newStyles.flatMap { newStyle in
+		return newStyles.compactMap { newStyle in
 			guard let oldStyle = oldStyles
 				.first(where: { $0.identifier == newStyle.identifier }) else {
 					return nil
@@ -180,7 +180,7 @@ struct StyleUpdateSummaryGenerator {
 	private func removedStyles(oldStyles: [CodeTemplateReplacableStyle], newStyles: [CodeTemplateReplacableStyle]) -> [RemovedStyle] {
 		return oldStyles
 			.filter({ !$0.isDeprecated })
-			.flatMap { newStyle in
+			.compactMap { newStyle in
 				guard newStyles.first(where: { $0.identifier == newStyle.identifier }) == nil else {
 					return nil
 				}
@@ -189,7 +189,7 @@ struct StyleUpdateSummaryGenerator {
 	}
 	
 	private func deprecatedStyles(forFileNamesForStyle fileNamesForStyleName: [String: [String]]) -> [DeprecatedStyle] {
-		return fileNamesForStyleName.flatMap({ DeprecatedStyle(styleName: $0.0, fileNames: $0.1) })
+		return fileNamesForStyleName.compactMap({ DeprecatedStyle(styleName: $0.0, fileNames: $0.1) })
 	}
 }
 

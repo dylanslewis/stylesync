@@ -176,7 +176,7 @@ private extension Array where Iterator.Element == String {
 					.replacingOccurrences(of: replacementKey.codePlaceholderReference, with: replacementValue)
 			})
 			return codeLineWithReplacedPlaceholders
-		}).flatMap({ line -> String? in
+		}).compactMap({ line -> String? in
 			switch line.contains(deprecatedReference) {
 			case true:
 				// Condition is matched, remove the reference from the line.

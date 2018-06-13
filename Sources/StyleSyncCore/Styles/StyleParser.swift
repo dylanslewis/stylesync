@@ -15,12 +15,12 @@ struct StyleParser<S: Style> {
 				return newStyles.contains(where: { $0.identifier == style.identifier }) == false
 			}
 			.map({ $0.deprecated })
-			.flatMap({ $0 as? S })
+			.compactMap({ $0 as? S })
 	}
 	
 	func getCurrentAndMigratedStyles(usingPreviouslyExportedStyles previouslyExportedStyles: [S]) -> [(currentStyle: S, migratedStyle: S)] {
 		return previouslyExportedStyles
-			.flatMap { style -> (S, S)? in
+			.compactMap { style -> (S, S)? in
 				guard
 					let migratedStyle = newStyles
 						.first(where: { $0.identifier == style.identifier && $0.name != style.name })
