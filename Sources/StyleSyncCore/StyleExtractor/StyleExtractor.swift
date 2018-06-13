@@ -31,7 +31,7 @@ final class StyleExtractor {
 	
 	lazy var latestTextStyles: [TextStyle] = {
 		return sketchDocument.layerTextStyles.objects
-			.flatMap { textStyleObject -> TextStyle? in
+			.compactMap { textStyleObject -> TextStyle? in
 				let color = textStyleObject.value.textStyle.encodedAttributes.color
 				guard let colorStyle = ColorStyle.colorStyle(for: color, in: latestColorStyles) else {
 					ErrorManager.log(warning: "\(textStyleObject.name) does not use a color from the shared colour scheme")
@@ -42,7 +42,7 @@ final class StyleExtractor {
 	}()
 	lazy var latestColorStyles: [ColorStyle] = {
 		return sketchDocument.layerStyles.objects
-			.flatMap({ ColorStyle(colorStyleObject: $0) })
+			.compactMap({ ColorStyle(colorStyleObject: $0) })
 	}()
 	
 	// MARK: - Initializer
