@@ -260,28 +260,40 @@ final class StyleExporter {
 		deprecatedColorStyles: [ColorStyle],
 		ignoredFiles: [File]
 	) throws {
-		// Update style references.
-		let currentAndMigratedTextReplacableStyles = currentAndMigratedTextStyles
-			.map({ currentAndMigratedTextStyle -> (CodeTemplateReplacableStyle, CodeTemplateReplacableStyle) in
-				let fileType = textStylesFileExtension
-				let currentStyle = CodeTemplateReplacableStyle(textStyle: currentAndMigratedTextStyle.0, fileType: fileType)
-				let migratedStyle = CodeTemplateReplacableStyle(textStyle: currentAndMigratedTextStyle.1, fileType: fileType)
-				return (currentStyle, migratedStyle)
-			})
-		let currentAndMigratedColorReplacableStyles = currentAndMigratedColorStyles
-			.map({ currentAndMigratedColorStyle -> (CodeTemplateReplacableStyle, CodeTemplateReplacableStyle) in
-				let fileType = colorStylesFileExtension
-				let currentStyle = CodeTemplateReplacableStyle(colorStyle: currentAndMigratedColorStyle.0, fileType: fileType)
-				let migratedStyle = CodeTemplateReplacableStyle(colorStyle: currentAndMigratedColorStyle.1, fileType: fileType)
-				return (currentStyle, migratedStyle)
-			})
-		
-		let updateOldColorStyleReferencesOperation = updateOldReferencesFileOperation(
-			currentAndMigratedStyles: currentAndMigratedColorReplacableStyles,
+		// Create references pairs of the current style's name and its
+		// identifier. This prevents an issue where a style that is renamed to
+		// an existing style's name may not be updated correctly.
+		let textStyleToIdentifierReference = currentAndMigratedTextStyles
+			.map({ $0.0 })
+			.map({ ReplaceableReference.referenceToIdentifier(from: $0, fileType: textStylesFileExtension) })
+		let colorStyleToIdentifierReference = currentAndMigratedColorStyles
+			.map({ $0.0 })
+			.map({ ReplaceableReference.referenceToIdentifier(from: $0, fileType: colorStylesFileExtension) })
+
+		let updateTextStylesToIdentifiersOperation = updateReferencesFileOperation(
+			currentAndMigratedReferences: textStyleToIdentifierReference,
 			mutatedFiles: &mutatedFiles
 		)
-		let updateOldTextStyleReferencesOperation = updateOldReferencesFileOperation(
-			currentAndMigratedStyles: currentAndMigratedTextReplacableStyles,
+		let updateColorStylesToIdentifiersOperation = updateReferencesFileOperation(
+			currentAndMigratedReferences: colorStyleToIdentifierReference,
+			mutatedFiles: &mutatedFiles
+		)
+		
+		// Create reference pairs of the identifier and the migrated style's
+		// name.
+		let identifierToTextStyleReference = currentAndMigratedTextStyles
+			.map({ $0.1 })
+			.map({ ReplaceableReference.referenceFromIdentifier(to: $0, fileType: textStylesFileExtension) })
+		let identifierToColorStyleReference = currentAndMigratedColorStyles
+			.map({ $0.1 })
+			.map({ ReplaceableReference.referenceFromIdentifier(to: $0, fileType: colorStylesFileExtension) })
+		
+		let updateIdentifiersToMigratedTextStylesOperation = updateReferencesFileOperation(
+			currentAndMigratedReferences: identifierToTextStyleReference,
+			mutatedFiles: &mutatedFiles
+		)
+		let updateIdentifiersToMigratedColorStylesOperation = updateReferencesFileOperation(
+			currentAndMigratedReferences: identifierToColorStyleReference,
 			mutatedFiles: &mutatedFiles
 		)
 		
@@ -300,14 +312,21 @@ final class StyleExporter {
 			filesForDeprecatedStyle: &filesForDeprecatedTextStyle
 		)
 		
+		// All conversions to identifiers must happen before any references are
+		// updates to their migrated name.
+		let preparationOperations: [FileOperation] = [
+			updateTextStylesToIdentifiersOperation,
+			updateColorStylesToIdentifiersOperation
+		]
+		
 		let allOperations: [FileOperation] = [
-			updateOldColorStyleReferencesOperation,
-			updateOldTextStyleReferencesOperation,
+			updateIdentifiersToMigratedTextStylesOperation,
+			updateIdentifiersToMigratedColorStylesOperation,
 			findUsedDeprecatedColorStylesOperation,
 			findUsedDeprecatedTextStylesOperation
 		]
 		
-		projectFolder
+		let files = projectFolder
 			.makeFileSequence(recursive: true, includeHidden: false)
 			.filter({ file -> Bool in
 				// Only update files that are encoded as `String`.
@@ -319,9 +338,13 @@ final class StyleExporter {
 				return true
 			})
 			.filter({ !ignoredFiles.contains($0) })
-			.forEach({ file in
-				allOperations.forEach(({ $0(file) }))
-			})
+		
+		files.forEach({ file in
+			preparationOperations.forEach({ $0(file) })
+		})
+		files.forEach({ file in
+			allOperations.forEach({ $0(file) })
+		})
 	}
 	
 	private func updateVersion() {
@@ -398,8 +421,8 @@ final class StyleExporter {
 	
 	// MARK: - Helpers
 	
-	private func updateOldReferencesFileOperation(
-		currentAndMigratedStyles: [(CodeTemplateReplacableStyle, CodeTemplateReplacableStyle)],
+	private func updateReferencesFileOperation(
+		currentAndMigratedReferences: [ReplaceableReference],
 		mutatedFiles: inout Set<File>
 	) -> FileOperation {
 		return { file in
@@ -410,14 +433,14 @@ final class StyleExporter {
 				ErrorManager.log(error: error, context: .files)
 				return
 			}
-			currentAndMigratedStyles.forEach({
+			currentAndMigratedReferences.forEach({
 				var containsOccurence = true
 				repeat {
-					guard let range = fileString.range(of: $0.0.variableName, whereSurroundingCharactersAreNotContainedIn: .alphanumerics) else {
+					guard let range = fileString.range(of: $0.fromReference, whereSurroundingCharactersAreNotContainedIn: .alphanumerics) else {
 						containsOccurence = false
 						return
 					}
-					fileString = fileString.replacingCharacters(in: range, with: $0.1.variableName)
+					fileString = fileString.replacingCharacters(in: range, with: $0.toReference)
 					mutatedFiles.insert(file)
 				} while containsOccurence == true
 			})
