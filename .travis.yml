@@ -3,7 +3,7 @@ os:
 language: generic
 sudo: required
 dist: trusty
-osx_image: xcode9.3
+osx_image: xcode9.4
 install:
   - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
 script:
