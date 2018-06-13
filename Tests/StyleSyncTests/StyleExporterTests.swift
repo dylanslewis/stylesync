@@ -14,6 +14,7 @@ class StyleExporterTests: XCTestCase {
 	private enum Constant {
 		static let fileWithReferencesToDeprecatedStylesName = "FileWithReferenceToDeprecatedStyles.fileExtension"
 		static let fileWithReferencesToNewStylesOneName = "FileWithReferenceToNewOneStyles.fileExtension"
+		static let fileWithReferencesToNewStylesOneAndTwoName = "FileWithReferenceToNewOneAndTwoStyles.fileExtension"
 	}
 	
 	// MARK: - Stored variables
@@ -31,6 +32,12 @@ class StyleExporterTests: XCTestCase {
 	private let newColorStyleOne = ColorStyle(
 		name: "New Color Style 1",
 		identifier: "C1",
+		color: .green,
+		isDeprecated: false
+	)
+	private let newColorStyleTwo = ColorStyle(
+		name: "New Color Style 2",
+		identifier: "C2",
 		color: .green,
 		isDeprecated: false
 	)
@@ -74,6 +81,18 @@ class StyleExporterTests: XCTestCase {
 			kerning: 2,
 			lineHeight: 16,
 			colorStyle: newColorStyleOne,
+			isDeprecated: false
+		)
+	}
+	private var newTextStyleTwo: TextStyle {
+		return TextStyle(
+			name: "New Text Style 2",
+			identifier: "T2",
+			fontName: "DifferentFontName",
+			pointSize: 20,
+			kerning: 4,
+			lineHeight: 18,
+			colorStyle: newColorStyleTwo,
 			isDeprecated: false
 		)
 	}
@@ -152,7 +171,7 @@ class StyleExporterTests: XCTestCase {
 	}
 	
 	func testWhenOldStylesAreUsedInTheProjectThenNewStylesContainsThoseStylesAsDeprecatedStyles() {
-		createFileWithReferencesToNewStyles()
+		createFileWithReferencesToNewStylesOne()
 		
 		let styleExporter = getStylesExporterAndExportStyles(
 			latestTextStyles: [],
@@ -184,7 +203,7 @@ class StyleExporterTests: XCTestCase {
 	}
 	
 	func testWhenAStyleIsRenamedThenTheReferencesAreUpdated() {
-		createFileWithReferencesToNewStyles()
+		createFileWithReferencesToNewStylesOne()
 		
 		let _ = getStylesExporterAndExportStyles(
 			latestTextStyles: [renamedNewTextStyleOne],
@@ -209,9 +228,72 @@ class StyleExporterTests: XCTestCase {
 			"""
 		XCTAssertEqual(fileWithReferencesToNewStylesString, expectedFileWithReferencesToNewStylesString)
 	}
+	
+	func testWhenAStyleIsRenamedToAnExistingStylesNameThenTheReferencesAreUpdatedCorrectly() {
+		createFileWithReferencesToNewStylesOneAndTwo()
+		
+		let newTextStyleOneWithNewTextStyleTwoName = TextStyle(
+			name: newTextStyleTwo.name,
+			identifier: newTextStyleOne.identifier,
+			fontName: newTextStyleOne.fontName,
+			pointSize: newTextStyleOne.pointSize,
+			kerning: newTextStyleOne.kerning,
+			lineHeight: newTextStyleOne.lineHeight,
+			colorStyle: newTextStyleOne.colorStyle,
+			isDeprecated: false
+		)
+		let renamedNewTextStyleTwo = TextStyle(
+			name: "Renamed Text Style 2",
+			identifier: newTextStyleTwo.identifier,
+			fontName: newTextStyleTwo.fontName,
+			pointSize: newTextStyleTwo.pointSize,
+			kerning: newTextStyleTwo.kerning,
+			lineHeight: newTextStyleTwo.lineHeight,
+			colorStyle: newTextStyleTwo.colorStyle,
+			isDeprecated: false
+		)
+		let newColorStyleOneWithNewColorStyleTwoName = ColorStyle(
+			name: newColorStyleTwo.name,
+			identifier: newColorStyleOne.identifier,
+			color: newColorStyleOne.color,
+			isDeprecated: newColorStyleOne.isDeprecated
+		)
+		let renamedNewColorStyleTwo = ColorStyle(
+			name: "Renamed Color Style 2",
+			identifier: newColorStyleTwo.identifier,
+			color: newColorStyleTwo.color,
+			isDeprecated: newColorStyleTwo.isDeprecated
+		)
+		
+		let _ = getStylesExporterAndExportStyles(
+			latestTextStyles: [newTextStyleOneWithNewTextStyleTwoName, renamedNewTextStyleTwo],
+			latestColorStyles: [newColorStyleOneWithNewColorStyleTwoName, renamedNewColorStyleTwo],
+			previouslyExportedTextStyles: [newTextStyleOne, newTextStyleTwo],
+			previouslyExportedColorStyles: [newColorStyleOne, newColorStyleTwo]
+		)
+		
+		let fileWithReferencesToNewStylesString: String
+		do {
+			let fileWithReferencesToNewStyles = try projectFolder.file(
+				named: Constant.fileWithReferencesToNewStylesOneAndTwoName
+			)
+			fileWithReferencesToNewStylesString = try fileWithReferencesToNewStyles.readAsString()
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
+		
+		let expectedFileWithReferencesToNewStylesString = """
+		\(newTextStyleTwo.name.camelcased)
+		\(newColorStyleTwo.name.camelcased)
+		\(renamedNewTextStyleTwo.name.camelcased)
+		\(renamedNewColorStyleTwo.name.camelcased)
+		"""
+		XCTAssertEqual(fileWithReferencesToNewStylesString, expectedFileWithReferencesToNewStylesString)
+	}
+
 
 	func testWhenNoStyleIsRenamedThenMutatedFilesIsEmpty() {
-		createFileWithReferencesToNewStyles()
+		createFileWithReferencesToNewStylesOne()
 		
 		let styleExporter = getStylesExporterAndExportStyles(
 			latestTextStyles: [newTextStyleOne],
@@ -225,7 +307,7 @@ class StyleExporterTests: XCTestCase {
 	}
 	
 	func testWhenAStyleIsRenamedThenMutatedFilesContainsTheUpdatedFiles() {
-		createFileWithReferencesToNewStyles()
+		createFileWithReferencesToNewStylesOne()
 		
 		let styleExporter = getStylesExporterAndExportStyles(
 			latestTextStyles: [renamedNewTextStyleOne],
@@ -304,7 +386,7 @@ class StyleExporterTests: XCTestCase {
 		}
 	}
 	
-	private func createFileWithReferencesToNewStyles() {
+	private func createFileWithReferencesToNewStylesOne() {
 		let stringWithReferenceToNewStyles = """
 		\(newTextStyleOne.name.camelcased)
 		\(newColorStyleOne.name.camelcased)
@@ -312,6 +394,23 @@ class StyleExporterTests: XCTestCase {
 		do {
 			try projectFolder.createFile(
 				named: Constant.fileWithReferencesToNewStylesOneName,
+				contents: stringWithReferenceToNewStyles
+			)
+		} catch {
+			XCTFailAndAbort(error.localizedDescription)
+		}
+	}
+	
+	private func createFileWithReferencesToNewStylesOneAndTwo() {
+		let stringWithReferenceToNewStyles = """
+		\(newTextStyleOne.name.camelcased)
+		\(newColorStyleOne.name.camelcased)
+		\(newTextStyleTwo.name.camelcased)
+		\(newColorStyleTwo.name.camelcased)
+		"""
+		do {
+			try projectFolder.createFile(
+				named: Constant.fileWithReferencesToNewStylesOneAndTwoName,
 				contents: stringWithReferenceToNewStyles
 			)
 		} catch {
