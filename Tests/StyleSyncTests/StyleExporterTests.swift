@@ -19,7 +19,8 @@ class StyleExporterTests: XCTestCase {
 	
 	// MARK: - Stored variables
 	
-	private let projectFolder: Folder = .current
+	private let projectFolder: Folder = testResources
+
 	private let textStylesTemplate: File = try! testResources.file(named: "TextStylesTemplate.fileExtension-template.txt")
 	private let colorStylesTemplate: File = try! testResources.file(named: "ColorStylesTemplate.fileExtension-template.txt")
 	
