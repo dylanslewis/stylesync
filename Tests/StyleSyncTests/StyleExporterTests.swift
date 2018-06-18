@@ -65,6 +65,7 @@ class StyleExporterTests: XCTestCase {
 		return TextStyle(
 			name: "Deprecated Text Style",
 			identifier: "T0",
+			groupedIdentifiers: nil,
 			fontName: "FontName",
 			pointSize: 16,
 			kerning: 0,
@@ -77,6 +78,7 @@ class StyleExporterTests: XCTestCase {
 		return TextStyle(
 			name: "New Text Style 1",
 			identifier: "T1",
+			groupedIdentifiers: nil,
 			fontName: "DifferentFontName",
 			pointSize: 18,
 			kerning: 2,
@@ -89,6 +91,7 @@ class StyleExporterTests: XCTestCase {
 		return TextStyle(
 			name: "New Text Style 2",
 			identifier: "T2",
+			groupedIdentifiers: nil,
 			fontName: "DifferentFontName",
 			pointSize: 20,
 			kerning: 4,
@@ -101,6 +104,7 @@ class StyleExporterTests: XCTestCase {
 		return TextStyle(
 			name: "Renamed New Text Style",
 			identifier: newTextStyleOne.identifier,
+			groupedIdentifiers: nil,
 			fontName: newTextStyleOne.fontName,
 			pointSize: newTextStyleOne.pointSize,
 			kerning: newTextStyleOne.kerning,
@@ -236,6 +240,7 @@ class StyleExporterTests: XCTestCase {
 		let newTextStyleOneWithNewTextStyleTwoName = TextStyle(
 			name: newTextStyleTwo.name,
 			identifier: newTextStyleOne.identifier,
+			groupedIdentifiers: nil,
 			fontName: newTextStyleOne.fontName,
 			pointSize: newTextStyleOne.pointSize,
 			kerning: newTextStyleOne.kerning,
@@ -246,6 +251,7 @@ class StyleExporterTests: XCTestCase {
 		let renamedNewTextStyleTwo = TextStyle(
 			name: "Renamed Text Style 2",
 			identifier: newTextStyleTwo.identifier,
+			groupedIdentifiers: nil,
 			fontName: newTextStyleTwo.fontName,
 			pointSize: newTextStyleTwo.pointSize,
 			kerning: newTextStyleTwo.kerning,

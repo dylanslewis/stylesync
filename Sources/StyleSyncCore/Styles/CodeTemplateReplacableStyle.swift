@@ -21,6 +21,10 @@ struct CodeTemplateReplacableStyle: CodeTemplateReplacable {
 		return style.identifier
 	}
 	
+	func isTheSameStyle(as codeTemplateReplaceableStyle: CodeTemplateReplacableStyle) -> Bool {
+		return style.isTheSameStyle(as: codeTemplateReplaceableStyle.style)
+	}
+	
 	init(textStyle: TextStyle, fileType: FileType) {
 		let fileExtension = FileExtension(rawValue: fileType)
 		let letterSpacingEm = textStyle.kerning / textStyle.pointSize
@@ -40,7 +44,7 @@ struct CodeTemplateReplacableStyle: CodeTemplateReplacable {
 			"lineHeight": textStyle.lineHeight.cleaned,
 			"lineSpacingExtra": lineSpacingExtra.cleaned,
 			"lineSpacingMultiplier": String(describing: lineSpacingMultiplier),
-			"color": textStyle.colorStyle.name.codeName(fileExtension, variableType: .colorStyleName)
+			"color": textStyle.colorStyle?.name.codeName(fileExtension, variableType: .colorStyleName) ?? "NO COLOR"
 		]
 		self.ignoredUpdateAttributes = ["letterSpacingEm", "lineSpacingExtra", "lineSpacingMultiplier"]
 		self.isDeprecated = textStyle.isDeprecated

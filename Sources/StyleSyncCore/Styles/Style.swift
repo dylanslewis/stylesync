@@ -11,4 +11,6 @@ protocol Style {
 	var identifier: String { get }
 	var isDeprecated: Bool { get }
 	var deprecated: Style { get }
+	
+	func isTheSameStyle(as style: Style) -> Bool
 }

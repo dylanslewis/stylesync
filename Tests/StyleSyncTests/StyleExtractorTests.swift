@@ -61,6 +61,8 @@ class StyleExtractorTests: XCTestCase {
 	
 	// MARK: - Tests
 	
+	// FIXME: Add tests for namespaced styles
+	
 	func testWhenPreviouslyExportedStylesFilesAreCreatedThenPreviouslyExportedStylesVersionReadCorrectly() {
 		createPreviouslyExportedStylesFiles(textStyles: [], colorStyles: [])
 

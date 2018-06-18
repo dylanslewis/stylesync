@@ -24,6 +24,7 @@ public final class StyleSync {
 	
 	// MARK: - Initializer
 	
+	// FIXME: Add option to namespace styles
 	public init(arguments: [String] = CommandLine.arguments, projectFolder: Folder = .current) {
 		#if os(Linux)
 			ErrorManager.log(fatalError: .unsupportedPlatform, context: .initialization)

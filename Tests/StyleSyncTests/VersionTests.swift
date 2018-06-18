@@ -102,6 +102,7 @@ class VersionTests: XCTestCase {
 		return .init(
 			name: "Heading",
 			identifier: "1",
+			groupedIdentifiers: nil,
 			fontName: "Font",
 			pointSize: 20,
 			kerning: 1,
@@ -114,6 +115,7 @@ class VersionTests: XCTestCase {
 		return .init(
 			name: "Body",
 			identifier: "2",
+			groupedIdentifiers: nil,
 			fontName: "Font",
 			pointSize: 16,
 			kerning: 1,
@@ -126,6 +128,7 @@ class VersionTests: XCTestCase {
 		return .init(
 			name: "New Heading",
 			identifier: headingTextStyle.identifier,
+			groupedIdentifiers: nil,
 			fontName: headingTextStyle.fontName,
 			pointSize: headingTextStyle.pointSize,
 			kerning: headingTextStyle.kerning,
@@ -305,6 +308,8 @@ class VersionTests: XCTestCase {
 		let expectedVersion = Version(major: 2, minor: 0)
 		XCTAssertEqual(version, expectedVersion)
 	}
+	
+	// FIXME: Add tests for name spaced styles
 }
 
 private extension Array where Element == ColorStyle {

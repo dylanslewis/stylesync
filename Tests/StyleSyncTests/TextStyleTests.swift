@@ -18,6 +18,7 @@ class TextStyleTests: XCTestCase {
 		let textStyle = TextStyle(
 			name: "Text Style",
 			identifier: "0",
+			groupedIdentifiers: nil,
 			fontName: "DINAlternate-Bold",
 			pointSize: 20,
 			kerning: 0,

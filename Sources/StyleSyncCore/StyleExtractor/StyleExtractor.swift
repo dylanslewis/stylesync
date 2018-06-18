@@ -30,15 +30,38 @@ final class StyleExtractor {
 	}
 	
 	lazy var latestTextStyles: [TextStyle] = {
-		return sketchDocument.layerTextStyles.objects
-			.compactMap { textStyleObject -> TextStyle? in
-				let color = textStyleObject.value.textStyle.encodedAttributes.color
-				guard let colorStyle = ColorStyle.colorStyle(for: color, in: latestColorStyles) else {
-					ErrorManager.log(warning: "\(textStyleObject.name) does not use a color from the shared colour scheme")
-					return nil
-				}
-				return TextStyle(textStyleObject: textStyleObject, colorStyle: colorStyle)
+		let nonNamespacedLayerTextStyles = sketchDocument.layerTextStyles.objects.filter({ textStyleObject -> Bool in
+			return !textStyleObject.name.contains("/")
+		})
+		let namespacedLayerTextStyles = sketchDocument.layerTextStyles.objects.filter({ textStyleObject -> Bool in
+			return textStyleObject.name.contains("/")
+		})
+		
+		var namespacedStylesForName: [String: [SketchDocument.TextStyles.Object]] = [:]
+		for namespacedLayerTextStyle in namespacedLayerTextStyles {
+			guard let styleName = namespacedLayerTextStyle.name.split(separator: "/").first else {
+				continue
+			}
+			var existingStyles = namespacedStylesForName[String(styleName)] ?? []
+			existingStyles.append(namespacedLayerTextStyle)
+			
+			namespacedStylesForName[String(styleName)] = existingStyles
 		}
+		
+		let convertedNonNamespacedStyles = nonNamespacedLayerTextStyles.compactMap { textStyleObject -> TextStyle? in
+			let color = textStyleObject.value.textStyle.encodedAttributes.color
+			guard let colorStyle = ColorStyle.colorStyle(for: color, in: latestColorStyles) else {
+				ErrorManager.log(warning: "\(textStyleObject.name) does not use a color from the shared colour scheme")
+				return nil
+			}
+			return TextStyle(textStyleObject: textStyleObject, colorStyle: colorStyle)
+		}
+		
+		let convertedNamespacedStyles = namespacedStylesForName.compactMap({ (name, textStyleObjects) -> TextStyle? in
+			return TextStyle(name: name, textStyleObjects: textStyleObjects)
+		})
+		
+		return convertedNonNamespacedStyles + convertedNamespacedStyles
 	}()
 	lazy var latestColorStyles: [ColorStyle] = {
 		return sketchDocument.layerStyles.objects

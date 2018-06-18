@@ -36,6 +36,12 @@ struct ColorStyle: Style {
 	}
 }
 
+extension ColorStyle {
+	func isTheSameStyle(as style: Style) -> Bool {
+		return identifier == style.identifier
+	}
+}
+
 // MARK: - Codable
 
 extension ColorStyle: Codable {

@@ -1,3 +1,3 @@
 import Files
 
-let testResources = try! Folder(path: "/Users/dylanslewis/Developer/StyleSync/Tests/StyleSyncTests/Resources")
+let testResources = try! Folder(path: "/Users/dylanslewis/Developer/stylesync/Tests/StyleSyncTests/Resources")

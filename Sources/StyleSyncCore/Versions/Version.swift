@@ -64,13 +64,32 @@ extension Version {
 		}
 
 		let didColorStylesChange = oldColorStyles != newColorStyles
-		let didTextStylesChange = oldTextStyles != newTextStyles
+	
+		let correspondingOldTextStyles = newTextStyles.map { newTextStyle in
+			// Find a corresponding old style.
+			return oldTextStyles.first(where: { $0.isTheSameStyle(as: newTextStyle) })
+		}
+		let didTextStylesChange = correspondingOldTextStyles.count == newTextStyles.count
+		
 		let didStylesChange = didColorStylesChange || didTextStylesChange
 
 		let oldColorStyleIdentifiers = oldColorStyles.map { $0.identifier }
 		let oldTextStyleIdentifiers = oldTextStyles.map { $0.identifier }
 		let newColorStyleIdentifiers = newColorStyles.map { $0.identifier }
 		let newTextStyleIdentifiers = newTextStyles.map { $0.identifier }
+		
+		var containsRemovedTextStyle = false
+		
+		oldTextStyles.forEach({ oldTextStyle in
+			newTextStyles.forEach({ $0.isTheSameStyle(as: oldTextStyle) })
+		})
+		
+		// Was a style removed?
+		
+		let correspondingNewTextStyles= 
+	
+		
+		// FIXME: Compare with isTheSameStyleAs to fix versioning
 
 		var oldColorStyleIdentifiersSet = Set(oldColorStyleIdentifiers)
 		var oldTextStyleIdentifiersSet = Set(oldTextStyleIdentifiers)

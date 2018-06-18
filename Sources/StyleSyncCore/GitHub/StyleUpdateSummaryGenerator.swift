@@ -160,7 +160,7 @@ struct StyleUpdateSummaryGenerator {
 	
 	private func addedStyles(oldStyles: [CodeTemplateReplacableStyle], newStyles: [CodeTemplateReplacableStyle]) -> [AddedStyle] {
 		return newStyles.compactMap { newStyle in
-			guard oldStyles.first(where: { $0.identifier == newStyle.identifier }) == nil else {
+			guard oldStyles.first(where: { $0.isTheSameStyle(as: newStyle) }) == nil else {
 				return nil
 			}
 			return AddedStyle(style: newStyle)
@@ -170,7 +170,7 @@ struct StyleUpdateSummaryGenerator {
 	private func updatedStyles(oldStyles: [CodeTemplateReplacableStyle], newStyles: [CodeTemplateReplacableStyle]) -> [UpdatedStyle] {
 		return newStyles.compactMap { newStyle in
 			guard let oldStyle = oldStyles
-				.first(where: { $0.identifier == newStyle.identifier }) else {
+				.first(where: { $0.isTheSameStyle(as: newStyle) }) else {
 					return nil
 			}
 			return UpdatedStyle(oldStyle: oldStyle, newStyle: newStyle)
@@ -181,7 +181,7 @@ struct StyleUpdateSummaryGenerator {
 		return oldStyles
 			.filter({ !$0.isDeprecated })
 			.compactMap { newStyle in
-				guard newStyles.first(where: { $0.identifier == newStyle.identifier }) == nil else {
+				guard newStyles.first(where: { $0.isTheSameStyle(as: newStyle) }) == nil else {
 					return nil
 				}
 				return RemovedStyle(style: newStyle)
