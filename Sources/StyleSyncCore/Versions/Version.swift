@@ -86,7 +86,7 @@ extension Version {
 		
 		// Was a style removed?
 		
-		let correspondingNewTextStyles= 
+//		let correspondingNewTextStyles= 
 	
 		
 		// FIXME: Compare with isTheSameStyleAs to fix versioning

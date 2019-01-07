@@ -34,6 +34,8 @@ public struct CodeGenerator {
 		self.fileExtension = try templateFile.templateFileExtension()
 		self.fileName = templateFile.templateFileName
 		self.templateCodeLines = template.components(separatedBy: "\n")
+		
+		// TODO: Validte template for namespace
 	}
 	
 	/// Creates a `CodeGenerator` with a given template and an array of groups

@@ -78,7 +78,7 @@ class StyleExporterTests: XCTestCase {
 		return TextStyle(
 			name: "New Text Style 1",
 			identifier: "T1",
-			groupedIdentifiers: nil,
+			groupedIdentifiers: ["T0.0", "T0.1"],
 			fontName: "DifferentFontName",
 			pointSize: 18,
 			kerning: 2,
@@ -297,7 +297,45 @@ class StyleExporterTests: XCTestCase {
 		"""
 		XCTAssertEqual(fileWithReferencesToNewStylesString, expectedFileWithReferencesToNewStylesString)
 	}
-
+	
+	func testGivenAAGroupIdentifiedStyleNameAndIdentifierOfIsChangedWhenReferencesAreUpdatedThenStyleIsRenamedCorrectly() {
+		createFileWithReferencesToNewStylesOne()
+		
+		let updatedTextStyle = TextStyle(
+			name: "New text style name",
+			identifier: "New text style identifier",
+			groupedIdentifiers: newTextStyleOne.groupedIdentifiers,
+			fontName: newTextStyleOne.fontName,
+			pointSize: newTextStyleOne.pointSize,
+			kerning: newTextStyleOne.kerning,
+			lineHeight: newTextStyleOne.lineHeight,
+			colorStyle: newTextStyleOne.colorStyle,
+			isDeprecated: newTextStyleOne.isDeprecated
+		)
+		
+		let _ = getStylesExporterAndExportStyles(
+			latestTextStyles: [updatedTextStyle],
+			latestColorStyles: [newColorStyleOne],
+			previouslyExportedTextStyles: [newTextStyleOne],
+			previouslyExportedColorStyles: [newColorStyleOne]
+		)
+		
+		let fileWithReferencesToNewStylesString: String
+		do {
+			let fileWithReferencesToNewStyles = try projectFolder.file(
+				named: Constant.fileWithReferencesToNewStylesOneName
+			)
+			fileWithReferencesToNewStylesString = try fileWithReferencesToNewStyles.readAsString()
+		} catch {
+			return XCTFail(error.localizedDescription)
+		}
+		
+		let expectedFileWithReferencesToNewStylesString = """
+		\(updatedTextStyle.name.camelcased)
+		\(newColorStyleOne.name.camelcased)
+		"""
+		XCTAssertEqual(fileWithReferencesToNewStylesString, expectedFileWithReferencesToNewStylesString)
+	}
 
 	func testWhenNoStyleIsRenamedThenMutatedFilesIsEmpty() {
 		createFileWithReferencesToNewStylesOne()

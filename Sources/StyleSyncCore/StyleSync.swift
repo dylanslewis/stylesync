@@ -30,18 +30,25 @@ public final class StyleSync {
 			ErrorManager.log(fatalError: .unsupportedPlatform, context: .initialization)
 		#endif
 		
-		switch arguments.count {
-		case 1:
-			break
-		case 2 where arguments.last == "-h":
-			print(StyleSync.helpMessage)
-			exit(0)
-		case 2 where arguments.last == "-v":
-			print(StyleSync.versionMessage)
-			exit(0)
-		default:
-			print(StyleSync.helpMessage)
-			ErrorManager.log(fatalError: Error.invalidArguments, context: .arguments)
+		var argumentsWithoutCommand = arguments
+		argumentsWithoutCommand.removeFirst()
+		
+		var shouldNamespaceStyles: Bool = false
+		for argument in argumentsWithoutCommand {
+			switch argument {
+			case "-h":
+				print(StyleSync.helpMessage)
+				exit(0)
+			case "-v":
+				print(StyleSync.versionMessage)
+				exit(0)
+			case "-nt":
+				shouldNamespaceStyles = true
+				print(StyleSync.versionMessage)
+			default:
+				print(StyleSync.helpMessage)
+				ErrorManager.log(fatalError: Error.invalidArguments, context: .arguments)
+			}
 		}
 		
 		let configManager = ConfigManager(projectFolder: projectFolder)
@@ -198,13 +205,26 @@ public final class StyleSync {
 
 private extension StyleSync {
 	static var helpMessage: String {
-		return "stylesync v\(version)\n"
-			+ "\n"
-			+ "Run `stylesync` in the root directory of your project to set up a config file."
+		return """
+		stylesync v\(version)\n"
+		
+		Run `stylesync` in the root directory of your project to set up a config file."
+		
+		Options:
+		- h: Help
+		- v: Version
+		- nt: Treat text style names as namespaced by '/'. Given "TextStyleName/center/black", the text style will be "TextStyleName".
+		"""
 	}
 	
 	static var versionMessage: String {
 		return "stylesync, version \(version)"
+	}
+	
+	static var namespacedStylesMessage: String {
+		return """
+		Text style names will be treated as namespaced.
+		"""
 	}
 	
 	private static let version = "1.0.0"
