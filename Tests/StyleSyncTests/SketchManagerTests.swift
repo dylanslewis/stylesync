@@ -118,7 +118,7 @@ class SketchManagerTests: XCTestCase {
 		XCTAssertEqual(sketchDocument.layerStyles.objects.count, 5)
 	}
 	
-	func testPreVersion50SketchFileCannotBeParsed() throws {
+	func testPreVersion50SketchFileCannotBeParsed() {
 		do {
 			_ = try self.sketchDocument(withName: "PreVersion50")
 		} catch {
