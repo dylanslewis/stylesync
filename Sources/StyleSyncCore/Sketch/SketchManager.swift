@@ -41,6 +41,7 @@ public class SketchManager {
 		
 		let sketchMetadataFile = try zipManager.getSketchMetadata()
 		let sketchMetadata: SketchMetadata = try sketchMetadataFile.readAsDecodedJSON()
+		print("Decoded Sketch metadata")
 		
 		guard sketchMetadata.appVersion >= Constant.minimumVersion else {
 			throw Error.unsupportedVersion
@@ -48,6 +49,7 @@ public class SketchManager {
 		
 		let sketchDocumentFile = try zipManager.getSketchDocument()
 		let sketchDocument: SketchDocument = try sketchDocumentFile.readAsDecodedJSON()
+		print("Decoded Sketch document")
 		
 		return sketchDocument
 	}
