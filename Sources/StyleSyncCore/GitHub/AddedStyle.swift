@@ -11,7 +11,7 @@ struct AddedStyle {
 	let attributes: [AddedStyleAttribute]
 	
 	init(style: CodeTemplateReplacableStyle) {
-		let attributes = style.replacementDictionary.keys.flatMap({ key -> AddedStyleAttribute? in
+		let attributes = style.replacementDictionary.keys.compactMap({ key -> AddedStyleAttribute? in
 			guard let value = style.replacementDictionary[key] else {
 				return nil
 			}

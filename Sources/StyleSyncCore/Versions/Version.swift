@@ -20,7 +20,7 @@ public struct Version {
 		let numberFormatter = NumberFormatter()
 		let versionComponents = versionString
 			.components(separatedBy: ".")
-			.flatMap { component in
+			.compactMap { component in
 				return numberFormatter.number(from: component)?.intValue
 		}
 		

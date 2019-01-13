@@ -120,7 +120,7 @@ class SketchManagerTests: XCTestCase {
 	
 	func testPreVersion50SketchFileCannotBeParsed() throws {
 		do {
-			try self.sketchDocument(withName: "PreVersion50")
+			_ = try self.sketchDocument(withName: "PreVersion50")
 		} catch {
 			guard let sketchManagerError = error as? SketchManager.Error else {
 				return XCTFail("Incorrect error type: \(type(of: error))")
