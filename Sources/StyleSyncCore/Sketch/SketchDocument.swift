@@ -8,7 +8,14 @@ import Cocoa
 
 // MARK: - Sketch Document
 
+protocol ABCColorStyle {
+	var name: String { get }
+	var identifier: String { get }
+	var color: NSColor { get }
+}
+
 public struct SketchDocument: Codable {
+	public let assets: ColorAssets
 	public let layerStyles: ColorStyles
 	public let layerTextStyles: TextStyles
 }
@@ -43,6 +50,22 @@ public extension SketchDocument {
 						public let alpha: CGFloat
 					}
 				}
+			}
+		}
+	}
+}
+
+public extension SketchDocument {
+	public struct ColorAssets: Codable {
+		public struct ColorAsset {
+			public let name: String
+			public let color: Color
+			
+			public struct Color: Codable {
+				public let red: CGFloat
+				public let green: CGFloat
+				public let blue: CGFloat
+				public let alpha: CGFloat
 			}
 		}
 	}
